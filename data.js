@@ -336,6 +336,11 @@ export const SITE = {
     ],
   },
 
+  // Admin dashboard — admin.html (create user in Supabase → Authentication)
+  admin: {
+    loginEmail: "asantewaa@glamroom.com",
+  },
+
   homeNavLinks: [
     { label: "Discover More", href: "about.html" },
     { label: "Glam Room", href: "glam-room.html" },

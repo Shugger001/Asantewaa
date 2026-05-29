@@ -1,5 +1,6 @@
 import { SITE, getLocationLabel } from './data.js';
 import { initBookingForm } from './booking.js';
+import { initFindBooking } from './find-booking.js';
 
 /* ==========================================================================
    Glam Room by Asantewaa — Application Logic
@@ -256,6 +257,36 @@ function getNavLinks() {
 
 /* --- Editorial Homepage (beyonce.com style) --- */
 
+function renderFindBookingPanel(panel, i, bgStyle, panelClass) {
+  const copy = SITE.findBooking || {};
+  const labelHtml = panel.label ? `<p class="home-panel-label">${panel.label}</p>` : '';
+
+  return `
+    <section class="${panelClass} home-panel--find-booking" id="${panel.id}">
+      <div class="home-panel-bg" style="${bgStyle}"></div>
+      <div class="home-panel-overlay"></div>
+      <div class="home-panel-content home-panel-content--form">
+        ${labelHtml}
+        <h2 class="home-panel-title">${panel.title}</h2>
+        ${panel.subtitle ? `<p class="home-panel-subtitle">${panel.subtitle}</p>` : ''}
+        <form id="findBookingForm" class="find-booking-form" autocomplete="off">
+          <label class="find-booking-field">
+            <span>WhatsApp / phone number</span>
+            <input type="tel" id="findPhone" required placeholder="${copy.phonePlaceholder || '+233 XX XXX XXXX'}">
+          </label>
+          <label class="find-booking-field">
+            <span>Last 4 letters of your name</span>
+            <input type="text" id="findNameSuffix" required maxlength="4" minlength="4"
+              placeholder="${copy.namePlaceholder || 'e.g. nsah'}" autocapitalize="characters" spellcheck="false">
+          </label>
+          <button type="submit" class="find-booking-submit">${copy.submitLabel || 'Check Status'}</button>
+        </form>
+        <div id="findBookingResult" class="find-booking-result" hidden></div>
+      </div>
+    </section>
+  `;
+}
+
 function renderHomePanels() {
   const container = document.getElementById('home-panels');
   if (!container || !SITE.home?.panels) return;
@@ -274,6 +305,10 @@ function renderHomePanels() {
 
       const isVisual = panel.imageOnly;
       const panelClass = `home-panel${i === 0 ? ' in-view' : ''}${isVisual ? ' home-panel--visual' : ''}`;
+
+      if (panel.type === 'find-booking') {
+        return renderFindBookingPanel(panel, i, bgStyle, panelClass);
+      }
 
       const linkOverlay = panel.link
         ? `<a href="${panel.link}" class="home-panel-link" aria-label="${panel.linkText || panel.labelLeft || panel.title || 'View'}"></a>`
@@ -834,6 +869,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (page === 'home') {
     renderHomePanels();
+    initFindBooking();
     initHomeScrollEffects();
   } else if (page === 'business') {
     renderServices();

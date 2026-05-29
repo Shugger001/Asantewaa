@@ -151,6 +151,15 @@ export const SITE = {
         linkText: "Book Now",
       },
       {
+        id: "find-booking",
+        type: "find-booking",
+        label: "Track",
+        title: "Find My Booking",
+        subtitle: "No account needed — phone & last 4 letters of your name",
+        imageUrl: "https://images.unsplash.com/photo-1516975080664-ed2fc6a13737?w=1920&q=85&auto=format&fit=crop",
+        gradient: "linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.88) 100%)",
+      },
+      {
         id: "visual-6",
         imageOnly: true,
         labelLeft: "Ghana",
@@ -339,6 +348,18 @@ export const SITE = {
   // Admin dashboard — admin.html (create user in Supabase → Authentication)
   admin: {
     loginEmail: "asantewaa@glamroom.com",
+  },
+
+  findBooking: {
+    phonePlaceholder: "024 XXX XXXX or +233 XX XXX XXXX",
+    namePlaceholder: "Last 4 letters of your name",
+    submitLabel: "Check Status",
+    loading: "Checking…",
+    invalidPhone: "Enter a valid Ghana number (e.g. 024XXXXXXX).",
+    invalidName: "Enter exactly 4 letters — the last 4 letters of the name you booked with.",
+    notFound: "No booking found. Double-check your phone and the last 4 letters of the name you used when booking.",
+    unavailable: "Booking lookup isn't connected yet. WhatsApp Glam Room to check your slot.",
+    error: "Something went wrong. Please try again or WhatsApp Glam Room.",
   },
 
   homeNavLinks: [

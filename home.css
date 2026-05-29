@@ -348,6 +348,113 @@ body.home-editorial .mobile-menu-overlay {
   z-index: 3;
 }
 
+/* Find My Booking panel */
+.home-panel--find-booking {
+  align-items: center;
+}
+
+.home-panel-content--form {
+  max-width: 420px;
+  width: 100%;
+}
+
+.find-booking-form {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1.25rem;
+  width: 100%;
+}
+
+.find-booking-field {
+  display: grid;
+  gap: 0.35rem;
+  text-align: left;
+}
+
+.find-booking-field span {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.find-booking-field input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+}
+
+.find-booking-field input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.find-booking-field input:focus {
+  outline: none;
+  border-color: rgba(212, 168, 83, 0.8);
+  box-shadow: 0 0 0 2px rgba(212, 168, 83, 0.2);
+}
+
+.find-booking-submit {
+  margin-top: 0.25rem;
+  padding: 0.85rem 1.25rem;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #2d1b0e;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.find-booking-submit:hover {
+  transform: translateY(-1px);
+  opacity: 0.92;
+}
+
+.find-booking-submit:disabled {
+  opacity: 0.55;
+  cursor: wait;
+  transform: none;
+}
+
+.find-booking-result {
+  margin-top: 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  text-align: left;
+}
+
+.find-booking-result--success {
+  background: rgba(43, 94, 43, 0.35);
+  border: 1px solid rgba(120, 200, 120, 0.45);
+  color: #e8f5e9;
+}
+
+.find-booking-result--error {
+  background: rgba(198, 40, 40, 0.25);
+  border: 1px solid rgba(255, 120, 120, 0.35);
+  color: #ffebee;
+}
+
+.find-booking-result p + p {
+  margin-top: 0.65rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
 /* Image-only editorial panels (beyonce.com style) */
 .home-panel--visual {
   align-items: flex-start;

@@ -226,7 +226,7 @@ function openClearConfirmModal() {
   backdrop.innerHTML = `
     <div class="admin-modal" role="dialog" aria-labelledby="clearConfirmTitle" aria-modal="true">
       <h3 id="clearConfirmTitle">Confirm clear filters</h3>
-      <p class="admin-modal-text">Enter your admin password to reset all filters.</p>
+      <p class="admin-modal-text">Enter the same password you used to sign in, or your clear-filters password.</p>
       <div class="login-error" id="clearConfirmError"></div>
       <label for="clearConfirmPassword">Password</label>
       <input type="password" id="clearConfirmPassword" autocomplete="current-password" placeholder="Admin password">
@@ -253,13 +253,13 @@ function openClearConfirmModal() {
     if (e.key === 'Escape') closeClearConfirmModal();
   });
 
-  document.body.classList.add('install-prompt-open');
+  document.body.classList.add('admin-modal-open');
   setTimeout(() => document.getElementById('clearConfirmPassword')?.focus(), 50);
 }
 
 function closeClearConfirmModal() {
   document.getElementById('clearConfirmModal')?.remove();
-  document.body.classList.remove('install-prompt-open');
+  document.body.classList.remove('admin-modal-open');
 }
 
 async function verifyClearPassword(password) {

@@ -146,6 +146,16 @@ body {
   flex: 1;
 }
 
+.filter-bar .btn-ghost {
+  background: #f7efe6;
+  color: #2d1b0e;
+  border: 1px solid #e8d9c8;
+}
+
+.filter-bar .btn-ghost:hover {
+  background: #efe3d4;
+}
+
 .clear-filters-toast {
   flex: 1 1 100%;
   margin: 0;

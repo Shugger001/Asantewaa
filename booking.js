@@ -4,8 +4,8 @@ import {
   getLocationLabel,
   getLocationLabelById,
 } from './data.js';
+import { getSupabase, isSupabaseConfigured } from './supabase-client.js';
 
-const GOOGLE_SCRIPT_URL = SITE.booking.googleScriptUrl;
 let bookedSlots = [];
 let datePicker = null;
 
@@ -98,25 +98,107 @@ function initDatePicker() {
   });
 }
 
-async function fetchBookedSlots(date) {
-  if (!date || GOOGLE_SCRIPT_URL.includes('YOUR_GOOGLE_APPS_SCRIPT')) return;
-
-  try {
-    const response = await fetch(`${GOOGLE_SCRIPT_URL}?action=get&date=${encodeURIComponent(date)}`);
-    if (response.ok) {
-      const data = await response.json();
-      bookedSlots = data.bookedTimes || [];
-      updateTimeSlotAvailability();
-    }
-  } catch {
-    bookedSlots = getLocalBookingsForDate(date);
-    updateTimeSlotAvailability();
-  }
+function getSelectedLocationId() {
+  return document.getElementById('location')?.value || '';
 }
 
-function getLocalBookingsForDate(date) {
-  const local = JSON.parse(localStorage.getItem('glamBookings') || '[]');
-  return local.filter((b) => b.date === date).map((b) => b.time);
+function isMissingColumnError(error) {
+  return error?.code === '42703' || error?.code === 'PGRST204';
+}
+
+function toDbRow(booking, withLocationColumns) {
+  const row = {
+    full_name: booking.fullName,
+    phone: booking.phone,
+    email: booking.email || null,
+    service: booking.service,
+    booking_date: booking.date,
+    booking_time: booking.time,
+    status: 'pending',
+    payment_status: 'pending',
+  };
+
+  if (withLocationColumns) {
+    row.location_id = booking.locationId;
+    row.location = booking.location;
+    row.notes = booking.notes || null;
+  } else {
+    const locationLine = booking.location ? `[Location: ${booking.location}]` : '';
+    row.notes = [locationLine, booking.notes].filter(Boolean).join('\n').trim() || null;
+  }
+
+  return row;
+}
+
+async function fetchExistingBooking(supabase, date, time, locationId) {
+  let result = await supabase
+    .from('bookings')
+    .select('id')
+    .eq('booking_date', date)
+    .eq('booking_time', time)
+    .eq('location_id', locationId)
+    .in('status', ['pending', 'confirmed']);
+
+  if (isMissingColumnError(result.error)) {
+    result = await supabase
+      .from('bookings')
+      .select('id')
+      .eq('booking_date', date)
+      .eq('booking_time', time)
+      .in('status', ['pending', 'confirmed']);
+  }
+
+  return result;
+}
+
+async function insertBooking(supabase, booking) {
+  let result = await supabase.from('bookings').insert([toDbRow(booking, true)]);
+  if (isMissingColumnError(result.error)) {
+    result = await supabase.from('bookings').insert([toDbRow(booking, false)]);
+  }
+  if (result.error) throw result.error;
+}
+
+async function fetchBookedSlots(date) {
+  const locationId = getSelectedLocationId();
+  if (!date || !locationId) {
+    bookedSlots = [];
+    updateTimeSlotAvailability();
+    return;
+  }
+
+  const supabase = getSupabase();
+  if (!supabase) {
+    bookedSlots = [];
+    updateTimeSlotAvailability();
+    return;
+  }
+
+  try {
+    let { data, error } = await supabase
+      .from('bookings')
+      .select('booking_time')
+      .eq('booking_date', date)
+      .eq('location_id', locationId)
+      .in('status', ['pending', 'confirmed']);
+
+    if (isMissingColumnError(error)) {
+      ({ data, error } = await supabase
+        .from('bookings')
+        .select('booking_time')
+        .eq('booking_date', date)
+        .in('status', ['pending', 'confirmed']));
+    }
+
+    if (error) throw error;
+
+    bookedSlots = (data || []).map((row) => row.booking_time);
+    updateTimeSlotAvailability();
+  } catch (err) {
+    console.error('Error fetching bookings:', err);
+    bookedSlots = [];
+    updateTimeSlotAvailability();
+  }
 }
 
 function updateTimeSlotAvailability() {
@@ -129,7 +211,7 @@ function updateTimeSlotAvailability() {
 
     if (bookedSlots.includes(value)) {
       option.disabled = true;
-      option.textContent = `${label} — Booked`;
+      option.textContent = `${label} 🔴 Booked`;
     } else {
       option.disabled = false;
       option.textContent = label;
@@ -139,7 +221,7 @@ function updateTimeSlotAvailability() {
 
 function updateSummary() {
   const name = document.getElementById('fullName').value.trim() || 'Queen';
-  const locationId = document.getElementById('location')?.value || '';
+  const locationId = getSelectedLocationId();
   const location = getLocationLabelById(locationId);
   const service = document.getElementById('service').value;
   const date = document.getElementById('date').value;
@@ -176,9 +258,14 @@ function showSuccess(message) {
   setTimeout(() => { el.style.display = 'none'; }, 10000);
 }
 
-function showError(message) {
+function showError(message, { html = false } = {}) {
   const el = document.getElementById('errorMessage');
-  document.getElementById('errorText').textContent = message;
+  const textEl = document.getElementById('errorText');
+  if (html) {
+    textEl.innerHTML = message;
+  } else {
+    textEl.textContent = message;
+  }
   el.style.display = 'block';
   document.getElementById('successMessage').style.display = 'none';
   setTimeout(() => { el.style.display = 'none'; }, 6000);
@@ -216,7 +303,7 @@ async function handleSubmit(e) {
   const fullName = document.getElementById('fullName').value.trim();
   const phone = document.getElementById('phone').value.trim();
   const email = document.getElementById('email').value.trim();
-  const locationId = document.getElementById('location').value;
+  const locationId = getSelectedLocationId();
   const location = getLocationLabelById(locationId);
   const service = document.getElementById('service').value;
   const date = document.getElementById('date').value;
@@ -232,52 +319,68 @@ async function handleSubmit(e) {
   if (bookedSlots.includes(time)) { showError('Eh! This time don book already. Choose another time, queen 👑'); resetButton(submitBtn); return; }
 
   const bookingData = {
-    action: 'add',
-    timestamp: new Date().toISOString(),
     fullName,
     phone,
     email,
+    locationId,
     location,
     service,
     date,
     time,
     notes,
-    status: 'Pending',
   };
 
-  const localBookings = JSON.parse(localStorage.getItem('glamBookings') || '[]');
-  localBookings.push(bookingData);
-  localStorage.setItem('glamBookings', JSON.stringify(localBookings));
-
-  const scriptConfigured = GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes('YOUR_GOOGLE_APPS_SCRIPT');
-
-  if (scriptConfigured) {
-    try {
-      await fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(bookingData),
-      });
-      showSuccess(`🔥 SUCCESS! ${fullName}, your booking at <strong>${location}</strong> for ${service} on ${date} at ${time} don land! Asantewaa go text you on WhatsApp to confirm. Come slay! 👑`);
-    } catch {
-      const waUrl = getWhatsAppFallbackUrl(bookingData);
-      showSuccess(`⚠️ Saved locally! WhatsApp Asantewaa to confirm: <a href="${waUrl}" target="_blank" rel="noopener noreferrer">Tap to chat on WhatsApp</a>`);
-    }
-  } else {
+  if (!isSupabaseConfigured()) {
     const waUrl = getWhatsAppFallbackUrl(bookingData);
-    showSuccess(`✅ Booking saved! WhatsApp Asantewaa to confirm: <a href="${waUrl}" target="_blank" rel="noopener noreferrer">Tap to chat on WhatsApp</a>`);
+    showSuccess(`⚠️ Online booking isn't connected yet. WhatsApp Asantewaa to confirm: <a href="${waUrl}" target="_blank" rel="noopener noreferrer">Tap to chat on WhatsApp</a>`);
+    resetButton(submitBtn);
+    return;
   }
 
-  document.getElementById('fullName').value = '';
-  document.getElementById('phone').value = '';
-  document.getElementById('email').value = '';
-  document.getElementById('notes').value = '';
-  document.getElementById('location').value = '';
-  document.getElementById('service').value = '';
-  if (datePicker) datePicker.clear();
-  document.getElementById('time').value = '';
-  updateSummary();
+  const supabase = getSupabase();
+
+  try {
+    const { data: existingBookings, error: checkError } = await fetchExistingBooking(
+      supabase,
+      date,
+      time,
+      locationId
+    );
+
+    if (checkError) throw checkError;
+
+    if (existingBookings?.length > 0) {
+      showError('Eh! This time don book already. Choose another time, queen 👑');
+      resetButton(submitBtn);
+      await fetchBookedSlots(date);
+      return;
+    }
+
+    await insertBooking(supabase, bookingData);
+
+    showSuccess(
+      `🔥 SUCCESS! ${fullName}, your booking at <strong>${location}</strong> for ${service} on ${date} at ${time} don land in our system! Asantewaa go confirm via WhatsApp soon. Come slay! 👑`
+    );
+
+    document.getElementById('fullName').value = '';
+    document.getElementById('phone').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('notes').value = '';
+    document.getElementById('location').value = '';
+    document.getElementById('service').value = '';
+    if (datePicker) datePicker.clear();
+    document.getElementById('time').value = '';
+    updateSummary();
+    await fetchBookedSlots(date);
+  } catch (err) {
+    console.error('Booking error:', err);
+    const waUrl = getWhatsAppFallbackUrl(bookingData);
+    showError(
+      `Something went wrong: ${err.message || 'Please try again'}. Or <a href="${waUrl}" target="_blank" rel="noopener noreferrer">WhatsApp Asantewaa directly</a>.`,
+      { html: true }
+    );
+  }
+
   resetButton(submitBtn);
 }
 
@@ -286,7 +389,10 @@ function initBookingForm() {
   initDatePicker();
 
   document.getElementById('fullName')?.addEventListener('input', updateSummary);
-  document.getElementById('location')?.addEventListener('change', updateSummary);
+  document.getElementById('location')?.addEventListener('change', () => {
+    updateSummary();
+    fetchBookedSlots(document.getElementById('date')?.value || '');
+  });
   document.getElementById('service')?.addEventListener('change', updateSummary);
   document.getElementById('time')?.addEventListener('change', updateSummary);
   document.getElementById('bookingForm')?.addEventListener('submit', handleSubmit);

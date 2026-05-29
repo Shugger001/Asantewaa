@@ -299,8 +299,11 @@ export const SITE = {
   },
 
   booking: {
-    // Paste your Google Apps Script Web App URL after deployment (see apps-script/Code.gs)
-    googleScriptUrl: "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE",
+    // Supabase — paste credentials from Project Settings → API
+    supabase: {
+      url: "https://pksfslkwmlrlttoojluk.supabase.co",
+      anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrc2ZzbGt3bWxybHR0b29qbHVrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNjMyNzcsImV4cCI6MjA5NTYzOTI3N30.put72ryG2V8E7rQLfF6omcGplgrUbHmrep8zLBvEk6M",
+    },
 
     headline: "Book your crowning glory",
     subhead: "Select your service, pick a time, and come shine like a true Ghanaian queen 👑",

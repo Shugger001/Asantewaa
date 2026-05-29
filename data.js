@@ -348,6 +348,8 @@ export const SITE = {
   // Admin dashboard — admin.html (create user in Supabase → Authentication)
   admin: {
     loginEmail: "asantewaa@glamroom.com",
+    // Password required when tapping Clear (change this!)
+    clearPassword: "glamroom2024",
   },
 
   findBooking: {

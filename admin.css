@@ -387,3 +387,63 @@ tr:last-child td {
 .admin-footer a {
   color: #c35a2e;
 }
+
+.admin-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(45, 27, 14, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.admin-modal-backdrop.is-open {
+  display: flex;
+}
+
+.admin-modal {
+  width: min(100%, 380px);
+  background: white;
+  border-radius: 24px;
+  padding: 1.5rem;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+}
+
+.admin-modal h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+}
+
+.admin-modal-text {
+  font-size: 0.9rem;
+  color: #5a3e2b;
+  margin-bottom: 1rem;
+}
+
+.admin-modal label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.admin-modal input[type="password"] {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #f0e4d8;
+  border-radius: 12px;
+  font-family: inherit;
+}
+
+.admin-modal-actions {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.admin-modal-actions .btn-primary {
+  width: 100%;
+  padding: 0.75rem;
+}

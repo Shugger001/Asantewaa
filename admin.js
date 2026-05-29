@@ -209,6 +209,71 @@ async function login(email, password) {
   await loadBookings();
 }
 
+function clearFilters() {
+  document.getElementById('statusFilter').value = 'all';
+  document.getElementById('dateFilter').value = '';
+  document.getElementById('phoneFilter').value = '';
+  applyFilters();
+}
+
+function openClearConfirmModal() {
+  const modal = document.getElementById('clearConfirmModal');
+  const errorEl = document.getElementById('clearConfirmError');
+  const passwordInput = document.getElementById('clearConfirmPassword');
+  errorEl.style.display = 'none';
+  errorEl.textContent = '';
+  passwordInput.value = '';
+  modal.classList.add('is-open');
+  modal.setAttribute('aria-hidden', 'false');
+  setTimeout(() => passwordInput.focus(), 50);
+}
+
+function closeClearConfirmModal() {
+  const modal = document.getElementById('clearConfirmModal');
+  modal.classList.remove('is-open');
+  modal.setAttribute('aria-hidden', 'true');
+}
+
+async function verifyClearPassword(password) {
+  const configured = SITE.admin?.clearPassword?.trim();
+  if (configured) return password === configured;
+
+  const supabase = getSupabase();
+  if (!supabase || !password) return false;
+
+  const { data: { session } } = await supabase.auth.getSession();
+  const email = session?.user?.email || SITE.admin?.loginEmail;
+  if (!email) return false;
+
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  return !error;
+}
+
+async function handleClearWithPassword() {
+  const errorEl = document.getElementById('clearConfirmError');
+  const password = document.getElementById('clearConfirmPassword').value;
+  const submitBtn = document.getElementById('clearConfirmSubmit');
+
+  errorEl.style.display = 'none';
+  submitBtn.disabled = true;
+
+  try {
+    const ok = await verifyClearPassword(password);
+    if (!ok) {
+      errorEl.textContent = 'Wrong password. Filters were not cleared.';
+      errorEl.style.display = 'block';
+      return;
+    }
+    closeClearConfirmModal();
+    clearFilters();
+  } catch {
+    errorEl.textContent = 'Could not verify password. Try again.';
+    errorEl.style.display = 'block';
+  } finally {
+    submitBtn.disabled = false;
+  }
+}
+
 async function logout() {
   const supabase = getSupabase();
   if (supabase) await supabase.auth.signOut();
@@ -238,11 +303,21 @@ async function init() {
   document.getElementById('dateFilter').addEventListener('change', applyFilters);
   document.getElementById('phoneFilter').addEventListener('input', applyFilters);
   document.getElementById('exportBtn').addEventListener('click', exportToCSV);
-  document.getElementById('clearFilterBtn').addEventListener('click', () => {
-    document.getElementById('statusFilter').value = 'all';
-    document.getElementById('dateFilter').value = '';
-    document.getElementById('phoneFilter').value = '';
-    applyFilters();
+  document.getElementById('clearFilterBtn').addEventListener('click', openClearConfirmModal);
+  document.getElementById('clearConfirmCancel').addEventListener('click', closeClearConfirmModal);
+  document.getElementById('clearConfirmSubmit').addEventListener('click', handleClearWithPassword);
+  document.getElementById('clearConfirmPassword').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleClearWithPassword();
+    }
+    if (e.key === 'Escape') closeClearConfirmModal();
+  });
+  document.getElementById('clearConfirmModal').addEventListener('click', (e) => {
+    if (e.target.id === 'clearConfirmModal') closeClearConfirmModal();
+  });
+  document.querySelector('#clearConfirmModal .admin-modal')?.addEventListener('click', (e) => {
+    e.stopPropagation();
   });
   document.getElementById('refreshBtn').addEventListener('click', loadBookings);
   document.getElementById('logoutBtn').addEventListener('click', logout);

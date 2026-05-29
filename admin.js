@@ -217,21 +217,49 @@ function clearFilters() {
 }
 
 function openClearConfirmModal() {
-  const modal = document.getElementById('clearConfirmModal');
-  const errorEl = document.getElementById('clearConfirmError');
-  const passwordInput = document.getElementById('clearConfirmPassword');
-  errorEl.style.display = 'none';
-  errorEl.textContent = '';
-  passwordInput.value = '';
-  modal.classList.add('is-open');
-  modal.setAttribute('aria-hidden', 'false');
-  setTimeout(() => passwordInput.focus(), 50);
+  closeClearConfirmModal();
+
+  const backdrop = document.createElement('div');
+  backdrop.id = 'clearConfirmModal';
+  backdrop.className = 'admin-modal-backdrop is-open';
+  backdrop.setAttribute('role', 'presentation');
+  backdrop.innerHTML = `
+    <div class="admin-modal" role="dialog" aria-labelledby="clearConfirmTitle" aria-modal="true">
+      <h3 id="clearConfirmTitle">Confirm clear filters</h3>
+      <p class="admin-modal-text">Enter your admin password to reset all filters.</p>
+      <div class="login-error" id="clearConfirmError"></div>
+      <label for="clearConfirmPassword">Password</label>
+      <input type="password" id="clearConfirmPassword" autocomplete="current-password" placeholder="Admin password">
+      <div class="admin-modal-actions">
+        <button type="button" class="btn-primary" id="clearConfirmSubmit">Clear filters</button>
+        <button type="button" class="btn-primary btn-dark" id="clearConfirmCancel">Cancel</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(backdrop);
+
+  backdrop.addEventListener('click', (e) => {
+    if (e.target === backdrop) closeClearConfirmModal();
+  });
+  backdrop.querySelector('.admin-modal')?.addEventListener('click', (e) => e.stopPropagation());
+  document.getElementById('clearConfirmCancel')?.addEventListener('click', closeClearConfirmModal);
+  document.getElementById('clearConfirmSubmit')?.addEventListener('click', handleClearWithPassword);
+  document.getElementById('clearConfirmPassword')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleClearWithPassword();
+    }
+    if (e.key === 'Escape') closeClearConfirmModal();
+  });
+
+  document.body.classList.add('install-prompt-open');
+  setTimeout(() => document.getElementById('clearConfirmPassword')?.focus(), 50);
 }
 
 function closeClearConfirmModal() {
-  const modal = document.getElementById('clearConfirmModal');
-  modal.classList.remove('is-open');
-  modal.setAttribute('aria-hidden', 'true');
+  document.getElementById('clearConfirmModal')?.remove();
+  document.body.classList.remove('install-prompt-open');
 }
 
 async function verifyClearPassword(password) {
@@ -304,21 +332,6 @@ async function init() {
   document.getElementById('phoneFilter').addEventListener('input', applyFilters);
   document.getElementById('exportBtn').addEventListener('click', exportToCSV);
   document.getElementById('clearFilterBtn').addEventListener('click', openClearConfirmModal);
-  document.getElementById('clearConfirmCancel').addEventListener('click', closeClearConfirmModal);
-  document.getElementById('clearConfirmSubmit').addEventListener('click', handleClearWithPassword);
-  document.getElementById('clearConfirmPassword').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      handleClearWithPassword();
-    }
-    if (e.key === 'Escape') closeClearConfirmModal();
-  });
-  document.getElementById('clearConfirmModal').addEventListener('click', (e) => {
-    if (e.target.id === 'clearConfirmModal') closeClearConfirmModal();
-  });
-  document.querySelector('#clearConfirmModal .admin-modal')?.addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
   document.getElementById('refreshBtn').addEventListener('click', loadBookings);
   document.getElementById('logoutBtn').addEventListener('click', logout);
 

@@ -1,5 +1,6 @@
 import { SITE } from './data.js';
 import { getSupabase } from './supabase-client.js';
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
 const adminContent = document.getElementById('adminContent');
 const loginContainer = document.getElementById('loginContainer');

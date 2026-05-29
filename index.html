@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Asantewaa — Ghanaian TikTok star and founder of Glam Room, Accra's premier hair salon.">
+  <meta name="theme-color" content="#000000">
+  <title>Asantewaa | Glam Room</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="home.css">
+</head>
+<body data-page="home" class="editorial-theme home-editorial">
+
+  <!-- Minimal top bar (beyonce.com style) -->
+  <header class="home-topbar">
+    <a href="glam-room.html" class="home-topbar-link" id="home-topbar-left">GLAM ROOM</a>
+    <a href="#hero" class="home-topbar-center" aria-label="Home">
+      <i class="fa-solid fa-star"></i>
+    </a>
+    <button class="home-menu-btn" id="home-menu-open" aria-label="Open menu">MENU</button>
+  </header>
+
+  <!-- Slide-out menu -->
+  <div class="home-menu-overlay" id="home-menu-overlay"></div>
+  <nav class="home-menu-panel" id="home-menu-panel" aria-label="Site navigation">
+    <button class="home-menu-close" id="home-menu-close">Close</button>
+    <ul class="home-menu-links" id="home-menu-links"></ul>
+    <div class="home-menu-socials" id="home-menu-socials"></div>
+    <p class="home-menu-footer" id="home-menu-footer"></p>
+  </nav>
+
+  <p class="home-scroll-hint" id="home-scroll-hint">Scroll</p>
+
+  <!-- Full-viewport editorial panels -->
+  <div class="home-scroll-dots" id="home-scroll-dots" aria-hidden="true"></div>
+  <div class="home-scroll" id="home-scroll">
+    <main id="home-panels"></main>
+  </div>
+
+  <footer class="home-bottombar">
+    <span id="home-copyright"></span>
+    <a href="about.html">Discover</a>
+  </footer>
+
+  <!-- Legacy nav hidden by CSS; kept for app.js compatibility -->
+  <nav class="nav" id="nav" aria-hidden="true"><div class="nav-inner"><ul id="nav-links"></ul></div></nav>
+  <div class="mobile-menu-overlay" id="mobile-overlay"></div>
+  <aside class="mobile-menu" id="mobile-menu"><ul class="mobile-menu-links" id="mobile-menu-links"></ul></aside>
+  <footer class="footer" id="footer" aria-hidden="true">
+    <div class="footer-inner">
+      <ul id="footer-nav-links"></ul>
+      <div id="footer-socials"></div>
+      <p id="footer-copyright"></p>
+      <p id="footer-tagline"></p>
+    </div>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,842 @@
+import { SITE } from './data.js';
+import { initBookingForm } from './booking.js';
+
+/* ==========================================================================
+   Glam Room by Asantewaa — Application Logic
+   ========================================================================== */
+
+function getWhatsAppUrl() {
+  const number = SITE.whatsapp.replace(/[^0-9+]/g, '');
+  const msg = encodeURIComponent(SITE.whatsappMessage);
+  return `https://wa.me/${number.replace('+', '')}?text=${msg}`;
+}
+
+function openWhatsApp() {
+  window.open(getWhatsAppUrl(), '_blank', 'noopener,noreferrer');
+}
+
+function scrollToSection(selector) {
+  const el = document.querySelector(selector);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+/* --- Dynamic Content Rendering --- */
+
+function renderServices() {
+  const grid = document.getElementById('services-grid');
+  if (!grid) return;
+
+  grid.innerHTML = Array.from({ length: SITE.services.length }, () =>
+    '<div class="skeleton"></div>'
+  ).join('');
+
+  setTimeout(() => {
+    grid.innerHTML = SITE.services
+      .map(
+        (service, i) => `
+      <article class="glass-card service-card reveal reveal-delay-${(i % 4) + 1}" data-service="${service.id}">
+        <div class="service-card-header">
+          <div class="service-icon"><i class="${service.icon}"></i></div>
+          ${service.badge ? `<span class="service-badge">${service.badge}</span>` : ''}
+        </div>
+        <h3 class="service-name">${service.name}</h3>
+        <p class="service-desc">${service.description}</p>
+        <div class="service-meta">
+          <span class="service-price">${service.price}</span>
+          <span class="service-duration"><i class="fa-regular fa-clock"></i> ${service.duration}</span>
+        </div>
+      </article>
+    `
+      )
+      .join('');
+
+    observeRevealElements(grid.querySelectorAll('.reveal'));
+  }, 400);
+}
+
+function renderGallery() {
+  const grid = document.getElementById('gallery-grid');
+  if (!grid) return;
+
+  grid.innerHTML = SITE.gallery
+    .map(
+      (item, i) => `
+    <div class="gallery-item reveal visible reveal-delay-${(i % 4) + 1}" data-gallery-id="${item.id}">
+      <!-- Replace gradient with image URL in data.js: imageUrl property -->
+      <div class="gallery-item-inner" style="background: ${item.gradient}">
+        <i class="fa-solid fa-camera gallery-placeholder-icon"></i>
+      </div>
+      <div class="gallery-overlay">
+        <span>${item.label}<br><small>Coming Soon</small></span>
+      </div>
+    </div>
+  `
+    )
+    .join('');
+
+  observeRevealElements(grid.querySelectorAll('.reveal'));
+}
+
+function renderAbout() {
+  const statsEl = document.getElementById('about-stats');
+  if (statsEl) {
+    statsEl.innerHTML = SITE.about.stats
+      .map(
+        (stat) => `
+      <div class="glass-card stat-item">
+        <div class="stat-value">${stat.value}</div>
+        <div class="stat-label">${stat.label}</div>
+      </div>
+    `
+      )
+      .join('');
+  }
+
+  const aboutParagraphs = document.getElementById('about-paragraphs');
+  if (aboutParagraphs) {
+    aboutParagraphs.innerHTML = SITE.about.paragraphs
+      .map((p) => `<p>${p}</p>`)
+      .join('');
+  }
+
+  const quoteText = document.getElementById('quote-text');
+  const quoteAuthor = document.getElementById('quote-author');
+  if (quoteText) quoteText.textContent = SITE.quote.text;
+  if (quoteAuthor) quoteAuthor.textContent = SITE.quote.attribution;
+}
+
+function renderBusiness() {
+  const taglineEl = document.getElementById('business-tagline');
+  if (taglineEl) taglineEl.textContent = SITE.business.tagline;
+
+  const introEl = document.getElementById('business-intro');
+  if (introEl) {
+    introEl.innerHTML = SITE.business.intro
+      .map((p) => `<p>${p}</p>`)
+      .join('');
+  }
+
+  const quoteText = document.getElementById('quote-text');
+  const quoteAuthor = document.getElementById('quote-author');
+  if (quoteText) quoteText.textContent = SITE.quote.text;
+  if (quoteAuthor) quoteAuthor.textContent = SITE.quote.attribution;
+
+  const hoursEl = document.getElementById('business-hours');
+  if (hoursEl) {
+    hoursEl.innerHTML = `<i class="fa-regular fa-clock"></i> ${SITE.business.hours}`;
+  }
+}
+
+function renderHomeContact() {
+  const socialsEl = document.getElementById('contact-socials');
+  if (socialsEl) {
+    socialsEl.innerHTML = SITE.socials
+      .map(
+        (s) => `
+      <a href="${s.url}" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="${s.platform}">
+        <i class="${s.icon}"></i>
+      </a>
+    `
+      )
+      .join('');
+  }
+
+  const footerSocials = document.getElementById('footer-socials');
+  if (footerSocials) {
+    footerSocials.innerHTML = SITE.socials
+      .map(
+        (s) => `
+      <a href="${s.url}" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="${s.platform}">
+        <i class="${s.icon}"></i>
+      </a>
+    `
+      )
+      .join('');
+  }
+}
+
+function renderLocations(containerId) {
+  const el = document.getElementById(containerId);
+  if (!el || !SITE.locations?.length) return;
+
+  el.innerHTML = SITE.locations
+    .map(
+      (loc) => `
+    <div class="glass-card location-card">
+      <h3 class="location-card-name"><i class="fa-solid fa-location-dot"></i> ${loc.name}</h3>
+      <p class="location-card-address">${loc.address}</p>
+      <p class="location-card-meta">${loc.city}, ${loc.country}</p>
+      ${loc.hours ? `<p class="location-card-hours"><i class="fa-regular fa-clock"></i> ${loc.hours}</p>` : ''}
+      <a href="${loc.mapUrl}" class="location-card-map" target="_blank" rel="noopener noreferrer">
+        View on Google Maps <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
+    </div>
+  `
+    )
+    .join('');
+}
+
+function renderContact() {
+  renderLocations('contact-locations');
+
+  const socialsEl = document.getElementById('contact-socials');
+  if (socialsEl) {
+    socialsEl.innerHTML = SITE.socials
+      .map(
+        (s) => `
+      <a href="${s.url}" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="${s.platform}">
+        <i class="${s.icon}"></i>
+      </a>
+    `
+      )
+      .join('');
+  }
+
+  const footerSocials = document.getElementById('footer-socials');
+  if (footerSocials) {
+    footerSocials.innerHTML = SITE.socials
+      .map(
+        (s) => `
+      <a href="${s.url}" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="${s.platform}">
+        <i class="${s.icon}"></i>
+      </a>
+    `
+      )
+      .join('');
+  }
+}
+
+function populateStaticContent() {
+  const page = document.body.dataset.page || 'home';
+  const titles = {
+    home: SITE.owner,
+    about: `About ${SITE.owner} | Glam Room`,
+    business: `Glam Room | Hair Salon Accra — ${SITE.owner}`,
+    booking: `Book Your Glam | ${SITE.brand}`,
+  };
+  document.title = titles[page] || titles.home;
+
+  const brandEls = document.querySelectorAll('[data-brand]');
+  brandEls.forEach((el) => {
+    el.innerHTML = `Glam Room <span>by Asantewaa</span>`;
+  });
+
+  const taglineEl = document.getElementById('hero-tagline');
+  if (taglineEl) taglineEl.textContent = SITE.tagline;
+
+  const footerCopy = document.getElementById('footer-copyright');
+  if (footerCopy) footerCopy.textContent = SITE.footer.copyright;
+
+  const footerTag = document.getElementById('footer-tagline');
+  if (footerTag) footerTag.textContent = SITE.footer.tagline;
+
+  const heroImg = document.getElementById('hero-photo');
+  if (heroImg && SITE.hero.photoUrl) {
+    heroImg.src = SITE.hero.photoUrl;
+    heroImg.alt = SITE.hero.photoAlt;
+    heroImg.style.display = 'block';
+    document.getElementById('hero-placeholder')?.remove();
+  }
+}
+
+function getNavLinks() {
+  const page = document.body.dataset.page || 'home';
+  if (page === 'business') return SITE.businessNavLinks;
+  if (page === 'about') return SITE.aboutNavLinks;
+  if (page === 'booking') return SITE.bookingNavLinks;
+  return SITE.homeNavLinks;
+}
+
+/* --- Editorial Homepage (beyonce.com style) --- */
+
+function renderHomePanels() {
+  const container = document.getElementById('home-panels');
+  if (!container || !SITE.home?.panels) return;
+
+  container.innerHTML = SITE.home.panels
+    .map((panel, i) => {
+      const imageUrl = panel.imageUrl || (i === 0 ? SITE.hero.photoUrl : '');
+      const imagePosition = panel.imagePosition || 'center top';
+      const overlay = panel.imageOnly
+        ? 'linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.35) 100%)'
+        : panel.gradient || 'linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%)';
+
+      const bgStyle = imageUrl
+        ? `background-image: ${overlay}, url('${imageUrl}'); background-position: ${imagePosition};`
+        : `background: ${panel.gradient || '#1a0f0a'};`;
+
+      const isVisual = panel.imageOnly;
+      const panelClass = `home-panel${i === 0 ? ' in-view' : ''}${isVisual ? ' home-panel--visual' : ''}`;
+
+      const linkOverlay = panel.link
+        ? `<a href="${panel.link}" class="home-panel-link" aria-label="${panel.linkText || panel.labelLeft || panel.title || 'View'}"></a>`
+        : '';
+
+      if (isVisual) {
+        return `
+        <section class="${panelClass}" id="${panel.id}">
+          <div class="home-panel-bg" style="${bgStyle}" role="img" aria-label="${panel.labelLeft || ''} ${panel.labelRight || ''}"></div>
+          ${linkOverlay}
+          <div class="home-panel-visual-labels">
+            <span>${panel.labelLeft || ''}</span>
+            <span>${panel.labelRight || ''}</span>
+          </div>
+        </section>
+      `;
+      }
+
+      const titleClass = i === 0 ? 'home-panel-title hero-name' : 'home-panel-title';
+      const labelHtml = panel.label ? `<p class="home-panel-label">${panel.label}</p>` : '';
+      const headingTag = i === 0 ? 'h1' : 'h2';
+      const ctaHtml = panel.link
+        ? `<a href="${panel.link}" class="home-panel-cta">${panel.linkText || 'Explore'}</a>`
+        : '';
+
+      return `
+        <section class="${panelClass}" id="${panel.id}">
+          <div class="home-panel-bg" style="${bgStyle}"></div>
+          <div class="home-panel-overlay"></div>
+          ${linkOverlay}
+          <div class="home-panel-content">
+            ${labelHtml}
+            <${headingTag} class="${titleClass}">${panel.title}</${headingTag}>
+            ${panel.subtitle ? `<p class="home-panel-subtitle">${panel.subtitle}</p>` : ''}
+            ${ctaHtml}
+          </div>
+        </section>
+      `;
+    })
+    .join('');
+}
+
+function initEditorialMenu() {
+  const openBtn = document.getElementById('home-menu-open');
+  const closeBtn = document.getElementById('home-menu-close');
+  const panel = document.getElementById('home-menu-panel');
+  const overlay = document.getElementById('home-menu-overlay');
+
+  const menuLinks = document.getElementById('home-menu-links');
+  if (menuLinks) {
+    menuLinks.innerHTML = SITE.home.menuLinks
+      .map((link) => `<li><a href="${link.href}">${link.label}</a></li>`)
+      .join('');
+  }
+
+  const menuSocials = document.getElementById('home-menu-socials');
+  if (menuSocials) {
+    menuSocials.innerHTML = SITE.socials
+      .map(
+        (s) =>
+          `<a href="${s.url}" target="_blank" rel="noopener noreferrer" aria-label="${s.platform}"><i class="${s.icon}"></i></a>`
+      )
+      .join('');
+  }
+
+  const topbarLeft = document.getElementById('home-topbar-left');
+  if (topbarLeft) {
+    topbarLeft.textContent = SITE.home.topbarLeft;
+    topbarLeft.href = SITE.home.topbarLeftLink;
+  }
+
+  const copyright = document.getElementById('home-copyright');
+  if (copyright) copyright.textContent = `${SITE.owner} © ${new Date().getFullYear()}`;
+
+  const menuFooter = document.getElementById('home-menu-footer');
+  if (menuFooter) menuFooter.textContent = SITE.footer.tagline;
+
+  function setMenu(open) {
+    panel?.classList.toggle('open', open);
+    overlay?.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  openBtn?.addEventListener('click', () => setMenu(true));
+  closeBtn?.addEventListener('click', () => setMenu(false));
+  overlay?.addEventListener('click', () => setMenu(false));
+
+  panel?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setMenu(false));
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setMenu(false);
+  });
+}
+
+function initHomeScrollEffects() {
+  const scrollEl = document.getElementById('home-scroll');
+  const hint = document.getElementById('home-scroll-hint');
+  const panels = document.querySelectorAll('.home-panel');
+  const dotsContainer = document.getElementById('home-scroll-dots');
+
+  if (dotsContainer && panels.length) {
+    dotsContainer.innerHTML = Array.from(panels, (_, i) =>
+      `<span class="home-scroll-dot${i === 0 ? ' active' : ''}" data-index="${i}"></span>`
+    ).join('');
+  }
+
+  const dots = dotsContainer?.querySelectorAll('.home-scroll-dot');
+
+  function updateActivePanel() {
+    let activeIndex = 0;
+    panels.forEach((panel, i) => {
+      const rect = panel.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight * 0.55 && rect.bottom > window.innerHeight * 0.45;
+      panel.classList.toggle('in-view', inView);
+      if (inView) activeIndex = i;
+    });
+    dots?.forEach((dot, i) => dot.classList.toggle('active', i === activeIndex));
+  }
+
+  if (!scrollEl) return;
+
+  scrollEl.addEventListener('scroll', () => {
+    if (scrollEl.scrollTop > 80) hint?.classList.add('hidden');
+    updateActivePanel();
+  }, { passive: true });
+
+  updateActivePanel();
+}
+
+/* --- Testimonial Carousel --- */
+
+class TestimonialCarousel {
+  constructor() {
+    this.track = document.getElementById('testimonial-track');
+    this.dotsContainer = document.getElementById('carousel-dots');
+    this.prevBtn = document.getElementById('carousel-prev');
+    this.nextBtn = document.getElementById('carousel-next');
+    this.current = 0;
+    this.total = SITE.testimonials.length;
+    this.autoInterval = null;
+    this.touchStartX = 0;
+
+    if (!this.track) return;
+    this.init();
+  }
+
+  init() {
+    this.renderSlides();
+    this.renderDots();
+    this.bindEvents();
+    this.startAuto();
+  }
+
+  renderSlides() {
+    this.track.innerHTML = SITE.testimonials
+      .map(
+        (t) => `
+      <div class="testimonial-slide">
+        <div class="glass-card testimonial-card">
+          <div class="testimonial-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testimonial-text">"${t.text}"</p>
+          <p class="testimonial-author">${t.author}</p>
+          <p class="testimonial-role">${t.role}</p>
+        </div>
+      </div>
+    `
+      )
+      .join('');
+  }
+
+  renderDots() {
+    if (!this.dotsContainer) return;
+    this.dotsContainer.innerHTML = SITE.testimonials
+      .map(
+        (_, i) =>
+          `<button class="carousel-dot${i === 0 ? ' active' : ''}" aria-label="Go to testimonial ${i + 1}" data-index="${i}"></button>`
+      )
+      .join('');
+  }
+
+  goTo(index) {
+    this.current = ((index % this.total) + this.total) % this.total;
+    this.track.style.transform = `translateX(-${this.current * 100}%)`;
+    this.dotsContainer?.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === this.current);
+    });
+  }
+
+  next() {
+    this.goTo(this.current + 1);
+  }
+
+  prev() {
+    this.goTo(this.current - 1);
+  }
+
+  startAuto() {
+    this.stopAuto();
+    this.autoInterval = setInterval(() => this.next(), 5000);
+  }
+
+  stopAuto() {
+    if (this.autoInterval) clearInterval(this.autoInterval);
+  }
+
+  bindEvents() {
+    this.prevBtn?.addEventListener('click', () => {
+      this.prev();
+      this.startAuto();
+    });
+
+    this.nextBtn?.addEventListener('click', () => {
+      this.next();
+      this.startAuto();
+    });
+
+    this.dotsContainer?.addEventListener('click', (e) => {
+      const dot = e.target.closest('.carousel-dot');
+      if (dot) {
+        this.goTo(parseInt(dot.dataset.index, 10));
+        this.startAuto();
+      }
+    });
+
+    const wrapper = document.querySelector('.testimonial-carousel');
+    wrapper?.addEventListener('mouseenter', () => this.stopAuto());
+    wrapper?.addEventListener('mouseleave', () => this.startAuto());
+
+    wrapper?.addEventListener(
+      'touchstart',
+      (e) => {
+        this.touchStartX = e.touches[0].clientX;
+      },
+      { passive: true }
+    );
+
+    wrapper?.addEventListener(
+      'touchend',
+      (e) => {
+        const diff = this.touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+          diff > 0 ? this.next() : this.prev();
+          this.startAuto();
+        }
+      },
+      { passive: true }
+    );
+  }
+}
+
+/* --- Typewriter Effect --- */
+
+function initTypewriter() {
+  const el = document.getElementById('hero-typewriter');
+  if (!el) return;
+
+  const phrases = SITE.hero.typewriterPhrases;
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+
+  function tick() {
+    const current = phrases[phraseIndex];
+
+    if (isDeleting) {
+      el.textContent = current.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      el.textContent = current.substring(0, charIndex + 1);
+      charIndex++;
+    }
+
+    let delay = isDeleting ? 40 : 80;
+
+    if (!isDeleting && charIndex === current.length) {
+      delay = 2000;
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      delay = 400;
+    }
+
+    setTimeout(tick, delay);
+  }
+
+  tick();
+}
+
+/* --- Parallax --- */
+
+function initParallax() {
+  const layer = document.getElementById('hero-parallax');
+  if (!layer || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let currentX = 0;
+  let currentY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 20;
+    mouseY = (e.clientY / window.innerHeight - 0.5) * 20;
+  });
+
+  function animate() {
+    currentX += (mouseX - currentX) * 0.05;
+    currentY += (mouseY - currentY) * 0.05;
+
+    const scrollY = window.scrollY * 0.15;
+    layer.style.transform = `translate3d(${currentX}px, ${currentY + scrollY}px, 0)`;
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+}
+
+/* --- Theme Toggle --- */
+
+function initTheme() {
+  const toggle = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  const saved = localStorage.getItem('glamroom-theme');
+
+  if (saved === 'dark') {
+    html.classList.add('dark');
+  }
+
+  updateThemeIcon();
+
+  toggle?.addEventListener('click', () => {
+    html.classList.toggle('dark');
+    localStorage.setItem('glamroom-theme', html.classList.contains('dark') ? 'dark' : 'light');
+    updateThemeIcon();
+  });
+
+  function updateThemeIcon() {
+    if (!toggle) return;
+    const icon = toggle.querySelector('i');
+    if (icon) {
+      icon.className = html.classList.contains('dark')
+        ? 'fa-solid fa-sun'
+        : 'fa-solid fa-moon';
+    }
+  }
+}
+
+/* --- Custom Cursor --- */
+
+function initCustomCursor() {
+  if (window.matchMedia('(pointer: coarse)').matches) {
+    document.body.classList.add('no-custom-cursor');
+    return;
+  }
+
+  const dot = document.createElement('div');
+  const ring = document.createElement('div');
+  dot.className = 'cursor-dot';
+  ring.className = 'cursor-ring';
+  document.body.appendChild(dot);
+  document.body.appendChild(ring);
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let dotX = 0;
+  let dotY = 0;
+  let ringX = 0;
+  let ringY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  document.querySelectorAll('a, button, .gallery-item, .service-card').forEach((el) => {
+    el.addEventListener('mouseenter', () => {
+      ring.style.width = '48px';
+      ring.style.height = '48px';
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.style.width = '32px';
+      ring.style.height = '32px';
+    });
+  });
+
+  function animate() {
+    dotX += (mouseX - dotX) * 0.35;
+    dotY += (mouseY - dotY) * 0.35;
+    ringX += (mouseX - ringX) * 0.15;
+    ringY += (mouseY - ringY) * 0.15;
+
+    dot.style.left = `${dotX}px`;
+    dot.style.top = `${dotY}px`;
+    ring.style.left = `${ringX}px`;
+    ring.style.top = `${ringY}px`;
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+}
+
+/* --- Intersection Observer (Reveal) --- */
+
+let revealObserver;
+
+function observeRevealElements(elements) {
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    );
+  }
+
+  elements.forEach((el) => revealObserver.observe(el));
+}
+
+function initReveal() {
+  observeRevealElements(document.querySelectorAll('.reveal'));
+}
+
+/* --- Navigation --- */
+
+function initNav() {
+  const nav = document.getElementById('nav');
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const overlay = document.getElementById('mobile-overlay');
+
+  window.addEventListener('scroll', () => {
+    nav?.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  const floatBtn = document.getElementById('whatsapp-float');
+  if (floatBtn) {
+    window.addEventListener('scroll', () => {
+      floatBtn.classList.toggle('visible', window.scrollY > window.innerHeight * 0.3);
+    });
+  }
+
+  function toggleMenu(open) {
+    hamburger?.classList.toggle('active', open);
+    mobileMenu?.classList.toggle('open', open);
+    overlay?.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  hamburger?.addEventListener('click', () => {
+    toggleMenu(!mobileMenu?.classList.contains('open'));
+  });
+
+  overlay?.addEventListener('click', () => toggleMenu(false));
+
+  document.querySelectorAll('.nav-link, .mobile-menu-links a, .footer-links a').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href?.startsWith('#')) {
+        e.preventDefault();
+        scrollToSection(href);
+        toggleMenu(false);
+      }
+    });
+  });
+
+  const navLinks = getNavLinks();
+
+  const navLinksContainer = document.getElementById('nav-links');
+  if (navLinksContainer) {
+    navLinksContainer.innerHTML = navLinks
+      .map((link) => `<li><a href="${link.href}" class="nav-link">${link.label}</a></li>`)
+      .join('');
+  }
+
+  const mobileLinks = document.getElementById('mobile-menu-links');
+  if (mobileLinks) {
+    mobileLinks.innerHTML = navLinks
+      .map((link) => `<li><a href="${link.href}">${link.label}</a></li>`)
+      .join('');
+  }
+
+  const footerLinks = document.getElementById('footer-nav-links');
+  if (footerLinks) {
+    footerLinks.innerHTML = navLinks
+      .map((link) => `<li><a href="${link.href}">${link.label}</a></li>`)
+      .join('');
+  }
+}
+
+/* --- Button Handlers --- */
+
+function initButtons() {
+  const page = document.body.dataset.page || 'home';
+
+  document.getElementById('btn-view-services')?.addEventListener('click', () => {
+    scrollToSection('#services');
+  });
+
+  if (page === 'business') {
+    document.getElementById('btn-contact-whatsapp')?.addEventListener('click', openWhatsApp);
+  }
+
+  document.querySelectorAll('.btn').forEach((btn) => {
+    btn.addEventListener('click', function (e) {
+      const ripple = document.createElement('span');
+      ripple.className = 'btn-ripple';
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      ripple.style.width = ripple.style.height = `${size}px`;
+      ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+      ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+      this.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    });
+  });
+}
+
+/* --- External Links --- */
+
+function initExternalLinks() {
+  document.querySelectorAll('a[href^="http"]').forEach((link) => {
+    if (!link.hasAttribute('target')) {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+    }
+  });
+}
+
+/* --- Init --- */
+
+document.addEventListener('DOMContentLoaded', () => {
+  const page = document.body.dataset.page || 'home';
+
+  populateStaticContent();
+  initEditorialMenu();
+  initCustomCursor();
+
+  if (page !== 'home') {
+    renderContact();
+    initReveal();
+    initButtons();
+  }
+
+  initExternalLinks();
+
+  if (page === 'home') {
+    renderHomePanels();
+    initHomeScrollEffects();
+  } else if (page === 'business') {
+    renderServices();
+    renderBusiness();
+    renderGallery();
+    new TestimonialCarousel();
+    initParallax();
+  } else if (page === 'about') {
+    renderAbout();
+    initParallax();
+  } else if (page === 'booking') {
+    initBookingForm();
+  }
+});

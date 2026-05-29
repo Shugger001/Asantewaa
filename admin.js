@@ -7,9 +7,9 @@ const loginForm = document.getElementById('loginForm');
 const loginError = document.getElementById('loginError');
 const bookingsBody = document.getElementById('bookingsBody');
 const emptyState = document.getElementById('emptyState');
-const loadingState = document.getElementById('loadingState');
 
 let allBookings = [];
+let filteredBookings = [];
 
 function showLogin(message = '') {
   adminContent.hidden = true;
@@ -52,6 +52,14 @@ function statusBadge(status) {
   return `<span class="status-badge status-${safe}">${safe}</span>`;
 }
 
+function escapeHtml(str) {
+  return String(str ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 function updateStats(bookings) {
   const today = new Date().toISOString().slice(0, 10);
   document.getElementById('totalBookings').textContent = bookings.length;
@@ -61,16 +69,17 @@ function updateStats(bookings) {
 }
 
 function renderBookings(bookings) {
-  bookingsBody.innerHTML = '';
+  filteredBookings = bookings;
   emptyState.hidden = bookings.length > 0;
-  loadingState.hidden = true;
 
-  if (!bookings.length) return;
+  if (!bookings.length) {
+    bookingsBody.innerHTML = '<tr><td colspan="8" class="table-empty">No bookings found</td></tr>';
+    return;
+  }
 
   bookingsBody.innerHTML = bookings
     .map((b) => {
       const location = b.location || b.notes?.match(/\[Location: ([^\]]+)\]/)?.[1] || '—';
-      const notes = (b.notes || '').replace(/\[Location:[^\]]+\]\n?/, '').trim() || '—';
 
       return `
         <tr data-id="${b.id}">
@@ -80,14 +89,12 @@ function renderBookings(bookings) {
           <td><a class="phone-link" href="${whatsAppHref(b.phone)}" target="_blank" rel="noopener noreferrer">${escapeHtml(b.phone)}</a></td>
           <td>${escapeHtml(location)}</td>
           <td>${escapeHtml(b.service)}</td>
-          <td class="notes-cell">${escapeHtml(notes)}</td>
           <td>${statusBadge(b.status)}</td>
           <td>
             <div class="row-actions">
-              ${actionButton(b, 'confirmed', 'Confirm', b.status === 'confirmed')}
-              ${actionButton(b, 'completed', 'Complete', b.status === 'completed')}
-              ${actionButton(b, 'cancelled', 'Cancel', b.status === 'cancelled')}
-              <button type="button" class="btn-sm danger" data-action="delete" data-id="${b.id}">Delete</button>
+              ${b.status === 'pending' ? `<button type="button" class="action-btn confirm" data-action="status" data-id="${b.id}" data-status="confirmed" title="Confirm">✅</button>` : ''}
+              ${b.status === 'confirmed' ? `<button type="button" class="action-btn complete" data-action="status" data-id="${b.id}" data-status="completed" title="Complete">✨</button>` : ''}
+              ${b.status !== 'cancelled' ? `<button type="button" class="action-btn cancel" data-action="status" data-id="${b.id}" data-status="cancelled" title="Cancel">❌</button>` : ''}
             </div>
           </td>
         </tr>
@@ -96,25 +103,15 @@ function renderBookings(bookings) {
     .join('');
 }
 
-function actionButton(booking, status, label, disabled) {
-  return `<button type="button" class="btn-sm secondary" data-action="status" data-id="${booking.id}" data-status="${status}" ${disabled ? 'disabled' : ''}>${label}</button>`;
-}
-
-function escapeHtml(str) {
-  return String(str ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
-
 function applyFilters() {
   const status = document.getElementById('statusFilter').value;
   const date = document.getElementById('dateFilter').value;
+  const phone = document.getElementById('phoneFilter').value.trim().toLowerCase();
 
   let filtered = [...allBookings];
   if (status !== 'all') filtered = filtered.filter((b) => b.status === status);
   if (date) filtered = filtered.filter((b) => b.booking_date === date);
+  if (phone) filtered = filtered.filter((b) => b.phone.toLowerCase().includes(phone));
 
   renderBookings(filtered);
 }
@@ -126,9 +123,8 @@ async function loadBookings() {
     return;
   }
 
-  loadingState.hidden = false;
+  bookingsBody.innerHTML = '<tr><td colspan="8" class="table-loading">Loading bookings…</td></tr>';
   emptyState.hidden = true;
-  bookingsBody.innerHTML = '';
 
   const { data, error } = await supabase
     .from('bookings')
@@ -136,16 +132,13 @@ async function loadBookings() {
     .order('booking_date', { ascending: false })
     .order('booking_time', { ascending: false });
 
-  loadingState.hidden = true;
-
   if (error) {
     if (error.message?.includes('JWT') || error.code === 'PGRST301') {
       showLogin('Session expired. Please log in again.');
       await supabase.auth.signOut();
       return;
     }
-    emptyState.hidden = false;
-    emptyState.textContent = `Could not load bookings: ${error.message}`;
+    bookingsBody.innerHTML = `<tr><td colspan="8" class="table-empty">Could not load bookings: ${escapeHtml(error.message)}</td></tr>`;
     return;
   }
 
@@ -164,15 +157,39 @@ async function updateStatus(id, status) {
   await loadBookings();
 }
 
-async function deleteBooking(id) {
-  if (!confirm('Delete this booking permanently?')) return;
-  const supabase = getSupabase();
-  const { error } = await supabase.from('bookings').delete().eq('id', id);
-  if (error) {
-    alert(`Delete failed: ${error.message}`);
+function exportToCSV() {
+  const rows = filteredBookings.length ? filteredBookings : allBookings;
+
+  if (!rows.length) {
+    alert('No bookings to export!');
     return;
   }
-  await loadBookings();
+
+  const headers = ['Full Name', 'Phone', 'Email', 'Location', 'Service', 'Date', 'Time', 'Status', 'Notes', 'Created At'];
+  const csvRows = rows.map((b) => [
+    b.full_name,
+    b.phone,
+    b.email || '',
+    b.location || '',
+    b.service,
+    b.booking_date,
+    b.booking_time,
+    b.status,
+    b.notes || '',
+    b.created_at || '',
+  ]);
+
+  const csvContent = [headers, ...csvRows]
+    .map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+    .join('\n');
+
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `glam-room-bookings-${new Date().toISOString().split('T')[0]}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 async function login(email, password) {
@@ -217,9 +234,14 @@ async function init() {
   });
 
   document.getElementById('applyFilterBtn').addEventListener('click', applyFilters);
+  document.getElementById('statusFilter').addEventListener('change', applyFilters);
+  document.getElementById('dateFilter').addEventListener('change', applyFilters);
+  document.getElementById('phoneFilter').addEventListener('input', applyFilters);
+  document.getElementById('exportBtn').addEventListener('click', exportToCSV);
   document.getElementById('clearFilterBtn').addEventListener('click', () => {
     document.getElementById('statusFilter').value = 'all';
     document.getElementById('dateFilter').value = '';
+    document.getElementById('phoneFilter').value = '';
     applyFilters();
   });
   document.getElementById('refreshBtn').addEventListener('click', loadBookings);
@@ -228,10 +250,7 @@ async function init() {
   bookingsBody.addEventListener('click', async (e) => {
     const btn = e.target.closest('button[data-action]');
     if (!btn) return;
-
-    const { action, id, status } = btn.dataset;
-    if (action === 'status') await updateStatus(id, status);
-    if (action === 'delete') await deleteBooking(id);
+    if (btn.dataset.action === 'status') await updateStatus(btn.dataset.id, btn.dataset.status);
   });
 
   if (!supabase) {

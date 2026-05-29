@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow">
   <title>Glam Room Admin | Asantewaa</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="admin.css">
 </head>
 <body>
@@ -13,12 +14,12 @@
   <div class="admin-container" id="adminContent" hidden>
     <header class="admin-header">
       <div>
-        <h1>👑 Glam Room Admin</h1>
+        <h1><i class="fas fa-crown"></i> Glam Room Admin</h1>
         <p>Welcome back, Asantewaa! Manage your queens' bookings here.</p>
       </div>
       <div class="admin-header-actions">
-        <button type="button" class="btn-ghost" id="refreshBtn">Refresh</button>
-        <button type="button" class="btn-ghost" id="logoutBtn">Log out</button>
+        <button type="button" class="btn-ghost" id="refreshBtn"><i class="fas fa-rotate"></i> Refresh</button>
+        <button type="button" class="btn-ghost" id="logoutBtn">🚪 Logout</button>
       </div>
     </header>
 
@@ -50,8 +51,10 @@
         <option value="cancelled">Cancelled</option>
       </select>
       <input type="date" id="dateFilter" aria-label="Filter by date">
+      <input type="text" id="phoneFilter" placeholder="Filter by phone" aria-label="Filter by phone">
       <button type="button" class="btn-primary" id="applyFilterBtn">Apply Filter</button>
-      <button type="button" class="btn-primary" id="clearFilterBtn" style="background:#2D1B0E;">Clear</button>
+      <button type="button" class="btn-primary" id="exportBtn">📥 Export to CSV</button>
+      <button type="button" class="btn-primary btn-dark" id="clearFilterBtn">Clear</button>
     </div>
 
     <div class="table-wrap">
@@ -64,15 +67,15 @@
             <th>Phone</th>
             <th>Location</th>
             <th>Service</th>
-            <th>Notes</th>
             <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody id="bookingsBody"></tbody>
+        <tbody id="bookingsBody">
+          <tr><td colspan="8" class="table-loading">Loading bookings…</td></tr>
+        </tbody>
       </table>
       <p class="empty-state" id="emptyState" hidden>No bookings match your filters.</p>
-      <p class="admin-loading" id="loadingState">Loading bookings…</p>
     </div>
 
     <p class="admin-footer">
@@ -81,6 +84,7 @@
   </div>
 
   <div class="login-container" id="loginContainer">
+    <i class="fas fa-crown login-crown" aria-hidden="true"></i>
     <h2>🔐 Admin Login</h2>
     <p class="login-sub">Sign in to manage bookings</p>
     <div class="login-error" id="loginError"></div>
@@ -89,7 +93,7 @@
       <input type="email" id="adminEmail" required autocomplete="username" placeholder="admin@example.com">
       <label for="adminPassword">Password</label>
       <input type="password" id="adminPassword" required autocomplete="current-password" placeholder="Password">
-      <button type="submit" class="btn-primary" id="loginBtn" style="width:100%;padding:0.75rem;">Login</button>
+      <button type="submit" class="btn-primary" id="loginBtn">Login</button>
     </form>
   </div>
 

@@ -133,6 +133,78 @@ body {
   cursor: not-allowed;
 }
 
+.btn-dark {
+  background: #2d1b0e;
+}
+
+.btn-dark:hover {
+  background: #1a0f0a;
+}
+
+.filter-bar input[type="text"] {
+  min-width: 160px;
+  flex: 1;
+}
+
+.login-crown {
+  display: block;
+  font-size: 3rem;
+  color: #c35a2e;
+  text-align: center;
+  margin: 0 auto 0.5rem;
+}
+
+.table-loading,
+.table-empty {
+  text-align: center;
+  color: #5a3e2b;
+  padding: 2rem 1rem !important;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  font-size: 1.15rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+}
+
+.action-btn.confirm:hover { transform: scale(1.15); }
+.action-btn.complete:hover { transform: scale(1.15); }
+.action-btn.cancel:hover { transform: scale(1.15); }
+
+.status-completed {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.status-cancelled {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.status-pending {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.status-confirmed {
+  background: #e8f5e9;
+  color: #2b5e2b;
+}
+
+@media (max-width: 768px) {
+  table {
+    font-size: 0.8rem;
+  }
+
+  th,
+  td {
+    padding: 0.5rem;
+  }
+}
+
 .table-wrap {
   overflow-x: auto;
   background: white;

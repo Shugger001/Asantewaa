@@ -212,14 +212,55 @@ async function login(email, password) {
   await loadBookings();
 }
 
-function clearFilters() {
-  document.getElementById('statusFilter').value = 'all';
-  document.getElementById('dateFilter').value = '';
-  document.getElementById('phoneFilter').value = '';
-  applyFilters();
+function resetFilters() {
+  const statusFilter = document.getElementById('statusFilter');
+  const dateFilter = document.getElementById('dateFilter');
+  const phoneFilter = document.getElementById('phoneFilter');
+
+  if (statusFilter) {
+    statusFilter.value = 'all';
+    statusFilter.selectedIndex = 0;
+  }
+
+  if (dateFilter) {
+    dateFilter.value = '';
+    dateFilter.defaultValue = '';
+    dateFilter.valueAsDate = null;
+  }
+
+  if (phoneFilter) {
+    phoneFilter.value = '';
+  }
+
+  renderBookings([...allBookings]);
 }
 
-function showClearSuccess() {
+async function deleteAllBookings() {
+  const supabase = getSupabase();
+  if (!supabase) throw new Error('Supabase is not configured.');
+
+  const { data: rows, error: readError } = await supabase.from('bookings').select('id');
+  if (readError) throw new Error(readError.message);
+  if (!rows?.length) {
+    allBookings = [];
+    resetFilters();
+    updateStats([]);
+    return;
+  }
+
+  const { error: deleteError } = await supabase
+    .from('bookings')
+    .delete()
+    .in('id', rows.map((row) => row.id));
+
+  if (deleteError) throw new Error(deleteError.message);
+
+  allBookings = [];
+  resetFilters();
+  updateStats([]);
+}
+
+function showClearSuccess(message = 'All bookings cleared from the site.') {
   let toast = document.getElementById('clearFiltersToast');
   if (!toast) {
     toast = document.createElement('p');
@@ -228,12 +269,12 @@ function showClearSuccess() {
     toast.setAttribute('role', 'status');
     document.querySelector('.filter-bar')?.appendChild(toast);
   }
-  toast.textContent = 'Filters cleared';
+  toast.textContent = message;
   toast.hidden = false;
   clearTimeout(showClearSuccess._timer);
   showClearSuccess._timer = setTimeout(() => {
     toast.hidden = true;
-  }, 2500);
+  }, 3500);
 }
 
 async function verifyLoginPassword(email, password) {
@@ -274,13 +315,13 @@ function openClearConfirmModal() {
   backdrop.setAttribute('role', 'presentation');
   backdrop.innerHTML = `
     <div class="admin-modal" role="dialog" aria-labelledby="clearConfirmTitle" aria-modal="true">
-      <h3 id="clearConfirmTitle">Confirm clear filters</h3>
-      <p class="admin-modal-text">Enter the same password you used to sign in, or your clear-filters password.</p>
+      <h3 id="clearConfirmTitle">Clear all bookings?</h3>
+      <p class="admin-modal-text">This permanently removes every booking from the admin dashboard and customer lookup on the site. Enter your password to confirm.</p>
       <div class="login-error" id="clearConfirmError"></div>
       <label for="clearConfirmPassword">Password</label>
       <input type="password" id="clearConfirmPassword" autocomplete="current-password" placeholder="Admin password">
       <div class="admin-modal-actions">
-        <button type="button" class="btn-primary" id="clearConfirmSubmit">Clear filters</button>
+        <button type="button" class="btn-primary" id="clearConfirmSubmit">Clear all bookings</button>
         <button type="button" class="btn-primary btn-dark" id="clearConfirmCancel">Cancel</button>
       </div>
     </div>
@@ -323,18 +364,21 @@ async function handleClearWithPassword() {
   try {
     const ok = await verifyClearPassword(passwordInput.value);
     if (!ok) {
-      errorEl.textContent = 'Wrong password. Filters were not cleared.';
+      errorEl.textContent = 'Wrong password. Bookings were not cleared.';
       errorEl.style.display = 'block';
       return;
     }
-    clearFilters();
+
+    submitBtn.textContent = 'Clearing…';
+    await deleteAllBookings();
     showClearSuccess();
     closeClearConfirmModal();
-  } catch {
-    errorEl.textContent = 'Could not verify password. Try again.';
+  } catch (err) {
+    errorEl.textContent = err?.message || 'Could not clear bookings. Try again.';
     errorEl.style.display = 'block';
   } finally {
     submitBtn.disabled = false;
+    submitBtn.textContent = 'Clear all bookings';
   }
 }
 
@@ -364,11 +408,12 @@ async function init() {
   });
 
   document.getElementById('applyFilterBtn').addEventListener('click', applyFilters);
+  document.getElementById('resetFilterBtn').addEventListener('click', resetFilters);
   document.getElementById('statusFilter').addEventListener('change', applyFilters);
   document.getElementById('dateFilter').addEventListener('change', applyFilters);
   document.getElementById('phoneFilter').addEventListener('input', applyFilters);
   document.getElementById('exportBtn').addEventListener('click', exportToCSV);
-  document.getElementById('clearFilterBtn').addEventListener('click', openClearConfirmModal);
+  document.getElementById('clearAllBtn').addEventListener('click', openClearConfirmModal);
   document.getElementById('refreshBtn').addEventListener('click', loadBookings);
   document.getElementById('logoutBtn').addEventListener('click', logout);
 

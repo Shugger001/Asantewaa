@@ -1,5 +1,6 @@
 import { SITE } from './data.js';
 import { getSupabase } from './supabase-client.js';
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
 const adminContent = document.getElementById('adminContent');
 const loginContainer = document.getElementById('loginContainer');
@@ -10,6 +11,7 @@ const emptyState = document.getElementById('emptyState');
 
 let allBookings = [];
 let filteredBookings = [];
+let cachedLoginPassword = null;
 
 function showLogin(message = '') {
   adminContent.hidden = true;
@@ -205,6 +207,7 @@ async function login(email, password) {
     return;
   }
 
+  cachedLoginPassword = password;
   showAdmin();
   await loadBookings();
 }
@@ -214,6 +217,52 @@ function clearFilters() {
   document.getElementById('dateFilter').value = '';
   document.getElementById('phoneFilter').value = '';
   applyFilters();
+}
+
+function showClearSuccess() {
+  let toast = document.getElementById('clearFiltersToast');
+  if (!toast) {
+    toast = document.createElement('p');
+    toast.id = 'clearFiltersToast';
+    toast.className = 'clear-filters-toast';
+    toast.setAttribute('role', 'status');
+    document.querySelector('.filter-bar')?.appendChild(toast);
+  }
+  toast.textContent = 'Filters cleared';
+  toast.hidden = false;
+  clearTimeout(showClearSuccess._timer);
+  showClearSuccess._timer = setTimeout(() => {
+    toast.hidden = true;
+  }, 2500);
+}
+
+async function verifyLoginPassword(email, password) {
+  const { url, anonKey } = SITE.booking.supabase || {};
+  if (!url || !anonKey || !email || !password) return false;
+
+  const tempClient = createClient(url, anonKey, {
+    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+  });
+  const { data, error } = await tempClient.auth.signInWithPassword({ email, password });
+  return Boolean(data?.session && !error);
+}
+
+async function verifyClearPassword(password) {
+  const trimmed = password.trim();
+  if (!trimmed) return false;
+
+  const configured = SITE.admin?.clearPassword?.trim();
+  if (configured && trimmed === configured) return true;
+  if (cachedLoginPassword && trimmed === cachedLoginPassword) return true;
+
+  const supabase = getSupabase();
+  if (!supabase) return false;
+
+  const { data: { session } } = await supabase.auth.getSession();
+  const email = session?.user?.email?.trim();
+  if (!email) return false;
+
+  return verifyLoginPassword(email, trimmed);
 }
 
 function openClearConfirmModal() {
@@ -262,38 +311,25 @@ function closeClearConfirmModal() {
   document.body.classList.remove('admin-modal-open');
 }
 
-async function verifyClearPassword(password) {
-  const configured = SITE.admin?.clearPassword?.trim();
-  if (configured) return password === configured;
-
-  const supabase = getSupabase();
-  if (!supabase || !password) return false;
-
-  const { data: { session } } = await supabase.auth.getSession();
-  const email = session?.user?.email || SITE.admin?.loginEmail;
-  if (!email) return false;
-
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
-  return !error;
-}
-
 async function handleClearWithPassword() {
   const errorEl = document.getElementById('clearConfirmError');
-  const password = document.getElementById('clearConfirmPassword').value;
+  const passwordInput = document.getElementById('clearConfirmPassword');
   const submitBtn = document.getElementById('clearConfirmSubmit');
+  if (!errorEl || !passwordInput || !submitBtn) return;
 
   errorEl.style.display = 'none';
   submitBtn.disabled = true;
 
   try {
-    const ok = await verifyClearPassword(password);
+    const ok = await verifyClearPassword(passwordInput.value);
     if (!ok) {
       errorEl.textContent = 'Wrong password. Filters were not cleared.';
       errorEl.style.display = 'block';
       return;
     }
-    closeClearConfirmModal();
     clearFilters();
+    showClearSuccess();
+    closeClearConfirmModal();
   } catch {
     errorEl.textContent = 'Could not verify password. Try again.';
     errorEl.style.display = 'block';
@@ -305,6 +341,7 @@ async function handleClearWithPassword() {
 async function logout() {
   const supabase = getSupabase();
   if (supabase) await supabase.auth.signOut();
+  cachedLoginPassword = null;
   showLogin();
 }
 

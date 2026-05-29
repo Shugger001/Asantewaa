@@ -146,6 +146,17 @@ body {
   flex: 1;
 }
 
+.clear-filters-toast {
+  flex: 1 1 100%;
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
 .login-crown {
   display: block;
   font-size: 3rem;
@@ -399,7 +410,7 @@ tr:last-child td {
   padding: 1rem;
 }
 
-body.install-prompt-open {
+body.admin-modal-open {
   overflow: hidden;
 }
 

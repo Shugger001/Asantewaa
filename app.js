@@ -1,4 +1,4 @@
-import { SITE } from './data.js';
+import { SITE, getLocationLabel } from './data.js';
 import { initBookingForm } from './booking.js';
 
 /* ==========================================================================
@@ -162,19 +162,24 @@ function renderLocations(containerId) {
   if (!el || !SITE.locations?.length) return;
 
   el.innerHTML = SITE.locations
-    .map(
-      (loc) => `
+    .map((loc) => {
+      const address = loc.address?.trim();
+      const title = getLocationLabel(loc);
+      const showBrandLine = address && loc.name && address !== loc.name;
+
+      return `
     <div class="glass-card location-card">
-      <h3 class="location-card-name"><i class="fa-solid fa-location-dot"></i> ${loc.name}</h3>
-      <p class="location-card-address">${loc.address}</p>
+      <h3 class="location-card-name"><i class="fa-solid fa-location-dot"></i> ${title}</h3>
+      ${showBrandLine ? `<p class="location-card-brand">${loc.name}</p>` : ''}
+      ${address ? '' : `<p class="location-card-address">Open Google Maps for the full address.</p>`}
       <p class="location-card-meta">${loc.city}, ${loc.country}</p>
       ${loc.hours ? `<p class="location-card-hours"><i class="fa-regular fa-clock"></i> ${loc.hours}</p>` : ''}
       <a href="${loc.mapUrl}" class="location-card-map" target="_blank" rel="noopener noreferrer">
         View on Google Maps <i class="fa-solid fa-arrow-up-right-from-square"></i>
       </a>
     </div>
-  `
-    )
+  `;
+    })
     .join('');
 }
 
@@ -623,7 +628,10 @@ function initTheme() {
 /* --- Custom Cursor --- */
 
 function initCustomCursor() {
-  if (window.matchMedia('(pointer: coarse)').matches) {
+  const isTouch =
+    window.matchMedia('(pointer: coarse)').matches ||
+    window.matchMedia('(max-width: 768px)').matches;
+  if (isTouch) {
     document.body.classList.add('no-custom-cursor');
     return;
   }

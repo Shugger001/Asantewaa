@@ -1,4 +1,9 @@
-import { SITE } from './data.js';
+import {
+  SITE,
+  getLocationBookingValue,
+  getLocationLabel,
+  getLocationLabelById,
+} from './data.js';
 
 const GOOGLE_SCRIPT_URL = SITE.booking.googleScriptUrl;
 let bookedSlots = [];
@@ -19,11 +24,19 @@ function populateBookingPage() {
   const locationsList = document.getElementById('booking-locations-list');
   if (locationsList) {
     locationsList.innerHTML = SITE.locations
-      .map(
-        (loc) => `
-      <li><i class="fas fa-map-marker-alt"></i> <strong>${loc.name}</strong><br><span style="opacity:0.85;font-size:0.88em">${loc.address}</span></li>
-    `
-      )
+      .map((loc) => {
+        const label = getLocationLabel(loc);
+        const brand = loc.name?.trim();
+        const showBrand = brand && label !== brand;
+
+        return `
+      <li>
+        <i class="fas fa-map-marker-alt"></i>
+        <strong>${label}</strong>
+        ${showBrand ? `<br><span style="opacity:0.85;font-size:0.88em">${brand}</span>` : ''}
+      </li>
+    `;
+      })
       .join('');
   }
 
@@ -31,7 +44,12 @@ function populateBookingPage() {
   if (locationSelect) {
     locationSelect.innerHTML =
       '<option value="">— Select location —</option>' +
-      SITE.locations.map((loc) => `<option value="${loc.name}">${loc.name}</option>`).join('');
+      SITE.locations
+        .map((loc) => {
+          const label = getLocationLabel(loc);
+          return `<option value="${getLocationBookingValue(loc)}">${label}</option>`;
+        })
+        .join('');
   }
 
   document.getElementById('booking-hours').textContent = SITE.booking.hours || SITE.business.hours;
@@ -121,13 +139,14 @@ function updateTimeSlotAvailability() {
 
 function updateSummary() {
   const name = document.getElementById('fullName').value.trim() || 'Queen';
-  const location = document.getElementById('location')?.value || '';
+  const locationId = document.getElementById('location')?.value || '';
+  const location = getLocationLabelById(locationId);
   const service = document.getElementById('service').value;
   const date = document.getElementById('date').value;
   const time = document.getElementById('time').value;
   const summaryDiv = document.getElementById('liveSummary');
 
-  if (service && location && date && time) {
+  if (service && locationId && date && time) {
     summaryDiv.innerHTML = `
       <i class="fas fa-check-circle" style="color: var(--terracotta);"></i>
       <strong>Booking summary:</strong><br>
@@ -136,7 +155,7 @@ function updateSummary() {
       📅 ${date} at ${time}<br>
       <span style="font-size: 0.82rem;">💰 Pay at salon. Mama Glam dey wait you!</span>
     `;
-  } else if (service && location) {
+  } else if (service && locationId) {
     summaryDiv.innerHTML = `<i class="fas fa-info-circle"></i> Pick date and time to complete your booking.`;
   } else if (service) {
     summaryDiv.innerHTML = `<i class="fas fa-info-circle"></i> Pick date and time to complete your booking.`;
@@ -197,7 +216,8 @@ async function handleSubmit(e) {
   const fullName = document.getElementById('fullName').value.trim();
   const phone = document.getElementById('phone').value.trim();
   const email = document.getElementById('email').value.trim();
-  const location = document.getElementById('location').value;
+  const locationId = document.getElementById('location').value;
+  const location = getLocationLabelById(locationId);
   const service = document.getElementById('service').value;
   const date = document.getElementById('date').value;
   const time = document.getElementById('time').value;
@@ -205,7 +225,7 @@ async function handleSubmit(e) {
 
   if (!fullName) { showError("Abeg, tell us who's coming to slay! 💁🏾‍♀️"); resetButton(submitBtn); return; }
   if (!validatePhone(phone)) { showError('Chale! Enter correct Ghana number (e.g., 024XXXXXXX or +233XXXXXXXXX) 📱'); resetButton(submitBtn); return; }
-  if (!location) { showError('Pick which Glam Room location you dey come to! 📍'); resetButton(submitBtn); return; }
+  if (!locationId) { showError('Pick which Glam Room location you dey come to! 📍'); resetButton(submitBtn); return; }
   if (!service) { showError("Pick a service, mama! We no fit guess your hair dreams 🔥"); resetButton(submitBtn); return; }
   if (!date) { showError('Pick date. Make you no just show anyhow o! 📅'); resetButton(submitBtn); return; }
   if (!time) { showError('Select time. Asantewaa no dey sleep for shop 😴'); resetButton(submitBtn); return; }

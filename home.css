@@ -1,6 +1,14 @@
 /* ==========================================================================
-   Homepage — Beyoncé.com-inspired editorial layout
-   https://beyonce.com/
+   Glam Room — Editorial theme & homepage
+   https://beyonce.com/ (homepage layout reference)
+
+   File map:
+   - styles.css    → shared components (legacy + grids)
+   - home.css      → editorial theme + homepage panels
+   - booking.css   → booking form layout
+   - mobile.css    → responsive / touch (load last on every page)
+   - data.js       → all copy, services, locations, images
+   - app.js        → render + menu + interactions
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
@@ -559,6 +567,27 @@ body.editorial-theme .stat-label {
   color: var(--text-muted);
 }
 
+/* Services: two cards per row on phones (pairs) */
+body.editorial-theme #services-grid.services-grid,
+body.editorial-theme .services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.65rem, 2.5vw, 1rem);
+  width: 100%;
+}
+
+body.editorial-theme .services-grid > .service-card,
+body.editorial-theme .services-grid > .skeleton,
+body.editorial-theme .services-grid > article {
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  body.editorial-theme .services-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 body.editorial-theme .service-name {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.4rem;
@@ -725,7 +754,7 @@ body.editorial-theme .map-placeholder {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Three shop locations */
+/* Two shop locations */
 .locations-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -733,9 +762,9 @@ body.editorial-theme .map-placeholder {
   margin-bottom: 0.5rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 560px) {
   .locations-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -760,6 +789,14 @@ body.editorial-theme .map-placeholder {
 .location-card-name i {
   margin-top: 0.15rem;
   flex-shrink: 0;
+}
+
+.location-card-brand {
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0.35rem 0 0.5rem;
 }
 
 .location-card-address {

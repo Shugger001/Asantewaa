@@ -3,6 +3,26 @@
  * Edit this file to update all content without touching HTML.
  */
 
+/** Primary label: Maps formatted address, else business name from the pin */
+export function getLocationLabel(loc) {
+  const address = loc.address?.trim();
+  return address || loc.name?.trim() || "Glam Room";
+}
+
+/** Stable unique value for booking forms (not duplicate "Glam Room" titles) */
+export function getLocationBookingValue(loc) {
+  return loc.bookingValue?.trim() || loc.id;
+}
+
+export function findLocationById(id) {
+  return SITE.locations?.find((loc) => loc.id === id);
+}
+
+export function getLocationLabelById(id) {
+  const loc = findLocationById(id);
+  return loc ? getLocationLabel(loc) : id;
+}
+
 export const SITE = {
   brand: "Glam Room by Asantewaa",
   owner: "Asantewaa",
@@ -12,33 +32,24 @@ export const SITE = {
   whatsapp: "+233XXXXXXXXX",
   whatsappMessage: "Hi Glam Room! I'd like to book an appointment 💅",
 
-  // Edit names and addresses for all 3 Glam Room locations
+  // Two Glam Room shops — names/addresses match Google Maps pins (not area labels)
   locations: [
     {
-      id: "abelemkpe",
-      name: "Glam Room — Abelemkpe",
+      id: "glam-room-tn4f",
+      name: "Glam Room",
       address: "Behind Tasty Fried Chicken, Abelemkpe, Accra",
       city: "Accra",
       country: "Ghana",
-      mapUrl: "https://maps.google.com/?q=Abelemkpe+Accra+Ghana",
+      mapUrl: "https://share.google/TN4FohAFQiJ6UgK4b",
       hours: "Mon – Sat: 9am – 6pm · Sun: Closed",
     },
     {
-      id: "east-legon",
-      name: "Glam Room — East Legon",
-      address: "UPDATE: East Legon street address",
+      id: "glam-room-eniy",
+      name: "Glam Room",
+      address: "",
       city: "Accra",
       country: "Ghana",
-      mapUrl: "https://maps.google.com/?q=East+Legon+Accra+Ghana",
-      hours: "Mon – Sat: 9am – 6pm · Sun: Closed",
-    },
-    {
-      id: "location-3",
-      name: "Glam Room — Location 3",
-      address: "UPDATE: Third shop street address",
-      city: "Accra",
-      country: "Ghana",
-      mapUrl: "https://maps.google.com/?q=Accra+Ghana",
+      mapUrl: "https://share.google/eNIyXIhSW1kZ6rzmF",
       hours: "Mon – Sat: 9am – 6pm · Sun: Closed",
     },
   ],
@@ -281,7 +292,7 @@ export const SITE = {
   business: {
     tagline: "Accra's baddest hair destination — where your crown gets the main character energy it deserves.",
     intro: [
-      "Glam Room is Asantewaa's dream salon — now with three locations across Accra, so your glow up is never far away. Warm vibes, expert stylists, and zero tolerance for bad hair days at every chair.",
+      "Glam Room is Asantewaa's dream salon — with two locations across Accra, so your glow up is never far away. Warm vibes, expert stylists, and zero tolerance for bad hair days at every chair.",
       "From silk press to full bridal glam, every appointment comes with main character energy included. Walk in as you are, walk out ready for Accra to stare.",
     ],
     hours: "Mon – Sat: 9am – 6pm · Sun: Closed",

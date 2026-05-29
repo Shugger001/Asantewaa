@@ -1,5 +1,6 @@
 /* ==========================================================================
-   Glam Room by Asantewaa — Styles
+   Glam Room by Asantewaa — Base & component styles
+   (Editorial overrides: home.css | Mobile: mobile.css)
    ========================================================================== */
 
 :root {
@@ -595,6 +596,7 @@ body.no-custom-cursor .cursor-ring {
 .section-inner {
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .section-header {
@@ -660,11 +662,19 @@ body.no-custom-cursor .cursor-ring {
   }
 }
 
-/* Services */
+/* Services — 2 columns default (pairs); 3 on large screens */
+#services-grid.services-grid,
 .services-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.services-grid > .service-card,
+.services-grid > .skeleton,
+.services-grid > article {
+  min-width: 0;
 }
 
 .service-card {
@@ -1288,7 +1298,35 @@ body.no-custom-cursor .cursor-ring {
 /* Responsive */
 @media (min-width: 640px) {
   .services-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .service-card {
+    padding: 1.5rem;
+  }
+
+  .service-icon {
+    width: 52px;
+    height: 52px;
+    font-size: 1.2rem;
+  }
+
+  .service-name {
+    font-size: 1.2rem;
+  }
+
+  .service-desc {
+    font-size: 0.88rem;
+    -webkit-line-clamp: unset;
+    display: block;
+    overflow: visible;
+  }
+
+  .service-meta {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .hero-inner {

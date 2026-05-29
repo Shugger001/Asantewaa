@@ -1,0 +1,492 @@
+/* ==========================================================================
+   Glam Room — Mobile & responsive (load last)
+   ========================================================================== */
+
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --page-gutter: clamp(1rem, 4vw, 1.5rem);
+  --touch-min: 44px;
+}
+
+/* --- Base --- */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body.editorial-theme,
+body.home-editorial {
+  padding-left: var(--safe-left);
+  padding-right: var(--safe-right);
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Prevent iOS zoom on form focus */
+input,
+select,
+textarea,
+button {
+  font-size: 16px;
+}
+
+@media (min-width: 768px) {
+  input,
+  select,
+  textarea {
+    font-size: 1rem;
+  }
+}
+
+/* Touch-friendly tap targets */
+a,
+button,
+.btn,
+.home-menu-btn,
+.home-topbar-link,
+.carousel-btn,
+.social-link,
+.whatsapp-float {
+  min-height: var(--touch-min);
+  -webkit-tap-highlight-color: rgba(212, 168, 83, 0.2);
+}
+
+.home-topbar-link,
+.home-menu-btn {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* --- Editorial chrome --- */
+.home-topbar {
+  padding-top: calc(0.75rem + var(--safe-top));
+  padding-left: calc(var(--page-gutter) + var(--safe-left));
+  padding-right: calc(var(--page-gutter) + var(--safe-right));
+}
+
+.home-bottombar {
+  padding-bottom: calc(1rem + var(--safe-bottom));
+  padding-left: calc(var(--page-gutter) + var(--safe-left));
+  padding-right: calc(var(--page-gutter) + var(--safe-right));
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.home-menu-panel {
+  width: min(100vw, 380px);
+  padding-top: calc(4.5rem + var(--safe-top));
+  padding-bottom: calc(1.5rem + var(--safe-bottom));
+}
+
+.home-menu-links a {
+  padding: 1.1rem 0;
+  min-height: var(--touch-min);
+  display: flex;
+  align-items: center;
+}
+
+/* --- Homepage panels --- */
+.home-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+.home-panel-content {
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+  padding-bottom: calc(5rem + var(--safe-bottom));
+}
+
+.home-panel-visual-labels {
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+  padding-top: calc(4.5rem + var(--safe-top));
+}
+
+.home-scroll-hint {
+  bottom: calc(3.5rem + var(--safe-bottom));
+}
+
+.whatsapp-float {
+  bottom: calc(1.25rem + var(--safe-bottom));
+  right: calc(1rem + var(--safe-right));
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  min-height: 52px;
+}
+
+/* --- Inner pages layout --- */
+.editorial-main {
+  padding-top: calc(4.25rem + var(--safe-top));
+  padding-bottom: calc(4.5rem + var(--safe-bottom));
+}
+
+body.editorial-theme .section {
+  padding: 3.5rem var(--page-gutter);
+}
+
+.section-inner {
+  width: 100%;
+  padding: 0;
+}
+
+body.editorial-theme .section-header {
+  margin-bottom: 2rem;
+}
+
+body.editorial-theme .section-title {
+  font-size: clamp(1.75rem, 8vw, 2.75rem);
+  hyphens: auto;
+}
+
+/* Business hero */
+body.editorial-theme .editorial-main .business-hero {
+  min-height: min(85vh, 720px);
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+  padding-bottom: 2rem;
+}
+
+body.editorial-theme .editorial-main .business-hero-inner {
+  padding-top: calc(4rem + var(--safe-top));
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.business-hero .hero-buttons {
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 320px;
+  gap: 0.75rem;
+}
+
+.business-hero .hero-buttons .btn {
+  width: 100%;
+  justify-content: center;
+  min-height: var(--touch-min);
+}
+
+/* About grid stacks on mobile */
+.about-grid {
+  gap: 1.5rem;
+}
+
+body.editorial-theme .about-content p {
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.about-stats {
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 400px) {
+  .about-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Services — 2 pairs side by side on mobile */
+#services-grid.services-grid,
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  width: 100%;
+}
+
+.services-grid > .service-card,
+.services-grid > .skeleton,
+.services-grid > article {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.service-card {
+  padding: 1rem 0.85rem;
+  min-width: 0;
+}
+
+.service-card-header {
+  margin-bottom: 0.65rem;
+}
+
+.service-icon {
+  width: 42px;
+  height: 42px;
+  font-size: 1rem;
+  border-radius: 0.65rem;
+}
+
+.service-badge {
+  font-size: 0.55rem;
+  padding: 0.2rem 0.45rem;
+  letter-spacing: 0.03em;
+}
+
+.service-name {
+  font-size: clamp(0.95rem, 3.5vw, 1.15rem);
+  margin-bottom: 0.35rem;
+  line-height: 1.2;
+}
+
+body.editorial-theme .service-name {
+  font-size: clamp(1rem, 3.8vw, 1.2rem);
+}
+
+.service-desc {
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin-bottom: 0.65rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.service-meta {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  padding-top: 0.65rem;
+}
+
+.service-price {
+  font-size: 0.78rem;
+}
+
+.service-duration {
+  font-size: 0.68rem;
+}
+
+.service-duration i {
+  font-size: 0.65rem;
+}
+
+/* Gallery */
+.gallery-grid {
+  gap: 0.75rem;
+}
+
+/* Locations */
+.locations-grid {
+  gap: 1rem;
+}
+
+.location-card {
+  padding: 1.25rem;
+}
+
+.location-card-address {
+  font-size: 1.05rem;
+  word-break: break-word;
+}
+
+/* Contact & CTAs */
+.contact-cta {
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-cta .btn {
+  width: 100%;
+  margin-left: 0 !important;
+  justify-content: center;
+}
+
+.contact-card {
+  padding: 1.5rem;
+}
+
+.social-links {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Testimonials */
+.testimonials-wrapper {
+  padding: 0 0.25rem;
+}
+
+.testimonial-card {
+  padding: 1.75rem 1.25rem;
+}
+
+.testimonial-text {
+  font-size: 1.05rem;
+}
+
+.carousel-controls {
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Quote card */
+.quote-card {
+  padding: 1.5rem;
+}
+
+.quote-text {
+  font-size: 1.1rem !important;
+}
+
+/* --- Booking page --- */
+body.editorial-theme .booking-container {
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+  padding-top: calc(5rem + var(--safe-top));
+  padding-bottom: calc(3rem + var(--safe-bottom));
+}
+
+.booking-grid {
+  gap: 1.25rem;
+}
+
+.booking-header {
+  margin-bottom: 1.75rem;
+}
+
+.booking-title {
+  font-size: clamp(1.75rem, 7vw, 2.5rem);
+}
+
+.personality-card,
+.booking-form-card {
+  padding: 1.5rem;
+}
+
+.booking-info-list li {
+  font-size: 0.88rem;
+  word-break: break-word;
+}
+
+.btn-book-submit {
+  min-height: 52px;
+}
+
+/* --- Small phones (≤480px) --- */
+@media (max-width: 480px) {
+  .home-topbar-link,
+  .home-menu-btn {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+  }
+
+  .home-panel-title {
+    font-size: clamp(2.5rem, 14vw, 4rem);
+  }
+
+  .home-panel-title.hero-name {
+    font-size: clamp(2.75rem, 16vw, 4.5rem);
+  }
+
+  .home-panel-visual-labels span {
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+  }
+
+  body.editorial-theme .business-hero-title {
+    font-size: clamp(2.25rem, 12vw, 3.5rem);
+  }
+
+  .home-bottombar span,
+  .home-bottombar a {
+    font-size: 0.52rem;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* --- Tablet portrait (481px–767px) --- */
+@media (min-width: 481px) and (max-width: 767px) {
+  .locations-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .services-grid {
+    gap: 0.85rem;
+  }
+
+  .service-card {
+    padding: 1.15rem;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .business-hero .hero-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+  }
+
+  .business-hero .hero-buttons .btn {
+    width: auto;
+    flex: 1 1 auto;
+    min-width: 140px;
+  }
+
+  .contact-cta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: none;
+  }
+
+  .contact-cta .btn {
+    width: auto;
+  }
+}
+
+/* --- Desktop hover only (no sticky hover on touch) --- */
+@media (hover: hover) and (pointer: fine) {
+  .glass-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+@media (hover: none) {
+  .glass-card:hover {
+    transform: none;
+  }
+
+  .home-panel:hover .home-panel-bg,
+  .home-panel.in-view .home-panel-bg {
+    transform: scale(1.02);
+  }
+}
+
+/* --- Landscape phones --- */
+@media (max-height: 500px) and (orientation: landscape) {
+  .home-panel {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  body.editorial-theme .editorial-main .business-hero {
+    min-height: auto;
+    padding-top: 4rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .home-scroll-hint {
+    display: none;
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "Glam Room by Asantewaa",
+  "short_name": "Glam Room",
+  "description": "Book your glow up at Glam Room — Accra's premier hair salon by Asantewaa.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#1a0f0a",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "./icons/glam-room-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/glam-room-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

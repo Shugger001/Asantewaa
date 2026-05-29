@@ -1,6 +1,7 @@
 import { SITE, getLocationLabel } from './data.js';
 import { initBookingForm } from './booking.js';
 import { initFindBooking } from './find-booking.js';
+import { initInstallPrompt } from './install-prompt.js';
 
 /* ==========================================================================
    Glam Room by Asantewaa — Application Logic
@@ -870,6 +871,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (page === 'home') {
     renderHomePanels();
     initFindBooking();
+    initInstallPrompt();
     initHomeScrollEffects();
   } else if (page === 'business') {
     renderServices();

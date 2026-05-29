@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Glam Room">
+  <rect width="512" height="512" rx="96" fill="#1a0f0a"/>
+  <rect x="32" y="32" width="448" height="448" rx="80" fill="none" stroke="#D4A853" stroke-width="8"/>
+  <path fill="#D4A853" d="M256 108c-8 28-28 48-56 56 28 8 48 28 56 56 8-28 28-48 56-56-28-8-48-28-56-56zm0 88c-44 0-80 36-80 80v24h160v-24c0-44-36-80-80-80z"/>
+  <text x="256" y="340" text-anchor="middle" font-family="Georgia, serif" font-size="52" font-weight="700" fill="#FFF8F0">GR</text>
+  <text x="256" y="392" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#C75B39">GLAM ROOM</text>
+</svg>

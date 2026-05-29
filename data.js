@@ -362,6 +362,16 @@ export const SITE = {
     error: "Something went wrong. Please try again or WhatsApp Glam Room.",
   },
 
+  installPrompt: {
+    title: "Add Glam Room to your home screen",
+    body: "Open like an app — one tap from your phone, no browser bar. Perfect for booking your next slay 👑",
+    installButton: "Add to Home Screen",
+    iosButton: "Got it",
+    laterButton: "Maybe later",
+    androidHint: "Tap below to install Glam Room on this device.",
+    delayMs: 3000,
+  },
+
   homeNavLinks: [
     { label: "Discover More", href: "about.html" },
     { label: "Glam Room", href: "glam-room.html" },

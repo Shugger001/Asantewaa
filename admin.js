@@ -11,6 +11,7 @@ const emptyState = document.getElementById('emptyState');
 
 let allBookings = [];
 let filteredBookings = [];
+let cachedLoginPassword = null;
 
 function showLogin(message = '') {
   adminContent.hidden = true;
@@ -206,6 +207,7 @@ async function login(email, password) {
     return;
   }
 
+  cachedLoginPassword = password;
   showAdmin();
   await loadBookings();
 }
@@ -275,31 +277,111 @@ function showClearSuccess(message = 'All bookings cleared from the site.') {
   }, 3500);
 }
 
-async function handleClearAll() {
-  if (!confirm('Delete all bookings permanently? This cannot be undone.')) return;
+async function verifyClearPassword(password) {
+  const trimmed = password.trim();
+  if (!trimmed) return false;
 
-  const btn = document.getElementById('clearAllBtn');
-  if (btn) {
-    btn.disabled = true;
-    btn.textContent = 'Clearing…';
-  }
+  const configured = SITE.admin?.clearPassword?.trim();
+  if (configured && trimmed === configured) return true;
+  if (cachedLoginPassword && trimmed === cachedLoginPassword) return true;
+
+  const supabase = getSupabase();
+  if (!supabase) return false;
+
+  const { data: { session } } = await supabase.auth.getSession();
+  const email = session?.user?.email?.trim();
+  if (!email) return false;
+
+  const { url, anonKey } = SITE.booking.supabase || {};
+  if (!url || !anonKey) return false;
+
+  const tempClient = createClient(url, anonKey, {
+    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+  });
+  const { data, error } = await tempClient.auth.signInWithPassword({ email, password: trimmed });
+  return Boolean(data?.session && !error);
+}
+
+function openClearConfirmModal() {
+  closeClearConfirmModal();
+
+  const backdrop = document.createElement('div');
+  backdrop.id = 'clearConfirmModal';
+  backdrop.className = 'admin-modal-backdrop is-open';
+  backdrop.setAttribute('role', 'presentation');
+  backdrop.innerHTML = `
+    <div class="admin-modal" role="dialog" aria-labelledby="clearConfirmTitle" aria-modal="true">
+      <h3 id="clearConfirmTitle">Clear all bookings?</h3>
+      <p class="admin-modal-text">This permanently removes every booking from the site. Enter your admin password to confirm.</p>
+      <div class="login-error" id="clearConfirmError"></div>
+      <label for="clearConfirmPassword">Password</label>
+      <input type="password" id="clearConfirmPassword" autocomplete="current-password" placeholder="Admin password">
+      <div class="admin-modal-actions">
+        <button type="button" class="btn-primary" id="clearConfirmSubmit">Clear all bookings</button>
+        <button type="button" class="btn-primary btn-dark" id="clearConfirmCancel">Cancel</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(backdrop);
+
+  backdrop.addEventListener('click', (e) => {
+    if (e.target === backdrop) closeClearConfirmModal();
+  });
+  backdrop.querySelector('.admin-modal')?.addEventListener('click', (e) => e.stopPropagation());
+  document.getElementById('clearConfirmCancel')?.addEventListener('click', closeClearConfirmModal);
+  document.getElementById('clearConfirmSubmit')?.addEventListener('click', handleClearWithPassword);
+  document.getElementById('clearConfirmPassword')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleClearWithPassword();
+    }
+    if (e.key === 'Escape') closeClearConfirmModal();
+  });
+
+  document.body.classList.add('admin-modal-open');
+  setTimeout(() => document.getElementById('clearConfirmPassword')?.focus(), 50);
+}
+
+function closeClearConfirmModal() {
+  document.getElementById('clearConfirmModal')?.remove();
+  document.body.classList.remove('admin-modal-open');
+}
+
+async function handleClearWithPassword() {
+  const errorEl = document.getElementById('clearConfirmError');
+  const passwordInput = document.getElementById('clearConfirmPassword');
+  const submitBtn = document.getElementById('clearConfirmSubmit');
+  if (!errorEl || !passwordInput || !submitBtn) return;
+
+  errorEl.style.display = 'none';
+  submitBtn.disabled = true;
 
   try {
+    const ok = await verifyClearPassword(passwordInput.value);
+    if (!ok) {
+      errorEl.textContent = 'Wrong password. Bookings were not cleared.';
+      errorEl.style.display = 'block';
+      return;
+    }
+
+    submitBtn.textContent = 'Clearing…';
     await deleteAllBookings();
     showClearSuccess();
+    closeClearConfirmModal();
   } catch (err) {
-    alert(err?.message || 'Could not clear bookings. Try again.');
+    errorEl.textContent = err?.message || 'Could not clear bookings. Try again.';
+    errorEl.style.display = 'block';
   } finally {
-    if (btn) {
-      btn.disabled = false;
-      btn.textContent = 'Clear all bookings';
-    }
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Clear all bookings';
   }
 }
 
 async function logout() {
   const supabase = getSupabase();
   if (supabase) await supabase.auth.signOut();
+  cachedLoginPassword = null;
   showLogin();
 }
 
@@ -327,7 +409,7 @@ async function init() {
   document.getElementById('dateFilter').addEventListener('change', applyFilters);
   document.getElementById('phoneFilter').addEventListener('input', applyFilters);
   document.getElementById('exportBtn').addEventListener('click', exportToCSV);
-  document.getElementById('clearAllBtn').addEventListener('click', handleClearAll);
+  document.getElementById('clearAllBtn').addEventListener('click', openClearConfirmModal);
   document.getElementById('refreshBtn').addEventListener('click', loadBookings);
   document.getElementById('logoutBtn').addEventListener('click', logout);
 

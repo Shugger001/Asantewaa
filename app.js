@@ -497,8 +497,9 @@ async function initHomeIntroLoader(onComplete) {
   }
 
   await sleep(slideMs);
-  loader.classList.add('show-stars');
-  await sleep(starMs);
+  loader.classList.add('show-stars', 'show-title');
+  const titleRevealMs = title.length * letterStaggerMs + 180;
+  await sleep(Math.max(starMs, titleRevealMs));
 
   loader.classList.add('is-exiting');
   document.body.classList.remove('home-intro-active');

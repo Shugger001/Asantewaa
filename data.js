@@ -32,6 +32,33 @@ export function findServiceStyle(serviceId, styleId) {
   return service?.styles?.find((style) => style.id === styleId);
 }
 
+/** Extract numeric GHS amount from a price string (e.g. "GH₵ 35", "From GH₵ 350/person") */
+export function parsePriceAmount(priceStr) {
+  if (!priceStr) return null;
+  const match = String(priceStr).replace(/,/g, '').match(/(\d+(?:\.\d+)?)/);
+  return match ? Number(match[1]) : null;
+}
+
+/** Price range label for a general service from its specific styles */
+export function getServicePriceRange(service) {
+  const amounts = (service?.styles || [])
+    .map((style) => parsePriceAmount(style.price))
+    .filter((amount) => amount != null);
+
+  if (!amounts.length) {
+    return service?.price || '';
+  }
+
+  const min = Math.min(...amounts);
+  const max = Math.max(...amounts);
+
+  if (min === max) {
+    return `GH₵ ${min}`;
+  }
+
+  return `GH₵ ${min} – GH₵ ${max}`;
+}
+
 /** Flat list for booking dropdown — category + specific style */
 export function getBookingStyleOptions() {
   return SITE.services.flatMap((service) =>

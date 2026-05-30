@@ -1,4 +1,4 @@
-import { SITE, getLocationLabel, findServiceById } from './data.js';
+import { SITE, getLocationLabel, findServiceById, getServicePriceRange } from './data.js';
 import { initBookingForm } from './booking.js';
 import { initFindBooking } from './find-booking.js';
 import { initInstallPrompt } from './install-prompt.js';
@@ -47,7 +47,7 @@ function renderServices() {
           <h3 class="service-name">${service.name}</h3>
           <p class="service-desc">${service.description}</p>
           <div class="service-meta">
-            <span class="service-price">${service.price}</span>
+            <span class="service-price">${getServicePriceRange(service)}</span>
             <span class="service-duration"><i class="fa-regular fa-clock"></i> ${service.duration}</span>
           </div>
           <div class="service-card-footer">
@@ -96,7 +96,7 @@ function renderServiceDetail() {
   const metaEl = document.getElementById('service-meta');
   if (metaEl) {
     metaEl.innerHTML = `
-      <span><i class="fa-solid fa-tag"></i> ${service.price}</span>
+      <span><i class="fa-solid fa-tag"></i> ${getServicePriceRange(service)}</span>
       <span><i class="fa-regular fa-clock"></i> ${service.duration}</span>
       <span><i class="fa-solid fa-scissors"></i> ${service.styles?.length || 0} styles</span>
     `;

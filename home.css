@@ -235,6 +235,12 @@ body.home-editorial .mobile-menu-overlay {
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.home-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 .home-panel {
@@ -256,7 +262,7 @@ body.home-editorial .mobile-menu-overlay {
   inset: 0;
   background-size: cover;
   background-position: center top;
-  transform: translate3d(0, var(--parallax-y, 0px), 0) scale(var(--panel-scale, 1.02));
+  transform: translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0) scale(var(--panel-scale, 1.02));
   transition: transform 8s ease-out;
   will-change: transform;
 }
@@ -717,14 +723,57 @@ body.home-intro-done .home-scroll-dots {
 
 .home-intro-loader.is-exiting {
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.25s ease;
 }
 
 .home-intro-loader.is-exiting .home-intro-loader__slides,
 .home-intro-loader.is-exiting .home-intro-loader__stars {
-  transform: scale(1.03);
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  transform: scale(1.02);
+  transition: transform 0.25s ease, opacity 0.25s ease;
   opacity: 0;
+}
+
+/* Desktop — horizontal scroll (beyonce.com) */
+@media (min-width: 1024px) {
+  .home-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+  }
+
+  #home-panels {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: max-content;
+  }
+
+  .home-panel {
+    flex: 0 0 100vw;
+    flex: 0 0 100dvw;
+    width: 100vw;
+    width: 100dvw;
+    min-height: 0;
+  }
+
+  .home-scroll-hint::after {
+    content: ' →';
+  }
+
+  .home-scroll-dots {
+    right: auto;
+    left: 50%;
+    top: auto;
+    bottom: 3.25rem;
+    transform: translateX(-50%);
+    flex-direction: row;
+    gap: 0.45rem;
+  }
+
+  .home-scroll-dot.active {
+    width: 28px;
+    height: 5px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -754,6 +803,7 @@ body.home-intro-done .home-scroll-dots {
   .home-panel-bg {
     transition: none;
     transform: none !important;
+    --parallax-x: 0px !important;
     --parallax-y: 0px !important;
     --panel-scale: 1 !important;
   }

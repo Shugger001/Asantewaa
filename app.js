@@ -491,6 +491,10 @@ async function initHomeIntroLoader(onComplete) {
   onComplete();
 }
 
+function isHomeHorizontalScroll() {
+  return window.matchMedia('(min-width: 1024px)').matches;
+}
+
 function initHomeScrollEffects() {
   const scrollEl = document.getElementById('home-scroll');
   const hint = document.getElementById('home-scroll-hint');
@@ -504,33 +508,72 @@ function initHomeScrollEffects() {
   }
 
   const dots = dotsContainer?.querySelectorAll('.home-scroll-dot');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   function updateActivePanel() {
+    const horizontal = isHomeHorizontalScroll();
     let activeIndex = 0;
+
     panels.forEach((panel, i) => {
       const rect = panel.getBoundingClientRect();
-      const inView = rect.top < window.innerHeight * 0.55 && rect.bottom > window.innerHeight * 0.45;
+      const inView = horizontal
+        ? rect.left < window.innerWidth * 0.55 && rect.right > window.innerWidth * 0.45
+        : rect.top < window.innerHeight * 0.55 && rect.bottom > window.innerHeight * 0.45;
+
       panel.classList.toggle('in-view', inView);
       if (inView) activeIndex = i;
 
       const bg = panel.querySelector('.home-panel-bg');
-      if (bg && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const center = rect.top + rect.height / 2;
-        const viewportCenter = window.innerHeight / 2;
-        const offset = ((center - viewportCenter) / window.innerHeight) * 36;
-        bg.style.setProperty('--parallax-y', `${offset.toFixed(1)}px`);
+      if (bg && !reducedMotion.matches) {
+        if (horizontal) {
+          const center = rect.left + rect.width / 2;
+          const viewportCenter = window.innerWidth / 2;
+          const offset = ((center - viewportCenter) / window.innerWidth) * 36;
+          bg.style.setProperty('--parallax-x', `${offset.toFixed(1)}px`);
+          bg.style.setProperty('--parallax-y', '0px');
+        } else {
+          const center = rect.top + rect.height / 2;
+          const viewportCenter = window.innerHeight / 2;
+          const offset = ((center - viewportCenter) / window.innerHeight) * 36;
+          bg.style.setProperty('--parallax-y', `${offset.toFixed(1)}px`);
+          bg.style.setProperty('--parallax-x', '0px');
+        }
       }
     });
+
     dots?.forEach((dot, i) => dot.classList.toggle('active', i === activeIndex));
   }
 
   if (!scrollEl) return;
 
   scrollEl.addEventListener('scroll', () => {
-    if (scrollEl.scrollTop > 80) hint?.classList.add('hidden');
+    const horizontal = isHomeHorizontalScroll();
+    const scrolled = horizontal ? scrollEl.scrollLeft : scrollEl.scrollTop;
+    if (scrolled > 80) hint?.classList.add('hidden');
     updateActivePanel();
   }, { passive: true });
 
+  scrollEl.addEventListener('wheel', (e) => {
+    if (!isHomeHorizontalScroll() || e.ctrlKey) return;
+    if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+    e.preventDefault();
+    scrollEl.scrollLeft += e.deltaY;
+  }, { passive: false });
+
+  dots?.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      const index = Number(dot.dataset.index);
+      const panel = panels[index];
+      if (!panel) return;
+      panel.scrollIntoView({
+        behavior: reducedMotion.matches ? 'auto' : 'smooth',
+        block: 'nearest',
+        inline: isHomeHorizontalScroll() ? 'start' : 'nearest',
+      });
+    });
+  });
+
+  window.addEventListener('resize', updateActivePanel, { passive: true });
   updateActivePanel();
 }
 

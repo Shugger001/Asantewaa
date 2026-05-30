@@ -413,6 +413,14 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 function preloadImages(urls) {
   return Promise.all(
     urls.map(
@@ -464,9 +472,10 @@ async function initHomeIntroLoader(onComplete) {
     return slide;
   });
 
-  const title = config.title || SITE.owner || 'Asantewaa';
-  const subtitle = config.subtitle || '';
-  const letterStaggerMs = config.letterStaggerMs ?? 38;
+  const title = (config.title || SITE.owner || 'Asantewaa').toUpperCase();
+  const subtitle = (config.subtitle || '').toUpperCase();
+  const letterStaggerMs = config.letterStaggerMs ?? 28;
+  const titleHoldMs = config.titleHoldMs ?? 280;
   const titleLetters = [...title].map((ch, i) => {
     const safe = ch === ' ' ? '\u00a0' : escapeHtml(ch);
     return `<span class="home-intro-letter" style="--i:${i}">${safe}</span>`;
@@ -474,6 +483,7 @@ async function initHomeIntroLoader(onComplete) {
 
   const titleEl = document.createElement('div');
   titleEl.className = 'home-intro-loader__title';
+  titleEl.style.setProperty('--letter-stagger', `${letterStaggerMs}ms`);
   titleEl.setAttribute('aria-hidden', 'true');
   titleEl.innerHTML = `
     <div class="home-intro-title-line">${titleLetters}</div>
@@ -498,8 +508,8 @@ async function initHomeIntroLoader(onComplete) {
 
   await sleep(slideMs);
   loader.classList.add('show-stars', 'show-title');
-  const titleRevealMs = title.length * letterStaggerMs + 180;
-  await sleep(Math.max(starMs, titleRevealMs));
+  const titleRevealMs = title.length * letterStaggerMs + 220;
+  await sleep(Math.max(starMs, titleRevealMs + titleHoldMs));
 
   loader.classList.add('is-exiting');
   document.body.classList.remove('home-intro-active');

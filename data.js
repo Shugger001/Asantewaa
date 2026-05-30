@@ -79,11 +79,12 @@ export const SITE = {
         "images/glam-red-celebration.png",
       ],
       slideMs: 160,
-      starMs: 200,
-      exitMs: 250,
+      starMs: 320,
+      exitMs: 320,
+      titleHoldMs: 280,
       title: "Asantewaa",
       subtitle: "Glam Room",
-      letterStaggerMs: 38,
+      letterStaggerMs: 28,
     },
     panels: [
       {

@@ -58,7 +58,7 @@ export async function fetchBookingCountsByDate(supabase, locationId, minDate, ma
         .select('booking_date')
         .gte('booking_date', minStr)
         .lte('booking_date', maxStr)
-        .in('status', ['pending', 'confirmed']);
+        .in('status', ['pending', 'confirmed']));
     }
 
     if (error) throw error;

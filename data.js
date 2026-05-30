@@ -65,9 +65,9 @@ export const SITE = {
     topbarLeftLink: "glam-room.html",
     menuLinks: [
       { label: "Home", href: "index.html" },
-      { label: "Discover More", href: "about.html" },
-      { label: "Glam Room", href: "glam-room.html" },
-      { label: "Book", href: "book.html" },
+      { label: "The Enterprise", href: "about.html" },
+      { label: "The Glam Room", href: "glam-room.html" },
+      { label: "Bookings & Proposals", href: "book.html" },
     ],
     introLoader: {
       images: [
@@ -392,27 +392,27 @@ export const SITE = {
 
   homeNavLinks: [
     { label: "Discover More", href: "about.html" },
-    { label: "Glam Room", href: "glam-room.html" },
-    { label: "Book", href: "book.html" },
+    { label: "The Glam Room", href: "glam-room.html" },
+    { label: "Bookings & Proposals", href: "book.html" },
   ],
 
   aboutNavLinks: [
     { label: "Home", href: "index.html" },
     { label: "About", href: "#about" },
-    { label: "Glam Room", href: "glam-room.html" },
+    { label: "The Glam Room", href: "glam-room.html" },
   ],
 
   businessNavLinks: [
     { label: "Home", href: "index.html" },
     { label: "Services", href: "#services" },
     { label: "Gallery", href: "#gallery" },
-    { label: "Book", href: "book.html" },
+    { label: "Bookings & Proposals", href: "book.html" },
   ],
 
   bookingNavLinks: [
     { label: "Home", href: "index.html" },
-    { label: "Glam Room", href: "glam-room.html" },
-    { label: "Book", href: "#booking" },
+    { label: "The Glam Room", href: "glam-room.html" },
+    { label: "Bookings & Proposals", href: "#booking" },
   ],
 
   footer: {

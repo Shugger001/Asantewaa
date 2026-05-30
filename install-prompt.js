@@ -1,4 +1,4 @@
-import { SITE } from './data.js';
+import { SITE } from './data.js?v=20260536';
 
 const STORAGE_KEY = 'glamroom_install_dismissed';
 const DISMISS_DAYS = 14;

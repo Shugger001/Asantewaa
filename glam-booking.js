@@ -3,8 +3,8 @@ import {
   getLocationBookingValue,
   getLocationLabelById,
   findServiceById,
-} from './data.js';
-import { getSupabase, isSupabaseConfigured } from './supabase-client.js';
+} from './data.js?v=20260536';
+import { getSupabase, isSupabaseConfigured } from './supabase-client.js?v=20260536';
 import {
   applyCapacityToDatePicker,
   buildDateDisableFunctions,
@@ -13,7 +13,7 @@ import {
   getDailyBookingCount,
   getMaxReservationsPerDay,
   isDateFullyBooked,
-} from './booking-capacity.js';
+} from './booking-capacity.js?v=20260536';
 
 let overlayDatePicker = null;
 let bookedSlots = [];

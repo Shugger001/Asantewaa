@@ -1,14 +1,14 @@
-import { SITE, getLocationLabel, findServiceById, getServicePriceRange } from './data.js';
-import { initBookingForm } from './booking.js';
+import { SITE, getLocationLabel, findServiceById, getServicePriceRange } from './data.js?v=20260536';
+import { initBookingForm } from './booking.js?v=20260536';
 import {
   initGlamBookingOverlay,
   bindSanctuaryBookingButtons,
   populateOverlayServices,
   populateOverlayTimeSlots,
-} from './glam-booking.js';
-import { initProposalsForm } from './proposals.js';
-import { initFindBooking } from './find-booking.js';
-import { initInstallPrompt } from './install-prompt.js';
+} from './glam-booking.js?v=20260536';
+import { initProposalsForm } from './proposals.js?v=20260536';
+import { initFindBooking } from './find-booking.js?v=20260536';
+import { initInstallPrompt } from './install-prompt.js?v=20260536';
 
 /* ==========================================================================
    Glam Room by Asantewaa — Application Logic

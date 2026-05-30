@@ -1,4 +1,4 @@
-import { SITE } from './data.js';
+import { SITE } from './data.js?v=20260536';
 
 export function initProposalsForm() {
   const form = document.getElementById('prop-form');

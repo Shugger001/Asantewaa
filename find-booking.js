@@ -1,5 +1,5 @@
-import { SITE } from './data.js';
-import { getSupabase, isSupabaseConfigured } from './supabase-client.js';
+import { SITE } from './data.js?v=20260536';
+import { getSupabase, isSupabaseConfigured } from './supabase-client.js?v=20260536';
 
 function normalizePhoneDigits(phone) {
   return phone.replace(/\D/g, '');

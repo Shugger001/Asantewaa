@@ -1,4 +1,4 @@
-import { SITE } from './data.js';
+import { SITE } from './data.js?v=20260536';
 
 export function getMaxReservationsPerDay() {
   return SITE.booking?.maxReservationsPerDay ?? 6;

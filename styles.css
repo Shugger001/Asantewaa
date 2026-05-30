@@ -673,7 +673,8 @@ body.no-custom-cursor .cursor-ring {
 
 .services-grid > .service-card,
 .services-grid > .skeleton,
-.services-grid > article {
+.services-grid > article,
+.services-grid > .service-card-link {
   min-width: 0;
 }
 

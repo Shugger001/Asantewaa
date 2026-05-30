@@ -1,931 +1,426 @@
 /* ==========================================================================
-   The Enterprise — Martina Dwamena / Asantewaa analytics page
+   The Enterprise — PAGE 02 wireframe (partnerships & influence)
    ========================================================================== */
 
-.enterprise-hero {
-  min-height: min(88vh, 920px);
-  display: flex;
-  align-items: flex-end;
-  padding: 7rem 1.5rem 3rem;
-  position: relative;
-  background: #000;
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.enterprise-hero__media {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.enterprise-hero__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 15%;
-  transform: scale(1.02);
-}
-
-.enterprise-hero__overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.05) 35%, rgba(0, 0, 0, 0.55) 72%, rgba(0, 0, 0, 0.92) 100%),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.35) 0%, transparent 45%);
-  pointer-events: none;
-}
-
-.enterprise-hero-inner {
-  position: relative;
-  z-index: 2;
-  width: min(1100px, 100%);
-  margin: 0 auto;
-}
-
-.enterprise-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
-  margin-bottom: 1rem;
-}
-
-.enterprise-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3rem, 12vw, 6.5rem);
-  font-weight: 400;
-  font-style: italic;
-  color: #fff;
-  line-height: 0.95;
-  margin: 0 0 0.35rem;
-}
-
-.enterprise-aka {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: clamp(0.65rem, 2vw, 0.78rem);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
-  margin: 0 0 1.25rem;
-}
-
-.enterprise-tagline {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(0.95rem, 2.2vw, 1.1rem);
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.62);
-  max-width: 640px;
-  margin: 0;
-}
-
-.enterprise-section {
-  padding: 3.5rem 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.enterprise-section-inner {
-  width: min(1100px, 100%);
-  margin: 0 auto;
-}
-
-.enterprise-section-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.38);
-  margin-bottom: 0.75rem;
-}
-
-.enterprise-section-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem, 6vw, 3.25rem);
-  font-weight: 400;
-  font-style: italic;
-  color: #fff;
-  margin: 0 0 2rem;
-  line-height: 1.05;
-}
-
-.enterprise-profile-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 2rem;
-  align-items: start;
-}
-
-.enterprise-bio {
-  font-size: 0.98rem;
-  line-height: 1.75;
-  color: rgba(255, 255, 255, 0.68);
-  margin: 0 0 1.5rem;
-}
-
-.enterprise-facts {
-  display: grid;
-  gap: 0;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.enterprise-fact {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 1rem;
-  padding: 0.85rem 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  font-size: 0.88rem;
-}
-
-.enterprise-fact:last-child {
-  border-bottom: none;
-}
-
-.enterprise-fact dt {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.38);
-  margin: 0;
-}
-
-.enterprise-fact dd {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.82);
-}
-
-.enterprise-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-top: 0.5rem;
-}
-
-.enterprise-tag {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.55rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 0.35rem 0.65rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.62);
-}
-
-.enterprise-platforms {
-  display: grid;
-  gap: 1px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.enterprise-platform {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 1.25rem;
-  align-items: center;
-  padding: 1.35rem 1.25rem;
-  background: #000;
-  text-decoration: none;
-  color: inherit;
-  transition: background 0.2s ease;
-}
-
-.enterprise-platform:hover {
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.enterprise-platform.is-primary {
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.enterprise-platform-icon {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  font-size: 1.1rem;
-  color: #fff;
-}
-
-.enterprise-platform-body h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.65rem;
-  font-style: italic;
-  font-weight: 400;
-  color: #fff;
-  margin: 0 0 0.2rem;
-}
-
-.enterprise-platform-handle {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.45);
-  margin: 0 0 0.55rem;
-}
-
-.enterprise-platform-types {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-}
-
-.enterprise-platform-type {
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.48);
-}
-
-.enterprise-platform-type::after {
-  content: ' ·';
-  opacity: 0.4;
-}
-
-.enterprise-platform-type:last-child::after {
-  content: '';
-}
-
-.enterprise-platform-stats {
-  text-align: right;
-  min-width: 120px;
-}
-
-.enterprise-platform-followers {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem;
-  font-style: italic;
-  color: #fff;
-  line-height: 1;
-  margin: 0 0 0.25rem;
-}
-
-.enterprise-platform-metric {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.52rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.38);
-  margin: 0.15rem 0 0;
-}
-
-.enterprise-platform-note {
-  grid-column: 1 / -1;
-  font-size: 0.82rem;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.42);
-  padding-top: 0.25rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  margin-top: 0.25rem;
-}
-
-.enterprise-metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  margin-bottom: 2rem;
-}
-
-.enterprise-metric {
-  background: #000;
-  padding: 1.35rem 1.15rem;
-  text-align: center;
-}
-
-.enterprise-metric i {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.35);
-  margin-bottom: 0.65rem;
-}
-
-.enterprise-metric-value {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.75rem, 4vw, 2.35rem);
-  font-style: italic;
-  color: #fff;
-  line-height: 1;
-  margin-bottom: 0.35rem;
-}
-
-.enterprise-metric-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.52rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.38);
-  line-height: 1.45;
-}
-
-.enterprise-audience-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-}
-
-.enterprise-audience-card {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 1.35rem;
-}
-
-.enterprise-audience-card h3 {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.42);
-  margin: 0 0 1.15rem;
-}
-
-.enterprise-bar-row {
-  margin-bottom: 0.85rem;
-}
-
-.enterprise-bar-row:last-child {
-  margin-bottom: 0;
-}
-
-.enterprise-bar-header {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.62);
-  margin-bottom: 0.35rem;
-}
-
-.enterprise-bar-track {
-  height: 4px;
-  background: rgba(255, 255, 255, 0.08);
-  overflow: hidden;
-}
-
-.enterprise-bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.75));
-  transition: width 0.8s ease;
-}
-
-.enterprise-interest-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.enterprise-interest-list li {
-  font-size: 0.84rem;
-  color: rgba(255, 255, 255, 0.62);
-  padding: 0.55rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.enterprise-interest-list li:last-child {
-  border-bottom: none;
-}
-
-.enterprise-interest-list li::before {
-  content: '—';
-  margin-right: 0.65rem;
-  color: rgba(255, 255, 255, 0.25);
-}
-
-.enterprise-audience-summary {
-  grid-column: 1 / -1;
-  font-size: 0.95rem;
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.58);
-  margin: 0 0 0.5rem;
-  max-width: 780px;
-}
-
-.enterprise-peak {
-  grid-column: 1 / -1;
-  padding: 1rem 1.15rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 0.86rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.52);
-}
-
-.enterprise-peak strong {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.55rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.38);
-  display: block;
-  margin-bottom: 0.35rem;
-  font-weight: 400;
-}
-
-.enterprise-timeline {
-  border-left: 1px solid rgba(255, 255, 255, 0.1);
-  margin-left: 0.5rem;
-  padding-left: 1.75rem;
-}
-
-.enterprise-timeline-item {
-  position: relative;
-  padding-bottom: 1.75rem;
-}
-
-.enterprise-timeline-item:last-child {
-  padding-bottom: 0;
-}
-
-.enterprise-timeline-item::before {
-  content: '';
-  position: absolute;
-  left: -1.95rem;
-  top: 0.35rem;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12);
-}
-
-.enterprise-timeline-year {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.16em;
-  color: rgba(255, 255, 255, 0.38);
-  margin-bottom: 0.25rem;
-}
-
-.enterprise-timeline-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.45rem;
-  font-style: italic;
-  color: #fff;
-  margin: 0 0 0.35rem;
-}
-
-.enterprise-timeline-detail {
-  font-size: 0.86rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.52);
-  margin: 0;
-}
-
-.enterprise-commercial-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.enterprise-commercial-item {
-  background: #000;
-  padding: 1.35rem 1.25rem;
-}
-
-.enterprise-commercial-item h4 {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.55rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.38);
-  margin: 0 0 0.55rem;
-  font-weight: 400;
-}
-
-.enterprise-commercial-value {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.55rem;
-  font-style: italic;
-  color: #fff;
-  margin: 0 0 0.45rem;
-  line-height: 1.2;
-}
-
-.enterprise-commercial-detail {
-  font-size: 0.82rem;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.48);
-  margin: 0;
-}
-
-.enterprise-awards {
-  display: grid;
-  gap: 0;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.enterprise-award {
-  display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 1rem;
-  padding: 1rem 1.15rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.enterprise-award:last-child {
-  border-bottom: none;
-}
-
-.enterprise-award-year {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.38);
-}
-
-.enterprise-award-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.25rem;
-  font-style: italic;
-  color: #fff;
-  margin: 0 0 0.15rem;
-}
-
-.enterprise-award-org {
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.45);
-  margin: 0;
-}
-
-.enterprise-sources {
-  font-size: 0.78rem;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.35);
-}
-
-.enterprise-sources ul {
-  list-style: none;
-  margin: 1rem 0 0;
-  padding: 0;
-}
-
-.enterprise-sources li {
-  margin-bottom: 0.35rem;
-}
-
-.enterprise-sources a {
-  color: rgba(255, 255, 255, 0.5);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.enterprise-sources a:hover {
-  color: #fff;
-}
-
-.enterprise-disclaimer {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.52rem;
-  letter-spacing: 0.08em;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.28);
-  margin-top: 1.25rem;
-}
-
-.enterprise-cta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 2rem;
-}
-
-.enterprise-cta .btn {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-#connect .social-links {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
 body[data-page="enterprise"] .editorial-main {
+  padding: 0;
   overflow-x: clip;
 }
 
 body[data-page="enterprise"] .home-bottombar {
   mix-blend-mode: normal;
-  background: rgba(0, 0, 0, 0.92);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: #000;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
 }
 
-/* --- Tablet --- */
-@media (max-width: 900px) {
-  .enterprise-profile-grid,
-  .enterprise-audience-grid,
-  .enterprise-commercial-grid {
+body[data-page="enterprise"] .home-bottombar span,
+body[data-page="enterprise"] .home-bottombar a {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+/* --- Section 1: Icon statement (editorial split) --- */
+.enterprise-statement {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #000;
+}
+
+.enterprise-statement__portrait {
+  position: relative;
+  min-height: 320px;
+  background: #0a0a0a;
+}
+
+.enterprise-statement__portrait::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 7rem;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.enterprise-statement__portrait img {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.enterprise-statement__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: calc(5rem + env(safe-area-inset-top, 0px)) clamp(1.5rem, 4vw, 4rem) 3rem;
+}
+
+.enterprise-display {
+  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.enterprise-display-line {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(2.75rem, 6.5vw, 5.25rem);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 0.92;
+  margin: 0;
+}
+
+.enterprise-statements {
+  margin-bottom: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.enterprise-statement-line {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.95rem, 1.8vw, 1.12rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.enterprise-statement-body {
+  max-width: 34rem;
+}
+
+.enterprise-statement-body-block {
+  margin: 0 0 1.35rem;
+}
+
+.enterprise-statement-body-block:last-child {
+  margin-bottom: 0;
+}
+
+.enterprise-statement-body-line {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.88rem, 1.5vw, 0.98rem);
+  font-weight: 400;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0;
+}
+
+/* --- Section 2: Power metrics (full bleed) --- */
+.enterprise-analytics {
+  background: #000;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.enterprise-power-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.enterprise-power-metric {
+  background: #000;
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2.5rem);
+  min-height: clamp(140px, 18vw, 190px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.enterprise-power-value {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: #fff;
+  line-height: 1;
+  margin: 0 0 0.65rem;
+}
+
+.enterprise-power-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(0.48rem, 1vw, 0.58rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.45;
+}
+
+.enterprise-power-sublabel {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.72rem, 1.2vw, 0.82rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.42);
+  margin-top: 0.4rem;
+}
+
+.enterprise-power-benchmark {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.68rem, 1.1vw, 0.76rem);
+  color: rgba(255, 255, 255, 0.28);
+  margin-top: 0.5rem;
+}
+
+.enterprise-power-strip {
+  grid-column: 1 / -1;
+  background: #000;
+  padding: 1.1rem clamp(1.25rem, 3vw, 2.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.enterprise-power-strip span {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(0.52rem, 1vw, 0.62rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* --- Section 3: Brand strip --- */
+.enterprise-brands {
+  background: #000;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: clamp(2.5rem, 5vw, 3.5rem) clamp(1.25rem, 3vw, 2.5rem) 0;
+}
+
+.enterprise-brands-label,
+.enterprise-pillars-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.32);
+  text-align: center;
+  margin: 0 0 1.75rem;
+}
+
+.enterprise-brand-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.enterprise-brand-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.enterprise-brand {
+  flex: 1 0 auto;
+  min-width: 7rem;
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.75rem 1rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.32);
+  white-space: nowrap;
+}
+
+.enterprise-brand img {
+  max-height: 1.5rem;
+  width: auto;
+  filter: grayscale(1) brightness(1.4);
+  opacity: 0.85;
+}
+
+.enterprise-inline-footer {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+  text-align: center;
+  margin: 0;
+  padding: 0 clamp(1.25rem, 3vw, 2.5rem) clamp(2rem, 4vw, 2.75rem);
+}
+
+/* --- Section 4: Campaign pillars accordion --- */
+.enterprise-pillars {
+  background: #000;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: clamp(2.5rem, 5vw, 3.5rem) 0 calc(5rem + env(safe-area-inset-bottom, 0px));
+}
+
+.enterprise-accordion {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.enterprise-accordion-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.enterprise-accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: clamp(1.1rem, 2.5vw, 1.45rem) clamp(1.25rem, 3vw, 2.5rem);
+  background: #0a0a0a;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  transition: background 0.25s ease;
+}
+
+.enterprise-accordion-trigger:hover {
+  background: #111;
+}
+
+.enterprise-accordion-title {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.82rem, 1.6vw, 0.95rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.35;
+}
+
+.enterprise-accordion-icon {
+  flex-shrink: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+.enterprise-accordion-item.is-open .enterprise-accordion-icon {
+  transform: rotate(45deg);
+}
+
+.enterprise-accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+  background: #000;
+}
+
+.enterprise-accordion-item.is-open .enterprise-accordion-panel {
+  grid-template-rows: 1fr;
+}
+
+.enterprise-accordion-panel-inner {
+  overflow: hidden;
+}
+
+.enterprise-accordion-body {
+  margin: 0;
+  padding: 0 clamp(1.25rem, 3vw, 2.5rem) clamp(1.35rem, 2.5vw, 1.75rem);
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.88rem, 1.4vw, 0.96rem);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.62);
+  max-width: 42rem;
+}
+
+/* --- Tablet / small desktop --- */
+@media (max-width: 960px) {
+  .enterprise-statement {
     grid-template-columns: 1fr;
+    min-height: auto;
   }
 
-  .enterprise-metrics-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .enterprise-statement__portrait {
+    min-height: min(58vh, 520px);
   }
 
-  .enterprise-audience-grid {
-    gap: 1rem;
+  .enterprise-statement__content {
+    padding-top: 2rem;
+    padding-bottom: 2.75rem;
+  }
+
+  .enterprise-display-line {
+    letter-spacing: 0.12em;
   }
 }
 
 /* --- Mobile --- */
 @media (max-width: 768px) {
-  .enterprise-hero {
-    min-height: min(78vh, 680px);
-    align-items: flex-end;
-    padding: calc(4.75rem + env(safe-area-inset-top, 0px)) var(--page-gutter, 1.25rem) 2.25rem;
+  body[data-page="enterprise"] .editorial-main {
+    padding-bottom: calc(4.5rem + var(--safe-bottom, 0px));
   }
 
-  .enterprise-hero__media img {
-    object-position: center 12%;
+  .enterprise-statement__portrait {
+    min-height: min(52vh, 460px);
   }
 
-  .enterprise-label {
-    letter-spacing: 0.2em;
-    font-size: 0.56rem;
-    margin-bottom: 0.75rem;
+  .enterprise-statement__content {
+    padding: 1.75rem var(--page-gutter, 1.25rem) 2.25rem;
   }
 
-  .enterprise-title {
-    font-size: clamp(2.35rem, 11vw, 3.5rem);
-    line-height: 1;
-    overflow-wrap: anywhere;
+  .enterprise-display-line {
+    font-size: clamp(2.15rem, 10vw, 2.85rem);
+    letter-spacing: 0.1em;
   }
 
-  .enterprise-aka {
-    letter-spacing: 0.16em;
-    font-size: 0.6rem;
-    margin-bottom: 1rem;
-  }
-
-  .enterprise-tagline {
-    font-size: 0.92rem;
-    line-height: 1.6;
-  }
-
-  .enterprise-section {
-    padding: 2.5rem var(--page-gutter, 1.25rem);
-  }
-
-  .enterprise-section-title {
-    font-size: clamp(1.75rem, 8vw, 2.35rem);
-    margin-bottom: 1.35rem;
-    overflow-wrap: anywhere;
-    hyphens: auto;
-  }
-
-  .enterprise-section-label {
-    letter-spacing: 0.2em;
-    margin-bottom: 0.5rem;
-  }
-
-  .enterprise-profile-grid {
-    gap: 1.35rem;
-  }
-
-  .enterprise-bio {
-    font-size: 0.92rem;
-    line-height: 1.65;
-    margin-bottom: 1rem;
-  }
-
-  .enterprise-fact {
+  .enterprise-power-grid {
     grid-template-columns: 1fr;
-    gap: 0.35rem;
-    padding: 0.9rem 0.85rem;
   }
 
-  .enterprise-fact dd {
-    font-size: 0.86rem;
-    line-height: 1.5;
-    overflow-wrap: anywhere;
+  .enterprise-power-metric {
+    min-height: 128px;
+    padding: 1.35rem var(--page-gutter, 1.25rem);
   }
 
-  .enterprise-tag {
-    font-size: 0.52rem;
-    letter-spacing: 0.08em;
-    padding: 0.4rem 0.55rem;
+  .enterprise-power-value {
+    font-size: clamp(2rem, 9vw, 2.75rem);
   }
 
-  .enterprise-metrics-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-bottom: 1.35rem;
-  }
-
-  .enterprise-metric {
-    padding: 1rem 0.75rem;
-  }
-
-  .enterprise-metric-value {
-    font-size: clamp(1.45rem, 6vw, 1.85rem);
-  }
-
-  .enterprise-metric-label {
-    font-size: 0.48rem;
-    letter-spacing: 0.08em;
-    line-height: 1.35;
-  }
-
-  .enterprise-platform {
-    display: grid;
-    grid-template-columns: 44px minmax(0, 1fr);
-    grid-template-areas:
-      "icon body"
-      "stats stats"
-      "note note";
-    gap: 0.65rem 0.85rem;
-    padding: 1.1rem var(--page-gutter, 1rem);
-    align-items: start;
-  }
-
-  .enterprise-platform-icon {
-    grid-area: icon;
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
-  }
-
-  .enterprise-platform-body {
-    grid-area: body;
-    min-width: 0;
-  }
-
-  .enterprise-platform-body h3 {
-    font-size: 1.35rem;
-    line-height: 1.1;
-  }
-
-  .enterprise-platform-handle {
-    font-size: 0.54rem;
-    letter-spacing: 0.06em;
-    overflow-wrap: anywhere;
-    margin-bottom: 0.45rem;
-  }
-
-  .enterprise-platform-types {
-    gap: 0.35rem;
-  }
-
-  .enterprise-platform-type {
-    display: inline-block;
-    font-size: 0.62rem;
-    line-height: 1.35;
-    padding: 0.28rem 0.45rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.52);
-  }
-
-  .enterprise-platform-type::after {
-    content: '';
-  }
-
-  .enterprise-platform-stats {
-    grid-area: stats;
-    grid-column: auto;
-    min-width: 0;
+  .enterprise-power-strip {
+    justify-content: flex-start;
     text-align: left;
-    margin-top: 0;
-    padding-top: 0.75rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 0.5rem 0.75rem;
   }
 
-  .enterprise-platform-followers {
-    grid-column: 1 / -1;
-    font-size: 1.75rem;
+  .enterprise-brand-strip {
+    justify-content: flex-start;
+    gap: 1rem;
+    padding-left: var(--page-gutter, 1.25rem);
+    padding-right: var(--page-gutter, 1.25rem);
   }
 
-  .enterprise-platform-metric {
-    font-size: 0.48rem;
-    letter-spacing: 0.06em;
-    line-height: 1.4;
-    margin: 0;
-    overflow-wrap: anywhere;
+  .enterprise-brand {
+    min-width: 6.5rem;
   }
 
-  .enterprise-platform-note {
-    grid-area: note;
-    font-size: 0.78rem;
-    line-height: 1.5;
-    margin-top: 0;
-    padding-top: 0.65rem;
+  .enterprise-brands,
+  .enterprise-pillars {
+    padding-left: 0;
+    padding-right: 0;
   }
 
-  .enterprise-audience-summary {
-    font-size: 0.88rem;
-    line-height: 1.65;
-    margin-bottom: 0.25rem;
+  .enterprise-brands-label,
+  .enterprise-pillars-label {
+    padding: 0 var(--page-gutter, 1.25rem);
   }
 
-  .enterprise-audience-card {
-    padding: 1.1rem 0.95rem;
-  }
-
-  .enterprise-audience-card h3 {
-    letter-spacing: 0.14em;
-    margin-bottom: 0.9rem;
-  }
-
-  .enterprise-bar-header {
-    font-size: 0.72rem;
-    gap: 0.5rem;
-  }
-
-  .enterprise-bar-header span:last-child {
-    flex-shrink: 0;
-  }
-
-  .enterprise-peak {
-    padding: 0.9rem 0.95rem;
-    font-size: 0.82rem;
-  }
-
-  .enterprise-timeline {
-    margin-left: 0.35rem;
-    padding-left: 1.35rem;
-  }
-
-  .enterprise-timeline-item::before {
-    left: -1.55rem;
-    width: 6px;
-    height: 6px;
-  }
-
-  .enterprise-timeline-title {
-    font-size: 1.2rem;
-    line-height: 1.15;
-    overflow-wrap: anywhere;
-  }
-
-  .enterprise-timeline-detail {
-    font-size: 0.82rem;
-  }
-
-  .enterprise-commercial-item {
-    padding: 1.1rem 0.95rem;
-  }
-
-  .enterprise-commercial-value {
-    font-size: 1.25rem;
-    line-height: 1.25;
-    overflow-wrap: anywhere;
-  }
-
-  .enterprise-commercial-detail {
-    font-size: 0.78rem;
-  }
-
-  .enterprise-award {
-    grid-template-columns: 1fr;
-    gap: 0.35rem;
-    padding: 0.95rem 0.85rem;
-  }
-
-  .enterprise-award-title {
-    font-size: 1.1rem;
-    line-height: 1.2;
-  }
-
-  .enterprise-cta {
-    flex-direction: column;
-    margin-top: 1.5rem;
-  }
-
-  .enterprise-cta .btn {
-    width: 100%;
-    justify-content: center;
-    min-height: 48px;
-  }
-
-  #connect .social-links {
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-
-  .enterprise-sources {
-    font-size: 0.72rem;
-  }
-
-  .enterprise-sources a {
-    overflow-wrap: anywhere;
-  }
-}
-
-@media (max-width: 400px) {
-  .enterprise-metrics-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .enterprise-platform-stats {
-    grid-template-columns: 1fr;
+  .enterprise-inline-footer {
+    padding-left: var(--page-gutter, 1.25rem);
+    padding-right: var(--page-gutter, 1.25rem);
   }
 }

@@ -137,6 +137,18 @@ function renderServiceDetail() {
     .join('');
 
   observeRevealElements(grid.querySelectorAll('.reveal'));
+
+  const noticeEl = document.querySelector('.services-extension-notice');
+  const extensionNotice = SITE.business?.extensionNotice;
+  if (noticeEl) {
+    if (service.id === 'braiding-workmanship' && extensionNotice) {
+      noticeEl.hidden = false;
+      noticeEl.innerHTML = `<i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>${extensionNotice}</span>`;
+    } else {
+      noticeEl.hidden = true;
+      noticeEl.innerHTML = '';
+    }
+  }
 }
 
 function renderGallery() {
@@ -193,201 +205,145 @@ function renderAbout() {
   if (quoteAuthor) quoteAuthor.textContent = SITE.quote.attribution;
 }
 
-function renderBarChart(container, title, rows) {
+function initEnterpriseAccordion(container) {
   if (!container) return;
-  container.innerHTML = `
-    <h3>${title}</h3>
-    ${rows
-      .map(
-        (row) => `
-      <div class="enterprise-bar-row">
-        <div class="enterprise-bar-header">
-          <span>${row.label}</span>
-          <span>${row.pct}%</span>
-        </div>
-        <div class="enterprise-bar-track">
-          <div class="enterprise-bar-fill" style="width: ${row.pct}%"></div>
-        </div>
-      </div>
-    `
-      )
-      .join('')}
-  `;
+
+  const items = container.querySelectorAll('.enterprise-accordion-item');
+  items.forEach((item) => {
+    const trigger = item.querySelector('.enterprise-accordion-trigger');
+    trigger?.addEventListener('click', () => {
+      const isOpen = item.classList.contains('is-open');
+      items.forEach((other) => {
+        other.classList.remove('is-open');
+        other.querySelector('.enterprise-accordion-trigger')?.setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
 }
 
 function renderEnterprise() {
   const data = SITE.enterprise;
   if (!data) return;
 
-  const setText = (id, text) => {
-    const el = document.getElementById(id);
-    if (el && text != null) el.textContent = text;
-  };
-
-  setText('enterprise-label', data.hero.label);
-  setText('enterprise-title', data.hero.title);
-  setText('enterprise-aka', `a.k.a. ${data.hero.aka}`);
-  setText('enterprise-tagline', data.hero.tagline);
-
-  const heroImage = document.getElementById('enterprise-hero-image');
-  if (heroImage) {
-    const imageUrl = data.hero.imageUrl || SITE.hero?.photoUrl;
-    heroImage.src = imageUrl || '';
-    heroImage.alt = data.hero.imageAlt || SITE.hero?.photoAlt || 'Asantewaa';
-    if (data.hero.imagePosition) {
-      heroImage.style.objectPosition = data.hero.imagePosition;
+  const statement = data.statement;
+  const statementImage = document.getElementById('enterprise-statement-image');
+  if (statementImage && statement) {
+    statementImage.src = statement.imageUrl || SITE.hero?.photoUrl || '';
+    statementImage.alt = statement.imageAlt || 'Asantewaa';
+    if (statement.imagePosition) {
+      statementImage.style.objectPosition = statement.imagePosition;
     }
   }
-  setText('enterprise-bio', data.profile.bio);
-  setText('enterprise-audience-summary', data.audience.summary);
-  setText('enterprise-commercial-headline', data.commercial.headline);
 
-  const nicheEl = document.getElementById('enterprise-niche');
-  if (nicheEl) {
-    nicheEl.innerHTML = data.profile.contentNiche
-      .map((tag) => `<span class="enterprise-tag">${tag}</span>`)
+  const headlinesEl = document.getElementById('enterprise-headlines');
+  if (headlinesEl && statement?.displayLines) {
+    headlinesEl.innerHTML = statement.displayLines
+      .map((line) => `<span class="enterprise-display-line">${line}</span>`)
       .join('');
   }
 
-  const factsEl = document.getElementById('enterprise-facts');
-  if (factsEl) {
-    const facts = [
-      ['Legal name', data.profile.legalName],
-      ['Stage name', data.profile.stageName],
-      ['Born', data.profile.born],
-      ['Nationality', data.profile.nationality],
-      ['Education', data.profile.education],
-      [
-        'Occupations',
-        data.profile.occupations.join(' · '),
-      ],
-    ];
-    factsEl.innerHTML = facts
-      .map(([label, value]) => `<div class="enterprise-fact"><dt>${label}</dt><dd>${value}</dd></div>`)
+  const statementsEl = document.getElementById('enterprise-statements');
+  if (statementsEl && statement?.statements) {
+    statementsEl.innerHTML = statement.statements
+      .map((line) => `<p class="enterprise-statement-line">${line}</p>`)
       .join('');
   }
 
-  const engagementEl = document.getElementById('enterprise-engagement');
-  if (engagementEl) {
-    engagementEl.innerHTML = data.engagement
+  const bodyEl = document.getElementById('enterprise-body');
+  if (bodyEl && statement?.body) {
+    bodyEl.innerHTML = statement.body
       .map(
-        (item) => `
-      <div class="enterprise-metric">
-        <i class="${item.icon}"></i>
-        <div class="enterprise-metric-value">${item.value}</div>
-        <div class="enterprise-metric-label">${item.label}</div>
+        (block) => `
+      <div class="enterprise-statement-body-block">
+        ${block.map((line) => `<p class="enterprise-statement-body-line">${line}</p>`).join('')}
       </div>
     `
       )
       .join('');
   }
 
-  const platformsEl = document.getElementById('enterprise-platforms');
-  if (platformsEl) {
-    platformsEl.innerHTML = data.platforms
-      .map((platform) => {
-        const tag = platform.url ? 'a' : 'div';
-        const href = platform.url ? ` href="${platform.url}" target="_blank" rel="noopener noreferrer"` : '';
+  const metricsEl = document.getElementById('enterprise-metrics');
+  if (metricsEl && data.metrics) {
+    metricsEl.innerHTML = data.metrics
+      .map((metric) => {
+        if (metric.variant === 'strip') {
+          return `
+        <div class="enterprise-power-strip">
+          <span>${metric.text}</span>
+        </div>
+      `;
+        }
         return `
-      <${tag} class="enterprise-platform${platform.primary ? ' is-primary' : ''}"${href}>
-        <div class="enterprise-platform-icon"><i class="${platform.icon}"></i></div>
-        <div class="enterprise-platform-body">
-          <h3>${platform.name}</h3>
-          <p class="enterprise-platform-handle">${platform.handle}</p>
-          <div class="enterprise-platform-types">
-            ${platform.contentTypes.map((type) => `<span class="enterprise-platform-type">${type}</span>`).join('')}
-          </div>
-        </div>
-        <div class="enterprise-platform-stats">
-          <p class="enterprise-platform-followers">${platform.followers}</p>
-          <p class="enterprise-platform-metric">${platform.metric2Label}: ${platform.metric2}</p>
-          <p class="enterprise-platform-metric">${platform.metric3Label}: ${platform.metric3}</p>
-        </div>
-        <p class="enterprise-platform-note">${platform.note}</p>
-      </${tag}>
+      <div class="enterprise-power-metric">
+        <div class="enterprise-power-value">${metric.value}</div>
+        <div class="enterprise-power-label">${metric.label}</div>
+        ${metric.sublabel ? `<div class="enterprise-power-sublabel">${metric.sublabel}</div>` : ''}
+        ${metric.benchmark ? `<div class="enterprise-power-benchmark">${metric.benchmark}</div>` : ''}
+      </div>
     `;
       })
       .join('');
   }
 
-  renderBarChart(document.getElementById('enterprise-regions'), 'Geography', data.audience.regions);
-  renderBarChart(document.getElementById('enterprise-ages'), 'Age groups', data.audience.demographics);
-  renderBarChart(document.getElementById('enterprise-gender'), 'Gender split', data.audience.gender);
+  const brandsLabel = document.getElementById('enterprise-brands-label');
+  if (brandsLabel) brandsLabel.textContent = data.brandPartners?.label || 'As seen with';
 
-  const interestsEl = document.getElementById('enterprise-interests');
-  if (interestsEl) {
-    interestsEl.innerHTML = `
-      <h3>Audience interests</h3>
-      <ul class="enterprise-interest-list">
-        ${data.audience.interests.map((item) => `<li>${item}</li>`).join('')}
-      </ul>
-    `;
-  }
-
-  const peakEl = document.getElementById('enterprise-peak');
-  if (peakEl) {
-    peakEl.innerHTML = `<strong>Peak engagement drivers</strong>${data.audience.peakEngagement}`;
-  }
-
-  const timelineEl = document.getElementById('enterprise-timeline');
-  if (timelineEl) {
-    timelineEl.innerHTML = data.timeline
+  const brandsEl = document.getElementById('enterprise-brands');
+  if (brandsEl && data.brandPartners?.items) {
+    brandsEl.innerHTML = data.brandPartners.items
       .map(
-        (item) => `
-      <div class="enterprise-timeline-item">
-        <div class="enterprise-timeline-year">${item.year}</div>
-        <h3 class="enterprise-timeline-title">${item.title}</h3>
-        <p class="enterprise-timeline-detail">${item.detail}</p>
-      </div>
+        (brand) => `
+      <span class="enterprise-brand">${brand.logoUrl ? `<img src="${brand.logoUrl}" alt="${brand.name}" height="24">` : brand.name}</span>
     `
       )
       .join('');
   }
 
-  const commercialEl = document.getElementById('enterprise-commercial');
-  if (commercialEl) {
-    commercialEl.innerHTML = data.commercial.items
-      .map(
-        (item) => `
-      <div class="enterprise-commercial-item">
-        <h4>${item.title}</h4>
-        <p class="enterprise-commercial-value">${item.value}</p>
-        <p class="enterprise-commercial-detail">${item.detail}</p>
-      </div>
-    `
-      )
-      .join('');
-  }
+  const pillarsLabel = document.getElementById('enterprise-pillars-label');
+  if (pillarsLabel) pillarsLabel.textContent = data.campaignPillars?.label || 'Strategic campaign offerings';
 
-  const awardsEl = document.getElementById('enterprise-awards');
-  if (awardsEl) {
-    awardsEl.innerHTML = data.awards
+  const pillarsEl = document.getElementById('enterprise-pillars');
+  if (pillarsEl && data.campaignPillars?.items) {
+    pillarsEl.innerHTML = data.campaignPillars.items
       .map(
-        (award) => `
-      <div class="enterprise-award">
-        <div class="enterprise-award-year">${award.year}</div>
-        <div>
-          <h3 class="enterprise-award-title">${award.title}</h3>
-          <p class="enterprise-award-org">${award.org}</p>
+        (pillar, index) => `
+      <div class="enterprise-accordion-item${index === 0 ? ' is-open' : ''}">
+        <button
+          type="button"
+          class="enterprise-accordion-trigger"
+          aria-expanded="${index === 0 ? 'true' : 'false'}"
+          aria-controls="pillar-panel-${pillar.id}"
+          id="pillar-trigger-${pillar.id}"
+        >
+          <span class="enterprise-accordion-title">${pillar.number} / ${pillar.title.toUpperCase()}</span>
+          <span class="enterprise-accordion-icon" aria-hidden="true">+</span>
+        </button>
+        <div
+          class="enterprise-accordion-panel"
+          id="pillar-panel-${pillar.id}"
+          role="region"
+          aria-labelledby="pillar-trigger-${pillar.id}"
+        >
+          <div class="enterprise-accordion-panel-inner">
+            <p class="enterprise-accordion-body">${pillar.body}</p>
+          </div>
         </div>
       </div>
     `
       )
       .join('');
+    initEnterpriseAccordion(pillarsEl);
   }
 
-  const sourcesEl = document.getElementById('enterprise-sources');
-  if (sourcesEl) {
-    sourcesEl.innerHTML = `
-      <p>Last updated: ${data.lastUpdated}</p>
-      <p>${data.disclaimer}</p>
-      <p><strong>Sources</strong></p>
-      <ul>
-        ${data.sources.map((s) => `<li><a href="${s.url}" target="_blank" rel="noopener noreferrer">${s.label}</a></li>`).join('')}
-      </ul>
-      <p class="enterprise-disclaimer">Audience percentages are estimated from public reporting and regional creator benchmarks — not official platform analytics.</p>
-    `;
-  }
+  const footerMid = document.getElementById('enterprise-footer-mid');
+  if (footerMid && data.footer) footerMid.textContent = data.footer;
+
+  const copyright = document.getElementById('home-copyright');
+  if (copyright && data.footer) copyright.textContent = data.footer;
 
   renderHomeContact();
 }
@@ -533,6 +489,7 @@ function populateStaticContent() {
   const extensionNotice = SITE.business?.extensionNotice;
   if (extensionNotice) {
     document.querySelectorAll('.services-extension-notice').forEach((el) => {
+      if (document.body.dataset.page === 'service') return;
       el.innerHTML = `<i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>${extensionNotice}</span>`;
     });
   }

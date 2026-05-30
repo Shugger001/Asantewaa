@@ -929,6 +929,11 @@ body.home-intro-done .home-scroll-dots {
     filter: none !important;
     transition: none !important;
   }
+
+  .home-intro-loader::after {
+    animation: none !important;
+    opacity: 0 !important;
+  }
 }
 
 /* ==========================================================================

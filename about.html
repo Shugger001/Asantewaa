@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="The Enterprise — Martina Dwamena (Asantewaa) social media analytics, audience demographics, engagement metrics and brand reach.">
+  <meta name="description" content="The Enterprise — Asantewaa partnerships, verified audience analytics, campaign pillars and brand collaborations.">
   <meta name="theme-color" content="#000000">
-  <title>The Enterprise | Martina Dwamena — Asantewaa</title>
+  <title>The Enterprise | Asantewaa</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 
   <link rel="stylesheet" href="styles.css">
@@ -34,92 +34,30 @@
   </nav>
 
   <main class="editorial-main">
-    <section class="enterprise-hero" id="enterprise">
-      <div class="enterprise-hero__media" aria-hidden="true">
-        <img id="enterprise-hero-image" src="" alt="" decoding="async">
+    <section class="enterprise-statement" id="enterprise">
+      <div class="enterprise-statement__portrait">
+        <img id="enterprise-statement-image" src="" alt="" decoding="async">
       </div>
-      <div class="enterprise-hero__overlay" aria-hidden="true"></div>
-      <div class="enterprise-hero-inner">
-        <p class="enterprise-label" id="enterprise-label"></p>
-        <h1 class="enterprise-title" id="enterprise-title"></h1>
-        <p class="enterprise-aka" id="enterprise-aka"></p>
-        <p class="enterprise-tagline" id="enterprise-tagline"></p>
+      <div class="enterprise-statement__content">
+        <div class="enterprise-display" id="enterprise-headlines" aria-label="Shaping culture. Driving engagement."></div>
+        <div class="enterprise-statements" id="enterprise-statements"></div>
+        <div class="enterprise-statement-body" id="enterprise-body"></div>
       </div>
     </section>
 
-    <section class="enterprise-section">
-      <div class="enterprise-section-inner">
-        <p class="enterprise-section-label">Profile</p>
-        <h2 class="enterprise-section-title">Creator overview</h2>
-        <div class="enterprise-profile-grid">
-          <div>
-            <p class="enterprise-bio" id="enterprise-bio"></p>
-            <div class="enterprise-tags" id="enterprise-niche"></div>
-          </div>
-          <dl class="enterprise-facts" id="enterprise-facts"></dl>
-        </div>
-      </div>
+    <section class="enterprise-analytics" id="analytics" aria-label="Verified audience analytics">
+      <div class="enterprise-power-grid" id="enterprise-metrics"></div>
     </section>
 
-    <section class="enterprise-section" id="analytics">
-      <div class="enterprise-section-inner">
-        <p class="enterprise-section-label">Platforms</p>
-        <h2 class="enterprise-section-title">Social media analytics</h2>
-        <div class="enterprise-metrics-grid" id="enterprise-engagement"></div>
-        <div class="enterprise-platforms" id="enterprise-platforms"></div>
-      </div>
+    <section class="enterprise-brands" aria-labelledby="enterprise-brands-label">
+      <p class="enterprise-brands-label" id="enterprise-brands-label"></p>
+      <div class="enterprise-brand-strip" id="enterprise-brands"></div>
+      <p class="enterprise-inline-footer" id="enterprise-footer-mid"></p>
     </section>
 
-    <section class="enterprise-section" id="audience">
-      <div class="enterprise-section-inner">
-        <p class="enterprise-section-label">Demographics</p>
-        <h2 class="enterprise-section-title">Audience &amp; engagement</h2>
-        <div class="enterprise-audience-grid">
-          <p class="enterprise-audience-summary" id="enterprise-audience-summary"></p>
-          <div class="enterprise-audience-card" id="enterprise-regions"></div>
-          <div class="enterprise-audience-card" id="enterprise-ages"></div>
-          <div class="enterprise-audience-card" id="enterprise-gender"></div>
-          <div class="enterprise-audience-card" id="enterprise-interests"></div>
-          <div class="enterprise-peak" id="enterprise-peak"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="enterprise-section">
-      <div class="enterprise-section-inner">
-        <p class="enterprise-section-label">Growth</p>
-        <h2 class="enterprise-section-title">Career timeline</h2>
-        <div class="enterprise-timeline" id="enterprise-timeline"></div>
-      </div>
-    </section>
-
-    <section class="enterprise-section">
-      <div class="enterprise-section-inner">
-        <p class="enterprise-section-label">Commercial</p>
-        <h2 class="enterprise-section-title" id="enterprise-commercial-headline"></h2>
-        <div class="enterprise-commercial-grid" id="enterprise-commercial"></div>
-        <div class="enterprise-cta">
-          <a href="book.html" class="btn btn-primary">Bookings &amp; Proposals <i class="fa-solid fa-arrow-right"></i></a>
-          <a href="glam-room.html" class="btn btn-secondary">The Glam Room</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="enterprise-section">
-      <div class="enterprise-section-inner">
-        <p class="enterprise-section-label">Recognition</p>
-        <h2 class="enterprise-section-title">Awards &amp; press</h2>
-        <div class="enterprise-awards" id="enterprise-awards"></div>
-      </div>
-    </section>
-
-    <section class="enterprise-section" id="connect">
-      <div class="enterprise-section-inner">
-        <p class="enterprise-section-label">Connect</p>
-        <h2 class="enterprise-section-title">Follow Asantewaa</h2>
-        <div class="social-links" id="contact-socials"></div>
-        <div class="enterprise-sources" id="enterprise-sources"></div>
-      </div>
+    <section class="enterprise-pillars" aria-labelledby="enterprise-pillars-label">
+      <p class="enterprise-pillars-label" id="enterprise-pillars-label"></p>
+      <div class="enterprise-accordion" id="enterprise-pillars"></div>
     </section>
   </main>
 

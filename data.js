@@ -23,6 +23,29 @@ export function getLocationLabelById(id) {
   return loc ? getLocationLabel(loc) : id;
 }
 
+export function findServiceById(id) {
+  return SITE.services?.find((service) => service.id === id);
+}
+
+export function findServiceStyle(serviceId, styleId) {
+  const service = findServiceById(serviceId);
+  return service?.styles?.find((style) => style.id === styleId);
+}
+
+/** Flat list for booking dropdown — category + specific style */
+export function getBookingStyleOptions() {
+  return SITE.services.flatMap((service) =>
+    (service.styles || []).map((style) => ({
+      value: `${service.name} — ${style.name}`,
+      label: style.name,
+      category: service.name,
+      price: style.price,
+      serviceId: service.id,
+      styleId: style.id,
+    }))
+  );
+}
+
 export const SITE = {
   brand: "Glam Room by Asantewaa",
   owner: "Asantewaa",
@@ -418,6 +441,12 @@ export const SITE = {
       duration: "2–3 hrs",
       icon: "fa-solid fa-wind",
       badge: "Popular",
+      styles: [
+        { id: "classic-silk-press", name: "Classic Silk Press", description: "Smooth blow-out finish with body and movement.", price: "GH₵ 150", duration: "2–3 hrs" },
+        { id: "silk-press-curls", name: "Silk Press & Curls", description: "Silk press finished with soft, bouncy curls.", price: "GH₵ 180", duration: "2.5–3 hrs" },
+        { id: "silk-press-wrap", name: "Silk Press & Wrap", description: "Sleek wrap set for a polished, lasting finish.", price: "GH₵ 170", duration: "2–3 hrs" },
+        { id: "silk-press-trim", name: "Silk Press + Trim", description: "Silk press with a shape refresh and trim.", price: "GH₵ 190", duration: "3 hrs" },
+      ],
     },
     {
       id: "braids-twists",
@@ -427,6 +456,14 @@ export const SITE = {
       duration: "4–6 hrs",
       icon: "fa-solid fa-grip-lines",
       badge: null,
+      styles: [
+        { id: "knotless-braids", name: "Knotless Braids", description: "Lightweight, scalp-friendly braids with a natural lay.", price: "From GH₵ 350", duration: "5–7 hrs", imageUrl: "images/glam-braids-studio.png" },
+        { id: "box-braids", name: "Box Braids", description: "Classic box parts — medium or long length.", price: "From GH₵ 280", duration: "4–6 hrs" },
+        { id: "passion-twists", name: "Passion Twists", description: "Soft, bohemian twists with volume and texture.", price: "From GH₵ 320", duration: "4–5 hrs" },
+        { id: "butterfly-braids", name: "Butterfly Braids", description: "Trendy butterfly locs/braids with a fluffy finish.", price: "From GH₵ 400", duration: "5–6 hrs", imageUrl: "images/glam-braids-portrait.png" },
+        { id: "feed-in-braids", name: "Feed-in Braids", description: "Natural-looking cornrows that feed in seamlessly.", price: "From GH₵ 200", duration: "2–4 hrs" },
+        { id: "cornrows", name: "Cornrows", description: "Simple to intricate cornrow patterns.", price: "From GH₵ 150", duration: "1.5–3 hrs" },
+      ],
     },
     {
       id: "wig-install",
@@ -436,6 +473,13 @@ export const SITE = {
       duration: "1–2 hrs",
       icon: "fa-solid fa-hat-cowboy",
       badge: "Hot",
+      styles: [
+        { id: "glueless-install", name: "Glueless Install", description: "Secure, no-glue install — gentle on your hairline.", price: "GH₵ 180", duration: "1–2 hrs" },
+        { id: "lace-front-install", name: "Lace Front Install", description: "Melting lace for an undetectable hairline.", price: "GH₵ 220", duration: "1.5–2 hrs" },
+        { id: "full-lace-install", name: "Full Lace Install", description: "Full lace unit styled to perfection.", price: "GH₵ 280", duration: "2–3 hrs" },
+        { id: "wig-reinstall", name: "Wig Reinstall", description: "Take down and reinstall your existing unit.", price: "GH₵ 150", duration: "1–1.5 hrs" },
+        { id: "custom-wig-cut", name: "Custom Wig Cut & Style", description: "Shape and style your unit to fit your face.", price: "GH₵ 120", duration: "45 min – 1 hr" },
+      ],
     },
     {
       id: "natural-care",
@@ -445,6 +489,13 @@ export const SITE = {
       duration: "1–2 hrs",
       icon: "fa-solid fa-leaf",
       badge: null,
+      styles: [
+        { id: "deep-condition", name: "Deep Conditioning", description: "Intensive moisture treatment for dry, tired hair.", price: "GH₵ 100", duration: "1 hr" },
+        { id: "trim-shape", name: "Trim & Shape", description: "Health trim to keep your ends fresh.", price: "GH₵ 80", duration: "45 min" },
+        { id: "steam-treatment", name: "Steam Treatment", description: "Steam-assisted hydration for max absorption.", price: "GH₵ 130", duration: "1–1.5 hrs" },
+        { id: "protein-treatment", name: "Protein Treatment", description: "Strengthen weak or over-processed strands.", price: "GH₵ 140", duration: "1.5 hrs" },
+        { id: "wash-go-style", name: "Wash & Go Style", description: "Define and set your natural curl pattern.", price: "GH₵ 120", duration: "1–2 hrs" },
+      ],
     },
     {
       id: "color-highlights",
@@ -454,6 +505,12 @@ export const SITE = {
       duration: "3–4 hrs",
       icon: "fa-solid fa-palette",
       badge: null,
+      styles: [
+        { id: "full-color", name: "Full Color", description: "All-over colour transformation.", price: "From GH₵ 350", duration: "3–4 hrs", imageUrl: "images/glam-red-studio.png" },
+        { id: "highlights", name: "Highlights", description: "Face-framing or full-head highlights.", price: "From GH₵ 280", duration: "3 hrs" },
+        { id: "ombre-balayage", name: "Ombré / Balayage", description: "Gradual colour melt — subtle or bold.", price: "From GH₵ 400", duration: "4–5 hrs" },
+        { id: "root-touchup", name: "Root Touch-up", description: "Refresh grown-out roots to match your colour.", price: "GH₵ 250", duration: "2 hrs" },
+      ],
     },
     {
       id: "bridal-glam",
@@ -463,6 +520,13 @@ export const SITE = {
       duration: "Full day",
       icon: "fa-solid fa-gem",
       badge: "Premium",
+      styles: [
+        { id: "bridal-hair-makeup", name: "Bridal Hair & Makeup", description: "Full bridal glam — hair, makeup, and touch-ups.", price: "From GH₵ 800", duration: "Full day", imageUrl: "images/glam-red-indoor.png" },
+        { id: "bridal-hair-only", name: "Bridal Hair Only", description: "Wedding-day hairstyle with trial session.", price: "From GH₵ 500", duration: "4–6 hrs" },
+        { id: "bridesmaid-package", name: "Bridesmaid Package", description: "Coordinated looks for the bridal party.", price: "From GH₵ 350/person", duration: "2–3 hrs each" },
+        { id: "engagement-look", name: "Engagement Look", description: "Camera-ready hair for your engagement shoot.", price: "From GH₵ 400", duration: "3 hrs", imageUrl: "images/glam-red-celebration.png" },
+        { id: "traditional-ceremony", name: "Traditional Ceremony Style", description: "Styled for kente, white, or traditional wedding events.", price: "From GH₵ 450", duration: "3–4 hrs" },
+      ],
     },
   ],
 
@@ -574,6 +638,12 @@ export const SITE = {
     androidHint: "Tap below to install Glam Room on this device.",
     delayMs: 3000,
   },
+
+  serviceNavLinks: [
+    { label: "Home", href: "index.html" },
+    { label: "All Services", href: "glam-room.html#services" },
+    { label: "Bookings & Proposals", href: "book.html" },
+  ],
 
   homeNavLinks: [
     { label: "The Enterprise", href: "about.html" },

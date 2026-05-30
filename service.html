@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Browse specific hairstyles at Glam Room by Asantewaa — Accra's premier salon.">
+  <meta name="theme-color" content="#000000">
+  <title>Service | Glam Room</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="services.css">
+  <link rel="stylesheet" href="mobile.css">
+</head>
+<body data-page="service" class="editorial-theme">
+
+  <header class="home-topbar">
+    <a href="glam-room.html" class="home-topbar-link" id="home-topbar-left">GLAM ROOM</a>
+    <a href="index.html" class="home-topbar-center" aria-label="Home"><i class="fa-solid fa-star"></i></a>
+    <button class="home-menu-btn" id="home-menu-open" aria-label="Open menu">MENU</button>
+  </header>
+
+  <div class="home-menu-overlay" id="home-menu-overlay"></div>
+  <nav class="home-menu-panel" id="home-menu-panel" aria-label="Site navigation">
+    <button class="home-menu-close" id="home-menu-close">Close</button>
+    <ul class="home-menu-links" id="home-menu-links"></ul>
+    <div class="home-menu-socials" id="home-menu-socials"></div>
+    <p class="home-menu-footer" id="home-menu-footer"></p>
+  </nav>
+
+  <main class="editorial-main">
+    <section class="service-detail-hero" id="service-hero">
+      <div class="service-detail-hero-inner">
+        <a href="glam-room.html#services" class="service-back-link"><i class="fa-solid fa-arrow-left"></i> All services</a>
+        <div class="service-detail-icon" id="service-icon" aria-hidden="true"></div>
+        <p class="service-detail-label">Specific styles</p>
+        <h1 class="service-detail-title" id="service-title"></h1>
+        <p class="service-detail-desc" id="service-desc"></p>
+        <div class="service-detail-meta" id="service-meta"></div>
+      </div>
+    </section>
+
+    <section class="section service-styles-section">
+      <div class="section-inner">
+        <header class="section-header reveal">
+          <span class="section-label">Choose your look</span>
+          <h2 class="section-title">Styles under this service</h2>
+          <p class="section-desc" id="service-styles-intro">Tap a style to book — we'll have you looking like main character energy.</p>
+        </header>
+        <div class="service-styles-grid" id="service-styles-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="home-bottombar">
+    <span id="home-copyright"></span>
+    <a href="glam-room.html#services">Services</a>
+  </footer>
+
+  <nav class="nav" id="nav" aria-hidden="true"><ul id="nav-links"></ul></nav>
+  <footer class="footer" aria-hidden="true"><div id="footer-socials"></div><p id="footer-copyright"></p><p id="footer-tagline"></p></footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

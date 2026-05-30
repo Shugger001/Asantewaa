@@ -205,6 +205,7 @@ body.editorial-theme .about-content p {
   width: 100%;
 }
 
+.services-grid > .service-card-link,
 .services-grid > .service-card,
 .services-grid > .skeleton,
 .services-grid > article {
@@ -649,17 +650,7 @@ body.install-prompt-open {
 /* --- Enterprise page (mobile) --- */
 @media (max-width: 768px) {
   body[data-page="enterprise"] .editorial-main {
-    padding-bottom: calc(4.5rem + var(--safe-bottom));
-  }
-
-  body[data-page="enterprise"] .home-bottombar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 40;
-    background: rgba(0, 0, 0, 0.92);
-    backdrop-filter: blur(8px);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 0;
+    padding-bottom: calc(5rem + var(--safe-bottom));
   }
 }

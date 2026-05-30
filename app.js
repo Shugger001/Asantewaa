@@ -1,4 +1,4 @@
-import { SITE, getLocationLabel } from './data.js';
+import { SITE, getLocationLabel, findServiceById } from './data.js';
 import { initBookingForm } from './booking.js';
 import { initFindBooking } from './find-booking.js';
 import { initInstallPrompt } from './install-prompt.js';
@@ -38,24 +38,105 @@ function renderServices() {
     grid.innerHTML = SITE.services
       .map(
         (service, i) => `
-      <article class="glass-card service-card reveal reveal-delay-${(i % 4) + 1}" data-service="${service.id}">
-        <div class="service-card-header">
-          <div class="service-icon"><i class="${service.icon}"></i></div>
-          ${service.badge ? `<span class="service-badge">${service.badge}</span>` : ''}
-        </div>
-        <h3 class="service-name">${service.name}</h3>
-        <p class="service-desc">${service.description}</p>
-        <div class="service-meta">
-          <span class="service-price">${service.price}</span>
-          <span class="service-duration"><i class="fa-regular fa-clock"></i> ${service.duration}</span>
-        </div>
-      </article>
+      <a href="service.html?id=${encodeURIComponent(service.id)}" class="service-card-link reveal reveal-delay-${(i % 4) + 1}">
+        <article class="glass-card service-card" data-service="${service.id}">
+          <div class="service-card-header">
+            <div class="service-icon"><i class="${service.icon}"></i></div>
+            ${service.badge ? `<span class="service-badge">${service.badge}</span>` : ''}
+          </div>
+          <h3 class="service-name">${service.name}</h3>
+          <p class="service-desc">${service.description}</p>
+          <div class="service-meta">
+            <span class="service-price">${service.price}</span>
+            <span class="service-duration"><i class="fa-regular fa-clock"></i> ${service.duration}</span>
+          </div>
+          <div class="service-card-footer">
+            <span>${(service.styles?.length || 0)} styles</span>
+            <span>View <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </article>
+      </a>
     `
       )
       .join('');
 
     observeRevealElements(grid.querySelectorAll('.reveal'));
   }, 400);
+}
+
+function getQueryParam(name) {
+  return new URLSearchParams(window.location.search).get(name);
+}
+
+function renderServiceDetail() {
+  const serviceId = getQueryParam('id');
+  const service = findServiceById(serviceId);
+
+  if (!service) {
+    window.location.replace('glam-room.html#services');
+    return;
+  }
+
+  document.title = `${service.name} | Glam Room — Asantewaa`;
+
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) {
+    metaDesc.content = `${service.name} at Glam Room — ${service.description}`;
+  }
+
+  const iconEl = document.getElementById('service-icon');
+  if (iconEl) iconEl.innerHTML = `<i class="${service.icon}"></i>`;
+
+  const titleEl = document.getElementById('service-title');
+  if (titleEl) titleEl.textContent = service.name;
+
+  const descEl = document.getElementById('service-desc');
+  if (descEl) descEl.textContent = service.description;
+
+  const metaEl = document.getElementById('service-meta');
+  if (metaEl) {
+    metaEl.innerHTML = `
+      <span><i class="fa-solid fa-tag"></i> ${service.price}</span>
+      <span><i class="fa-regular fa-clock"></i> ${service.duration}</span>
+      <span><i class="fa-solid fa-scissors"></i> ${service.styles?.length || 0} styles</span>
+    `;
+  }
+
+  const introEl = document.getElementById('service-styles-intro');
+  if (introEl) {
+    introEl.textContent = `Pick a specific ${service.name.toLowerCase()} style below, then book your slot.`;
+  }
+
+  const grid = document.getElementById('service-styles-grid');
+  if (!grid || !service.styles?.length) return;
+
+  grid.innerHTML = service.styles
+    .map((style, i) => {
+      const bookUrl = `book.html?service=${encodeURIComponent(service.id)}&style=${encodeURIComponent(style.id)}`;
+      const mediaStyle = style.imageUrl
+        ? `background-image: url('${style.imageUrl}');`
+        : '';
+      const mediaClass = style.imageUrl ? '' : ' style-card-media--placeholder';
+      const mediaInner = style.imageUrl ? '' : '<i class="fa-solid fa-scissors"></i>';
+
+      return `
+        <article class="glass-card style-card reveal reveal-delay-${(i % 4) + 1}">
+          <div class="style-card-media${mediaClass}" style="${mediaStyle}">${mediaInner}</div>
+          <div class="style-card-body">
+            <h3 class="style-card-name">${style.name}</h3>
+            <p class="style-card-desc">${style.description}</p>
+            <div class="style-card-meta">
+              <span class="style-card-price">${style.price}</span>
+              <span class="style-card-duration"><i class="fa-regular fa-clock"></i> ${style.duration}</span>
+            </div>
+            <a href="${bookUrl}" class="btn btn-primary style-card-book">Book this style <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+      `;
+    })
+    .join('');
+
+  observeRevealElements(grid.querySelectorAll('.reveal'));
 }
 
 function renderGallery() {
@@ -453,6 +534,7 @@ function populateStaticContent() {
 function getNavLinks() {
   const page = document.body.dataset.page || 'home';
   if (page === 'business') return SITE.businessNavLinks;
+  if (page === 'service') return SITE.serviceNavLinks;
   if (page === 'enterprise' || page === 'about') return SITE.aboutNavLinks;
   if (page === 'booking') return SITE.bookingNavLinks;
   return SITE.homeNavLinks;
@@ -1243,6 +1325,9 @@ document.addEventListener('DOMContentLoaded', () => {
     renderBusiness();
     renderGallery();
     new TestimonialCarousel();
+    initParallax();
+  } else if (page === 'service') {
+    renderServiceDetail();
     initParallax();
   } else if (page === 'enterprise') {
     renderEnterprise();

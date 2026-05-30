@@ -3,6 +3,9 @@ import {
   getLocationBookingValue,
   getLocationLabel,
   getLocationLabelById,
+  getBookingStyleOptions,
+  findServiceById,
+  findServiceStyle,
 } from './data.js';
 import { getSupabase, isSupabaseConfigured } from './supabase-client.js';
 
@@ -57,11 +60,24 @@ function populateBookingPage() {
   document.getElementById('booking-vibe').textContent = SITE.booking.vibeNote;
 
   const serviceSelect = document.getElementById('service');
+  const styleOptions = getBookingStyleOptions();
   serviceSelect.innerHTML =
     '<option value="">— Select service —</option>' +
-    SITE.booking.services
-      .map((s) => `<option value="${s.value}">${s.label} - ${s.price}</option>`)
+    styleOptions
+      .map((s) => `<option value="${s.value}">${s.label} — ${s.price}</option>`)
       .join('');
+
+  const params = new URLSearchParams(window.location.search);
+  const serviceId = params.get('service');
+  const styleId = params.get('style');
+  if (serviceId && styleId) {
+    const service = findServiceById(serviceId);
+    const style = findServiceStyle(serviceId, styleId);
+    if (service && style) {
+      serviceSelect.value = `${service.name} — ${style.name}`;
+      updateSummary();
+    }
+  }
 
   const timeSelect = document.getElementById('time');
   timeSelect.innerHTML =

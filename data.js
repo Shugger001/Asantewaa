@@ -110,7 +110,7 @@ export const SITE = {
         imagePosition: "center top",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.75) 100%)",
         link: "about.html",
-        linkText: "Discover More",
+        linkText: "The Enterprise",
       },
       {
         id: "visual-2",
@@ -130,7 +130,7 @@ export const SITE = {
       },
       {
         id: "glam",
-        label: "Glam Room",
+        label: "The Glam Room",
         title: "Your Crown. Your Glow.",
         subtitle: "Accra's baddest hair destination",
         imageUrl: "images/glam-red-celebration.png",
@@ -157,7 +157,7 @@ export const SITE = {
       },
       {
         id: "book",
-        label: "Book",
+        label: "Bookings & Proposals",
         title: "Secure Your Slot",
         subtitle: "Mama Glam Is Waiting",
         imageUrl: "images/glam-red-studio.png",

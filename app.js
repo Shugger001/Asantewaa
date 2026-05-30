@@ -464,6 +464,23 @@ async function initHomeIntroLoader(onComplete) {
     return slide;
   });
 
+  const title = config.title || SITE.owner || 'Asantewaa';
+  const subtitle = config.subtitle || '';
+  const letterStaggerMs = config.letterStaggerMs ?? 38;
+  const titleLetters = [...title].map((ch, i) => {
+    const safe = ch === ' ' ? '\u00a0' : escapeHtml(ch);
+    return `<span class="home-intro-letter" style="--i:${i}">${safe}</span>`;
+  }).join('');
+
+  const titleEl = document.createElement('div');
+  titleEl.className = 'home-intro-loader__title';
+  titleEl.setAttribute('aria-hidden', 'true');
+  titleEl.innerHTML = `
+    <div class="home-intro-title-line">${titleLetters}</div>
+    ${subtitle ? `<p class="home-intro-subtitle" style="--i:${title.length + 1}">${escapeHtml(subtitle)}</p>` : ''}
+  `;
+  loader.appendChild(titleEl);
+
   document.body.appendChild(loader);
   await preloadImages(images);
   await new Promise((resolve) => requestAnimationFrame(resolve));

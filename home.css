@@ -524,7 +524,7 @@ body.home-intro-active .home-panel.in-view .home-panel-visual-labels {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 .home-scroll-dot {
@@ -532,7 +532,10 @@ body.home-intro-active .home-panel.in-view .home-panel-visual-labels {
   height: 5px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.25);
-  transition: height 0.3s, background 0.3s;
+  transition: height 0.3s, width 0.3s, background 0.3s;
+  cursor: pointer;
+  border: none;
+  padding: 0;
 }
 
 .home-scroll-dot.active {
@@ -773,6 +776,7 @@ body.home-intro-done .home-scroll-dots {
   .home-scroll-dot.active {
     width: 28px;
     height: 5px;
+    border-radius: 3px;
   }
 }
 

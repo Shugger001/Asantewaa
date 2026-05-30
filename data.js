@@ -81,6 +81,9 @@ export const SITE = {
       slideMs: 160,
       starMs: 200,
       exitMs: 250,
+      title: "Asantewaa",
+      subtitle: "Glam Room",
+      letterStaggerMs: 38,
     },
     panels: [
       {
@@ -391,7 +394,7 @@ export const SITE = {
   },
 
   homeNavLinks: [
-    { label: "Discover More", href: "about.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
     { label: "Bookings & Proposals", href: "book.html" },
   ],

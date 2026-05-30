@@ -225,11 +225,55 @@ function initEnterpriseAccordion(container) {
   });
 }
 
+function initEnterpriseGatewayScroll() {
+  const link = document.getElementById('enterprise-gateway-scroll');
+  if (!link) return;
+
+  link.addEventListener('click', (event) => {
+    const target = document.getElementById('enterprise-statement');
+    if (!target) return;
+    event.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
 function renderEnterprise() {
   const data = SITE.enterprise;
   if (!data) return;
 
   document.title = 'The Enterprise | Asantewaa';
+
+  const gateway = data.gateway;
+  if (gateway) {
+    const gatewayImage = document.getElementById('enterprise-gateway-image');
+    if (gatewayImage) {
+      gatewayImage.src = gateway.imageUrl || SITE.hero?.photoUrl || '';
+      gatewayImage.alt = gateway.imageAlt || 'Asantewaa';
+      if (gateway.imagePosition) {
+        gatewayImage.style.objectPosition = gateway.imagePosition;
+      }
+    }
+
+    const titleEl = document.getElementById('enterprise-gateway-title');
+    if (titleEl && gateway.title) titleEl.textContent = gateway.title;
+
+    const headlineEl = document.getElementById('enterprise-gateway-headline');
+    if (headlineEl && gateway.headline) {
+      headlineEl.innerHTML = `
+        <span class="ent-gateway__headline-rule" aria-hidden="true"></span>
+        <span class="ent-gateway__headline-text">${gateway.headline}</span>
+        <span class="ent-gateway__headline-rule" aria-hidden="true"></span>
+      `;
+    }
+
+    const metaEl = document.getElementById('enterprise-gateway-meta');
+    if (metaEl && gateway.meta) metaEl.textContent = gateway.meta;
+
+    const scrollText = document.getElementById('enterprise-gateway-scroll-text');
+    if (scrollText && gateway.scrollHint) scrollText.textContent = gateway.scrollHint;
+
+    initEnterpriseGatewayScroll();
+  }
 
   const statement = data.statement;
   const statementImage = document.getElementById('enterprise-statement-image');

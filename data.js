@@ -262,6 +262,15 @@ export const SITE = {
 
   enterprise: {
     footer: "© 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
+    gateway: {
+      title: "ASANTEWAA",
+      headline: "THE WORLD KNOWS HER NAME.",
+      meta: "ACCRA, GHANA * ASANTEWAA © 2026",
+      scrollHint: "SCROLL TO ENTER",
+      imageUrl: "images/glam-braids-portrait.png",
+      imageAlt: "Asantewaa — cinematic portrait",
+      imagePosition: "center 15%",
+    },
     statement: {
       imageUrl: "images/glam-red-studio.png",
       imageAlt: "Asantewaa — editorial portrait",

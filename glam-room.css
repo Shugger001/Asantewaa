@@ -23,6 +23,11 @@
   display: none !important;
 }
 
+.gr-page .footer,
+.gr-page .nav {
+  display: none !important;
+}
+
 .gr-topbar {
   position: fixed;
   top: 0;

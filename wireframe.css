@@ -3,6 +3,13 @@
    DISPLAY · BOLD · SMALL · FAINT · ACTION
    ========================================================================== */
 
+html:has(body.wf-page),
+html:has(body.enterprise-page),
+html:has(body.gr-page),
+html:has(body.prop-page) {
+  background: #000;
+}
+
 .wf-page {
   --wf-black: #000;
   --wf-charcoal: #3a3a3a;
@@ -25,7 +32,9 @@
 .wf-page .home-scroll-hint,
 .wf-page .home-scroll-dots,
 .wf-page .home-bottombar,
-.wf-page .home-scroll {
+.wf-page .home-scroll,
+.wf-page .footer,
+.wf-page .nav {
   display: none !important;
 }
 
@@ -42,6 +51,11 @@
   padding: calc(1.15rem + env(safe-area-inset-top, 0px)) 1.75rem 1.15rem;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
   pointer-events: none;
+}
+
+.wf-topbar-link {
+  justify-self: start;
+  white-space: nowrap;
 }
 
 .wf-topbar-link,
@@ -352,10 +366,25 @@
 
 /* --- Mobile --- */
 @media (max-width: 768px) {
+  .wf-topbar {
+    padding-left: var(--wf-gutter);
+    padding-right: var(--wf-gutter);
+  }
+
+  .wf-topbar-link,
+  .wf-topbar-menu {
+    font-size: 0.5625rem;
+    letter-spacing: 0.12em;
+  }
+
   .wf-gateway__title {
-    letter-spacing: 0.22em;
-    text-indent: 0.22em;
-    font-size: clamp(2.75rem, 16vw, 4.25rem);
+    letter-spacing: 0.12em;
+    text-indent: 0;
+    font-size: clamp(2rem, 11vw, 3.5rem);
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+    padding: 0 0.25rem;
   }
 
   .wf-gateway__headline {

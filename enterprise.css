@@ -26,6 +26,11 @@
   display: none !important;
 }
 
+.enterprise-page .footer,
+.enterprise-page .nav {
+  display: none !important;
+}
+
 /* --- Topbar: GLAM ROOM * MENU --- */
 .ent-topbar {
   position: fixed;

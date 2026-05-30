@@ -21,6 +21,11 @@
   display: none !important;
 }
 
+.prop-page .footer,
+.prop-page .nav {
+  display: none !important;
+}
+
 .prop-topbar {
   position: fixed;
   top: 0;

@@ -69,6 +69,19 @@ export const SITE = {
       { label: "Glam Room", href: "glam-room.html" },
       { label: "Book", href: "book.html" },
     ],
+    introLoader: {
+      images: [
+        "images/glam-braids-studio.png",
+        "images/glam-braids-portrait.png",
+        "images/glam-red-studio.png",
+        "images/glam-red-indoor.png",
+        "images/glam-red-outdoor.png",
+        "images/glam-red-celebration.png",
+      ],
+      slideMs: 480,
+      starMs: 650,
+      exitMs: 750,
+    },
     panels: [
       {
         id: "hero",

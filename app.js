@@ -409,6 +409,88 @@ function initEditorialMenu() {
   });
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function preloadImages(urls) {
+  return Promise.all(
+    urls.map(
+      (url) =>
+        new Promise((resolve) => {
+          const img = new Image();
+          img.onload = resolve;
+          img.onerror = resolve;
+          img.src = url;
+        })
+    )
+  );
+}
+
+async function initHomeIntroLoader(onComplete) {
+  const config = SITE.home?.introLoader;
+  const images = config?.images?.filter(Boolean);
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!images?.length || reducedMotion) {
+    document.body.classList.add('home-intro-done');
+    onComplete();
+    return;
+  }
+
+  document.body.classList.add('home-intro-active');
+
+  const loader = document.createElement('div');
+  loader.className = 'home-intro-loader';
+  loader.setAttribute('role', 'presentation');
+  loader.innerHTML = `
+    <div class="home-intro-loader__bg"></div>
+    <div class="home-intro-loader__slides"></div>
+    <div class="home-intro-loader__stars" aria-hidden="true">
+      <span class="home-intro-star home-intro-star--tl"><i class="fa-solid fa-star"></i></span>
+      <span class="home-intro-star home-intro-star--tr"><i class="fa-solid fa-star"></i></span>
+      <span class="home-intro-star home-intro-star--center"><i class="fa-solid fa-star"></i></span>
+      <span class="home-intro-star home-intro-star--bl"><i class="fa-solid fa-star"></i></span>
+      <span class="home-intro-star home-intro-star--br"><i class="fa-solid fa-star"></i></span>
+    </div>
+  `;
+
+  const slidesEl = loader.querySelector('.home-intro-loader__slides');
+  const slides = images.map((src) => {
+    const slide = document.createElement('div');
+    slide.className = 'home-intro-slide';
+    slide.innerHTML = `<img src="${src}" alt="" decoding="async">`;
+    slidesEl.appendChild(slide);
+    return slide;
+  });
+
+  document.body.appendChild(loader);
+  await preloadImages(images);
+  await new Promise((resolve) => requestAnimationFrame(resolve));
+
+  const slideMs = config.slideMs ?? 480;
+  const starMs = config.starMs ?? 650;
+  const exitMs = config.exitMs ?? 750;
+
+  slides[0]?.classList.add('is-active');
+  for (let i = 1; i < slides.length; i += 1) {
+    await sleep(slideMs);
+    slides[i - 1]?.classList.remove('is-active');
+    slides[i]?.classList.add('is-active');
+  }
+
+  await sleep(slideMs);
+  loader.classList.add('show-stars');
+  await sleep(starMs);
+
+  loader.classList.add('is-exiting');
+  document.body.classList.remove('home-intro-active');
+  document.body.classList.add('home-intro-done');
+  await sleep(exitMs);
+  loader.remove();
+  onComplete();
+}
+
 function initHomeScrollEffects() {
   const scrollEl = document.getElementById('home-scroll');
   const hint = document.getElementById('home-scroll-hint');
@@ -430,6 +512,14 @@ function initHomeScrollEffects() {
       const inView = rect.top < window.innerHeight * 0.55 && rect.bottom > window.innerHeight * 0.45;
       panel.classList.toggle('in-view', inView);
       if (inView) activeIndex = i;
+
+      const bg = panel.querySelector('.home-panel-bg');
+      if (bg && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const center = rect.top + rect.height / 2;
+        const viewportCenter = window.innerHeight / 2;
+        const offset = ((center - viewportCenter) / window.innerHeight) * 36;
+        bg.style.setProperty('--parallax-y', `${offset.toFixed(1)}px`);
+      }
     });
     dots?.forEach((dot, i) => dot.classList.toggle('active', i === activeIndex));
   }
@@ -875,7 +965,9 @@ document.addEventListener('DOMContentLoaded', () => {
     renderHomePanels();
     initFindBooking();
     initInstallPrompt();
-    initHomeScrollEffects();
+    initHomeIntroLoader(() => {
+      initHomeScrollEffects();
+    });
   } else if (page === 'business') {
     renderServices();
     renderBusiness();

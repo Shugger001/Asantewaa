@@ -63,7 +63,7 @@ body.home-editorial .mobile-menu-overlay {
   display: none !important;
 }
 
-/* Top bar — GLAM ROOM | ★ | MENU */
+/* Top bar — GLAM ROOM | * | MENU */
 .home-topbar {
   position: fixed;
   top: 0;
@@ -73,7 +73,7 @@ body.home-editorial .mobile-menu-overlay {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding: 1.25rem 1.75rem;
+  padding: calc(1.15rem + env(safe-area-inset-top, 0px)) 1.75rem 1.15rem;
   pointer-events: none;
 }
 
@@ -82,17 +82,28 @@ body.home-editorial .mobile-menu-overlay {
 }
 
 .home-topbar-link {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  color: rgba(255, 255, 255, 0.92);
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #fff;
   text-transform: uppercase;
+  text-decoration: none;
   transition: opacity 0.25s;
 }
 
 .home-topbar-link:hover {
   opacity: 0.65;
+}
+
+.home-topbar-sep {
+  justify-self: center;
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #fff;
+  line-height: 1;
 }
 
 .home-topbar-center {
@@ -111,11 +122,11 @@ body.home-editorial .mobile-menu-overlay {
   justify-self: end;
   background: none;
   border: none;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  color: rgba(255, 255, 255, 0.92);
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #fff;
   cursor: pointer;
   text-transform: uppercase;
   padding: 0.5rem;

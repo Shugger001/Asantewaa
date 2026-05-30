@@ -1,0 +1,385 @@
+/* ==========================================================================
+   ASANTEWAA WIREFRAME — PAGE 01 (HOME)
+   DISPLAY · BOLD · SMALL · FAINT · ACTION
+   ========================================================================== */
+
+.wf-page {
+  --wf-black: #000;
+  --wf-charcoal: #3a3a3a;
+  --wf-ivory: #f5f0e8;
+  --wf-faint: rgba(255, 255, 255, 0.28);
+  --wf-rule: rgba(255, 255, 255, 0.35);
+  --wf-gutter: clamp(1.25rem, 4.5vw, 2.75rem);
+  --wf-font: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --wf-mono: 'IBM Plex Mono', monospace;
+  --wf-display: clamp(3.5rem, 14vw, 9rem);
+  background: var(--wf-black);
+  color: #fff;
+  font-family: var(--wf-font);
+  margin: 0;
+  overflow-x: clip;
+}
+
+.wf-page .cursor-dot,
+.wf-page .cursor-ring,
+.wf-page .home-scroll-hint,
+.wf-page .home-scroll-dots,
+.wf-page .home-bottombar,
+.wf-page .home-scroll {
+  display: none !important;
+}
+
+/* --- Topbar: GLAM ROOM * MENU --- */
+.wf-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 300;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: calc(1.15rem + env(safe-area-inset-top, 0px)) 1.75rem 1.15rem;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+  pointer-events: none;
+}
+
+.wf-topbar-link,
+.wf-topbar-menu,
+.wf-topbar-sep {
+  pointer-events: auto;
+  font-family: var(--wf-font);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.wf-topbar-link:hover,
+.wf-topbar-menu:hover {
+  opacity: 0.65;
+}
+
+.wf-topbar-sep {
+  justify-self: center;
+  cursor: default;
+  font-weight: 700;
+}
+
+.wf-topbar-menu {
+  justify-self: end;
+}
+
+.wf-main {
+  background: var(--wf-black);
+}
+
+/* --- SECTION 1: Hero cover --- */
+.wf-gateway {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.wf-gateway__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.wf-gateway__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(20%) contrast(1.05) brightness(0.78);
+  transform: scale(1.02);
+}
+
+.wf-gateway__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.08) 40%, rgba(0, 0, 0, 0.2) 65%, rgba(0, 0, 0, 0.72) 100%),
+    radial-gradient(ellipse 75% 55% at 50% 42%, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+  pointer-events: none;
+}
+
+.wf-gateway__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  width: min(100%, 52rem);
+  padding: calc(5rem + env(safe-area-inset-top, 0px)) var(--wf-gutter) 5rem;
+  margin: auto 0;
+}
+
+.wf-gateway__title {
+  font-family: var(--wf-font);
+  font-size: var(--wf-display);
+  font-weight: 700;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1;
+  margin: 0 0 clamp(1.5rem, 3.5vw, 2.25rem);
+  text-indent: 0.38em;
+}
+
+.wf-gateway__headline {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  margin: 0 0 clamp(1rem, 2.5vw, 1.35rem);
+  width: 100%;
+}
+
+.wf-gateway__headline-text {
+  font-family: var(--wf-font);
+  font-size: clamp(0.6875rem, 1.6vw, 0.875rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.wf-gateway__headline-rule {
+  height: 1px;
+  background: var(--wf-rule);
+  min-width: 0;
+}
+
+.wf-gateway__meta {
+  font-family: var(--wf-mono);
+  font-size: clamp(0.5625rem, 1.1vw, 0.6875rem);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+}
+
+.wf-gateway__scroll {
+  position: absolute;
+  bottom: calc(1.75rem + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--wf-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--wf-faint);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.wf-gateway__scroll:hover {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.wf-gateway__scroll-icon {
+  font-size: 0.7rem;
+  animation: wf-scroll-bob 2.4s ease-in-out infinite;
+}
+
+@keyframes wf-scroll-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: translateY(4px);
+    opacity: 0.7;
+  }
+}
+
+/* --- SECTION 2: Portal split --- */
+.wf-portal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: min(100vh, 100dvh);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.wf-portal__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(3rem, 8vw, 5rem) var(--wf-gutter);
+  overflow: hidden;
+  text-decoration: none;
+  color: #fff;
+  min-height: min(50vh, 50dvh);
+}
+
+.wf-portal__panel--enterprise {
+  background: var(--wf-black);
+}
+
+.wf-portal__panel--glam {
+  background: var(--wf-charcoal);
+}
+
+.wf-portal__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.wf-portal__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+  transform: scale(1);
+  transition: transform 0.4s ease;
+}
+
+.wf-portal__panel:hover .wf-portal__media img,
+.wf-portal__panel:focus-visible .wf-portal__media img {
+  transform: scale(1.03);
+}
+
+.wf-portal__panel--enterprise .wf-portal__media img {
+  filter: grayscale(100%) contrast(1.1);
+}
+
+.wf-portal__panel--glam .wf-portal__media img {
+  filter: grayscale(40%) contrast(1.05);
+  opacity: 0.28;
+}
+
+.wf-portal__shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}
+
+.wf-portal__panel--glam .wf-portal__shade {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.wf-portal__content {
+  position: relative;
+  z-index: 2;
+  max-width: 18rem;
+}
+
+.wf-portal__title {
+  font-family: var(--wf-font);
+  font-size: clamp(0.9375rem, 1.8vw, 1.125rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0 0 0.65rem;
+}
+
+.wf-portal__tagline {
+  font-family: var(--wf-font);
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  font-weight: 400;
+  margin: 0 0 0.35rem;
+}
+
+.wf-portal__subline {
+  font-family: var(--wf-font);
+  font-size: clamp(0.75rem, 1.2vw, 0.8125rem);
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0 0 1.75rem;
+}
+
+.wf-portal__cta {
+  display: inline-block;
+  font-family: var(--wf-font);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--wf-black);
+  background: #fff;
+  padding: 0.85rem 1.35rem;
+  border: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.wf-portal__panel:hover .wf-portal__cta,
+.wf-portal__panel:focus-visible .wf-portal__cta {
+  opacity: 0.92;
+}
+
+/* --- Footer --- */
+.wf-footer {
+  font-family: var(--wf-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--wf-faint);
+  text-align: center;
+  padding: clamp(2rem, 4vw, 2.75rem) var(--wf-gutter)
+    calc(clamp(2rem, 4vw, 2.75rem) + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 0;
+}
+
+/* --- Mobile --- */
+@media (max-width: 768px) {
+  .wf-gateway__title {
+    letter-spacing: 0.22em;
+    text-indent: 0.22em;
+    font-size: clamp(2.75rem, 16vw, 4.25rem);
+  }
+
+  .wf-gateway__headline {
+    gap: 0.75rem;
+  }
+
+  .wf-gateway__headline-text {
+    font-size: clamp(0.5625rem, 2.6vw, 0.6875rem);
+    letter-spacing: 0.08em;
+    white-space: normal;
+    text-align: center;
+    max-width: 11rem;
+  }
+
+  .wf-portal {
+    grid-template-columns: 1fr;
+  }
+
+  .wf-portal__panel {
+    min-height: min(42vh, 42dvh);
+  }
+
+  .wf-topbar {
+    padding-left: var(--wf-gutter);
+    padding-right: var(--wf-gutter);
+  }
+}

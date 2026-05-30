@@ -1,5 +1,12 @@
 import { SITE, getLocationLabel, findServiceById, getServicePriceRange } from './data.js';
 import { initBookingForm } from './booking.js';
+import {
+  initGlamBookingOverlay,
+  bindSanctuaryBookingButtons,
+  populateOverlayServices,
+  populateOverlayTimeSlots,
+} from './glam-booking.js';
+import { initProposalsForm } from './proposals.js';
 import { initFindBooking } from './find-booking.js';
 import { initInstallPrompt } from './install-prompt.js';
 
@@ -225,55 +232,11 @@ function initEnterpriseAccordion(container) {
   });
 }
 
-function initEnterpriseGatewayScroll() {
-  const link = document.getElementById('enterprise-gateway-scroll');
-  if (!link) return;
-
-  link.addEventListener('click', (event) => {
-    const target = document.getElementById('enterprise-statement');
-    if (!target) return;
-    event.preventDefault();
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-}
-
 function renderEnterprise() {
   const data = SITE.enterprise;
   if (!data) return;
 
   document.title = 'The Enterprise | Asantewaa';
-
-  const gateway = data.gateway;
-  if (gateway) {
-    const gatewayImage = document.getElementById('enterprise-gateway-image');
-    if (gatewayImage) {
-      gatewayImage.src = gateway.imageUrl || SITE.hero?.photoUrl || '';
-      gatewayImage.alt = gateway.imageAlt || 'Asantewaa';
-      if (gateway.imagePosition) {
-        gatewayImage.style.objectPosition = gateway.imagePosition;
-      }
-    }
-
-    const titleEl = document.getElementById('enterprise-gateway-title');
-    if (titleEl && gateway.title) titleEl.textContent = gateway.title;
-
-    const headlineEl = document.getElementById('enterprise-gateway-headline');
-    if (headlineEl && gateway.headline) {
-      headlineEl.innerHTML = `
-        <span class="ent-gateway__headline-rule" aria-hidden="true"></span>
-        <span class="ent-gateway__headline-text">${gateway.headline}</span>
-        <span class="ent-gateway__headline-rule" aria-hidden="true"></span>
-      `;
-    }
-
-    const metaEl = document.getElementById('enterprise-gateway-meta');
-    if (metaEl && gateway.meta) metaEl.textContent = gateway.meta;
-
-    const scrollText = document.getElementById('enterprise-gateway-scroll-text');
-    if (scrollText && gateway.scrollHint) scrollText.textContent = gateway.scrollHint;
-
-    initEnterpriseGatewayScroll();
-  }
 
   const statement = data.statement;
   const statementImage = document.getElementById('enterprise-statement-image');
@@ -315,7 +278,7 @@ function renderEnterprise() {
   const metricsEl = document.getElementById('enterprise-metrics');
   if (metricsEl && data.metrics) {
     metricsEl.innerHTML = data.metrics
-      .map((metric) => {
+      .map((metric, index) => {
         if (metric.variant === 'strip') {
           return `
         <div class="ent-metric-strip">
@@ -323,8 +286,9 @@ function renderEnterprise() {
         </div>
       `;
         }
+        const wideClass = index >= 4 ? ' ent-metric--wide' : '';
         return `
-      <div class="ent-metric">
+      <div class="ent-metric${wideClass}">
         <p class="ent-metric-value">${metric.value}</p>
         <p class="ent-metric-label">${metric.label}</p>
         ${metric.sublabel ? `<p class="ent-metric-sub">${metric.sublabel}</p>` : ''}
@@ -390,6 +354,135 @@ function renderEnterprise() {
   if (footerEnd && data.footer) footerEnd.textContent = data.footer;
 
   renderHomeContact();
+}
+
+function renderGlamRoom() {
+  const data = SITE.glamRoom;
+  if (!data) return;
+
+  document.title = 'The Glam Room | Asantewaa';
+
+  const decl = data.declaration;
+  const titleEl = document.getElementById('gr-declaration-title');
+  if (titleEl && decl?.title) titleEl.textContent = decl.title;
+  const bylineEl = document.getElementById('gr-declaration-byline');
+  if (bylineEl && decl?.byline) bylineEl.textContent = decl.byline;
+  const taglineEl = document.getElementById('gr-declaration-tagline');
+  if (taglineEl && decl?.tagline) taglineEl.textContent = decl.tagline;
+
+  const sanctuariesEl = document.getElementById('gr-sanctuaries');
+  if (sanctuariesEl) {
+    sanctuariesEl.innerHTML = SITE.locations
+      .map(
+        (loc) => `
+      <button type="button" class="gr-sanctuary" data-location-id="${loc.id}">
+        <div class="gr-sanctuary__media" aria-hidden="true">
+          <img src="${loc.imageUrl || SITE.hero.photoUrl}" alt="" loading="lazy" decoding="async"${loc.imagePosition ? ` style="object-position: ${loc.imagePosition}"` : ''}>
+        </div>
+        <div class="gr-sanctuary__shade" aria-hidden="true"></div>
+        <div class="gr-sanctuary__content">
+          <p class="gr-sanctuary__brand">${loc.name?.toUpperCase() || 'GLAM ROOM'}</p>
+          <p class="gr-sanctuary__area">${loc.area || loc.city || 'ACCRA'}</p>
+          <span class="gr-sanctuary__cta">RESERVE YOUR CHAIR</span>
+        </div>
+      </button>
+    `
+      )
+      .join('');
+  }
+
+  const servicesEl = document.getElementById('gr-services-list');
+  if (servicesEl && data.signatureServices) {
+    servicesEl.innerHTML = data.signatureServices
+      .map(
+        (item) => `
+      <a href="service.html?id=${item.serviceId}" class="gr-service-row">
+        <span class="gr-service-row__num">${item.number}</span>
+        <div class="gr-service-row__main">
+          <p class="gr-service-row__title">${item.title}</p>
+        </div>
+        <p class="gr-service-row__desc">${item.descriptor}</p>
+      </a>
+    `
+      )
+      .join('');
+  }
+
+  const footerMid = document.getElementById('gr-footer-mid');
+  if (footerMid) footerMid.textContent = data.footer || SITE.globalFooter;
+  const footerEnd = document.getElementById('gr-footer-end');
+  if (footerEnd) footerEnd.textContent = data.footer || SITE.globalFooter;
+
+  populateOverlayServices();
+  populateOverlayTimeSlots();
+  initGlamBookingOverlay();
+  bindSanctuaryBookingButtons();
+}
+
+function renderProposals() {
+  const data = SITE.proposals;
+  if (!data) return;
+
+  document.title = 'Bookings & Proposals | Asantewaa';
+
+  const titleEl = document.getElementById('prop-hero-title');
+  if (titleEl && data.hero?.title) titleEl.textContent = data.hero.title;
+  const sublineEl = document.getElementById('prop-hero-subline');
+  if (sublineEl && data.hero?.subline) sublineEl.textContent = data.hero.subline;
+
+  const pillarSelect = document.getElementById('prop-pillar');
+  if (pillarSelect && data.form?.pillars) {
+    pillarSelect.innerHTML = data.form.pillars
+      .map((p) => `<option value="${p}">${p}</option>`)
+      .join('');
+  }
+
+  const budgetSelect = document.getElementById('prop-budget');
+  if (budgetSelect && data.form?.budgetTiers) {
+    budgetSelect.innerHTML =
+      '<option value="">— Select tier —</option>' +
+      data.form.budgetTiers.map((t) => `<option value="${t}">${t}</option>`).join('');
+  }
+
+  const submitBtn = document.getElementById('prop-submit');
+  if (submitBtn && data.form?.submitLabel) submitBtn.textContent = data.form.submitLabel;
+
+  const complianceEl = document.getElementById('prop-compliance');
+  if (complianceEl && data.compliance) {
+    complianceEl.innerHTML = data.compliance
+      .map(
+        (item) => `
+      <div class="prop-compliance__item">
+        <p class="prop-compliance__title">${item.title}</p>
+        <p class="prop-compliance__body">${item.body}</p>
+      </div>
+    `
+      )
+      .join('');
+  }
+
+  const contactEl = document.getElementById('prop-contact');
+  const contact = data.contact;
+  if (contactEl && contact) {
+    const waNum = contact.whatsapp?.replace(/[^0-9+]/g, '') || '';
+    contactEl.innerHTML = `
+      <p class="prop-contact__intro">${contact.intro || ''}</p>
+      <div class="prop-contact__row">
+        <span class="prop-contact__label">${contact.whatsappLabel || 'WhatsApp Management'}</span>
+        <a class="prop-contact__value" href="https://wa.me/${waNum.replace('+', '')}" target="_blank" rel="noopener noreferrer">${contact.whatsapp || ''}</a>
+      </div>
+      <div class="prop-contact__row">
+        <span class="prop-contact__label">${contact.emailLabel || 'Corporate Inbox'}</span>
+        <a class="prop-contact__value" href="mailto:${contact.email || ''}">${contact.email || ''}</a>
+      </div>
+      <p class="prop-contact__locations">${contact.locations || ''}</p>
+    `;
+  }
+
+  const footerEl = document.getElementById('prop-footer');
+  if (footerEl) footerEl.textContent = data.footer || SITE.globalFooter;
+
+  initProposalsForm();
 }
 
 function renderBusiness() {
@@ -503,6 +596,8 @@ function populateStaticContent() {
   const titles = {
     home: SITE.owner,
     enterprise: 'The Enterprise | Asantewaa',
+    'glam-room': 'The Glam Room | Asantewaa',
+    proposals: 'Bookings & Proposals | Asantewaa',
     about: `About ${SITE.owner} | Glam Room`,
     business: `Glam Room | Hair Salon Accra — ${SITE.owner}`,
     booking: `Book Your Glam | ${SITE.brand}`,
@@ -545,8 +640,80 @@ function getNavLinks() {
   if (page === 'business') return SITE.businessNavLinks;
   if (page === 'service') return SITE.serviceNavLinks;
   if (page === 'enterprise' || page === 'about') return SITE.aboutNavLinks;
-  if (page === 'booking') return SITE.bookingNavLinks;
+  if (page === 'proposals' || page === 'booking') return SITE.bookingNavLinks;
+  if (page === 'glam-room') return SITE.home.menuLinks;
   return SITE.homeNavLinks;
+}
+
+/* --- Wireframe Homepage (PAGE 01) --- */
+
+function initWireframeHomeScroll() {
+  const link = document.getElementById('home-gateway-scroll');
+  if (!link) return;
+
+  link.addEventListener('click', (event) => {
+    const target = document.getElementById('home-portal');
+    if (!target) return;
+    event.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+function renderWireframeHome() {
+  const container = document.getElementById('home-main');
+  const home = SITE.home;
+  if (!container || !home) return;
+
+  const gateway = home.gateway || {};
+  const imageStyle = gateway.imagePosition ? ` style="object-position: ${gateway.imagePosition}"` : '';
+  const title = gateway.title || SITE.owner.toUpperCase();
+
+  const portalHtml = (home.portals || [])
+    .map(
+      (panel) => `
+    <a href="${panel.href}" class="wf-portal__panel wf-portal__panel--${panel.theme || panel.id}" id="${panel.id === 'enterprise' ? 'home-portal-enterprise' : ''}">
+      <div class="wf-portal__media" aria-hidden="true">
+        <img src="${panel.imageUrl || ''}" alt="" loading="lazy" decoding="async"${panel.imagePosition ? ` style="object-position: ${panel.imagePosition}"` : ''}>
+      </div>
+      <div class="wf-portal__shade" aria-hidden="true"></div>
+      <div class="wf-portal__content">
+        <h2 class="wf-portal__title">${panel.title}</h2>
+        <p class="wf-portal__tagline">${panel.tagline}</p>
+        ${panel.subline ? `<p class="wf-portal__subline">${panel.subline}</p>` : '<p class="wf-portal__subline" aria-hidden="true">&nbsp;</p>'}
+        <span class="wf-portal__cta">${panel.cta}</span>
+      </div>
+    </a>
+  `
+    )
+    .join('');
+
+  container.innerHTML = `
+    <section class="wf-gateway" id="hero">
+      <div class="wf-gateway__media">
+        <img id="home-gateway-image" src="${gateway.imageUrl || SITE.hero?.photoUrl || ''}" alt="${gateway.imageAlt || SITE.owner}" decoding="async"${imageStyle}>
+      </div>
+      <div class="wf-gateway__overlay" aria-hidden="true"></div>
+      <div class="wf-gateway__content">
+        <h1 class="wf-gateway__title">${title}</h1>
+        <p class="wf-gateway__headline">
+          <span class="wf-gateway__headline-rule" aria-hidden="true"></span>
+          <span class="wf-gateway__headline-text">${gateway.headline || ''}</span>
+          <span class="wf-gateway__headline-rule" aria-hidden="true"></span>
+        </p>
+        <p class="wf-gateway__meta">${gateway.meta || ''}</p>
+      </div>
+      <a href="#home-portal" class="wf-gateway__scroll" id="home-gateway-scroll">
+        <span>${gateway.scrollHint || 'SCROLL TO ENTER'}</span>
+        <span class="wf-gateway__scroll-icon" aria-hidden="true">↓</span>
+      </a>
+    </section>
+    <section class="wf-portal" id="home-portal" aria-label="Choose your path">
+      ${portalHtml}
+    </section>
+    <p class="wf-footer">${home.footer || SITE.globalFooter || ''}</p>
+  `;
+
+  initWireframeHomeScroll();
 }
 
 /* --- Editorial Homepage (beyonce.com style) --- */
@@ -1324,12 +1491,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initExternalLinks();
 
   if (page === 'home') {
-    renderHomePanels();
-    initFindBooking();
-    initInstallPrompt();
-    initHomeIntroLoader(() => {
-      initHomeScrollEffects();
-    });
+    renderWireframeHome();
   } else if (page === 'business') {
     renderServices();
     renderBusiness();
@@ -1341,6 +1503,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initParallax();
   } else if (page === 'enterprise') {
     renderEnterprise();
+  } else if (page === 'glam-room') {
+    renderGlamRoom();
+  } else if (page === 'proposals') {
+    renderProposals();
   } else if (page === 'about') {
     renderAbout();
     initParallax();

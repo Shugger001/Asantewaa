@@ -45,12 +45,12 @@
 .ent-topbar-menu,
 .ent-topbar-sep {
   pointer-events: auto;
-  font-family: var(--ent-mono);
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
+  font-family: var(--ent-font);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.95);
+  color: #fff;
   background: none;
   border: none;
   cursor: pointer;
@@ -75,148 +75,6 @@
 .ent-main {
   background: var(--ent-black);
   min-height: 100vh;
-}
-
-/* ==========================================================================
-   PAGE 01 · SECTION 1 — Cinematic gateway (wireframe hero)
-   ========================================================================== */
-
-.ent-gateway {
-  position: relative;
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: var(--ent-black);
-}
-
-.ent-gateway__media {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.ent-gateway__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 15%;
-  display: block;
-  filter: grayscale(25%) contrast(1.06) brightness(0.82);
-  transform: scale(1.03);
-}
-
-.ent-gateway__overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.12) 38%, rgba(0, 0, 0, 0.22) 62%, rgba(0, 0, 0, 0.78) 100%),
-    radial-gradient(ellipse 80% 60% at 50% 45%, transparent 0%, rgba(0, 0, 0, 0.35) 100%);
-  pointer-events: none;
-}
-
-.ent-gateway__content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  width: 100%;
-  max-width: 56rem;
-  padding: calc(5.5rem + env(safe-area-inset-top, 0px)) var(--ent-gutter) 5.5rem;
-  margin: auto 0;
-}
-
-.ent-gateway__title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(3.25rem, 13vw, 8.75rem);
-  font-weight: 400;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #fff;
-  line-height: 0.92;
-  margin: 0 0 clamp(1.35rem, 3.5vw, 2.15rem);
-  text-shadow: 0 2px 48px rgba(0, 0, 0, 0.45);
-}
-
-.ent-gateway__headline {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(0.75rem, 2.5vw, 1.75rem);
-  margin: 0 0 clamp(1rem, 2.5vw, 1.5rem);
-  width: 100%;
-}
-
-.ent-gateway__headline-text {
-  font-family: var(--ent-font);
-  font-size: clamp(0.6875rem, 1.75vw, 0.9375rem);
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #fff;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.ent-gateway__headline-rule {
-  flex: 1 1 auto;
-  max-width: clamp(1.75rem, 9vw, 5.5rem);
-  height: 1px;
-  background: rgba(255, 255, 255, 0.4);
-}
-
-.ent-gateway__meta {
-  font-family: var(--ent-mono);
-  font-size: clamp(0.5625rem, 1.15vw, 0.6875rem);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.52);
-  margin: 0;
-}
-
-.ent-gateway__scroll {
-  position: absolute;
-  bottom: calc(1.85rem + env(safe-area-inset-bottom, 0px));
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.35rem;
-  font-family: var(--ent-mono);
-  font-size: 0.5625rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ent-faint);
-  text-decoration: none;
-  transition: color 0.25s ease;
-}
-
-.ent-gateway__scroll:hover {
-  color: rgba(255, 255, 255, 0.48);
-}
-
-.ent-gateway__scroll-icon {
-  font-size: 0.75rem;
-  line-height: 1;
-  animation: ent-gateway-bob 2.4s ease-in-out infinite;
-}
-
-@keyframes ent-gateway-bob {
-  0%,
-  100% {
-    transform: translateY(0);
-    opacity: 0.42;
-  }
-
-  50% {
-    transform: translateY(4px);
-    opacity: 0.72;
-  }
 }
 
 .ent-footer-line {
@@ -244,7 +102,6 @@
   min-height: 100vh;
   min-height: 100dvh;
   background: var(--ent-black);
-  border-top: 1px solid var(--ent-rule);
 }
 
 .ent-statement__portrait {
@@ -345,6 +202,17 @@
 .ent-metrics {
   display: grid;
   grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .ent-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ent-metric--wide,
+  .ent-metric-strip {
+    grid-column: 1 / -1;
+  }
 }
 
 .ent-metric {
@@ -564,23 +432,6 @@
 
 /* --- Mobile: stack portrait then copy --- */
 @media (max-width: 899px) {
-  .ent-gateway__title {
-    letter-spacing: 0.1em;
-  }
-
-  .ent-gateway__headline-text {
-    font-size: clamp(0.625rem, 2.8vw, 0.8125rem);
-    letter-spacing: 0.1em;
-  }
-
-  .ent-gateway__headline-rule {
-    max-width: clamp(1.25rem, 12vw, 3rem);
-  }
-
-  .ent-gateway__content {
-    padding-bottom: 4.5rem;
-  }
-
   .ent-statement {
     grid-template-columns: 1fr;
     min-height: auto;

@@ -3,10 +3,12 @@
  * Edit this file to update all content without touching HTML.
  */
 
-/** Primary label: Maps formatted address, else business name from the pin */
+/** Primary label: Maps formatted address, else area or business name from the pin */
 export function getLocationLabel(loc) {
   const address = loc.address?.trim();
-  return address || loc.name?.trim() || "Glam Room";
+  if (address) return address;
+  if (loc.area?.trim()) return `${loc.name?.trim() || "Glam Room"} — ${loc.area.trim()}`;
+  return loc.name?.trim() || "Glam Room";
 }
 
 /** Stable unique value for booking forms (not duplicate "Glam Room" titles) */
@@ -78,6 +80,18 @@ export const SITE = {
   owner: "Asantewaa",
   tagline: "Accra's baddest hair destination — where your crown gets the main character energy it deserves.",
 
+  /** Wireframe document — 6 pages (PDF pages 2–7) */
+  wireframePages: [
+    { id: "01", label: "Home — The Cinematic Gateway", href: "index.html" },
+    { id: "02", label: "The Enterprise — Partnerships & Influence", href: "about.html" },
+    { id: "02b", label: "The Enterprise — Campaign Pillars", href: "about.html#pillars" },
+    { id: "03", label: "The Glam Room — Salon Flagship", href: "glam-room.html" },
+    { id: "03b", label: "The Glam Room — Signature Services", href: "glam-room.html#services" },
+    { id: "04", label: "Bookings & Proposals — The Intake Engine", href: "book.html" },
+  ],
+
+  globalFooter: "© 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
+
   // UPDATE THIS with your real WhatsApp number (include country code, e.g. +233XXXXXXXXX)
   whatsapp: "+233XXXXXXXXX",
   whatsappMessage: "Hi Glam Room! I'd like to book an appointment 💅",
@@ -85,22 +99,30 @@ export const SITE = {
   // Two Glam Room shops — names/addresses match Google Maps pins (not area labels)
   locations: [
     {
-      id: "glam-room-tn4f",
+      id: "glam-room-adenta",
       name: "Glam Room",
-      address: "Behind Tasty Fried Chicken, Abelemkpe, Accra",
+      area: "ADENTA",
+      address: "Adenta, Accra",
       city: "Accra",
       country: "Ghana",
       mapUrl: "https://share.google/TN4FohAFQiJ6UgK4b",
       hours: "Mon – Sat: 9am – 6pm · Sun: Closed",
+      imageUrl: "images/glam-red-indoor.png",
+      imagePosition: "center center",
+      bookingValue: "glam-room-adenta",
     },
     {
-      id: "glam-room-eniy",
+      id: "glam-room-sowutuom",
       name: "Glam Room",
-      address: "",
+      area: "SOWUTUOM",
+      address: "Sowutuom, Accra",
       city: "Accra",
       country: "Ghana",
       mapUrl: "https://share.google/eNIyXIhSW1kZ6rzmF",
       hours: "Mon – Sat: 9am – 6pm · Sun: Closed",
+      imageUrl: "images/glam-braids-studio.png",
+      imagePosition: "center top",
+      bookingValue: "glam-room-sowutuom",
     },
   ],
 
@@ -113,132 +135,45 @@ export const SITE = {
   home: {
     topbarLeft: "GLAM ROOM",
     topbarLeftLink: "glam-room.html",
+    footer: "© 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
+    gateway: {
+      title: "ASANTEWAA",
+      headline: "THE WORLD KNOWS HER NAME.",
+      meta: "ACCRA, GHANA * ASANTEWAA © 2026",
+      scrollHint: "SCROLL TO ENTER",
+      imageUrl: "images/glam-braids-portrait.png",
+      imageAlt: "Asantewaa — cinematic portrait",
+      imagePosition: "center 15%",
+    },
+    portals: [
+      {
+        id: "enterprise",
+        theme: "enterprise",
+        title: "THE ENTERPRISE",
+        tagline: "She Builds Empires.",
+        subline: "",
+        cta: "Explore Partnerships",
+        href: "about.html",
+        imageUrl: "images/glam-red-studio.png",
+        imagePosition: "center 20%",
+      },
+      {
+        id: "glam-room",
+        theme: "glam",
+        title: "THE GLAM ROOM",
+        tagline: "She Defines Beauty.",
+        subline: "",
+        cta: "Book Your Experience",
+        href: "glam-room.html",
+        imageUrl: "images/glam-braids-studio.png",
+        imagePosition: "center top",
+      },
+    ],
     menuLinks: [
       { label: "Home", href: "index.html" },
       { label: "The Enterprise", href: "about.html" },
       { label: "The Glam Room", href: "glam-room.html" },
       { label: "Bookings & Proposals", href: "book.html" },
-    ],
-    introLoader: {
-      images: [
-        "images/glam-braids-studio.png",
-        "images/glam-braids-portrait.png",
-        "images/glam-red-studio.png",
-        "images/glam-red-indoor.png",
-        "images/glam-red-outdoor.png",
-        "images/glam-red-celebration.png",
-      ],
-      slideMs: 160,
-      starMs: 320,
-      exitMs: 320,
-      titleHoldMs: 280,
-      title: "Asantewaa",
-      subtitle: "Glam Room",
-      letterStaggerMs: 28,
-    },
-    panels: [
-      {
-        id: "hero",
-        label: "",
-        title: "Asantewaa",
-        subtitle: "🇬🇭 Accra, Ghana",
-        imageUrl: "images/glam-braids-studio.png",
-        imagePosition: "center 15%",
-        gradient: "linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%)",
-        link: null,
-      },
-      {
-        id: "visual-1",
-        imageOnly: true,
-        labelLeft: "Braids",
-        labelRight: "Butterfly",
-        imageUrl: "images/glam-braids-portrait.png",
-        imagePosition: "center top",
-      },
-      {
-        id: "discover",
-        label: "Discover",
-        title: "The Queen Behind the Chair",
-        subtitle: "4M+ Followers · Ghanaian Pride",
-        imageUrl: "images/glam-red-studio.png",
-        imagePosition: "center top",
-        gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.75) 100%)",
-        link: "about.html",
-        linkText: "The Enterprise",
-      },
-      {
-        id: "visual-2",
-        imageOnly: true,
-        labelLeft: "Bridal",
-        labelRight: "Glam",
-        imageUrl: "images/glam-red-indoor.png",
-        imagePosition: "center 20%",
-      },
-      {
-        id: "visual-3",
-        imageOnly: true,
-        labelLeft: "Red",
-        labelRight: "Carpet",
-        imageUrl: "images/glam-red-outdoor.png",
-        imagePosition: "center center",
-      },
-      {
-        id: "glam",
-        label: "The Glam Room",
-        title: "Your Crown. Your Glow.",
-        subtitle: "Accra's baddest hair destination",
-        imageUrl: "images/glam-red-celebration.png",
-        imagePosition: "center 25%",
-        gradient: "linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%)",
-        link: "glam-room.html",
-        linkText: "Enter Glam Room",
-      },
-      {
-        id: "visual-4",
-        imageOnly: true,
-        labelLeft: "Studio",
-        labelRight: "Slay",
-        imageUrl: "images/glam-braids-studio.png",
-        imagePosition: "center top",
-      },
-      {
-        id: "visual-5",
-        imageOnly: true,
-        labelLeft: "Full",
-        labelRight: "Glam",
-        imageUrl: "images/glam-braids-portrait.png",
-        imagePosition: "center center",
-      },
-      {
-        id: "book",
-        label: "Bookings & Proposals",
-        title: "Secure Your Slot",
-        subtitle: "Mama Glam Is Waiting",
-        imageUrl: "images/glam-red-studio.png",
-        imagePosition: "center 20%",
-        gradient: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 100%)",
-        link: "book.html",
-        linkText: "Book Now",
-      },
-      {
-        id: "find-booking",
-        type: "find-booking",
-        label: "Track",
-        title: "Find My Booking",
-        subtitle: "No account needed — phone & last 4 letters of your name",
-        imageUrl: "images/glam-red-indoor.png",
-        imagePosition: "center 30%",
-        gradient: "linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.88) 100%)",
-      },
-      {
-        id: "visual-6",
-        imageOnly: true,
-        labelLeft: "Ghana",
-        labelRight: "🇬🇭",
-        imageUrl: "images/glam-red-celebration.png",
-        imagePosition: "center center",
-        link: "glam-room.html",
-      },
     ],
   },
 
@@ -262,15 +197,6 @@ export const SITE = {
 
   enterprise: {
     footer: "© 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
-    gateway: {
-      title: "ASANTEWAA",
-      headline: "THE WORLD KNOWS HER NAME.",
-      meta: "ACCRA, GHANA * ASANTEWAA © 2026",
-      scrollHint: "SCROLL TO ENTER",
-      imageUrl: "images/glam-braids-portrait.png",
-      imageAlt: "Asantewaa — cinematic portrait",
-      imagePosition: "center 15%",
-    },
     statement: {
       imageUrl: "images/glam-red-studio.png",
       imageAlt: "Asantewaa — editorial portrait",
@@ -355,6 +281,104 @@ export const SITE = {
     cta: {
       label: "Explore Partnerships",
       href: "book.html",
+    },
+  },
+
+  glamRoom: {
+    footer: "© 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
+    declaration: {
+      title: "THE GLAM ROOM",
+      byline: "BY ASANTEWAA",
+      tagline:
+        "Where the world's most driven women come to be seen, restored, and elevated.",
+    },
+    bookingOverlay: {
+      title: "RESERVE YOUR CHAIR",
+      locationPrefix: "GLAM ROOM —",
+      submitLabel: "CONFIRM YOUR RESERVATION",
+      exitLabel: "X EXIT",
+    },
+    signatureServices: [
+      {
+        number: "01",
+        title: "LUXURY HAIR INSTALLATION",
+        descriptor: "Premier installation service. Every strand, intentional.",
+        serviceId: "hair-installation",
+      },
+      {
+        number: "02",
+        title: "CUSTOM WIG STYLING & MAINTENANCE",
+        descriptor: "Bespoke shaping and care. Built for your identity.",
+        serviceId: "hair-reset",
+      },
+      {
+        number: "03",
+        title: "PRECISION HAIR COLORING & BLENDING",
+        descriptor: "Color that looks like it was born that way.",
+        serviceId: "color-highlights",
+      },
+      {
+        number: "04",
+        title: "DEEP TREATMENTS & HAIR RESTORATION",
+        descriptor: "Repair. Restore. Revive. Results that speak.",
+        serviceId: "natural-care",
+      },
+      {
+        number: "05",
+        title: "EDITORIAL & BRIDAL GLAM",
+        descriptor: "For the moments that define you. No second takes.",
+        serviceId: "bridal-glam",
+      },
+    ],
+  },
+
+  proposals: {
+    footer: "© 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
+    hero: {
+      title: "PARTNER WITH ASANTEWAA",
+      subline:
+        "Submit your brief. We respond within 48 hours through official channels only.",
+    },
+    form: {
+      submitLabel: "SUBMIT STRATEGIC BRIEFING",
+      budgetTiers: [
+        "Under GH₵ 50,000",
+        "GH₵ 50,000 – GH₵ 150,000",
+        "GH₵ 150,000 – GH₵ 500,000",
+        "GH₵ 500,000+",
+      ],
+      pillars: [
+        "01 — Demonstrative Campaigns",
+        "02 — Pro Location Campaigns",
+        "03 — Snapchat Ecosystem Amplification",
+        "Open / Not yet selected",
+      ],
+    },
+    compliance: [
+      {
+        title: "image & asset rights",
+        body: "All creative assets licensed for 12 months from campaign launch. Organic digital distribution only.",
+      },
+      {
+        title: "paid media amplification",
+        body: "Boosting, dark-posting, or commercial promotion requires pre-approval plus a 30% base package premium.",
+      },
+      {
+        title: "media restrictions",
+        body: "Assets prohibited on national TV, billboards, print, or any offline or out-of-home media channels.",
+      },
+      {
+        title: "asset modification",
+        body: "No re-editing, cropping, or remixing without written authorisation. Unapproved changes void usage rights.",
+      },
+    ],
+    contact: {
+      intro: "FOR IMMEDIATE ASSISTANCE OR OFFICIAL DOCUMENTATION APPROVALS",
+      whatsappLabel: "WhatsApp Management",
+      whatsapp: "+233 (0) 247 743 593",
+      emailLabel: "Corporate Inbox",
+      email: "martinadwamena599@gmail.com",
+      locations: "ACCRA, GHANA * NEW JERSEY, USA",
     },
   },
 
@@ -612,8 +636,9 @@ export const SITE = {
 
   bookingNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
-    { label: "Bookings & Proposals", href: "#booking" },
+    { label: "Bookings & Proposals", href: "book.html" },
   ],
 
   footer: {

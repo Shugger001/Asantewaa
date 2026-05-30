@@ -78,9 +78,9 @@ export const SITE = {
         "images/glam-red-outdoor.png",
         "images/glam-red-celebration.png",
       ],
-      slideMs: 280,
-      starMs: 350,
-      exitMs: 400,
+      slideMs: 160,
+      starMs: 200,
+      exitMs: 250,
     },
     panels: [
       {

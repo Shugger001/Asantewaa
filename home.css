@@ -636,7 +636,7 @@ body.home-intro-done .home-scroll-dots {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 0.32s ease;
+  transition: opacity 0.18s ease;
 }
 
 .home-intro-slide.is-active {
@@ -648,8 +648,8 @@ body.home-intro-done .home-scroll-dots {
   height: 100%;
   object-fit: cover;
   object-position: center top;
-  transform: scale(1.1);
-  transition: transform 2.8s ease-out;
+  transform: scale(1.05);
+  transition: transform 0.75s ease-out;
 }
 
 .home-intro-slide.is-active img {
@@ -661,7 +661,7 @@ body.home-intro-done .home-scroll-dots {
   inset: 0;
   z-index: 2;
   opacity: 0;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.2s ease;
   pointer-events: none;
 }
 
@@ -675,7 +675,7 @@ body.home-intro-done .home-scroll-dots {
   font-size: clamp(0.65rem, 2vw, 0.85rem);
   opacity: 0;
   transform: scale(0.4);
-  transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.18s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
   mix-blend-mode: difference;
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.35);
 }
@@ -686,17 +686,17 @@ body.home-intro-done .home-scroll-dots {
 }
 
 .home-intro-loader.show-stars .home-intro-star--center {
-  transition-delay: 0.05s;
+  transition-delay: 0.02s;
 }
 
 .home-intro-loader.show-stars .home-intro-star--tr,
 .home-intro-loader.show-stars .home-intro-star--bl {
-  transition-delay: 0.12s;
+  transition-delay: 0.05s;
 }
 
 .home-intro-loader.show-stars .home-intro-star--tl,
 .home-intro-loader.show-stars .home-intro-star--br {
-  transition-delay: 0.2s;
+  transition-delay: 0.08s;
 }
 
 .home-intro-star--tl { top: 1.25rem; left: 1.5rem; }
@@ -717,13 +717,13 @@ body.home-intro-done .home-scroll-dots {
 
 .home-intro-loader.is-exiting {
   opacity: 0;
-  transition: opacity 0.75s ease;
+  transition: opacity 0.4s ease;
 }
 
 .home-intro-loader.is-exiting .home-intro-loader__slides,
 .home-intro-loader.is-exiting .home-intro-loader__stars {
   transform: scale(1.03);
-  transition: transform 0.75s ease, opacity 0.75s ease;
+  transition: transform 0.4s ease, opacity 0.4s ease;
   opacity: 0;
 }
 

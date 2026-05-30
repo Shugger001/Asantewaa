@@ -725,12 +725,17 @@ body.install-prompt-open {
     padding: 1.15rem var(--page-gutter, 1.25rem);
   }
 
-  .ent-metric-strip {
-    padding: 1rem var(--page-gutter, 1.25rem);
+  .ent-metric-strip-row {
+    padding: 0.85rem var(--page-gutter, 1.25rem);
+    gap: clamp(0.35rem, 1.5vw, 0.75rem);
   }
 
-  .ent-metric-strip span {
-    font-size: clamp(0.5rem, 2.2vw, 0.5625rem);
-    letter-spacing: 0.14em;
+  .ent-metric-strip-item {
+    font-size: clamp(0.4375rem, 1.85vw, 0.5625rem);
+    letter-spacing: 0.08em;
+  }
+
+  .ent-metric-strip-item:not(:last-child) {
+    padding-right: clamp(0.35rem, 1.5vw, 0.65rem);
   }
 }

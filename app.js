@@ -360,25 +360,37 @@ function renderEnterprise() {
 
   const metricsEl = document.getElementById('enterprise-metrics');
   if (metricsEl && data.metrics) {
-    metricsEl.innerHTML = data.metrics
-      .map((metric, index) => {
-        if (metric.variant === 'strip') {
-          return `
-        <div class="ent-metric-strip">
-          <span>${metric.text}</span>
-        </div>
-      `;
-        }
-        return `
+    const strips = data.metrics.filter((metric) => metric.variant === 'strip');
+    const cards = data.metrics.filter((metric) => metric.variant !== 'strip');
+
+    const cardsHtml = cards
+      .map(
+        (metric) => `
       <div class="ent-metric">
         <p class="ent-metric-value">${metric.value}</p>
         <p class="ent-metric-label">${metric.label}</p>
         ${metric.sublabel ? `<p class="ent-metric-sub">${metric.sublabel}</p>` : ''}
         ${metric.benchmark ? `<p class="ent-metric-faint">${metric.benchmark}</p>` : ''}
       </div>
-    `;
-      })
+    `
+      )
       .join('');
+
+    const stripsHtml = strips.length
+      ? `
+      <div class="ent-metric-strip-row" role="group" aria-label="Audience reach summary">
+        ${strips
+          .map(
+            (metric) => `
+          <span class="ent-metric-strip-item">${metric.text}</span>
+        `
+          )
+          .join('')}
+      </div>
+    `
+      : '';
+
+    metricsEl.innerHTML = cardsHtml + stripsHtml;
   }
 
   const brandsEl = document.getElementById('enterprise-brands');

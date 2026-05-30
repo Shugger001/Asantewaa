@@ -478,7 +478,7 @@
 }
 
 /* ==========================================================================
-   SECTION 2 — Power metrics (single-column stack)
+   SECTION 2 — Verified audience analytics (2×3 grid + strips)
    ========================================================================== */
 
 .ent-analytics {
@@ -488,24 +488,18 @@
 
 .ent-metrics {
   display: grid;
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 768px) {
-  .ent-metrics {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .ent-metric--wide,
-  .ent-metric-strip {
-    grid-column: 1 / -1;
-  }
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .ent-metric {
-  padding: clamp(1.5rem, 3.5vw, 2.35rem) var(--ent-gutter);
+  padding: clamp(1.25rem, 3.5vw, 2.35rem) var(--ent-gutter);
   border-bottom: 1px solid var(--ent-rule);
   background: var(--ent-black);
+  min-width: 0;
+}
+
+.ent-metric:nth-child(2n + 1) {
+  border-right: 1px solid var(--ent-rule);
 }
 
 .ent-metric-value {
@@ -516,6 +510,7 @@
   color: #fff;
   line-height: 1;
   margin: 0 0 0.55rem;
+  word-break: break-word;
 }
 
 .ent-metric-label {
@@ -542,9 +537,11 @@
   font-weight: 400;
   color: var(--ent-faint);
   margin: 0.45rem 0 0;
+  line-height: 1.4;
 }
 
 .ent-metric-strip {
+  grid-column: 1 / -1;
   padding: clamp(1.05rem, 2.5vw, 1.3rem) var(--ent-gutter);
   border-bottom: 1px solid var(--ent-rule);
   background: var(--ent-black);

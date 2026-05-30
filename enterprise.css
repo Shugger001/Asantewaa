@@ -1,0 +1,604 @@
+/* ==========================================================================
+   The Enterprise — Martina Dwamena / Asantewaa analytics page
+   ========================================================================== */
+
+.enterprise-hero {
+  min-height: 72vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 7rem 1.5rem 3rem;
+  position: relative;
+  background: #000;
+}
+
+.enterprise-hero-inner {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+}
+
+.enterprise-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 1rem;
+}
+
+.enterprise-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 12vw, 6.5rem);
+  font-weight: 400;
+  font-style: italic;
+  color: #fff;
+  line-height: 0.95;
+  margin: 0 0 0.35rem;
+}
+
+.enterprise-aka {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(0.65rem, 2vw, 0.78rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0 0 1.25rem;
+}
+
+.enterprise-tagline {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.62);
+  max-width: 640px;
+  margin: 0;
+}
+
+.enterprise-section {
+  padding: 3.5rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.enterprise-section-inner {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+}
+
+.enterprise-section-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  margin-bottom: 0.75rem;
+}
+
+.enterprise-section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  font-weight: 400;
+  font-style: italic;
+  color: #fff;
+  margin: 0 0 2rem;
+  line-height: 1.05;
+}
+
+.enterprise-profile-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.enterprise-bio {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.68);
+  margin: 0 0 1.5rem;
+}
+
+.enterprise-facts {
+  display: grid;
+  gap: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.enterprise-fact {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.88rem;
+}
+
+.enterprise-fact:last-child {
+  border-bottom: none;
+}
+
+.enterprise-fact dt {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  margin: 0;
+}
+
+.enterprise-fact dd {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.enterprise-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.5rem;
+}
+
+.enterprise-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.enterprise-platforms {
+  display: grid;
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.enterprise-platform {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.25rem;
+  align-items: center;
+  padding: 1.35rem 1.25rem;
+  background: #000;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s ease;
+}
+
+.enterprise-platform:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.enterprise-platform.is-primary {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.enterprise-platform-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.enterprise-platform-body h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.65rem;
+  font-style: italic;
+  font-weight: 400;
+  color: #fff;
+  margin: 0 0 0.2rem;
+}
+
+.enterprise-platform-handle {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0 0 0.55rem;
+}
+
+.enterprise-platform-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.enterprise-platform-type {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.48);
+}
+
+.enterprise-platform-type::after {
+  content: ' ·';
+  opacity: 0.4;
+}
+
+.enterprise-platform-type:last-child::after {
+  content: '';
+}
+
+.enterprise-platform-stats {
+  text-align: right;
+  min-width: 120px;
+}
+
+.enterprise-platform-followers {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-style: italic;
+  color: #fff;
+  line-height: 1;
+  margin: 0 0 0.25rem;
+}
+
+.enterprise-platform-metric {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  margin: 0.15rem 0 0;
+}
+
+.enterprise-platform-note {
+  grid-column: 1 / -1;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.42);
+  padding-top: 0.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-top: 0.25rem;
+}
+
+.enterprise-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 2rem;
+}
+
+.enterprise-metric {
+  background: #000;
+  padding: 1.35rem 1.15rem;
+  text-align: center;
+}
+
+.enterprise-metric i {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 0.65rem;
+}
+
+.enterprise-metric-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.75rem, 4vw, 2.35rem);
+  font-style: italic;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+.enterprise-metric-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  line-height: 1.45;
+}
+
+.enterprise-audience-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.enterprise-audience-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.35rem;
+}
+
+.enterprise-audience-card h3 {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+  margin: 0 0 1.15rem;
+}
+
+.enterprise-bar-row {
+  margin-bottom: 0.85rem;
+}
+
+.enterprise-bar-row:last-child {
+  margin-bottom: 0;
+}
+
+.enterprise-bar-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.62);
+  margin-bottom: 0.35rem;
+}
+
+.enterprise-bar-track {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.enterprise-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.75));
+  transition: width 0.8s ease;
+}
+
+.enterprise-interest-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.enterprise-interest-list li {
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.62);
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.enterprise-interest-list li:last-child {
+  border-bottom: none;
+}
+
+.enterprise-interest-list li::before {
+  content: '—';
+  margin-right: 0.65rem;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.enterprise-audience-summary {
+  grid-column: 1 / -1;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.58);
+  margin: 0 0 0.5rem;
+  max-width: 780px;
+}
+
+.enterprise-peak {
+  grid-column: 1 / -1;
+  padding: 1rem 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.52);
+}
+
+.enterprise-peak strong {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 400;
+}
+
+.enterprise-timeline {
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  margin-left: 0.5rem;
+  padding-left: 1.75rem;
+}
+
+.enterprise-timeline-item {
+  position: relative;
+  padding-bottom: 1.75rem;
+}
+
+.enterprise-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.enterprise-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -1.95rem;
+  top: 0.35rem;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12);
+}
+
+.enterprise-timeline-year {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.38);
+  margin-bottom: 0.25rem;
+}
+
+.enterprise-timeline-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.45rem;
+  font-style: italic;
+  color: #fff;
+  margin: 0 0 0.35rem;
+}
+
+.enterprise-timeline-detail {
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.52);
+  margin: 0;
+}
+
+.enterprise-commercial-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.enterprise-commercial-item {
+  background: #000;
+  padding: 1.35rem 1.25rem;
+}
+
+.enterprise-commercial-item h4 {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  margin: 0 0 0.55rem;
+  font-weight: 400;
+}
+
+.enterprise-commercial-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.55rem;
+  font-style: italic;
+  color: #fff;
+  margin: 0 0 0.45rem;
+  line-height: 1.2;
+}
+
+.enterprise-commercial-detail {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.48);
+  margin: 0;
+}
+
+.enterprise-awards {
+  display: grid;
+  gap: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.enterprise-award {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 1rem;
+  padding: 1rem 1.15rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.enterprise-award:last-child {
+  border-bottom: none;
+}
+
+.enterprise-award-year {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.enterprise-award-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  color: #fff;
+  margin: 0 0 0.15rem;
+}
+
+.enterprise-award-org {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
+
+.enterprise-sources {
+  font-size: 0.78rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.enterprise-sources ul {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+
+.enterprise-sources li {
+  margin-bottom: 0.35rem;
+}
+
+.enterprise-sources a {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.enterprise-sources a:hover {
+  color: #fff;
+}
+
+.enterprise-disclaimer {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.28);
+  margin-top: 1.25rem;
+}
+
+.enterprise-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.enterprise-cta .btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .enterprise-profile-grid,
+  .enterprise-audience-grid,
+  .enterprise-commercial-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .enterprise-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .enterprise-platform {
+    grid-template-columns: auto 1fr;
+  }
+
+  .enterprise-platform-stats {
+    grid-column: 2;
+    text-align: left;
+    margin-top: 0.5rem;
+  }
+
+  .enterprise-fact {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .enterprise-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}

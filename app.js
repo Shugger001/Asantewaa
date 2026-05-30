@@ -112,6 +112,195 @@ function renderAbout() {
   if (quoteAuthor) quoteAuthor.textContent = SITE.quote.attribution;
 }
 
+function renderBarChart(container, title, rows) {
+  if (!container) return;
+  container.innerHTML = `
+    <h3>${title}</h3>
+    ${rows
+      .map(
+        (row) => `
+      <div class="enterprise-bar-row">
+        <div class="enterprise-bar-header">
+          <span>${row.label}</span>
+          <span>${row.pct}%</span>
+        </div>
+        <div class="enterprise-bar-track">
+          <div class="enterprise-bar-fill" style="width: ${row.pct}%"></div>
+        </div>
+      </div>
+    `
+      )
+      .join('')}
+  `;
+}
+
+function renderEnterprise() {
+  const data = SITE.enterprise;
+  if (!data) return;
+
+  const setText = (id, text) => {
+    const el = document.getElementById(id);
+    if (el && text != null) el.textContent = text;
+  };
+
+  setText('enterprise-label', data.hero.label);
+  setText('enterprise-title', data.hero.title);
+  setText('enterprise-aka', `a.k.a. ${data.hero.aka}`);
+  setText('enterprise-tagline', data.hero.tagline);
+  setText('enterprise-bio', data.profile.bio);
+  setText('enterprise-audience-summary', data.audience.summary);
+  setText('enterprise-commercial-headline', data.commercial.headline);
+
+  const nicheEl = document.getElementById('enterprise-niche');
+  if (nicheEl) {
+    nicheEl.innerHTML = data.profile.contentNiche
+      .map((tag) => `<span class="enterprise-tag">${tag}</span>`)
+      .join('');
+  }
+
+  const factsEl = document.getElementById('enterprise-facts');
+  if (factsEl) {
+    const facts = [
+      ['Legal name', data.profile.legalName],
+      ['Stage name', data.profile.stageName],
+      ['Born', data.profile.born],
+      ['Nationality', data.profile.nationality],
+      ['Education', data.profile.education],
+      [
+        'Occupations',
+        data.profile.occupations.join(' · '),
+      ],
+    ];
+    factsEl.innerHTML = facts
+      .map(([label, value]) => `<div class="enterprise-fact"><dt>${label}</dt><dd>${value}</dd></div>`)
+      .join('');
+  }
+
+  const engagementEl = document.getElementById('enterprise-engagement');
+  if (engagementEl) {
+    engagementEl.innerHTML = data.engagement
+      .map(
+        (item) => `
+      <div class="enterprise-metric">
+        <i class="${item.icon}"></i>
+        <div class="enterprise-metric-value">${item.value}</div>
+        <div class="enterprise-metric-label">${item.label}</div>
+      </div>
+    `
+      )
+      .join('');
+  }
+
+  const platformsEl = document.getElementById('enterprise-platforms');
+  if (platformsEl) {
+    platformsEl.innerHTML = data.platforms
+      .map((platform) => {
+        const tag = platform.url ? 'a' : 'div';
+        const href = platform.url ? ` href="${platform.url}" target="_blank" rel="noopener noreferrer"` : '';
+        return `
+      <${tag} class="enterprise-platform${platform.primary ? ' is-primary' : ''}"${href}>
+        <div class="enterprise-platform-icon"><i class="${platform.icon}"></i></div>
+        <div class="enterprise-platform-body">
+          <h3>${platform.name}</h3>
+          <p class="enterprise-platform-handle">${platform.handle}</p>
+          <div class="enterprise-platform-types">
+            ${platform.contentTypes.map((type) => `<span class="enterprise-platform-type">${type}</span>`).join('')}
+          </div>
+        </div>
+        <div class="enterprise-platform-stats">
+          <p class="enterprise-platform-followers">${platform.followers}</p>
+          <p class="enterprise-platform-metric">${platform.metric2Label}: ${platform.metric2}</p>
+          <p class="enterprise-platform-metric">${platform.metric3Label}: ${platform.metric3}</p>
+        </div>
+        <p class="enterprise-platform-note">${platform.note}</p>
+      </${tag}>
+    `;
+      })
+      .join('');
+  }
+
+  renderBarChart(document.getElementById('enterprise-regions'), 'Geography', data.audience.regions);
+  renderBarChart(document.getElementById('enterprise-ages'), 'Age groups', data.audience.demographics);
+  renderBarChart(document.getElementById('enterprise-gender'), 'Gender split', data.audience.gender);
+
+  const interestsEl = document.getElementById('enterprise-interests');
+  if (interestsEl) {
+    interestsEl.innerHTML = `
+      <h3>Audience interests</h3>
+      <ul class="enterprise-interest-list">
+        ${data.audience.interests.map((item) => `<li>${item}</li>`).join('')}
+      </ul>
+    `;
+  }
+
+  const peakEl = document.getElementById('enterprise-peak');
+  if (peakEl) {
+    peakEl.innerHTML = `<strong>Peak engagement drivers</strong>${data.audience.peakEngagement}`;
+  }
+
+  const timelineEl = document.getElementById('enterprise-timeline');
+  if (timelineEl) {
+    timelineEl.innerHTML = data.timeline
+      .map(
+        (item) => `
+      <div class="enterprise-timeline-item">
+        <div class="enterprise-timeline-year">${item.year}</div>
+        <h3 class="enterprise-timeline-title">${item.title}</h3>
+        <p class="enterprise-timeline-detail">${item.detail}</p>
+      </div>
+    `
+      )
+      .join('');
+  }
+
+  const commercialEl = document.getElementById('enterprise-commercial');
+  if (commercialEl) {
+    commercialEl.innerHTML = data.commercial.items
+      .map(
+        (item) => `
+      <div class="enterprise-commercial-item">
+        <h4>${item.title}</h4>
+        <p class="enterprise-commercial-value">${item.value}</p>
+        <p class="enterprise-commercial-detail">${item.detail}</p>
+      </div>
+    `
+      )
+      .join('');
+  }
+
+  const awardsEl = document.getElementById('enterprise-awards');
+  if (awardsEl) {
+    awardsEl.innerHTML = data.awards
+      .map(
+        (award) => `
+      <div class="enterprise-award">
+        <div class="enterprise-award-year">${award.year}</div>
+        <div>
+          <h3 class="enterprise-award-title">${award.title}</h3>
+          <p class="enterprise-award-org">${award.org}</p>
+        </div>
+      </div>
+    `
+      )
+      .join('');
+  }
+
+  const sourcesEl = document.getElementById('enterprise-sources');
+  if (sourcesEl) {
+    sourcesEl.innerHTML = `
+      <p>Last updated: ${data.lastUpdated}</p>
+      <p>${data.disclaimer}</p>
+      <p><strong>Sources</strong></p>
+      <ul>
+        ${data.sources.map((s) => `<li><a href="${s.url}" target="_blank" rel="noopener noreferrer">${s.label}</a></li>`).join('')}
+      </ul>
+      <p class="enterprise-disclaimer">Audience percentages are estimated from public reporting and regional creator benchmarks — not official platform analytics.</p>
+    `;
+  }
+
+  renderHomeContact();
+}
+
 function renderBusiness() {
   const taglineEl = document.getElementById('business-tagline');
   if (taglineEl) taglineEl.textContent = SITE.business.tagline;
@@ -254,7 +443,7 @@ function populateStaticContent() {
 function getNavLinks() {
   const page = document.body.dataset.page || 'home';
   if (page === 'business') return SITE.businessNavLinks;
-  if (page === 'about') return SITE.aboutNavLinks;
+  if (page === 'enterprise' || page === 'about') return SITE.aboutNavLinks;
   if (page === 'booking') return SITE.bookingNavLinks;
   return SITE.homeNavLinks;
 }
@@ -1045,6 +1234,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderGallery();
     new TestimonialCarousel();
     initParallax();
+  } else if (page === 'enterprise') {
+    renderEnterprise();
   } else if (page === 'about') {
     renderAbout();
     initParallax();

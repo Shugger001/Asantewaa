@@ -1569,7 +1569,7 @@ function initExternalLinks() {
 
 /* --- Init --- */
 
-document.addEventListener('DOMContentLoaded', () => {
+function bootApp() {
   const page = document.body.dataset.page || 'home';
 
   populateStaticContent();
@@ -1612,4 +1612,10 @@ document.addEventListener('DOMContentLoaded', () => {
   } else if (page === 'booking') {
     initBookingForm();
   }
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bootApp);
+} else {
+  bootApp();
+}

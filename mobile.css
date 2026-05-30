@@ -654,3 +654,55 @@ body.install-prompt-open {
     padding-bottom: 0;
   }
 }
+
+/* Enterprise portal — keep 50/50 split on all mobile widths */
+@media (max-width: 899px) {
+  .ent-portal__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: min(100vh, 100dvh);
+  }
+
+  .ent-portal__panel {
+    min-width: 0;
+    min-height: min(100vh, 100dvh);
+    padding: calc(4.5rem + env(safe-area-inset-top, 0px)) 0.65rem clamp(2rem, 5vw, 3rem);
+  }
+
+  .ent-portal__panel + .ent-portal__panel {
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    border-top: none;
+  }
+
+  .ent-portal__content {
+    max-width: none;
+    width: 100%;
+    padding: 0 0.25rem;
+  }
+
+  .ent-portal__title {
+    font-size: clamp(0.5625rem, 2.8vw, 0.75rem);
+    letter-spacing: 0.1em;
+    line-height: 1.35;
+  }
+
+  .ent-portal__tagline {
+    font-size: clamp(0.6875rem, 2.6vw, 0.8125rem);
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+  }
+
+  .ent-portal__subline {
+    display: none;
+  }
+
+  .ent-portal__cta {
+    font-size: clamp(0.5rem, 2.2vw, 0.625rem);
+    letter-spacing: 0.06em;
+    padding: 0.7rem 0.5rem;
+    width: 100%;
+    max-width: 9.5rem;
+    line-height: 1.25;
+    min-height: auto;
+  }
+}

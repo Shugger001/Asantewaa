@@ -7,27 +7,28 @@
   <meta name="theme-color" content="#000000">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Asantewaa">
+  <meta name="apple-mobile-web-app-title" content="Glam Room">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icons/glam-room-icon.svg">
-  <title>Asantewaa</title>
+  <title>Asantewaa | Glam Room</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 
-  <link rel="stylesheet" href="styles.css?v=20260530">
-  <link rel="stylesheet" href="home.css?v=20260530">
-  <link rel="stylesheet" href="wireframe.css?v=20260530">
-  <link rel="stylesheet" href="mobile.css?v=20260530">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="mobile.css">
 </head>
-<body data-page="home" class="wf-page">
+<body data-page="home" class="editorial-theme home-editorial">
 
-  <header class="wf-topbar">
-    <a href="glam-room.html" class="wf-topbar-link" id="home-topbar-left">GLAM ROOM</a>
-    <span class="wf-topbar-sep" aria-hidden="true">*</span>
-    <button class="wf-topbar-menu" id="home-menu-open" aria-label="Open menu">MENU</button>
+  <header class="home-topbar">
+    <a href="glam-room.html" class="home-topbar-link" id="home-topbar-left">GLAM ROOM</a>
+    <a href="#hero" class="home-topbar-center" aria-label="Home">
+      <i class="fa-solid fa-star"></i>
+    </a>
+    <button class="home-menu-btn" id="home-menu-open" aria-label="Open menu">MENU</button>
   </header>
 
   <div class="home-menu-overlay" id="home-menu-overlay"></div>
@@ -38,9 +39,21 @@
     <p class="home-menu-footer" id="home-menu-footer"></p>
   </nav>
 
-  <main class="wf-main" id="home-main"></main>
+  <p class="home-scroll-hint" id="home-scroll-hint">Scroll</p>
+
+  <div class="home-scroll-dots" id="home-scroll-dots" aria-hidden="true"></div>
+  <div class="home-scroll" id="home-scroll">
+    <main id="home-panels"></main>
+  </div>
+
+  <footer class="home-bottombar">
+    <span id="home-copyright"></span>
+    <a href="about.html">Discover</a>
+  </footer>
 
   <nav class="nav" id="nav" aria-hidden="true"><div class="nav-inner"><ul id="nav-links"></ul></div></nav>
+  <div class="mobile-menu-overlay" id="mobile-overlay"></div>
+  <aside class="mobile-menu" id="mobile-menu"><ul class="mobile-menu-links" id="mobile-menu-links"></ul></aside>
   <footer class="footer" id="footer" aria-hidden="true">
     <div class="footer-inner">
       <ul id="footer-nav-links"></ul>
@@ -50,6 +63,6 @@
     </div>
   </footer>
 
-  <script type="module" src="app.js?v=20260530"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>

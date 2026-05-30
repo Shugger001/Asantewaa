@@ -458,6 +458,7 @@ function populateStaticContent() {
   const page = document.body.dataset.page || 'home';
   const titles = {
     home: SITE.owner,
+    enterprise: 'The Enterprise | Asantewaa',
     about: `About ${SITE.owner} | Glam Room`,
     business: `Glam Room | Hair Salon Accra — ${SITE.owner}`,
     booking: `Book Your Glam | ${SITE.brand}`,
@@ -1073,6 +1074,7 @@ function initTheme() {
 /* --- Custom Cursor --- */
 
 function initCustomCursor() {
+  if (document.body.classList.contains('enterprise-page')) return;
   const isTouch =
     window.matchMedia('(pointer: coarse)').matches ||
     window.matchMedia('(max-width: 768px)').matches;

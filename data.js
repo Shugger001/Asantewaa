@@ -263,9 +263,9 @@ export const SITE = {
   enterprise: {
     footer: "© 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
     statement: {
-      imageUrl: "images/glam-braids-portrait.png",
-      imageAlt: "Asantewaa — Martina Dwamena editorial portrait",
-      imagePosition: "center top",
+      imageUrl: "images/glam-red-studio.png",
+      imageAlt: "Asantewaa — editorial portrait",
+      imagePosition: "center 20%",
       displayLines: ["SHAPING", "CULTURE.", "DRIVING", "ENGAGEMENT."],
       statements: [
         "She is not just a creator.",

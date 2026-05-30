@@ -261,6 +261,37 @@ html.dark .booking-page {
   align-items: end;
 }
 
+.services-extension-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  margin: 1.25rem 0 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(212, 168, 83, 0.35);
+  border-radius: 0.65rem;
+  background: rgba(212, 168, 83, 0.08);
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.services-extension-notice i {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  color: var(--gold);
+  font-size: 0.95rem;
+}
+
+.services-extension-notice--booking {
+  margin: 0.25rem 0 1.25rem;
+}
+
+body:not(.editorial-theme) .services-extension-notice {
+  color: var(--text-secondary);
+  background: rgba(212, 168, 83, 0.12);
+  border-color: rgba(212, 168, 83, 0.4);
+}
+
 .form-hint {
   font-size: 0.78rem;
   color: var(--deep-green, #006B3F);

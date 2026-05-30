@@ -529,6 +529,13 @@ function populateStaticContent() {
     heroImg.style.display = 'block';
     document.getElementById('hero-placeholder')?.remove();
   }
+
+  const extensionNotice = SITE.business?.extensionNotice;
+  if (extensionNotice) {
+    document.querySelectorAll('.services-extension-notice').forEach((el) => {
+      el.innerHTML = `<i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>${extensionNotice}</span>`;
+    });
+  }
 }
 
 function getNavLinks() {

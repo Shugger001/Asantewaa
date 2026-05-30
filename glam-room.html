@@ -13,10 +13,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-  <link rel="stylesheet" href="styles.css?v=20260530">
-  <link rel="stylesheet" href="home.css?v=20260530">
-  <link rel="stylesheet" href="glam-room.css?v=20260530">
-  <link rel="stylesheet" href="mobile.css?v=20260530">
+  <link rel="stylesheet" href="styles.css?v=20260534">
+  <link rel="stylesheet" href="home.css?v=20260534">
+  <link rel="stylesheet" href="glam-room.css?v=20260534">
+  <link rel="stylesheet" href="mobile.css?v=20260534">
 </head>
 <body data-page="glam-room" class="gr-page">
 
@@ -71,17 +71,19 @@
           <label for="gr-phone">Phone / WhatsApp Number</label>
           <input type="tel" id="gr-phone" name="phone" required autocomplete="tel">
         </div>
-        <fieldset class="gr-field">
+        <fieldset class="gr-field gr-field--services">
           <legend>Select Your Service</legend>
           <div class="gr-radio-group" id="gr-service-radios"></div>
         </fieldset>
-        <div class="gr-field">
-          <label for="gr-date">Preferred Date and Time</label>
-          <input type="text" id="gr-date" name="date" placeholder="Pick a date" required>
-        </div>
-        <div class="gr-field">
-          <label for="gr-time">Time</label>
-          <select id="gr-time" name="time" required></select>
+        <div class="gr-field-row">
+          <div class="gr-field">
+            <label for="gr-date">Preferred Date</label>
+            <input type="text" id="gr-date" name="date" placeholder="Pick a date" required>
+          </div>
+          <div class="gr-field">
+            <label for="gr-time">Time</label>
+            <select id="gr-time" name="time" required></select>
+          </div>
         </div>
         <div class="gr-field">
           <label for="gr-notes">Special Notes or Requests</label>
@@ -93,6 +95,6 @@
     </div>
   </div>
 
-  <script type="module" src="app.js?v=20260530"></script>
+  <script type="module" src="app.js?v=20260534"></script>
 </body>
 </html>

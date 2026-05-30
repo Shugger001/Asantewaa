@@ -42,3 +42,5 @@ create policy "Public can read bookings for availability"
   for select
   to anon, authenticated
   using (status in ('pending', 'confirmed'));
+
+-- 3) Optional: enforce max 6 reservations per shop per day — run supabase/max-daily-bookings.sql

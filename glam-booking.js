@@ -5,10 +5,20 @@ import {
   findServiceById,
 } from './data.js';
 import { getSupabase, isSupabaseConfigured } from './supabase-client.js';
+import {
+  applyCapacityToDatePicker,
+  buildDateDisableFunctions,
+  fetchBookingCountsByDate,
+  getBookingWindowDates,
+  getDailyBookingCount,
+  getMaxReservationsPerDay,
+  isDateFullyBooked,
+} from './booking-availability.js';
 
 let overlayDatePicker = null;
 let bookedSlots = [];
 let activeLocationId = '';
+let capacityByDate = {};
 
 function validatePhone(phone) {
   return /^(\+233|0)[0-9]{9}$/.test(phone.replace(/\s/g, ''));
@@ -75,18 +85,36 @@ function updateOverlayTimeSlots() {
   });
 }
 
+async function refreshOverlayDateCapacity() {
+  const supabase = getSupabase();
+  if (!supabase || !activeLocationId) {
+    capacityByDate = {};
+    applyCapacityToDatePicker(overlayDatePicker, capacityByDate);
+    return;
+  }
+
+  const { minDate, maxDate } = getBookingWindowDates();
+  capacityByDate = await fetchBookingCountsByDate(supabase, activeLocationId, minDate, maxDate);
+  applyCapacityToDatePicker(overlayDatePicker, capacityByDate);
+
+  const selectedDate = document.getElementById('gr-date')?.value;
+  if (selectedDate && isDateFullyBooked(selectedDate, capacityByDate)) {
+    overlayDatePicker?.clear();
+    bookedSlots = [];
+    updateOverlayTimeSlots();
+  }
+}
+
 function initOverlayDatePicker() {
   if (typeof flatpickr === 'undefined') return;
 
-  const today = new Date();
-  const maxDate = new Date();
-  maxDate.setDate(today.getDate() + 60);
+  const { minDate, maxDate } = getBookingWindowDates();
 
   overlayDatePicker = flatpickr('#gr-date', {
-    minDate: today,
+    minDate,
     maxDate,
     dateFormat: 'Y-m-d',
-    disable: [(date) => date.getDay() === 0],
+    disable: buildDateDisableFunctions(capacityByDate),
     onChange(_selectedDates, dateStr) {
       fetchBookedSlots(dateStr, activeLocationId);
     },
@@ -107,11 +135,15 @@ function openBookingOverlay(location) {
   document.getElementById('gr-booking-form').reset();
   document.getElementById('gr-overlay-msg').hidden = true;
   overlayDatePicker?.clear();
+  bookedSlots = [];
+  updateOverlayTimeSlots();
 
   overlay.classList.add('is-open');
   overlay.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
   document.getElementById('gr-full-name')?.focus();
+
+  refreshOverlayDateCapacity();
 }
 
 function closeBookingOverlay() {
@@ -159,6 +191,17 @@ async function handleOverlaySubmit(event) {
 
   try {
     const supabase = getSupabase();
+    const dailyCount = await getDailyBookingCount(supabase, date, locationId);
+
+    if (dailyCount >= getMaxReservationsPerDay()) {
+      msgEl.textContent = 'This date is fully booked at this location. Please choose another day.';
+      msgEl.hidden = false;
+      submitBtn.disabled = false;
+      overlayDatePicker?.clear();
+      await refreshOverlayDateCapacity();
+      return;
+    }
+
     const row = {
       full_name: fullName,
       phone,
@@ -194,10 +237,20 @@ async function handleOverlaySubmit(event) {
 
     msgEl.textContent = 'Reservation received. We will confirm through official channels.';
     msgEl.hidden = false;
+    await refreshOverlayDateCapacity();
     setTimeout(closeBookingOverlay, 2800);
-  } catch {
-    msgEl.textContent = 'Something went wrong. Please try again or contact us directly.';
+  } catch (err) {
+    const limitReached =
+      err?.message?.includes('Daily booking limit') ||
+      err?.details?.includes('Daily booking limit');
+    msgEl.textContent = limitReached
+      ? 'This date is fully booked at this location. Please choose another day.'
+      : 'Something went wrong. Please try again or contact us directly.';
     msgEl.hidden = false;
+    if (limitReached) {
+      overlayDatePicker?.clear();
+      await refreshOverlayDateCapacity();
+    }
   }
 
   submitBtn.disabled = false;

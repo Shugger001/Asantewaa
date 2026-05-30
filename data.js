@@ -679,6 +679,8 @@ export const SITE = {
     vibeNote: "Braiding while blasting Amapiano & Afrobeats",
     tiktokHandle: "@asantewaaa_official",
 
+    maxReservationsPerDay: 6,
+
     timeSlots: [
       { value: "09:00", label: "09:00 AM" },
       { value: "10:00", label: "10:00 AM" },

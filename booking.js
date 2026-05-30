@@ -7,9 +7,19 @@ import {
   findServiceStyle,
 } from './data.js';
 import { getSupabase, isSupabaseConfigured } from './supabase-client.js';
+import {
+  applyCapacityToDatePicker,
+  buildDateDisableFunctions,
+  fetchBookingCountsByDate,
+  getBookingWindowDates,
+  getDailyBookingCount,
+  getMaxReservationsPerDay,
+  isDateFullyBooked,
+} from './booking-availability.js';
 
 let bookedSlots = [];
 let datePicker = null;
+let capacityByDate = {};
 
 function populateServiceCategories() {
   const categorySelect = document.getElementById('serviceCategory');
@@ -144,20 +154,41 @@ function populateBookingPage() {
 function initDatePicker() {
   if (typeof flatpickr === 'undefined') return;
 
-  const today = new Date();
-  const maxDate = new Date();
-  maxDate.setDate(today.getDate() + 60);
+  const { minDate, maxDate } = getBookingWindowDates();
 
   datePicker = flatpickr('#date', {
-    minDate: today,
+    minDate,
     maxDate,
     dateFormat: 'Y-m-d',
-    disable: [(date) => date.getDay() === 0],
+    disable: buildDateDisableFunctions(capacityByDate),
     onChange(_selectedDates, dateStr) {
       updateSummary();
       fetchBookedSlots(dateStr);
     },
   });
+}
+
+async function refreshBookingDateCapacity() {
+  const locationId = getSelectedLocationId();
+  const supabase = getSupabase();
+
+  if (!supabase || !locationId) {
+    capacityByDate = {};
+    applyCapacityToDatePicker(datePicker, capacityByDate);
+    return;
+  }
+
+  const { minDate, maxDate } = getBookingWindowDates();
+  capacityByDate = await fetchBookingCountsByDate(supabase, locationId, minDate, maxDate);
+  applyCapacityToDatePicker(datePicker, capacityByDate);
+
+  const selectedDate = document.getElementById('date')?.value;
+  if (selectedDate && isDateFullyBooked(selectedDate, capacityByDate)) {
+    datePicker?.clear();
+    bookedSlots = [];
+    updateTimeSlotAvailability();
+    updateSummary();
+  }
 }
 
 function getSelectedLocationId() {
@@ -402,6 +433,15 @@ async function handleSubmit(e) {
   const supabase = getSupabase();
 
   try {
+    const dailyCount = await getDailyBookingCount(supabase, date, locationId);
+    if (dailyCount >= getMaxReservationsPerDay()) {
+      showError('This date is fully booked at this location. Please choose another day.');
+      resetButton(submitBtn);
+      datePicker?.clear();
+      await refreshBookingDateCapacity();
+      return;
+    }
+
     const { data: existingBookings, error: checkError } = await fetchExistingBooking(
       supabase,
       date,
@@ -434,9 +474,22 @@ async function handleSubmit(e) {
     if (datePicker) datePicker.clear();
     document.getElementById('time').value = '';
     updateSummary();
+    await refreshBookingDateCapacity();
     await fetchBookedSlots(date);
   } catch (err) {
     console.error('Booking error:', err);
+    const limitReached =
+      err?.message?.includes('Daily booking limit') ||
+      err?.details?.includes('Daily booking limit');
+
+    if (limitReached) {
+      showError('This date is fully booked at this location. Please choose another day.');
+      datePicker?.clear();
+      await refreshBookingDateCapacity();
+      resetButton(submitBtn);
+      return;
+    }
+
     const waUrl = getWhatsAppFallbackUrl(bookingData);
     showError(
       `Something went wrong: ${err.message || 'Please try again'}. Or <a href="${waUrl}" target="_blank" rel="noopener noreferrer">WhatsApp Asantewaa directly</a>.`,
@@ -452,9 +505,10 @@ function initBookingForm() {
   initDatePicker();
 
   document.getElementById('fullName')?.addEventListener('input', updateSummary);
-  document.getElementById('location')?.addEventListener('change', () => {
+  document.getElementById('location')?.addEventListener('change', async () => {
     updateSummary();
-    fetchBookedSlots(document.getElementById('date')?.value || '');
+    await refreshBookingDateCapacity();
+    await fetchBookedSlots(document.getElementById('date')?.value || '');
   });
   document.getElementById('serviceCategory')?.addEventListener('change', (e) => {
     populateServiceStyles(e.target.value);

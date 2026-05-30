@@ -66,12 +66,15 @@ function renderGallery() {
     .map(
       (item, i) => `
     <div class="gallery-item reveal visible reveal-delay-${(i % 4) + 1}" data-gallery-id="${item.id}">
-      <!-- Replace gradient with image URL in data.js: imageUrl property -->
-      <div class="gallery-item-inner" style="background: ${item.gradient}">
-        <i class="fa-solid fa-camera gallery-placeholder-icon"></i>
+      <div class="gallery-item-inner" style="${
+        item.imageUrl
+          ? `background-image: url('${item.imageUrl}'); background-size: cover; background-position: center top;`
+          : `background: ${item.gradient}`
+      }">
+        ${item.imageUrl ? '' : '<i class="fa-solid fa-camera gallery-placeholder-icon"></i>'}
       </div>
       <div class="gallery-overlay">
-        <span>${item.label}<br><small>Coming Soon</small></span>
+        <span>${item.label}${item.imageUrl ? '' : '<br><small>Coming Soon</small>'}</span>
       </div>
     </div>
   `

@@ -15,7 +15,7 @@ import {
   getDailyBookingCount,
   getMaxReservationsPerDay,
   isDateFullyBooked,
-} from './booking-availability.js';
+} from './booking-capacity.js';
 
 let bookedSlots = [];
 let datePicker = null;

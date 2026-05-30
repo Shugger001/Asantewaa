@@ -13,7 +13,7 @@ import {
   getDailyBookingCount,
   getMaxReservationsPerDay,
   isDateFullyBooked,
-} from './booking-availability.js';
+} from './booking-capacity.js';
 
 let overlayDatePicker = null;
 let bookedSlots = [];

@@ -493,7 +493,7 @@ export const SITE = {
     },
     {
       id: "braiding-workmanship",
-      name: "Braiding (Workmanship Only)",
+      name: "Braids (Workmanship Only)",
       description: "Expert braiding by length — you bring the hair, we bring the hands. Workmanship only.",
       price: "From GH₵ 150",
       duration: "3–8 hrs",

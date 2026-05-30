@@ -216,6 +216,9 @@ export const SITE = {
       title: "Martina Dwamena",
       aka: "Asantewaa",
       tagline: "Social media analytics, audience insights & brand reach — Ghana's most influential digital creator.",
+      imageUrl: "images/glam-braids-portrait.png",
+      imageAlt: "Asantewaa — Martina Dwamena portrait",
+      imagePosition: "center 15%",
     },
     disclaimer:
       "Figures compiled from publicly available reports, interviews, and platform data. Follower counts and engagement metrics change daily.",

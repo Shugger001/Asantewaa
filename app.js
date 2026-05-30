@@ -147,6 +147,16 @@ function renderEnterprise() {
   setText('enterprise-title', data.hero.title);
   setText('enterprise-aka', `a.k.a. ${data.hero.aka}`);
   setText('enterprise-tagline', data.hero.tagline);
+
+  const heroImage = document.getElementById('enterprise-hero-image');
+  if (heroImage) {
+    const imageUrl = data.hero.imageUrl || SITE.hero?.photoUrl;
+    heroImage.src = imageUrl || '';
+    heroImage.alt = data.hero.imageAlt || SITE.hero?.photoAlt || 'Asantewaa';
+    if (data.hero.imagePosition) {
+      heroImage.style.objectPosition = data.hero.imagePosition;
+    }
+  }
   setText('enterprise-bio', data.profile.bio);
   setText('enterprise-audience-summary', data.audience.summary);
   setText('enterprise-commercial-headline', data.commercial.headline);

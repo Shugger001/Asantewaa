@@ -257,6 +257,10 @@ html.dark .booking-page {
   gap: 1rem;
 }
 
+.form-row-service {
+  align-items: end;
+}
+
 .form-hint {
   font-size: 0.78rem;
   color: var(--deep-green, #006B3F);

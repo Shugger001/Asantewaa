@@ -3,7 +3,6 @@ import {
   getLocationBookingValue,
   getLocationLabel,
   getLocationLabelById,
-  getBookingStyleOptions,
   findServiceById,
   findServiceStyle,
 } from './data.js';
@@ -11,6 +10,69 @@ import { getSupabase, isSupabaseConfigured } from './supabase-client.js';
 
 let bookedSlots = [];
 let datePicker = null;
+
+function populateServiceCategories() {
+  const categorySelect = document.getElementById('serviceCategory');
+  if (!categorySelect) return;
+
+  categorySelect.innerHTML =
+    '<option value="">— Select category —</option>' +
+    SITE.services
+      .map((service) => `<option value="${service.id}">${service.name}</option>`)
+      .join('');
+}
+
+function populateServiceStyles(serviceId, selectedStyleId = '') {
+  const styleSelect = document.getElementById('serviceStyle');
+  if (!styleSelect) return;
+
+  const service = findServiceById(serviceId);
+  const styles = service?.styles || [];
+
+  if (!serviceId || !styles.length) {
+    styleSelect.innerHTML = '<option value="">— Select category first —</option>';
+    styleSelect.value = '';
+    styleSelect.disabled = true;
+    return;
+  }
+
+  styleSelect.disabled = false;
+  styleSelect.innerHTML =
+    '<option value="">— Select service —</option>' +
+    styles
+      .map((style) => `<option value="${style.id}">${style.name} — ${style.price}</option>`)
+      .join('');
+
+  if (selectedStyleId && styles.some((style) => style.id === selectedStyleId)) {
+    styleSelect.value = selectedStyleId;
+  }
+}
+
+function getSelectedBookingService() {
+  const serviceId = document.getElementById('serviceCategory')?.value || '';
+  const styleId = document.getElementById('serviceStyle')?.value || '';
+  const service = findServiceById(serviceId);
+  const style = findServiceStyle(serviceId, styleId);
+
+  if (!service || !style) return '';
+
+  return `${service.name} — ${style.name}`;
+}
+
+function applyBookingServiceFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const serviceId = params.get('service');
+  const styleId = params.get('style');
+
+  if (!serviceId) return;
+
+  const categorySelect = document.getElementById('serviceCategory');
+  if (categorySelect && findServiceById(serviceId)) {
+    categorySelect.value = serviceId;
+    populateServiceStyles(serviceId, styleId || '');
+    updateSummary();
+  }
+}
 
 function populateBookingPage() {
   document.getElementById('booking-subhead').textContent = SITE.booking.subhead;
@@ -59,25 +121,9 @@ function populateBookingPage() {
   document.getElementById('booking-tiktok').textContent = `Follow me: ${SITE.booking.tiktokHandle}`;
   document.getElementById('booking-vibe').textContent = SITE.booking.vibeNote;
 
-  const serviceSelect = document.getElementById('service');
-  const styleOptions = getBookingStyleOptions();
-  serviceSelect.innerHTML =
-    '<option value="">— Select service —</option>' +
-    styleOptions
-      .map((s) => `<option value="${s.value}">${s.label} — ${s.price}</option>`)
-      .join('');
-
-  const params = new URLSearchParams(window.location.search);
-  const serviceId = params.get('service');
-  const styleId = params.get('style');
-  if (serviceId && styleId) {
-    const service = findServiceById(serviceId);
-    const style = findServiceStyle(serviceId, styleId);
-    if (service && style) {
-      serviceSelect.value = `${service.name} — ${style.name}`;
-      updateSummary();
-    }
-  }
+  populateServiceCategories();
+  populateServiceStyles('');
+  applyBookingServiceFromUrl();
 
   const timeSelect = document.getElementById('time');
   timeSelect.innerHTML =
@@ -239,7 +285,7 @@ function updateSummary() {
   const name = document.getElementById('fullName').value.trim() || 'Queen';
   const locationId = getSelectedLocationId();
   const location = getLocationLabelById(locationId);
-  const service = document.getElementById('service').value;
+  const service = getSelectedBookingService();
   const date = document.getElementById('date').value;
   const time = document.getElementById('time').value;
   const summaryDiv = document.getElementById('liveSummary');
@@ -258,7 +304,7 @@ function updateSummary() {
   } else if (service) {
     summaryDiv.innerHTML = `<i class="fas fa-info-circle"></i> Pick date and time to complete your booking.`;
   } else {
-    summaryDiv.innerHTML = `<i class="fas fa-info-circle"></i> Select a service to see your summary.`;
+    summaryDiv.innerHTML = `<i class="fas fa-info-circle"></i> Select a general service and specific style to see your summary.`;
   }
 }
 
@@ -321,7 +367,7 @@ async function handleSubmit(e) {
   const email = document.getElementById('email').value.trim();
   const locationId = getSelectedLocationId();
   const location = getLocationLabelById(locationId);
-  const service = document.getElementById('service').value;
+  const service = getSelectedBookingService();
   const date = document.getElementById('date').value;
   const time = document.getElementById('time').value;
   const notes = document.getElementById('notes').value.trim();
@@ -329,7 +375,7 @@ async function handleSubmit(e) {
   if (!fullName) { showError("Abeg, tell us who's coming to slay! 💁🏾‍♀️"); resetButton(submitBtn); return; }
   if (!validatePhone(phone)) { showError('Chale! Enter correct Ghana number (e.g., 024XXXXXXX or +233XXXXXXXXX) 📱'); resetButton(submitBtn); return; }
   if (!locationId) { showError('Pick which Glam Room location you dey come to! 📍'); resetButton(submitBtn); return; }
-  if (!service) { showError("Pick a service, mama! We no fit guess your hair dreams 🔥"); resetButton(submitBtn); return; }
+  if (!getSelectedBookingService()) { showError("Pick a general service and specific style, mama! We no fit guess your hair dreams 🔥"); resetButton(submitBtn); return; }
   if (!date) { showError('Pick date. Make you no just show anyhow o! 📅'); resetButton(submitBtn); return; }
   if (!time) { showError('Select time. Asantewaa no dey sleep for shop 😴'); resetButton(submitBtn); return; }
   if (bookedSlots.includes(time)) { showError('Eh! This time don book already. Choose another time, queen 👑'); resetButton(submitBtn); return; }
@@ -340,7 +386,7 @@ async function handleSubmit(e) {
     email,
     locationId,
     location,
-    service,
+    service: getSelectedBookingService(),
     date,
     time,
     notes,
@@ -383,7 +429,8 @@ async function handleSubmit(e) {
     document.getElementById('email').value = '';
     document.getElementById('notes').value = '';
     document.getElementById('location').value = '';
-    document.getElementById('service').value = '';
+    document.getElementById('serviceCategory').value = '';
+    populateServiceStyles('');
     if (datePicker) datePicker.clear();
     document.getElementById('time').value = '';
     updateSummary();
@@ -409,7 +456,11 @@ function initBookingForm() {
     updateSummary();
     fetchBookedSlots(document.getElementById('date')?.value || '');
   });
-  document.getElementById('service')?.addEventListener('change', updateSummary);
+  document.getElementById('serviceCategory')?.addEventListener('change', (e) => {
+    populateServiceStyles(e.target.value);
+    updateSummary();
+  });
+  document.getElementById('serviceStyle')?.addEventListener('change', updateSummary);
   document.getElementById('time')?.addEventListener('change', updateSummary);
   document.getElementById('bookingForm')?.addEventListener('submit', handleSubmit);
 }

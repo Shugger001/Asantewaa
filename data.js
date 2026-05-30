@@ -288,11 +288,11 @@ export const SITE = {
       { value: "8.4%", label: "AVG ENGAGEMENT RATE", benchmark: "Industry avg: 2 to 4%" },
       { value: "1,000,000+", label: "INSTAGRAM FOLLOWERS" },
       { value: "5.2%", label: "AVG ENGAGEMENT RATE", benchmark: "Industry avg: 1 to 3%" },
-      { value: "12,000,000+", label: "MONTHLY VIDEO VIEWS", sublabel: "Across All Platforms", wide: true },
-      { value: "18 to 38", label: "CORE AUDIENCE AGE", sublabel: "72% of Total Reach", wide: true },
+      { value: "12,000,000+", label: "MONTHLY VIDEO VIEWS", sublabel: "Across All Platforms" },
+      { value: "18 to 38", label: "CORE AUDIENCE AGE", sublabel: "72% of Total Reach" },
       { variant: "strip", text: "68% FEMALE / 32% MALE" },
       { variant: "strip", text: "PRIMARY REACH: GHANA & WEST AFRICA" },
-      { value: "89K+", label: "SNAPCHAT SUBSCRIBERS", wide: true },
+      { variant: "strip", text: "89K+ SNAPCHAT SUBSCRIBERS" },
     ],
     brandPartners: {
       items: [

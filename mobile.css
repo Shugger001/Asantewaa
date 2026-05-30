@@ -651,6 +651,6 @@ body.install-prompt-open {
 @media (max-width: 768px) {
   body[data-page="enterprise"] .editorial-main {
     padding-top: 0;
-    padding-bottom: calc(5rem + var(--safe-bottom));
+    padding-bottom: 0;
   }
 }

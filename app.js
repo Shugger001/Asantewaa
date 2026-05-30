@@ -229,6 +229,8 @@ function renderEnterprise() {
   const data = SITE.enterprise;
   if (!data) return;
 
+  document.title = 'The Enterprise | Asantewaa';
+
   const statement = data.statement;
   const statementImage = document.getElementById('enterprise-statement-image');
   if (statementImage && statement) {
@@ -277,9 +279,8 @@ function renderEnterprise() {
         </div>
       `;
         }
-        const wideClass = metric.wide ? ' ent-metric--wide' : '';
         return `
-      <div class="ent-metric${wideClass}">
+      <div class="ent-metric">
         <p class="ent-metric-value">${metric.value}</p>
         <p class="ent-metric-label">${metric.label}</p>
         ${metric.sublabel ? `<p class="ent-metric-sub">${metric.sublabel}</p>` : ''}
@@ -343,9 +344,6 @@ function renderEnterprise() {
 
   const footerEnd = document.getElementById('enterprise-footer-end');
   if (footerEnd && data.footer) footerEnd.textContent = data.footer;
-
-  const copyright = document.getElementById('home-copyright');
-  if (copyright && data.footer) copyright.textContent = data.footer;
 
   renderHomeContact();
 }

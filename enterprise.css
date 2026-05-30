@@ -1,15 +1,16 @@
 /* ==========================================================================
-   PAGE 02 / THE ENTERPRISE — wireframe exact
-   Typography: DISPLAY · BOLD · NORMAL · LABEL · FAINT
+   PAGE 02 / THE ENTERPRISE — wireframe (exact)
+   Typography legend: DISPLAY · BOLD · NORMAL · LABEL · FAINT
    ========================================================================== */
 
 .enterprise-page {
-  --ent-display: clamp(2.5rem, 7vw, 4.75rem);
-  --ent-metric: clamp(2.25rem, 6vw, 3.75rem);
+  --ent-display: clamp(2.75rem, 7.5vw, 5.5rem);
+  --ent-metric: clamp(2.5rem, 6.5vw, 4.25rem);
   --ent-label: 0.5625rem;
-  --ent-faint: rgba(255, 255, 255, 0.32);
-  --ent-rule: rgba(255, 255, 255, 0.12);
+  --ent-faint: rgba(255, 255, 255, 0.3);
+  --ent-rule: rgba(255, 255, 255, 0.14);
   --ent-strip-bg: #0a0a0a;
+  --ent-gutter: clamp(1.25rem, 4vw, 2.5rem);
 }
 
 body[data-page="enterprise"] .editorial-main {
@@ -18,24 +19,24 @@ body[data-page="enterprise"] .editorial-main {
   background: #000;
 }
 
-/* --- Global footer (wireframe: centered, faint) --- */
-body[data-page="enterprise"] .home-bottombar.ent-site-footer {
-  mix-blend-mode: normal;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #000;
-  border-top: 1px solid var(--ent-rule);
-  padding: 1.25rem 1.5rem calc(1.25rem + env(safe-area-inset-bottom, 0px));
+/* Wireframe topbar: GLAM ROOM * MENU (no star icon, no fixed footer) */
+body[data-page="enterprise"] .home-bottombar {
+  display: none !important;
 }
 
-body[data-page="enterprise"] .home-bottombar.ent-site-footer span {
+.ent-topbar.home-topbar {
+  grid-template-columns: 1fr auto 1fr;
+  mix-blend-mode: difference;
+}
+
+.ent-topbar-sep {
+  justify-self: center;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: var(--ent-label);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ent-faint);
-  text-align: center;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1;
 }
 
 .ent-footer-line {
@@ -46,16 +47,20 @@ body[data-page="enterprise"] .home-bottombar.ent-site-footer span {
   color: var(--ent-faint);
   text-align: center;
   margin: 0;
-  padding: clamp(2rem, 4vw, 2.75rem) clamp(1.25rem, 3vw, 2rem);
+  padding: clamp(2rem, 5vw, 3rem) var(--ent-gutter);
+}
+
+.ent-footer-line--end {
+  padding-bottom: calc(clamp(2rem, 5vw, 3rem) + env(safe-area-inset-bottom, 0px));
 }
 
 /* ==========================================================================
-   SECTION 1 — Icon statement (editorial split)
+   SECTION 1 — Icon statement (portrait left, copy right, full height)
    ========================================================================== */
 
 .ent-statement {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 0.44fr) minmax(0, 0.56fr);
   min-height: 100vh;
   min-height: 100dvh;
   background: #000;
@@ -64,7 +69,7 @@ body[data-page="enterprise"] .home-bottombar.ent-site-footer span {
 .ent-statement__portrait {
   position: relative;
   background: #000;
-  min-height: 280px;
+  min-height: 240px;
 }
 
 .ent-statement__portrait img {
@@ -80,24 +85,24 @@ body[data-page="enterprise"] .home-bottombar.ent-site-footer span {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: calc(4.5rem + env(safe-area-inset-top, 0px)) clamp(1.5rem, 4vw, 3.5rem) 2.5rem;
+  padding: calc(4.25rem + env(safe-area-inset-top, 0px)) var(--ent-gutter) 2.5rem;
   background: #000;
 }
 
-/* [DISPLAY] */
+/* [DISPLAY] — large, spaced, dominant */
 .ent-display {
-  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  margin-bottom: clamp(1.75rem, 3.5vw, 2.5rem);
 }
 
 .ent-display-line {
   display: block;
-  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Cormorant Garamond', 'Times New Roman', serif;
   font-size: var(--ent-display);
   font-weight: 400;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #fff;
-  line-height: 0.95;
+  line-height: 0.92;
   margin: 0;
 }
 
@@ -108,38 +113,37 @@ body[data-page="enterprise"] .home-bottombar.ent-site-footer span {
 
 .ent-bold-line {
   font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: clamp(0.9375rem, 1.6vw, 1.0625rem);
+  font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
   font-weight: 700;
   color: #fff;
-  line-height: 1.5;
+  line-height: 1.55;
   margin: 0;
 }
 
-/* [NORMAL] — line-by-line, no paragraph blocks */
+/* [NORMAL] — line-by-line */
 .ent-body {
-  max-width: 28rem;
+  max-width: 26rem;
 }
 
 .ent-body-line {
   font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: clamp(0.875rem, 1.4vw, 0.9375rem);
+  font-size: clamp(0.875rem, 1.35vw, 0.9375rem);
   font-weight: 400;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
   margin: 0;
 }
 
 .ent-body-gap {
-  height: 1.25rem;
+  height: 1.125rem;
 }
 
 /* ==========================================================================
-   SECTION 2 — Power metrics grid (full bleed, stacked)
+   SECTION 2 — Power metrics (single column grid, wireframe stack)
    ========================================================================== */
 
 .ent-analytics {
   background: #000;
-  border-top: 1px solid var(--ent-rule);
 }
 
 .ent-metrics {
@@ -150,54 +154,49 @@ body[data-page="enterprise"] .home-bottombar.ent-site-footer span {
 
 .ent-metric {
   background: #000;
-  padding: clamp(1.35rem, 3vw, 2rem) clamp(1.25rem, 3vw, 2.5rem);
+  padding: clamp(1.5rem, 3.5vw, 2.25rem) var(--ent-gutter);
   border-bottom: 1px solid var(--ent-rule);
 }
 
-/* [DISPLAY] metric value */
 .ent-metric-value {
-  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Cormorant Garamond', 'Times New Roman', serif;
   font-size: var(--ent-metric);
   font-weight: 400;
   letter-spacing: 0.02em;
   color: #fff;
   line-height: 1;
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.55rem;
 }
 
-/* [LABEL] */
 .ent-metric-label {
   font-family: 'IBM Plex Mono', monospace;
   font-size: var(--ent-label);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.48);
+  color: rgba(255, 255, 255, 0.46);
   line-height: 1.45;
   margin: 0;
 }
 
-/* [SMALL] supporting detail */
 .ent-metric-sub {
   font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: clamp(0.75rem, 1.2vw, 0.8125rem);
+  font-size: clamp(0.75rem, 1.15vw, 0.8125rem);
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.42);
   margin: 0.35rem 0 0;
 }
 
-/* [FAINT] benchmark */
 .ent-metric-faint {
   font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: clamp(0.6875rem, 1.1vw, 0.75rem);
+  font-size: clamp(0.6875rem, 1vw, 0.75rem);
   font-weight: 400;
   color: var(--ent-faint);
-  margin: 0.4rem 0 0;
+  margin: 0.45rem 0 0;
 }
 
-/* [LABEL] strip rows */
 .ent-metric-strip {
   background: #000;
-  padding: 1rem clamp(1.25rem, 3vw, 2.5rem);
+  padding: clamp(1rem, 2vw, 1.25rem) var(--ent-gutter);
   border-bottom: 1px solid var(--ent-rule);
 }
 
@@ -206,61 +205,48 @@ body[data-page="enterprise"] .home-bottombar.ent-site-footer span {
   font-size: var(--ent-label);
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
-}
-
-/* Desktop: paired metrics side-by-side (TikTok + engagement, IG + engagement) */
-@media (min-width: 900px) {
-  .ent-metrics {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .ent-metric--wide,
-  .ent-metric-strip {
-    grid-column: 1 / -1;
-  }
+  color: rgba(255, 255, 255, 0.52);
 }
 
 /* ==========================================================================
-   SECTION 3 — As seen with (logo strip)
+   SECTION 3 — As seen with
    ========================================================================== */
 
 .ent-brands {
   background: #000;
   border-top: 1px solid var(--ent-rule);
-  padding-top: clamp(2.5rem, 5vw, 3.5rem);
 }
 
 .ent-brand-strip {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(max-content, 1fr));
   align-items: center;
-  justify-content: space-between;
-  gap: clamp(1rem, 3vw, 2.5rem);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  padding: 0 clamp(1.25rem, 3vw, 2.5rem) clamp(2rem, 4vw, 2.5rem);
-}
-
-.ent-brand-strip::-webkit-scrollbar {
-  display: none;
+  gap: 1rem;
+  padding: clamp(2.5rem, 6vw, 4rem) var(--ent-gutter);
 }
 
 .ent-brand {
-  flex: 0 0 auto;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: clamp(0.5rem, 1vw, 0.5625rem);
-  letter-spacing: 0.2em;
+  font-size: var(--ent-label);
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.32);
+  text-align: center;
   white-space: nowrap;
 }
 
 .ent-brand img {
-  max-height: 1.25rem;
+  display: block;
+  max-height: 1.125rem;
   width: auto;
+  margin: 0 auto;
   filter: grayscale(1) brightness(1.5);
-  opacity: 0.8;
+  opacity: 0.85;
+}
+
+.ent-brands .ent-footer-line {
+  border-top: 1px solid var(--ent-rule);
+  padding-top: clamp(2rem, 4vw, 2.75rem);
 }
 
 /* ==========================================================================
@@ -286,23 +272,21 @@ body[data-page="enterprise"] .home-bottombar.ent-site-footer span {
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  padding: clamp(1rem, 2.5vw, 1.35rem) clamp(1.25rem, 3vw, 2.5rem);
+  padding: clamp(1.05rem, 2.5vw, 1.35rem) var(--ent-gutter);
   background: var(--ent-strip-bg);
   border: none;
   cursor: pointer;
   text-align: left;
   color: inherit;
-  transition: background 0.25s ease;
 }
 
 .ent-accordion-trigger:hover {
   background: #111;
 }
 
-/* [BOLD] strip title */
 .ent-accordion-title {
   font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: clamp(0.8125rem, 1.5vw, 0.9375rem);
+  font-size: clamp(0.8125rem, 1.4vw, 0.9375rem);
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -310,11 +294,10 @@ body[data-page="enterprise"] .home-bottombar.ent-site-footer span {
   line-height: 1.35;
 }
 
-/* [ACTION] + toggle */
 .ent-accordion-icon {
   flex-shrink: 0;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.55);
   line-height: 1;
@@ -340,23 +323,45 @@ body[data-page="enterprise"] .home-bottombar.ent-site-footer span {
   overflow: hidden;
 }
 
-/* [NORMAL] expanded body — line by line */
 .ent-accordion-body {
   margin: 0;
-  padding: 0 clamp(1.25rem, 3vw, 2.5rem) clamp(1.25rem, 2.5vw, 1.65rem);
+  padding: 0 var(--ent-gutter) clamp(1.25rem, 2.5vw, 1.65rem);
 }
 
 .ent-accordion-body-line {
   font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: clamp(0.875rem, 1.4vw, 0.9375rem);
+  font-size: clamp(0.875rem, 1.35vw, 0.9375rem);
   font-weight: 400;
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.62);
   margin: 0;
 }
 
+.ent-pillars .ent-footer-line--end {
+  border-top: 1px solid var(--ent-rule);
+}
+
 /* ==========================================================================
-   Responsive
+   Desktop — sticky portrait, full viewport height
+   ========================================================================== */
+
+@media (min-width: 900px) {
+  .ent-statement__portrait {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .ent-statement__portrait img {
+    min-height: 100%;
+  }
+}
+
+/* ==========================================================================
+   Mobile — portrait then copy; brands scroll horizontally
    ========================================================================== */
 
 @media (max-width: 899px) {
@@ -366,62 +371,54 @@ body[data-page="enterprise"] .home-bottombar.ent-site-footer span {
   }
 
   .ent-statement__portrait {
-    min-height: min(55vh, 520px);
+    min-height: min(44vh, 400px);
+    position: relative;
+    height: auto;
   }
 
   .ent-statement__copy {
     padding-top: 1.75rem;
-    padding-bottom: 2.25rem;
+    padding-bottom: 2rem;
   }
 
   .ent-display-line {
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
+    font-size: clamp(2.35rem, 11vw, 3.25rem);
   }
 
   .ent-brand-strip {
+    display: flex;
     justify-content: flex-start;
+    gap: clamp(1.25rem, 5vw, 2rem);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0;
+  }
+
+  .ent-brand-strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ent-brand {
+    flex: 0 0 auto;
+    text-align: left;
   }
 }
 
 @media (max-width: 768px) {
   body[data-page="enterprise"] .editorial-main {
-    padding-bottom: calc(3.5rem + var(--safe-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
-  .ent-statement__portrait {
-    min-height: min(50vh, 440px);
-  }
-
-  .ent-statement__copy {
-    padding-left: var(--page-gutter, 1.25rem);
-    padding-right: var(--page-gutter, 1.25rem);
-  }
-
-  .ent-metric {
-    padding-left: var(--page-gutter, 1.25rem);
-    padding-right: var(--page-gutter, 1.25rem);
-  }
-
-  .ent-metric-strip {
-    padding-left: var(--page-gutter, 1.25rem);
-    padding-right: var(--page-gutter, 1.25rem);
-  }
-
-  .ent-brand-strip {
-    padding-left: var(--page-gutter, 1.25rem);
-    padding-right: var(--page-gutter, 1.25rem);
-  }
-
+  .ent-statement__copy,
+  .ent-metric,
+  .ent-metric-strip,
+  .ent-brand-strip,
   .ent-accordion-trigger,
-  .ent-accordion-body {
+  .ent-accordion-body,
+  .ent-footer-line {
     padding-left: var(--page-gutter, 1.25rem);
     padding-right: var(--page-gutter, 1.25rem);
-  }
-}
-
-@media (min-width: 900px) {
-  .ent-statement__portrait {
-    min-height: 100vh;
-    min-height: 100dvh;
   }
 }

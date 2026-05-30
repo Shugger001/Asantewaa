@@ -434,18 +434,20 @@ export const SITE = {
 
   services: [
     {
-      id: "silk-press",
-      name: "Silk Press",
-      description: "Silky smooth, bouncy, and ready to turn heads. No crunch, no drama — just pure slay.",
-      price: "From GH₵ 150",
-      duration: "2–3 hrs",
-      icon: "fa-solid fa-wind",
+      id: "hair-reset",
+      name: "Hair Reset",
+      description: "Fresh start energy — wash, unwind, touch-ups, and quick styles to reset your crown.",
+      price: "From GH₵ 35",
+      duration: "30 min – 2 hrs",
+      icon: "fa-solid fa-arrows-rotate",
       badge: "Popular",
       styles: [
-        { id: "classic-silk-press", name: "Classic Silk Press", description: "Smooth blow-out finish with body and movement.", price: "GH₵ 150", duration: "2–3 hrs" },
-        { id: "silk-press-curls", name: "Silk Press & Curls", description: "Silk press finished with soft, bouncy curls.", price: "GH₵ 180", duration: "2.5–3 hrs" },
-        { id: "silk-press-wrap", name: "Silk Press & Wrap", description: "Sleek wrap set for a polished, lasting finish.", price: "GH₵ 170", duration: "2–3 hrs" },
-        { id: "silk-press-trim", name: "Silk Press + Trim", description: "Silk press with a shape refresh and trim.", price: "GH₵ 190", duration: "3 hrs" },
+        { id: "hair-wash", name: "Hair Wash", description: "Cleanse and refresh your hair.", price: "GH₵ 35", duration: "30 min" },
+        { id: "hair-wash-cornrows", name: "Hair Wash + Cornrows", description: "Wash plus cornrow styling.", price: "GH₵ 55", duration: "1–1.5 hrs" },
+        { id: "unbraid-hair-wash", name: "Unbraiding & Hair Wash", description: "Take down braids and wash your hair.", price: "GH₵ 50", duration: "1–2 hrs" },
+        { id: "touch-up-salon-relaxer", name: "Touch Up with Salon’s Relaxer", description: "New growth touch-up using Glam Room relaxer.", price: "GH₵ 70", duration: "1–1.5 hrs" },
+        { id: "touch-up-client-relaxer", name: "Touch Up with Client’s Relaxer", description: "New growth touch-up using your own relaxer.", price: "GH₵ 50", duration: "1–1.5 hrs" },
+        { id: "normal-ponytail", name: "Normal Ponytail", description: "Sleek, styled ponytail finish.", price: "GH₵ 80", duration: "45 min – 1 hr" },
       ],
     },
     {

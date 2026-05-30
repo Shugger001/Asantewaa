@@ -1,30 +1,59 @@
 /* ==========================================================================
-   The Enterprise — PAGE 02 wireframe (partnerships & influence)
+   PAGE 02 / THE ENTERPRISE — wireframe exact
+   Typography: DISPLAY · BOLD · NORMAL · LABEL · FAINT
    ========================================================================== */
+
+.enterprise-page {
+  --ent-display: clamp(2.5rem, 7vw, 4.75rem);
+  --ent-metric: clamp(2.25rem, 6vw, 3.75rem);
+  --ent-label: 0.5625rem;
+  --ent-faint: rgba(255, 255, 255, 0.32);
+  --ent-rule: rgba(255, 255, 255, 0.12);
+  --ent-strip-bg: #0a0a0a;
+}
 
 body[data-page="enterprise"] .editorial-main {
   padding: 0;
   overflow-x: clip;
-}
-
-body[data-page="enterprise"] .home-bottombar {
-  mix-blend-mode: normal;
   background: #000;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
 }
 
-body[data-page="enterprise"] .home-bottombar span,
-body[data-page="enterprise"] .home-bottombar a {
+/* --- Global footer (wireframe: centered, faint) --- */
+body[data-page="enterprise"] .home-bottombar.ent-site-footer {
+  mix-blend-mode: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  border-top: 1px solid var(--ent-rule);
+  padding: 1.25rem 1.5rem calc(1.25rem + env(safe-area-inset-bottom, 0px));
+}
+
+body[data-page="enterprise"] .home-bottombar.ent-site-footer span {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.52rem;
+  font-size: var(--ent-label);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.38);
+  color: var(--ent-faint);
+  text-align: center;
 }
 
-/* --- Section 1: Icon statement (editorial split) --- */
-.enterprise-statement {
+.ent-footer-line {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: var(--ent-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ent-faint);
+  text-align: center;
+  margin: 0;
+  padding: clamp(2rem, 4vw, 2.75rem) clamp(1.25rem, 3vw, 2rem);
+}
+
+/* ==========================================================================
+   SECTION 1 — Icon statement (editorial split)
+   ========================================================================== */
+
+.ent-statement {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   min-height: 100vh;
@@ -32,23 +61,13 @@ body[data-page="enterprise"] .home-bottombar a {
   background: #000;
 }
 
-.enterprise-statement__portrait {
+.ent-statement__portrait {
   position: relative;
-  min-height: 320px;
-  background: #0a0a0a;
+  background: #000;
+  min-height: 280px;
 }
 
-.enterprise-statement__portrait::after {
-  content: '';
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 7rem;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.enterprise-statement__portrait img {
+.ent-statement__portrait img {
   width: 100%;
   height: 100%;
   min-height: inherit;
@@ -57,228 +76,218 @@ body[data-page="enterprise"] .home-bottombar a {
   display: block;
 }
 
-.enterprise-statement__content {
+.ent-statement__copy {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: calc(5rem + env(safe-area-inset-top, 0px)) clamp(1.5rem, 4vw, 4rem) 3rem;
+  padding: calc(4.5rem + env(safe-area-inset-top, 0px)) clamp(1.5rem, 4vw, 3.5rem) 2.5rem;
+  background: #000;
 }
 
-.enterprise-display {
-  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+/* [DISPLAY] */
+.ent-display {
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
 }
 
-.enterprise-display-line {
+.ent-display-line {
   display: block;
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(2.75rem, 6.5vw, 5.25rem);
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: var(--ent-display);
   font-weight: 400;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #fff;
-  line-height: 0.92;
+  line-height: 0.95;
   margin: 0;
 }
 
-.enterprise-statements {
-  margin-bottom: clamp(1.75rem, 4vw, 2.5rem);
+/* [BOLD] */
+.ent-bold-lines {
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
 }
 
-.enterprise-statement-line {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(0.95rem, 1.8vw, 1.12rem);
+.ent-bold-line {
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: clamp(0.9375rem, 1.6vw, 1.0625rem);
   font-weight: 700;
   color: #fff;
   line-height: 1.5;
   margin: 0;
 }
 
-.enterprise-statement-body {
-  max-width: 34rem;
+/* [NORMAL] — line-by-line, no paragraph blocks */
+.ent-body {
+  max-width: 28rem;
 }
 
-.enterprise-statement-body-block {
-  margin: 0 0 1.35rem;
-}
-
-.enterprise-statement-body-block:last-child {
-  margin-bottom: 0;
-}
-
-.enterprise-statement-body-line {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(0.88rem, 1.5vw, 0.98rem);
+.ent-body-line {
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: clamp(0.875rem, 1.4vw, 0.9375rem);
   font-weight: 400;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
   margin: 0;
 }
 
-/* --- Section 2: Power metrics (full bleed) --- */
-.enterprise-analytics {
-  background: #000;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+.ent-body-gap {
+  height: 1.25rem;
 }
 
-.enterprise-power-grid {
+/* ==========================================================================
+   SECTION 2 — Power metrics grid (full bleed, stacked)
+   ========================================================================== */
+
+.ent-analytics {
+  background: #000;
+  border-top: 1px solid var(--ent-rule);
+}
+
+.ent-metrics {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  background: rgba(255, 255, 255, 0.1);
+  grid-template-columns: 1fr;
+  border-top: 1px solid var(--ent-rule);
 }
 
-.enterprise-power-metric {
+.ent-metric {
   background: #000;
-  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2.5rem);
-  min-height: clamp(140px, 18vw, 190px);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  padding: clamp(1.35rem, 3vw, 2rem) clamp(1.25rem, 3vw, 2.5rem);
+  border-bottom: 1px solid var(--ent-rule);
 }
 
-.enterprise-power-value {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(2.25rem, 5vw, 4rem);
+/* [DISPLAY] metric value */
+.ent-metric-value {
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: var(--ent-metric);
   font-weight: 400;
   letter-spacing: 0.02em;
   color: #fff;
   line-height: 1;
-  margin: 0 0 0.65rem;
+  margin: 0 0 0.5rem;
 }
 
-.enterprise-power-label {
+/* [LABEL] */
+.ent-metric-label {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: clamp(0.48rem, 1vw, 0.58rem);
+  font-size: var(--ent-label);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.48);
   line-height: 1.45;
+  margin: 0;
 }
 
-.enterprise-power-sublabel {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(0.72rem, 1.2vw, 0.82rem);
+/* [SMALL] supporting detail */
+.ent-metric-sub {
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: clamp(0.75rem, 1.2vw, 0.8125rem);
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.42);
-  margin-top: 0.4rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0.35rem 0 0;
 }
 
-.enterprise-power-benchmark {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(0.68rem, 1.1vw, 0.76rem);
-  color: rgba(255, 255, 255, 0.28);
-  margin-top: 0.5rem;
+/* [FAINT] benchmark */
+.ent-metric-faint {
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: clamp(0.6875rem, 1.1vw, 0.75rem);
+  font-weight: 400;
+  color: var(--ent-faint);
+  margin: 0.4rem 0 0;
 }
 
-.enterprise-power-strip {
-  grid-column: 1 / -1;
+/* [LABEL] strip rows */
+.ent-metric-strip {
   background: #000;
-  padding: 1.1rem clamp(1.25rem, 3vw, 2.5rem);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  padding: 1rem clamp(1.25rem, 3vw, 2.5rem);
+  border-bottom: 1px solid var(--ent-rule);
 }
 
-.enterprise-power-strip span {
+.ent-metric-strip span {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: clamp(0.52rem, 1vw, 0.62rem);
-  letter-spacing: 0.2em;
+  font-size: var(--ent-label);
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.55);
 }
 
-/* --- Section 3: Brand strip --- */
-.enterprise-brands {
+/* Desktop: paired metrics side-by-side (TikTok + engagement, IG + engagement) */
+@media (min-width: 900px) {
+  .ent-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ent-metric--wide,
+  .ent-metric-strip {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ==========================================================================
+   SECTION 3 — As seen with (logo strip)
+   ========================================================================== */
+
+.ent-brands {
   background: #000;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: clamp(2.5rem, 5vw, 3.5rem) clamp(1.25rem, 3vw, 2.5rem) 0;
+  border-top: 1px solid var(--ent-rule);
+  padding-top: clamp(2.5rem, 5vw, 3.5rem);
 }
 
-.enterprise-brands-label,
-.enterprise-pillars-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.52rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.32);
-  text-align: center;
-  margin: 0 0 1.75rem;
-}
-
-.enterprise-brand-strip {
+.ent-brand-strip {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: clamp(1rem, 3vw, 2.5rem);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  padding: 0 clamp(1.25rem, 3vw, 2.5rem) clamp(2rem, 4vw, 2.5rem);
 }
 
-.enterprise-brand-strip::-webkit-scrollbar {
+.ent-brand-strip::-webkit-scrollbar {
   display: none;
 }
 
-.enterprise-brand {
-  flex: 1 0 auto;
-  min-width: 7rem;
-  min-height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 0.75rem 1rem;
+.ent-brand {
+  flex: 0 0 auto;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.55rem;
-  letter-spacing: 0.18em;
+  font-size: clamp(0.5rem, 1vw, 0.5625rem);
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.32);
+  color: rgba(255, 255, 255, 0.35);
   white-space: nowrap;
 }
 
-.enterprise-brand img {
-  max-height: 1.5rem;
+.ent-brand img {
+  max-height: 1.25rem;
   width: auto;
-  filter: grayscale(1) brightness(1.4);
-  opacity: 0.85;
+  filter: grayscale(1) brightness(1.5);
+  opacity: 0.8;
 }
 
-.enterprise-inline-footer {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.52rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.28);
-  text-align: center;
-  margin: 0;
-  padding: 0 clamp(1.25rem, 3vw, 2.5rem) clamp(2rem, 4vw, 2.75rem);
-}
+/* ==========================================================================
+   SECTION 4 — Campaign pillars accordion
+   ========================================================================== */
 
-/* --- Section 4: Campaign pillars accordion --- */
-.enterprise-pillars {
+.ent-pillars {
   background: #000;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: clamp(2.5rem, 5vw, 3.5rem) 0 calc(5rem + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--ent-rule);
 }
 
-.enterprise-accordion {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+.ent-accordion {
+  border-top: 1px solid var(--ent-rule);
 }
 
-.enterprise-accordion-item {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+.ent-accordion-item {
+  border-bottom: 1px solid var(--ent-rule);
 }
 
-.enterprise-accordion-trigger {
+.ent-accordion-trigger {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  padding: clamp(1.1rem, 2.5vw, 1.45rem) clamp(1.25rem, 3vw, 2.5rem);
-  background: #0a0a0a;
+  padding: clamp(1rem, 2.5vw, 1.35rem) clamp(1.25rem, 3vw, 2.5rem);
+  background: var(--ent-strip-bg);
   border: none;
   cursor: pointer;
   text-align: left;
@@ -286,141 +295,133 @@ body[data-page="enterprise"] .home-bottombar a {
   transition: background 0.25s ease;
 }
 
-.enterprise-accordion-trigger:hover {
+.ent-accordion-trigger:hover {
   background: #111;
 }
 
-.enterprise-accordion-title {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(0.82rem, 1.6vw, 0.95rem);
+/* [BOLD] strip title */
+.ent-accordion-title {
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: clamp(0.8125rem, 1.5vw, 0.9375rem);
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #fff;
   line-height: 1.35;
 }
 
-.enterprise-accordion-icon {
+/* [ACTION] + toggle */
+.ent-accordion-icon {
   flex-shrink: 0;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.55);
   line-height: 1;
   transition: transform 0.3s ease;
 }
 
-.enterprise-accordion-item.is-open .enterprise-accordion-icon {
+.ent-accordion-item.is-open .ent-accordion-icon {
   transform: rotate(45deg);
 }
 
-.enterprise-accordion-panel {
+.ent-accordion-panel {
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.35s ease;
   background: #000;
 }
 
-.enterprise-accordion-item.is-open .enterprise-accordion-panel {
+.ent-accordion-item.is-open .ent-accordion-panel {
   grid-template-rows: 1fr;
 }
 
-.enterprise-accordion-panel-inner {
+.ent-accordion-panel-inner {
   overflow: hidden;
 }
 
-.enterprise-accordion-body {
+/* [NORMAL] expanded body — line by line */
+.ent-accordion-body {
   margin: 0;
-  padding: 0 clamp(1.25rem, 3vw, 2.5rem) clamp(1.35rem, 2.5vw, 1.75rem);
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(0.88rem, 1.4vw, 0.96rem);
-  line-height: 1.75;
-  color: rgba(255, 255, 255, 0.62);
-  max-width: 42rem;
+  padding: 0 clamp(1.25rem, 3vw, 2.5rem) clamp(1.25rem, 2.5vw, 1.65rem);
 }
 
-/* --- Tablet / small desktop --- */
-@media (max-width: 960px) {
-  .enterprise-statement {
+.ent-accordion-body-line {
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: clamp(0.875rem, 1.4vw, 0.9375rem);
+  font-weight: 400;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 899px) {
+  .ent-statement {
     grid-template-columns: 1fr;
     min-height: auto;
   }
 
-  .enterprise-statement__portrait {
-    min-height: min(58vh, 520px);
+  .ent-statement__portrait {
+    min-height: min(55vh, 520px);
   }
 
-  .enterprise-statement__content {
-    padding-top: 2rem;
-    padding-bottom: 2.75rem;
+  .ent-statement__copy {
+    padding-top: 1.75rem;
+    padding-bottom: 2.25rem;
   }
 
-  .enterprise-display-line {
-    letter-spacing: 0.12em;
-  }
-}
-
-/* --- Mobile --- */
-@media (max-width: 768px) {
-  body[data-page="enterprise"] .editorial-main {
-    padding-bottom: calc(4.5rem + var(--safe-bottom, 0px));
-  }
-
-  .enterprise-statement__portrait {
-    min-height: min(52vh, 460px);
-  }
-
-  .enterprise-statement__content {
-    padding: 1.75rem var(--page-gutter, 1.25rem) 2.25rem;
-  }
-
-  .enterprise-display-line {
-    font-size: clamp(2.15rem, 10vw, 2.85rem);
+  .ent-display-line {
     letter-spacing: 0.1em;
   }
 
-  .enterprise-power-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .enterprise-power-metric {
-    min-height: 128px;
-    padding: 1.35rem var(--page-gutter, 1.25rem);
-  }
-
-  .enterprise-power-value {
-    font-size: clamp(2rem, 9vw, 2.75rem);
-  }
-
-  .enterprise-power-strip {
+  .ent-brand-strip {
     justify-content: flex-start;
-    text-align: left;
+  }
+}
+
+@media (max-width: 768px) {
+  body[data-page="enterprise"] .editorial-main {
+    padding-bottom: calc(3.5rem + var(--safe-bottom, 0px));
   }
 
-  .enterprise-brand-strip {
-    justify-content: flex-start;
-    gap: 1rem;
+  .ent-statement__portrait {
+    min-height: min(50vh, 440px);
+  }
+
+  .ent-statement__copy {
     padding-left: var(--page-gutter, 1.25rem);
     padding-right: var(--page-gutter, 1.25rem);
   }
 
-  .enterprise-brand {
-    min-width: 6.5rem;
-  }
-
-  .enterprise-brands,
-  .enterprise-pillars {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .enterprise-brands-label,
-  .enterprise-pillars-label {
-    padding: 0 var(--page-gutter, 1.25rem);
-  }
-
-  .enterprise-inline-footer {
+  .ent-metric {
     padding-left: var(--page-gutter, 1.25rem);
     padding-right: var(--page-gutter, 1.25rem);
+  }
+
+  .ent-metric-strip {
+    padding-left: var(--page-gutter, 1.25rem);
+    padding-right: var(--page-gutter, 1.25rem);
+  }
+
+  .ent-brand-strip {
+    padding-left: var(--page-gutter, 1.25rem);
+    padding-right: var(--page-gutter, 1.25rem);
+  }
+
+  .ent-accordion-trigger,
+  .ent-accordion-body {
+    padding-left: var(--page-gutter, 1.25rem);
+    padding-right: var(--page-gutter, 1.25rem);
+  }
+}
+
+@media (min-width: 900px) {
+  .ent-statement__portrait {
+    min-height: 100vh;
+    min-height: 100dvh;
   }
 }

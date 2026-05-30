@@ -208,14 +208,14 @@ function renderAbout() {
 function initEnterpriseAccordion(container) {
   if (!container) return;
 
-  const items = container.querySelectorAll('.enterprise-accordion-item');
+  const items = container.querySelectorAll('.ent-accordion-item');
   items.forEach((item) => {
-    const trigger = item.querySelector('.enterprise-accordion-trigger');
+    const trigger = item.querySelector('.ent-accordion-trigger');
     trigger?.addEventListener('click', () => {
       const isOpen = item.classList.contains('is-open');
       items.forEach((other) => {
         other.classList.remove('is-open');
-        other.querySelector('.enterprise-accordion-trigger')?.setAttribute('aria-expanded', 'false');
+        other.querySelector('.ent-accordion-trigger')?.setAttribute('aria-expanded', 'false');
       });
       if (!isOpen) {
         item.classList.add('is-open');
@@ -242,27 +242,27 @@ function renderEnterprise() {
   const headlinesEl = document.getElementById('enterprise-headlines');
   if (headlinesEl && statement?.displayLines) {
     headlinesEl.innerHTML = statement.displayLines
-      .map((line) => `<span class="enterprise-display-line">${line}</span>`)
+      .map((line) => `<span class="ent-display-line">${line}</span>`)
       .join('');
   }
 
   const statementsEl = document.getElementById('enterprise-statements');
   if (statementsEl && statement?.statements) {
     statementsEl.innerHTML = statement.statements
-      .map((line) => `<p class="enterprise-statement-line">${line}</p>`)
+      .map((line) => `<p class="ent-bold-line">${line}</p>`)
       .join('');
   }
 
   const bodyEl = document.getElementById('enterprise-body');
   if (bodyEl && statement?.body) {
     bodyEl.innerHTML = statement.body
-      .map(
-        (block) => `
-      <div class="enterprise-statement-body-block">
-        ${block.map((line) => `<p class="enterprise-statement-body-line">${line}</p>`).join('')}
-      </div>
-    `
-      )
+      .map((block, index) => {
+        const lines = block
+          .map((line) => `<p class="ent-body-line">${line}</p>`)
+          .join('');
+        const gap = index < statement.body.length - 1 ? '<div class="ent-body-gap" aria-hidden="true"></div>' : '';
+        return lines + gap;
+      })
       .join('');
   }
 
@@ -272,64 +272,63 @@ function renderEnterprise() {
       .map((metric) => {
         if (metric.variant === 'strip') {
           return `
-        <div class="enterprise-power-strip">
+        <div class="ent-metric-strip">
           <span>${metric.text}</span>
         </div>
       `;
         }
+        const wideClass = metric.wide ? ' ent-metric--wide' : '';
         return `
-      <div class="enterprise-power-metric">
-        <div class="enterprise-power-value">${metric.value}</div>
-        <div class="enterprise-power-label">${metric.label}</div>
-        ${metric.sublabel ? `<div class="enterprise-power-sublabel">${metric.sublabel}</div>` : ''}
-        ${metric.benchmark ? `<div class="enterprise-power-benchmark">${metric.benchmark}</div>` : ''}
+      <div class="ent-metric${wideClass}">
+        <p class="ent-metric-value">${metric.value}</p>
+        <p class="ent-metric-label">${metric.label}</p>
+        ${metric.sublabel ? `<p class="ent-metric-sub">${metric.sublabel}</p>` : ''}
+        ${metric.benchmark ? `<p class="ent-metric-faint">${metric.benchmark}</p>` : ''}
       </div>
     `;
       })
       .join('');
   }
 
-  const brandsLabel = document.getElementById('enterprise-brands-label');
-  if (brandsLabel) brandsLabel.textContent = data.brandPartners?.label || 'As seen with';
-
   const brandsEl = document.getElementById('enterprise-brands');
   if (brandsEl && data.brandPartners?.items) {
     brandsEl.innerHTML = data.brandPartners.items
       .map(
         (brand) => `
-      <span class="enterprise-brand">${brand.logoUrl ? `<img src="${brand.logoUrl}" alt="${brand.name}" height="24">` : brand.name}</span>
+      <span class="ent-brand">${brand.logoUrl ? `<img src="${brand.logoUrl}" alt="${brand.name}">` : brand.name}</span>
     `
       )
       .join('');
   }
 
-  const pillarsLabel = document.getElementById('enterprise-pillars-label');
-  if (pillarsLabel) pillarsLabel.textContent = data.campaignPillars?.label || 'Strategic campaign offerings';
-
   const pillarsEl = document.getElementById('enterprise-pillars');
   if (pillarsEl && data.campaignPillars?.items) {
     pillarsEl.innerHTML = data.campaignPillars.items
       .map(
-        (pillar, index) => `
-      <div class="enterprise-accordion-item${index === 0 ? ' is-open' : ''}">
+        (pillar) => `
+      <div class="ent-accordion-item">
         <button
           type="button"
-          class="enterprise-accordion-trigger"
-          aria-expanded="${index === 0 ? 'true' : 'false'}"
+          class="ent-accordion-trigger"
+          aria-expanded="false"
           aria-controls="pillar-panel-${pillar.id}"
           id="pillar-trigger-${pillar.id}"
         >
-          <span class="enterprise-accordion-title">${pillar.number} / ${pillar.title.toUpperCase()}</span>
-          <span class="enterprise-accordion-icon" aria-hidden="true">+</span>
+          <span class="ent-accordion-title">${pillar.number} / ${pillar.title}</span>
+          <span class="ent-accordion-icon" aria-hidden="true">+</span>
         </button>
         <div
-          class="enterprise-accordion-panel"
+          class="ent-accordion-panel"
           id="pillar-panel-${pillar.id}"
           role="region"
           aria-labelledby="pillar-trigger-${pillar.id}"
         >
-          <div class="enterprise-accordion-panel-inner">
-            <p class="enterprise-accordion-body">${pillar.body}</p>
+          <div class="ent-accordion-panel-inner">
+            <div class="ent-accordion-body">
+              ${(Array.isArray(pillar.body) ? pillar.body : [pillar.body])
+                .map((line) => `<p class="ent-accordion-body-line">${line}</p>`)
+                .join('')}
+            </div>
           </div>
         </div>
       </div>
@@ -341,6 +340,9 @@ function renderEnterprise() {
 
   const footerMid = document.getElementById('enterprise-footer-mid');
   if (footerMid && data.footer) footerMid.textContent = data.footer;
+
+  const footerEnd = document.getElementById('enterprise-footer-end');
+  if (footerEnd && data.footer) footerEnd.textContent = data.footer;
 
   const copyright = document.getElementById('home-copyright');
   if (copyright && data.footer) copyright.textContent = data.footer;

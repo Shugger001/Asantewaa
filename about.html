@@ -9,7 +9,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 
   <link rel="stylesheet" href="styles.css">
@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="enterprise.css">
   <link rel="stylesheet" href="mobile.css">
 </head>
-<body data-page="enterprise" class="editorial-theme">
+<body data-page="enterprise" class="editorial-theme enterprise-page">
 
   <header class="home-topbar">
     <a href="glam-room.html" class="home-topbar-link" id="home-topbar-left">GLAM ROOM</a>
@@ -34,36 +34,38 @@
   </nav>
 
   <main class="editorial-main">
-    <section class="enterprise-statement" id="enterprise">
-      <div class="enterprise-statement__portrait">
+    <!-- PAGE 02 · SECTION 1 — Icon statement -->
+    <section class="ent-statement" id="enterprise">
+      <div class="ent-statement__portrait">
         <img id="enterprise-statement-image" src="" alt="" decoding="async">
       </div>
-      <div class="enterprise-statement__content">
-        <div class="enterprise-display" id="enterprise-headlines" aria-label="Shaping culture. Driving engagement."></div>
-        <div class="enterprise-statements" id="enterprise-statements"></div>
-        <div class="enterprise-statement-body" id="enterprise-body"></div>
+      <div class="ent-statement__copy">
+        <div class="ent-display" id="enterprise-headlines" aria-label="Shaping culture. Driving engagement."></div>
+        <div class="ent-bold-lines" id="enterprise-statements"></div>
+        <div class="ent-body" id="enterprise-body"></div>
       </div>
     </section>
 
-    <section class="enterprise-analytics" id="analytics" aria-label="Verified audience analytics">
-      <div class="enterprise-power-grid" id="enterprise-metrics"></div>
+    <!-- PAGE 02 · SECTION 2 — Verified audience analytics -->
+    <section class="ent-analytics" id="analytics" aria-label="Verified audience analytics">
+      <div class="ent-metrics" id="enterprise-metrics"></div>
     </section>
 
-    <section class="enterprise-brands" aria-labelledby="enterprise-brands-label">
-      <p class="enterprise-brands-label" id="enterprise-brands-label"></p>
-      <div class="enterprise-brand-strip" id="enterprise-brands"></div>
-      <p class="enterprise-inline-footer" id="enterprise-footer-mid"></p>
+    <!-- PAGE 02 · SECTION 3 — As seen with -->
+    <section class="ent-brands" aria-label="As seen with">
+      <div class="ent-brand-strip" id="enterprise-brands"></div>
+      <p class="ent-footer-line" id="enterprise-footer-mid"></p>
     </section>
 
-    <section class="enterprise-pillars" aria-labelledby="enterprise-pillars-label">
-      <p class="enterprise-pillars-label" id="enterprise-pillars-label"></p>
-      <div class="enterprise-accordion" id="enterprise-pillars"></div>
+    <!-- PAGE 02b · SECTION 4 — Campaign pillars -->
+    <section class="ent-pillars" aria-label="Strategic campaign offerings">
+      <div class="ent-accordion" id="enterprise-pillars"></div>
+      <p class="ent-footer-line" id="enterprise-footer-end"></p>
     </section>
   </main>
 
-  <footer class="home-bottombar">
+  <footer class="home-bottombar ent-site-footer">
     <span id="home-copyright"></span>
-    <a href="index.html">Home</a>
   </footer>
 
   <nav class="nav" id="nav" aria-hidden="true"><ul id="nav-links"></ul></nav>

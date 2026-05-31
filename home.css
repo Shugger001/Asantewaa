@@ -329,7 +329,11 @@ body.home-hero-title-done #hero .home-panel-content {
 }
 
 #hero.home-hero-title-settled .home-panel-content {
-  padding-bottom: calc(4.5rem + var(--hero-title-block-height, 5.5rem) + 0.75rem);
+  padding-bottom: calc(var(--hero-title-bottom, 4.5rem) + var(--hero-title-block-height, 5.5rem) + 0.75rem);
+}
+
+#hero {
+  --hero-title-bottom: 4.5rem;
 }
 
 .home-panel-label {
@@ -762,30 +766,33 @@ body.home-intro-done .home-scroll-dots {
   position: absolute;
   inset: 0;
   z-index: 4;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0 2rem;
   pointer-events: none;
   text-align: center;
 }
 
 .home-hero-intro-title__inner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
-  width: 100%;
-  max-width: 1400px;
-  transform: translateY(0);
-  transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
+  width: max-content;
+  max-width: calc(100% - 4rem);
+  transform: translate(-50%, -50%);
+  transition:
+    top 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+    bottom 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: top, bottom, transform;
 }
 
 .home-hero-intro-title.is-sliding-down .home-hero-intro-title__inner,
 .home-hero-intro-title.is-settled .home-hero-intro-title__inner {
-  transform: translateY(var(--hero-title-shift, 0px));
+  top: auto;
+  bottom: var(--hero-title-bottom, 4.5rem);
+  transform: translateX(-50%);
 }
 
 .home-hero-intro-title.is-settled::before {
@@ -930,7 +937,27 @@ body.home-intro-done .home-scroll-dots {
     flex: 0 0 100dvw;
     width: 100vw;
     width: 100dvw;
-    min-height: 0;
+    height: 100dvh;
+    min-height: 100dvh;
+  }
+
+  #hero {
+    --hero-title-bottom: 5.75rem;
+  }
+
+  .home-hero-intro-title .home-intro-title-line {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 0.15rem;
+  }
+
+  .home-hero-intro-title .home-intro-letter {
+    font-size: clamp(2.75rem, 4.2vw, 5.25rem);
+  }
+
+  .home-hero-intro-title .home-intro-subtitle {
+    font-size: clamp(0.55rem, 0.85vw, 0.68rem);
+    letter-spacing: 0.28em;
   }
 
   .home-scroll-hint::after {
@@ -961,6 +988,10 @@ body.home-intro-done .home-scroll-dots {
 
   .home-panel-content {
     padding-bottom: 5rem;
+  }
+
+  #hero {
+    --hero-title-bottom: 5rem;
   }
 
   .home-panel-label::before,

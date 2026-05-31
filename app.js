@@ -1057,17 +1057,7 @@ function getHeroTitleBottomPadding(hero) {
   return Number.isFinite(padding) ? padding : 72;
 }
 
-function setHeroTitleSlideDistance(hero, inner) {
-  const panelRect = hero.getBoundingClientRect();
-  const innerRect = inner.getBoundingClientRect();
-  const bottomPadding = getHeroTitleBottomPadding(hero);
-  const targetBottom = panelRect.bottom - bottomPadding;
-  const deltaY = targetBottom - innerRect.bottom;
-  inner.style.setProperty('--hero-title-shift', `${deltaY}px`);
-}
-
 function lockHeroTitleAtBase(hero, titleEl, inner) {
-  setHeroTitleSlideDistance(hero, inner);
   titleEl.classList.add('is-settled');
   hero.style.setProperty('--hero-title-block-height', `${inner.offsetHeight}px`);
 }
@@ -1177,14 +1167,10 @@ async function initHeroTitleSequence() {
 
   await sleep(titleRevealMs + titleHoldMs);
 
-  const inner = titleEl.querySelector('.home-hero-intro-title__inner');
-  if (inner) {
-    setHeroTitleSlideDistance(hero, inner);
-  }
-
   titleEl.classList.add('is-sliding-down');
   await sleep(titleSlideMs);
 
+  const inner = titleEl.querySelector('.home-hero-intro-title__inner');
   if (inner) {
     lockHeroTitleAtBase(hero, titleEl, inner);
   } else {

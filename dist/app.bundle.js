@@ -321,17 +321,6 @@ var SITE = {
             "Shot on location. Owned by your brand story.",
             "Deployed where your audience lives."
           ]
-        },
-        {
-          id: "snapchat",
-          number: "03",
-          title: "SNAPCHAT ECOSYSTEM AMPLIFICATION",
-          body: [
-            "Extended campaign lifecycle inside her private",
-            "premium Snapchat subscriber network.",
-            "High-visibility weekly content integration.",
-            "Exclusive access. Unmatched intimacy with audience."
-          ]
         }
       ]
     },
@@ -1114,17 +1103,6 @@ var SITE2 = {
             "retail flagship, corporate office, or custom venue.",
             "Shot on location. Owned by your brand story.",
             "Deployed where your audience lives."
-          ]
-        },
-        {
-          id: "snapchat",
-          number: "03",
-          title: "SNAPCHAT ECOSYSTEM AMPLIFICATION",
-          body: [
-            "Extended campaign lifecycle inside her private",
-            "premium Snapchat subscriber network.",
-            "High-visibility weekly content integration.",
-            "Exclusive access. Unmatched intimacy with audience."
           ]
         }
       ]
@@ -2371,17 +2349,6 @@ var SITE3 = {
             "retail flagship, corporate office, or custom venue.",
             "Shot on location. Owned by your brand story.",
             "Deployed where your audience lives."
-          ]
-        },
-        {
-          id: "snapchat",
-          number: "03",
-          title: "SNAPCHAT ECOSYSTEM AMPLIFICATION",
-          body: [
-            "Extended campaign lifecycle inside her private",
-            "premium Snapchat subscriber network.",
-            "High-visibility weekly content integration.",
-            "Exclusive access. Unmatched intimacy with audience."
           ]
         }
       ]

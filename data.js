@@ -367,17 +367,6 @@ export const SITE = {
             "Deployed where your audience lives.",
           ],
         },
-        {
-          id: "snapchat",
-          number: "03",
-          title: "SNAPCHAT ECOSYSTEM AMPLIFICATION",
-          body: [
-            "Extended campaign lifecycle inside her private",
-            "premium Snapchat subscriber network.",
-            "High-visibility weekly content integration.",
-            "Exclusive access. Unmatched intimacy with audience.",
-          ],
-        },
       ],
     },
     cta: {

@@ -140,6 +140,15 @@ body.home-editorial .mobile-menu-overlay {
   object-fit: contain;
 }
 
+body.site-light-topbar .home-topbar-link,
+body.site-light-topbar .home-menu-btn {
+  color: #1a0f0a;
+}
+
+body.site-light-topbar .home-topbar {
+  background: linear-gradient(180deg, rgba(253, 243, 231, 0.96) 0%, rgba(253, 243, 231, 0) 100%);
+}
+
 .home-menu-btn {
   justify-self: end;
   background: none;

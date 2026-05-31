@@ -42,6 +42,12 @@ function getServicePriceRange(service) {
 var SITE = {
   brand: "Glam Room by Asantewaa",
   owner: "Asantewaa",
+  logo: {
+    white: "icons/logo-white.png",
+    black: "icons/logo-black.png",
+    /** Pages 6–7 use the black mark on light backgrounds */
+    blackOnPages: ["booking", "admin"]
+  },
   tagline: "Accra's baddest hair destination \u2014 where your crown gets the main character energy it deserves.",
   /** Wireframe document — 6 pages (PDF pages 2–7) */
   wireframePages: [
@@ -834,6 +840,12 @@ function applyCapacityToDatePicker(picker, countsByDate) {
 var SITE2 = {
   brand: "Glam Room by Asantewaa",
   owner: "Asantewaa",
+  logo: {
+    white: "icons/logo-white.png",
+    black: "icons/logo-black.png",
+    /** Pages 6–7 use the black mark on light backgrounds */
+    blackOnPages: ["booking", "admin"]
+  },
   tagline: "Accra's baddest hair destination \u2014 where your crown gets the main character energy it deserves.",
   /** Wireframe document — 6 pages (PDF pages 2–7) */
   wireframePages: [
@@ -2089,6 +2101,12 @@ function findLocationById2(id) {
 var SITE3 = {
   brand: "Glam Room by Asantewaa",
   owner: "Asantewaa",
+  logo: {
+    white: "icons/logo-white.png",
+    black: "icons/logo-black.png",
+    /** Pages 6–7 use the black mark on light backgrounds */
+    blackOnPages: ["booking", "admin"]
+  },
   tagline: "Accra's baddest hair destination \u2014 where your crown gets the main character energy it deserves.",
   /** Wireframe document — 6 pages (PDF pages 2–7) */
   wireframePages: [

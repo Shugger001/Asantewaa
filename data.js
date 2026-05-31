@@ -81,6 +81,8 @@ export const SITE = {
   logo: {
     white: "icons/logo-white.png",
     black: "icons/logo-black.png",
+    /** Pages 6–7 use the black mark on light backgrounds */
+    blackOnPages: ["booking", "admin"],
   },
   tagline: "Accra's baddest hair destination — where your crown gets the main character energy it deserves.",
 

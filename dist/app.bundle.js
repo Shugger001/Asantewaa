@@ -1610,7 +1610,7 @@ async function handleDepositReturn(handlers = {}) {
   }
 }
 
-// booking.js?v=20260559
+// booking.js?v=20260560
 var slotBookingCounts = {};
 var datePicker = null;
 var capacityByDate = {};
@@ -1672,11 +1672,6 @@ function applyBookingLocationFromUrl() {
 }
 function populateBookingPage() {
   document.getElementById("booking-subhead").textContent = SITE.booking.subhead;
-  document.getElementById("booking-quote").innerHTML = `
-    <i class="fas fa-quote-left" style="color: var(--gold); margin-right: 0.4rem;"></i>
-    "${SITE.booking.bookingQuote}"
-    <div style="margin-top: 0.5rem; font-weight: 600; font-style: normal;">${SITE.owner} \u{1F1EC}\u{1F1ED}</div>
-  `;
   document.getElementById("booking-promise").innerHTML = `
     <i class="fas fa-gem" style="color: var(--gold);"></i>
     <strong>Mama Glam's Promise:</strong> ${SITE.booking.promise}

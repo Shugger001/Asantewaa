@@ -240,7 +240,7 @@ export const SITE = {
         imageUrl: "images/glam-red-studio.png",
         imagePosition: "center 20%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 100%)",
-        link: "proposals.html",
+        link: "book.html",
         linkText: "Book Now",
       },
       {

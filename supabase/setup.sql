@@ -18,7 +18,7 @@ alter table public.bookings
 
 drop index if exists bookings_unique_slot;
 
-create unique index if not exists bookings_unique_slot
+create index if not exists bookings_slot_lookup_idx
   on public.bookings (booking_date, booking_time, location_id)
   where status in ('pending', 'confirmed');
 
@@ -43,6 +43,6 @@ create policy "Public can read bookings for availability"
   to anon, authenticated
   using (status in ('pending', 'confirmed'));
 
--- 3) Optional: enforce max 6 reservations per shop per day — run supabase/max-daily-bookings.sql
+-- 3) Slot + daily capacity — run supabase/max-daily-bookings.sql (12/day, 3/slot)
 
 -- 4) Deposit auto-confirm (Moolre) — run supabase/setup-deposit.sql and deploy initiate-deposit + confirm-deposit

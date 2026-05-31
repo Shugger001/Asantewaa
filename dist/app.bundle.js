@@ -627,7 +627,8 @@ var SITE = {
     tagline: "\u2728 Mama Glam Herself \u2728",
     vibeNote: "Braiding while blasting Amapiano & Afrobeats",
     tiktokHandle: "@asantewaaa_official",
-    maxReservationsPerDay: 6,
+    maxReservationsPerDay: 12,
+    maxReservationsPerSlot: 3,
     deposit: {
       enabled: true,
       configured: false,
@@ -641,14 +642,9 @@ var SITE = {
       confirmedMessage: "You're confirmed! Your deposit secures your chair \u2014 see you at Glam Room."
     },
     timeSlots: [
-      { value: "09:00", label: "09:00 AM" },
-      { value: "10:00", label: "10:00 AM" },
+      { value: "08:00", label: "08:00 AM" },
       { value: "11:00", label: "11:00 AM" },
-      { value: "12:00", label: "12:00 PM" },
-      { value: "13:00", label: "01:00 PM" },
       { value: "14:00", label: "02:00 PM" },
-      { value: "15:00", label: "03:00 PM" },
-      { value: "16:00", label: "04:00 PM" },
       { value: "17:00", label: "05:00 PM" }
     ],
     services: [
@@ -748,7 +744,10 @@ function getSupabase() {
 
 // booking-capacity.js?v=20260536
 function getMaxReservationsPerDay() {
-  return SITE.booking?.maxReservationsPerDay ?? 6;
+  return SITE.booking?.maxReservationsPerDay ?? 12;
+}
+function getMaxReservationsPerSlot() {
+  return SITE.booking?.maxReservationsPerSlot ?? 3;
 }
 function formatDateYmd(date) {
   const y = date.getFullYear();
@@ -765,9 +764,26 @@ function countBookingsByDate(rows) {
   }
   return counts;
 }
+function countBookingsByTimeSlot(rows) {
+  const counts = {};
+  for (const row of rows || []) {
+    const key = row.booking_time;
+    if (!key) continue;
+    counts[key] = (counts[key] || 0) + 1;
+  }
+  return counts;
+}
 function isDateFullyBooked(dateStr, countsByDate, max = getMaxReservationsPerDay()) {
   if (!dateStr) return false;
   return (countsByDate[dateStr] || 0) >= max;
+}
+function isSlotFullyBooked(time, countsBySlot, max = getMaxReservationsPerSlot()) {
+  if (!time) return false;
+  return (countsBySlot[time] || 0) >= max;
+}
+function getSlotSpotsRemaining(time, countsBySlot, max = getMaxReservationsPerSlot()) {
+  if (!time) return max;
+  return Math.max(0, max - (countsBySlot[time] || 0));
 }
 function buildDateDisableFunctions(countsByDate, maxPerDay = getMaxReservationsPerDay()) {
   return [
@@ -799,6 +815,19 @@ async function getDailyBookingCount(supabase, date, locationId) {
     let { count, error } = await supabase.from("bookings").select("id", { count: "exact", head: true }).eq("booking_date", date).eq("location_id", locationId).in("status", ["pending", "confirmed"]);
     if (isMissingColumnError(error)) {
       ({ count, error } = await supabase.from("bookings").select("id", { count: "exact", head: true }).eq("booking_date", date).in("status", ["pending", "confirmed"]));
+    }
+    if (error) throw error;
+    return count || 0;
+  } catch {
+    return 0;
+  }
+}
+async function getSlotBookingCount(supabase, date, time, locationId) {
+  if (!supabase || !date || !time || !locationId) return 0;
+  try {
+    let { count, error } = await supabase.from("bookings").select("id", { count: "exact", head: true }).eq("booking_date", date).eq("booking_time", time).eq("location_id", locationId).in("status", ["pending", "confirmed"]);
+    if (isMissingColumnError(error)) {
+      ({ count, error } = await supabase.from("bookings").select("id", { count: "exact", head: true }).eq("booking_date", date).eq("booking_time", time).in("status", ["pending", "confirmed"]));
     }
     if (error) throw error;
     return count || 0;
@@ -1406,7 +1435,8 @@ var SITE2 = {
     tagline: "\u2728 Mama Glam Herself \u2728",
     vibeNote: "Braiding while blasting Amapiano & Afrobeats",
     tiktokHandle: "@asantewaaa_official",
-    maxReservationsPerDay: 6,
+    maxReservationsPerDay: 12,
+    maxReservationsPerSlot: 3,
     deposit: {
       enabled: true,
       configured: false,
@@ -1420,14 +1450,9 @@ var SITE2 = {
       confirmedMessage: "You're confirmed! Your deposit secures your chair \u2014 see you at Glam Room."
     },
     timeSlots: [
-      { value: "09:00", label: "09:00 AM" },
-      { value: "10:00", label: "10:00 AM" },
+      { value: "08:00", label: "08:00 AM" },
       { value: "11:00", label: "11:00 AM" },
-      { value: "12:00", label: "12:00 PM" },
-      { value: "13:00", label: "01:00 PM" },
       { value: "14:00", label: "02:00 PM" },
-      { value: "15:00", label: "03:00 PM" },
-      { value: "16:00", label: "04:00 PM" },
       { value: "17:00", label: "05:00 PM" }
     ],
     services: [
@@ -1617,7 +1642,7 @@ async function handleDepositReturn(handlers = {}) {
 }
 
 // booking.js?v=20260541
-var bookedSlots = [];
+var slotBookingCounts = {};
 var datePicker = null;
 var capacityByDate = {};
 function populateServiceCategories() {
@@ -1754,7 +1779,7 @@ async function refreshBookingDateCapacity() {
   const selectedDate = document.getElementById("date")?.value;
   if (selectedDate && isDateFullyBooked(selectedDate, capacityByDate)) {
     datePicker?.clear();
-    bookedSlots = [];
+    slotBookingCounts = {};
     updateTimeSlotAvailability();
     updateSummary();
   }
@@ -1786,13 +1811,6 @@ function toDbRow(booking, withLocationColumns) {
   }
   return row;
 }
-async function fetchExistingBooking(supabase, date, time, locationId) {
-  let result = await supabase.from("bookings").select("id").eq("booking_date", date).eq("booking_time", time).eq("location_id", locationId).in("status", ["pending", "confirmed"]);
-  if (isMissingColumnError2(result.error)) {
-    result = await supabase.from("bookings").select("id").eq("booking_date", date).eq("booking_time", time).in("status", ["pending", "confirmed"]);
-  }
-  return result;
-}
 async function insertBooking(supabase, booking) {
   let result = await supabase.from("bookings").insert([toDbRow(booking, true)]).select("id").single();
   if (isMissingColumnError2(result.error)) {
@@ -1804,13 +1822,13 @@ async function insertBooking(supabase, booking) {
 async function fetchBookedSlots(date) {
   const locationId = getSelectedLocationId();
   if (!date || !locationId) {
-    bookedSlots = [];
+    slotBookingCounts = {};
     updateTimeSlotAvailability();
     return;
   }
   const supabase = getSupabase();
   if (!supabase) {
-    bookedSlots = [];
+    slotBookingCounts = {};
     updateTimeSlotAvailability();
     return;
   }
@@ -1820,28 +1838,45 @@ async function fetchBookedSlots(date) {
       ({ data, error } = await supabase.from("bookings").select("booking_time").eq("booking_date", date).in("status", ["pending", "confirmed"]));
     }
     if (error) throw error;
-    bookedSlots = (data || []).map((row) => row.booking_time);
+    slotBookingCounts = countBookingsByTimeSlot(data);
     updateTimeSlotAvailability();
   } catch (err) {
     console.error("Error fetching bookings:", err);
-    bookedSlots = [];
+    slotBookingCounts = {};
     updateTimeSlotAvailability();
   }
+}
+function formatTimeSlotLabel(label, timeValue) {
+  const max = getMaxReservationsPerSlot();
+  const booked = slotBookingCounts[timeValue] || 0;
+  const remaining = getSlotSpotsRemaining(timeValue, slotBookingCounts, max);
+  if (remaining <= 0) {
+    return `${label} \u2014 Full`;
+  }
+  if (booked > 0) {
+    const spotWord = remaining === 1 ? "spot" : "spots";
+    return `${label} \u2014 ${remaining} ${spotWord} left`;
+  }
+  return label;
 }
 function updateTimeSlotAvailability() {
   const timeSelect = document.getElementById("time");
   if (!timeSelect) return;
+  const selectedTime = timeSelect.value;
   SITE.booking.timeSlots.forEach(({ value, label }) => {
     const option = timeSelect.querySelector(`option[value="${value}"]`);
     if (!option) return;
-    if (bookedSlots.includes(value)) {
+    if (isSlotFullyBooked(value, slotBookingCounts)) {
       option.disabled = true;
-      option.textContent = `${label} \u{1F534} Booked`;
+      option.textContent = `${label} \u2014 Full`;
     } else {
       option.disabled = false;
-      option.textContent = label;
+      option.textContent = formatTimeSlotLabel(label, value);
     }
   });
+  if (selectedTime && isSlotFullyBooked(selectedTime, slotBookingCounts)) {
+    timeSelect.value = "";
+  }
 }
 function updateSummary() {
   const name = document.getElementById("fullName").value.trim() || "Queen";
@@ -1958,8 +1993,8 @@ async function handleSubmit(e) {
     resetButton(submitBtn);
     return;
   }
-  if (bookedSlots.includes(time)) {
-    showError("Eh! This time don book already. Choose another time, queen \u{1F451}");
+  if (isSlotFullyBooked(time, slotBookingCounts)) {
+    showError("Eh! This time slot is full. Choose another time, queen \u{1F451}");
     resetButton(submitBtn);
     return;
   }
@@ -1990,15 +2025,9 @@ async function handleSubmit(e) {
       await refreshBookingDateCapacity();
       return;
     }
-    const { data: existingBookings, error: checkError } = await fetchExistingBooking(
-      supabase,
-      date,
-      time,
-      locationId
-    );
-    if (checkError) throw checkError;
-    if (existingBookings?.length > 0) {
-      showError("Eh! This time don book already. Choose another time, queen \u{1F451}");
+    const slotCount = await getSlotBookingCount(supabase, date, time, locationId);
+    if (slotCount >= getMaxReservationsPerSlot()) {
+      showError("Eh! This time slot is full. Choose another time, queen \u{1F451}");
       resetButton(submitBtn);
       await fetchBookedSlots(date);
       return;
@@ -2032,11 +2061,15 @@ async function handleSubmit(e) {
     await fetchBookedSlots(date);
   } catch (err) {
     console.error("Booking error:", err);
-    const limitReached = err?.message?.includes("Daily booking limit") || err?.details?.includes("Daily booking limit");
+    const limitReached = err?.message?.includes("Daily booking limit") || err?.details?.includes("Daily booking limit") || err?.message?.includes("Time slot fully booked") || err?.details?.includes("Time slot fully booked");
     if (limitReached) {
-      showError("This date is fully booked at this location. Please choose another day.");
-      datePicker?.clear();
+      const slotFull = err?.message?.includes("Time slot fully booked") || err?.details?.includes("Time slot fully booked");
+      showError(
+        slotFull ? "Eh! This time slot is full. Choose another time, queen \u{1F451}" : "This date is fully booked at this location. Please choose another day."
+      );
+      if (!slotFull) datePicker?.clear();
       await refreshBookingDateCapacity();
+      await fetchBookedSlots(document.getElementById("date")?.value || "");
       resetButton(submitBtn);
       return;
     }
@@ -2665,7 +2698,8 @@ var SITE3 = {
     tagline: "\u2728 Mama Glam Herself \u2728",
     vibeNote: "Braiding while blasting Amapiano & Afrobeats",
     tiktokHandle: "@asantewaaa_official",
-    maxReservationsPerDay: 6,
+    maxReservationsPerDay: 12,
+    maxReservationsPerSlot: 3,
     deposit: {
       enabled: true,
       configured: false,
@@ -2679,14 +2713,9 @@ var SITE3 = {
       confirmedMessage: "You're confirmed! Your deposit secures your chair \u2014 see you at Glam Room."
     },
     timeSlots: [
-      { value: "09:00", label: "09:00 AM" },
-      { value: "10:00", label: "10:00 AM" },
+      { value: "08:00", label: "08:00 AM" },
       { value: "11:00", label: "11:00 AM" },
-      { value: "12:00", label: "12:00 PM" },
-      { value: "13:00", label: "01:00 PM" },
       { value: "14:00", label: "02:00 PM" },
-      { value: "15:00", label: "03:00 PM" },
-      { value: "16:00", label: "04:00 PM" },
       { value: "17:00", label: "05:00 PM" }
     ],
     services: [

@@ -1,7 +1,11 @@
 import { SITE } from './data.js?v=20260536';
 
 export function getMaxReservationsPerDay() {
-  return SITE.booking?.maxReservationsPerDay ?? 6;
+  return SITE.booking?.maxReservationsPerDay ?? 12;
+}
+
+export function getMaxReservationsPerSlot() {
+  return SITE.booking?.maxReservationsPerSlot ?? 3;
 }
 
 export function formatDateYmd(date) {
@@ -21,9 +25,29 @@ export function countBookingsByDate(rows) {
   return counts;
 }
 
+export function countBookingsByTimeSlot(rows) {
+  const counts = {};
+  for (const row of rows || []) {
+    const key = row.booking_time;
+    if (!key) continue;
+    counts[key] = (counts[key] || 0) + 1;
+  }
+  return counts;
+}
+
 export function isDateFullyBooked(dateStr, countsByDate, max = getMaxReservationsPerDay()) {
   if (!dateStr) return false;
   return (countsByDate[dateStr] || 0) >= max;
+}
+
+export function isSlotFullyBooked(time, countsBySlot, max = getMaxReservationsPerSlot()) {
+  if (!time) return false;
+  return (countsBySlot[time] || 0) >= max;
+}
+
+export function getSlotSpotsRemaining(time, countsBySlot, max = getMaxReservationsPerSlot()) {
+  if (!time) return max;
+  return Math.max(0, max - (countsBySlot[time] || 0));
 }
 
 export function buildDateDisableFunctions(countsByDate, maxPerDay = getMaxReservationsPerDay()) {
@@ -84,6 +108,34 @@ export async function getDailyBookingCount(supabase, date, locationId) {
         .from('bookings')
         .select('id', { count: 'exact', head: true })
         .eq('booking_date', date)
+        .in('status', ['pending', 'confirmed']));
+    }
+
+    if (error) throw error;
+    return count || 0;
+  } catch {
+    return 0;
+  }
+}
+
+export async function getSlotBookingCount(supabase, date, time, locationId) {
+  if (!supabase || !date || !time || !locationId) return 0;
+
+  try {
+    let { count, error } = await supabase
+      .from('bookings')
+      .select('id', { count: 'exact', head: true })
+      .eq('booking_date', date)
+      .eq('booking_time', time)
+      .eq('location_id', locationId)
+      .in('status', ['pending', 'confirmed']);
+
+    if (isMissingColumnError(error)) {
+      ({ count, error } = await supabase
+        .from('bookings')
+        .select('id', { count: 'exact', head: true })
+        .eq('booking_date', date)
+        .eq('booking_time', time)
         .in('status', ['pending', 'confirmed']));
     }
 

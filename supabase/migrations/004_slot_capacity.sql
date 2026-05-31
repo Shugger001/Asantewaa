@@ -1,13 +1,14 @@
--- Enforce 12 reservations per shop per day and 3 per time slot.
--- Run once in Supabase → SQL Editor for project pksfslkwmlrlttoojluk
--- (Same SQL as supabase/migrations/004_slot_capacity.sql)
+-- 4 time slots × 3 chairs = 12 reservations per shop per day
+-- Matches SITE.booking.maxReservationsPerDay (12) and maxReservationsPerSlot (3)
 
+-- Allow multiple bookings per date/time/location (up to 3 per slot)
 drop index if exists public.bookings_unique_slot;
 
 create index if not exists bookings_slot_lookup_idx
   on public.bookings (booking_date, booking_time, location_id)
   where status in ('pending', 'confirmed');
 
+-- Daily cap: 12 per location
 create or replace function public.enforce_daily_booking_capacity()
 returns trigger
 language plpgsql
@@ -33,6 +34,7 @@ begin
 end;
 $$;
 
+-- Per-slot cap: 3 per location
 create or replace function public.enforce_slot_booking_capacity()
 returns trigger
 language plpgsql

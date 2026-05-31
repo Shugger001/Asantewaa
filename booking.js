@@ -10,11 +10,16 @@ import { getSupabase, isSupabaseConfigured } from './supabase-client.js?v=202605
 import {
   applyCapacityToDatePicker,
   buildDateDisableFunctions,
+  countBookingsByTimeSlot,
   fetchBookingCountsByDate,
   getBookingWindowDates,
   getDailyBookingCount,
   getMaxReservationsPerDay,
+  getMaxReservationsPerSlot,
+  getSlotBookingCount,
+  getSlotSpotsRemaining,
   isDateFullyBooked,
+  isSlotFullyBooked,
 } from './booking-capacity.js?v=20260536';
 import {
   handleDepositReturn,
@@ -22,7 +27,7 @@ import {
   startDepositPayment,
 } from './booking-payment.js?v=20260537';
 
-let bookedSlots = [];
+let slotBookingCounts = {};
 let datePicker = null;
 let capacityByDate = {};
 
@@ -208,7 +213,7 @@ async function refreshBookingDateCapacity() {
   const selectedDate = document.getElementById('date')?.value;
   if (selectedDate && isDateFullyBooked(selectedDate, capacityByDate)) {
     datePicker?.clear();
-    bookedSlots = [];
+    slotBookingCounts = {};
     updateTimeSlotAvailability();
     updateSummary();
   }
@@ -246,27 +251,6 @@ function toDbRow(booking, withLocationColumns) {
   return row;
 }
 
-async function fetchExistingBooking(supabase, date, time, locationId) {
-  let result = await supabase
-    .from('bookings')
-    .select('id')
-    .eq('booking_date', date)
-    .eq('booking_time', time)
-    .eq('location_id', locationId)
-    .in('status', ['pending', 'confirmed']);
-
-  if (isMissingColumnError(result.error)) {
-    result = await supabase
-      .from('bookings')
-      .select('id')
-      .eq('booking_date', date)
-      .eq('booking_time', time)
-      .in('status', ['pending', 'confirmed']);
-  }
-
-  return result;
-}
-
 async function insertBooking(supabase, booking) {
   let result = await supabase.from('bookings').insert([toDbRow(booking, true)]).select('id').single();
   if (isMissingColumnError(result.error)) {
@@ -279,14 +263,14 @@ async function insertBooking(supabase, booking) {
 async function fetchBookedSlots(date) {
   const locationId = getSelectedLocationId();
   if (!date || !locationId) {
-    bookedSlots = [];
+    slotBookingCounts = {};
     updateTimeSlotAvailability();
     return;
   }
 
   const supabase = getSupabase();
   if (!supabase) {
-    bookedSlots = [];
+    slotBookingCounts = {};
     updateTimeSlotAvailability();
     return;
   }
@@ -309,31 +293,54 @@ async function fetchBookedSlots(date) {
 
     if (error) throw error;
 
-    bookedSlots = (data || []).map((row) => row.booking_time);
+    slotBookingCounts = countBookingsByTimeSlot(data);
     updateTimeSlotAvailability();
   } catch (err) {
     console.error('Error fetching bookings:', err);
-    bookedSlots = [];
+    slotBookingCounts = {};
     updateTimeSlotAvailability();
   }
+}
+
+function formatTimeSlotLabel(label, timeValue) {
+  const max = getMaxReservationsPerSlot();
+  const booked = slotBookingCounts[timeValue] || 0;
+  const remaining = getSlotSpotsRemaining(timeValue, slotBookingCounts, max);
+
+  if (remaining <= 0) {
+    return `${label} — Full`;
+  }
+
+  if (booked > 0) {
+    const spotWord = remaining === 1 ? 'spot' : 'spots';
+    return `${label} — ${remaining} ${spotWord} left`;
+  }
+
+  return label;
 }
 
 function updateTimeSlotAvailability() {
   const timeSelect = document.getElementById('time');
   if (!timeSelect) return;
 
+  const selectedTime = timeSelect.value;
+
   SITE.booking.timeSlots.forEach(({ value, label }) => {
     const option = timeSelect.querySelector(`option[value="${value}"]`);
     if (!option) return;
 
-    if (bookedSlots.includes(value)) {
+    if (isSlotFullyBooked(value, slotBookingCounts)) {
       option.disabled = true;
-      option.textContent = `${label} 🔴 Booked`;
+      option.textContent = `${label} — Full`;
     } else {
       option.disabled = false;
-      option.textContent = label;
+      option.textContent = formatTimeSlotLabel(label, value);
     }
   });
+
+  if (selectedTime && isSlotFullyBooked(selectedTime, slotBookingCounts)) {
+    timeSelect.value = '';
+  }
 }
 
 function updateSummary() {
@@ -433,7 +440,11 @@ async function handleSubmit(e) {
   if (!getSelectedBookingService()) { showError("Pick a general service and specific style, mama! We no fit guess your hair dreams 🔥"); resetButton(submitBtn); return; }
   if (!date) { showError('Pick date. Make you no just show anyhow o! 📅'); resetButton(submitBtn); return; }
   if (!time) { showError('Select time. Asantewaa no dey sleep for shop 😴'); resetButton(submitBtn); return; }
-  if (bookedSlots.includes(time)) { showError('Eh! This time don book already. Choose another time, queen 👑'); resetButton(submitBtn); return; }
+  if (isSlotFullyBooked(time, slotBookingCounts)) {
+    showError('Eh! This time slot is full. Choose another time, queen 👑');
+    resetButton(submitBtn);
+    return;
+  }
 
   const bookingData = {
     fullName,
@@ -466,17 +477,9 @@ async function handleSubmit(e) {
       return;
     }
 
-    const { data: existingBookings, error: checkError } = await fetchExistingBooking(
-      supabase,
-      date,
-      time,
-      locationId
-    );
-
-    if (checkError) throw checkError;
-
-    if (existingBookings?.length > 0) {
-      showError('Eh! This time don book already. Choose another time, queen 👑');
+    const slotCount = await getSlotBookingCount(supabase, date, time, locationId);
+    if (slotCount >= getMaxReservationsPerSlot()) {
+      showError('Eh! This time slot is full. Choose another time, queen 👑');
       resetButton(submitBtn);
       await fetchBookedSlots(date);
       return;
@@ -516,12 +519,20 @@ async function handleSubmit(e) {
     console.error('Booking error:', err);
     const limitReached =
       err?.message?.includes('Daily booking limit') ||
-      err?.details?.includes('Daily booking limit');
+      err?.details?.includes('Daily booking limit') ||
+      err?.message?.includes('Time slot fully booked') ||
+      err?.details?.includes('Time slot fully booked');
 
     if (limitReached) {
-      showError('This date is fully booked at this location. Please choose another day.');
-      datePicker?.clear();
+      const slotFull = err?.message?.includes('Time slot fully booked') || err?.details?.includes('Time slot fully booked');
+      showError(
+        slotFull
+          ? 'Eh! This time slot is full. Choose another time, queen 👑'
+          : 'This date is fully booked at this location. Please choose another day.'
+      );
+      if (!slotFull) datePicker?.clear();
       await refreshBookingDateCapacity();
+      await fetchBookedSlots(document.getElementById('date')?.value || '');
       resetButton(submitBtn);
       return;
     }

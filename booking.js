@@ -12,6 +12,7 @@ import {
   buildDateDisableFunctions,
   countBookingsByTimeSlot,
   fetchBookingCountsByDate,
+  formatDateYmd,
   getBookingWindowDates,
   getDailyBookingCount,
   getMaxReservationsPerDay,
@@ -179,6 +180,15 @@ function populateBookingPage() {
   }
 }
 
+function markFullyBookedCalendarDays(_dObj, _dStr, _fp, dayElem) {
+  const dateStr = formatDateYmd(dayElem.dateObj);
+  if (isDateFullyBooked(dateStr, capacityByDate)) {
+    dayElem.classList.add('fully-booked-day');
+    dayElem.setAttribute('title', 'Fully booked');
+    dayElem.setAttribute('aria-disabled', 'true');
+  }
+}
+
 function initDatePicker() {
   if (typeof flatpickr === 'undefined') return;
 
@@ -189,6 +199,7 @@ function initDatePicker() {
     maxDate,
     dateFormat: 'Y-m-d',
     disable: buildDateDisableFunctions(capacityByDate),
+    onDayCreate: markFullyBookedCalendarDays,
     onChange(_selectedDates, dateStr) {
       updateSummary();
       fetchBookedSlots(dateStr);

@@ -1554,6 +1554,32 @@ body.editorial-theme .flatpickr-day.flatpickr-disabled:hover {
   background: transparent;
 }
 
+body.editorial-theme .flatpickr-day.fully-booked-day {
+  position: relative;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: not-allowed;
+}
+
+body.editorial-theme .flatpickr-day.fully-booked-day::after {
+  content: '';
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 50%;
+  height: 2px;
+  background: #e53935;
+  transform: rotate(-45deg);
+  pointer-events: none;
+  z-index: 1;
+}
+
+body.editorial-theme .flatpickr-day.fully-booked-day:hover,
+body.editorial-theme .flatpickr-day.fully-booked-day:focus {
+  background: rgba(229, 57, 53, 0.12);
+  border-color: rgba(229, 57, 53, 0.45);
+  color: rgba(255, 255, 255, 0.4);
+}
+
 body.editorial-theme .numInputWrapper span.arrowUp:after {
   border-bottom-color: #fff;
 }

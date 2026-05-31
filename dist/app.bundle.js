@@ -844,6 +844,7 @@ function getBookingWindowDates(daysAhead = 60) {
 function applyCapacityToDatePicker(picker, countsByDate) {
   if (!picker) return;
   picker.set("disable", buildDateDisableFunctions(countsByDate));
+  picker.redraw();
 }
 
 // data.js?v=20260537
@@ -1751,6 +1752,14 @@ function populateBookingPage() {
     waAlt.setAttribute("rel", "noopener noreferrer");
   }
 }
+function markFullyBookedCalendarDays(_dObj, _dStr, _fp, dayElem) {
+  const dateStr = formatDateYmd(dayElem.dateObj);
+  if (isDateFullyBooked(dateStr, capacityByDate)) {
+    dayElem.classList.add("fully-booked-day");
+    dayElem.setAttribute("title", "Fully booked");
+    dayElem.setAttribute("aria-disabled", "true");
+  }
+}
 function initDatePicker() {
   if (typeof flatpickr === "undefined") return;
   const { minDate, maxDate } = getBookingWindowDates();
@@ -1759,6 +1768,7 @@ function initDatePicker() {
     maxDate,
     dateFormat: "Y-m-d",
     disable: buildDateDisableFunctions(capacityByDate),
+    onDayCreate: markFullyBookedCalendarDays,
     onChange(_selectedDates, dateStr) {
       updateSummary();
       fetchBookedSlots(dateStr);

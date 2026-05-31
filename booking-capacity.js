@@ -156,4 +156,5 @@ export function getBookingWindowDates(daysAhead = 60) {
 export function applyCapacityToDatePicker(picker, countsByDate) {
   if (!picker) return;
   picker.set('disable', buildDateDisableFunctions(countsByDate));
+  picker.redraw();
 }

@@ -113,6 +113,7 @@ var SITE = {
       starMs: 320,
       exitMs: 320,
       titleHoldMs: 280,
+      titleSlideMs: 950,
       title: "Asantewaa",
       subtitle: "Glam Room",
       letterStaggerMs: 28
@@ -922,6 +923,7 @@ var SITE2 = {
       starMs: 320,
       exitMs: 320,
       titleHoldMs: 280,
+      titleSlideMs: 950,
       title: "Asantewaa",
       subtitle: "Glam Room",
       letterStaggerMs: 28
@@ -2194,6 +2196,7 @@ var SITE3 = {
       starMs: 320,
       exitMs: 320,
       titleHoldMs: 280,
+      titleSlideMs: 950,
       title: "Asantewaa",
       subtitle: "Glam Room",
       letterStaggerMs: 28
@@ -3749,7 +3752,8 @@ function renderHomePanels() {
   const container = document.getElementById("home-panels");
   if (!container || !SITE.home?.panels) return;
   container.innerHTML = SITE.home.panels.map((panel, i) => {
-    const imageUrl = panel.imageUrl || (i === 0 ? SITE.hero.photoUrl : "");
+    const introHeroImage = i === 0 ? getHeroIntroImageUrl() : "";
+    const imageUrl = introHeroImage || panel.imageUrl || (i === 0 ? SITE.hero.photoUrl : "");
     const imagePosition = panel.imagePosition || "center top";
     const overlay = panel.imageOnly ? "linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.35) 100%)" : panel.gradient || "linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%)";
     const bgStyle = imageUrl ? `background-image: ${overlay}, url('${imageUrl}'); background-position: ${imagePosition};` : `background: ${panel.gradient || "#1a0f0a"};`;
@@ -3775,11 +3779,16 @@ function renderHomePanels() {
     const labelHtml = panel.label ? `<p class="home-panel-label">${panel.label}</p>` : "";
     const headingTag = i === 0 ? "h1" : "h2";
     const ctaHtml = panel.link ? `<a href="${panel.link}" class="home-panel-cta">${panel.linkText || "Explore"}</a>` : "";
+    const heroIntroTitleHtml = i === 0 && SITE.home?.introLoader ? (() => {
+      const { html, letterStaggerMs } = buildIntroTitleMarkup(SITE.home.introLoader);
+      return `<div class="home-hero-intro-title" style="--letter-stagger:${letterStaggerMs}ms" aria-hidden="true">${html}</div>`;
+    })() : "";
     return `
         <section class="${panelClass}" id="${panel.id}">
           <div class="home-panel-bg" style="${bgStyle}"></div>
           <div class="home-panel-overlay"></div>
           ${linkOverlay}
+          ${heroIntroTitleHtml}
           <div class="home-panel-content">
             ${labelHtml}
             <${headingTag} class="${titleClass}">${panel.title}</${headingTag}>
@@ -3836,6 +3845,31 @@ function sleep(ms) {
 function escapeHtml(str) {
   return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
+function buildIntroTitleMarkup(config) {
+  const title = (config?.title || SITE.owner || "Asantewaa").toUpperCase();
+  const subtitle = (config?.subtitle || "").toUpperCase();
+  const letterStaggerMs = config?.letterStaggerMs ?? 28;
+  const titleLetters = [...title].map((ch, i) => {
+    const safe = ch === " " ? "\xA0" : escapeHtml(ch);
+    return `<span class="home-intro-letter" style="--i:${i}">${safe}</span>`;
+  }).join("");
+  return {
+    title,
+    subtitle,
+    letterStaggerMs,
+    html: `
+      <div class="home-hero-intro-title__inner">
+        <div class="home-intro-title-line">${titleLetters}</div>
+        ${subtitle ? `<p class="home-intro-subtitle" style="--i:${title.length + 1}">${escapeHtml(subtitle)}</p>` : ""}
+      </div>
+    `
+  };
+}
+function getHeroIntroImageUrl() {
+  const introImages = SITE.home?.introLoader?.images?.filter(Boolean);
+  if (introImages?.length) return introImages[introImages.length - 1];
+  return SITE.home?.panels?.[0]?.imageUrl || SITE.hero?.photoUrl || "";
+}
 function preloadImages(urls) {
   return Promise.all(
     urls.map(
@@ -3853,7 +3887,9 @@ async function initHomeIntroLoader(onComplete) {
   const images = config?.images?.filter(Boolean);
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!images?.length || reducedMotion) {
-    document.body.classList.add("home-intro-done");
+    document.body.classList.add("home-intro-done", "home-hero-title-done");
+    document.getElementById("hero")?.classList.add("home-hero-title-settled");
+    document.getElementById("hero")?.querySelector(".home-hero-intro-title")?.remove();
     onComplete();
     return;
   }
@@ -3880,23 +3916,6 @@ async function initHomeIntroLoader(onComplete) {
     slidesEl.appendChild(slide);
     return slide;
   });
-  const title = (config.title || SITE.owner || "Asantewaa").toUpperCase();
-  const subtitle = (config.subtitle || "").toUpperCase();
-  const letterStaggerMs = config.letterStaggerMs ?? 28;
-  const titleHoldMs = config.titleHoldMs ?? 280;
-  const titleLetters = [...title].map((ch, i) => {
-    const safe = ch === " " ? "\xA0" : escapeHtml(ch);
-    return `<span class="home-intro-letter" style="--i:${i}">${safe}</span>`;
-  }).join("");
-  const titleEl = document.createElement("div");
-  titleEl.className = "home-intro-loader__title";
-  titleEl.style.setProperty("--letter-stagger", `${letterStaggerMs}ms`);
-  titleEl.setAttribute("aria-hidden", "true");
-  titleEl.innerHTML = `
-    <div class="home-intro-title-line">${titleLetters}</div>
-    ${subtitle ? `<p class="home-intro-subtitle" style="--i:${title.length + 1}">${escapeHtml(subtitle)}</p>` : ""}
-  `;
-  loader.appendChild(titleEl);
   document.body.appendChild(loader);
   await preloadImages(images);
   await new Promise((resolve) => requestAnimationFrame(resolve));
@@ -3910,15 +3929,51 @@ async function initHomeIntroLoader(onComplete) {
     slides[i]?.classList.add("is-active");
   }
   await sleep(slideMs);
-  loader.classList.add("show-stars", "show-title");
-  const titleRevealMs = title.length * letterStaggerMs + 220;
-  await sleep(Math.max(starMs, titleRevealMs + titleHoldMs));
+  loader.classList.add("show-stars");
+  await sleep(starMs);
   loader.classList.add("is-exiting");
   document.body.classList.remove("home-intro-active");
-  document.body.classList.add("home-intro-done");
+  document.body.classList.add("home-intro-done", "home-hero-title-active");
   await sleep(exitMs);
   loader.remove();
+  await initHeroTitleSequence();
   onComplete();
+}
+async function initHeroTitleSequence() {
+  const config = SITE.home?.introLoader;
+  const hero = document.getElementById("hero");
+  const titleEl = hero?.querySelector(".home-hero-intro-title");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!titleEl || !config || reducedMotion) {
+    document.body.classList.remove("home-hero-title-active");
+    document.body.classList.add("home-hero-title-done");
+    hero?.classList.add("home-hero-title-settled");
+    return;
+  }
+  await sleep(120);
+  titleEl.classList.add("show-title");
+  const { title } = buildIntroTitleMarkup(config);
+  const letterStaggerMs = config.letterStaggerMs ?? 28;
+  const titleHoldMs = config.titleHoldMs ?? 280;
+  const titleSlideMs = config.titleSlideMs ?? 950;
+  const titleRevealMs = title.length * letterStaggerMs + 220;
+  await sleep(titleRevealMs + titleHoldMs);
+  const inner = titleEl.querySelector(".home-hero-intro-title__inner");
+  if (inner) {
+    const panelRect = hero.getBoundingClientRect();
+    const innerRect = inner.getBoundingClientRect();
+    const bottomPadding = Math.max(56, window.innerHeight * 0.1);
+    const targetCenterY = panelRect.height - bottomPadding - innerRect.height / 2;
+    const currentCenterY = innerRect.top + innerRect.height / 2 - panelRect.top;
+    const deltaY = targetCenterY - currentCenterY;
+    inner.style.setProperty("--hero-title-shift", `${deltaY}px`);
+  }
+  titleEl.classList.add("is-sliding-down");
+  await sleep(titleSlideMs);
+  document.body.classList.remove("home-hero-title-active");
+  document.body.classList.add("home-hero-title-done");
+  hero.classList.add("home-hero-title-settled");
+  titleEl.classList.add("is-settled");
 }
 function isHomeHorizontalScroll() {
   return window.matchMedia("(min-width: 1024px)").matches;

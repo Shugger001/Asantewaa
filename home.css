@@ -312,6 +312,22 @@ body.home-intro-active .home-panel.in-view .home-panel-visual-labels {
   transform: translateY(28px);
 }
 
+body.home-hero-title-active #hero .home-panel-content {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: none;
+}
+
+body.home-hero-title-done #hero .home-panel-content {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.85s ease 0.15s, transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+}
+
+#hero.home-hero-title-settled .home-panel-title {
+  display: none;
+}
+
 .home-panel-label {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.65rem;
@@ -738,6 +754,53 @@ body.home-intro-done .home-scroll-dots {
   transition-delay: 0s;
 }
 
+.home-hero-intro-title {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.home-hero-intro-title__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  transform: translateY(0);
+  transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.home-hero-intro-title.is-sliding-down .home-hero-intro-title__inner {
+  transform: translateY(var(--hero-title-shift, 0px));
+}
+
+.home-hero-intro-title.is-settled {
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding-bottom: clamp(3.25rem, 11vh, 5rem);
+}
+
+.home-hero-intro-title.is-settled .home-hero-intro-title__inner {
+  transform: none;
+}
+
+.home-hero-intro-title.show-title::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.5) 100%);
+  opacity: 0;
+  animation: home-intro-veil 0.35s ease forwards;
+  pointer-events: none;
+}
+
 .home-intro-loader.show-title::after {
   content: '';
   position: absolute;
@@ -813,9 +876,17 @@ body.home-intro-done .home-scroll-dots {
   transition-delay: calc(var(--i) * var(--letter-stagger, 28ms));
 }
 
-.home-intro-loader.show-title .home-intro-letter {
+.home-intro-loader.show-title .home-intro-letter,
+.home-hero-intro-title.show-title .home-intro-letter {
   opacity: 1;
   transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+.home-intro-loader.show-title .home-intro-subtitle,
+.home-hero-intro-title.show-title .home-intro-subtitle {
+  opacity: 1;
+  transform: translateY(0);
   filter: blur(0);
 }
 
@@ -834,12 +905,6 @@ body.home-intro-done .home-scroll-dots {
     transform 0.44s cubic-bezier(0.22, 1, 0.36, 1),
     filter 0.38s ease;
   transition-delay: calc(var(--i) * var(--letter-stagger, 28ms) + 80ms);
-}
-
-.home-intro-loader.show-title .home-intro-subtitle {
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0);
 }
 
 /* Desktop — horizontal scroll (beyonce.com) */

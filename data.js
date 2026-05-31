@@ -155,6 +155,7 @@ export const SITE = {
       starMs: 320,
       exitMs: 320,
       titleHoldMs: 280,
+      titleSlideMs: 950,
       title: "Asantewaa",
       subtitle: "Glam Room",
       letterStaggerMs: 28,

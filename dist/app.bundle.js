@@ -50,7 +50,7 @@ var SITE = {
     { id: "02b", label: "The Enterprise \u2014 Campaign Pillars", href: "about.html#pillars" },
     { id: "03", label: "The Glam Room \u2014 Salon Flagship", href: "glam-room.html" },
     { id: "03b", label: "The Glam Room \u2014 Signature Services", href: "glam-room.html#services" },
-    { id: "04", label: "Bookings & Proposals \u2014 The Intake Engine", href: "book.html" }
+    { id: "04", label: "Bookings & Proposals \u2014 The Intake Engine", href: "proposals.html" }
   ],
   globalFooter: "\xA9 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
   // UPDATE THIS with your real WhatsApp number (include country code, e.g. +233XXXXXXXXX)
@@ -97,7 +97,8 @@ var SITE = {
       { label: "Home", href: "index.html" },
       { label: "The Enterprise", href: "about.html" },
       { label: "The Glam Room", href: "glam-room.html" },
-      { label: "Bookings & Proposals", href: "book.html" }
+      { label: "Book Appointment", href: "book.html" },
+      { label: "Partnerships", href: "proposals.html" }
     ],
     introLoader: {
       images: [
@@ -197,7 +198,7 @@ var SITE = {
         imageUrl: "images/glam-red-studio.png",
         imagePosition: "center 20%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 100%)",
-        link: "book.html",
+        link: "proposals.html",
         linkText: "Book Now"
       },
       {
@@ -355,7 +356,7 @@ var SITE = {
     },
     cta: {
       label: "Explore Partnerships",
-      href: "book.html"
+      href: "proposals.html"
     }
   },
   glamRoom: {
@@ -680,12 +681,14 @@ var SITE = {
   serviceNavLinks: [
     { label: "Home", href: "index.html" },
     { label: "All Services", href: "glam-room.html#services" },
-    { label: "Bookings & Proposals", href: "book.html" }
+    { label: "Book Appointment", href: "book.html" },
+    { label: "Partnerships", href: "proposals.html" }
   ],
   homeNavLinks: [
     { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
-    { label: "Bookings & Proposals", href: "book.html" }
+    { label: "Book Appointment", href: "book.html" },
+    { label: "Partnerships", href: "proposals.html" }
   ],
   aboutNavLinks: [
     { label: "Home", href: "index.html" },
@@ -697,13 +700,14 @@ var SITE = {
     { label: "Home", href: "index.html" },
     { label: "Services", href: "#services" },
     { label: "Gallery", href: "#gallery" },
-    { label: "Bookings & Proposals", href: "book.html" }
+    { label: "Book Appointment", href: "book.html" },
+    { label: "Partnerships", href: "proposals.html" }
   ],
   bookingNavLinks: [
     { label: "Home", href: "index.html" },
     { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
-    { label: "Bookings & Proposals", href: "book.html" }
+    { label: "Partnerships", href: "proposals.html" }
   ],
   footer: {
     copyright: `\xA9 ${(/* @__PURE__ */ new Date()).getFullYear()} Glam Room by Asantewaa. All rights reserved.`,
@@ -811,7 +815,7 @@ var SITE2 = {
     { id: "02b", label: "The Enterprise \u2014 Campaign Pillars", href: "about.html#pillars" },
     { id: "03", label: "The Glam Room \u2014 Salon Flagship", href: "glam-room.html" },
     { id: "03b", label: "The Glam Room \u2014 Signature Services", href: "glam-room.html#services" },
-    { id: "04", label: "Bookings & Proposals \u2014 The Intake Engine", href: "book.html" }
+    { id: "04", label: "Bookings & Proposals \u2014 The Intake Engine", href: "proposals.html" }
   ],
   globalFooter: "\xA9 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
   // UPDATE THIS with your real WhatsApp number (include country code, e.g. +233XXXXXXXXX)
@@ -858,7 +862,8 @@ var SITE2 = {
       { label: "Home", href: "index.html" },
       { label: "The Enterprise", href: "about.html" },
       { label: "The Glam Room", href: "glam-room.html" },
-      { label: "Bookings & Proposals", href: "book.html" }
+      { label: "Book Appointment", href: "book.html" },
+      { label: "Partnerships", href: "proposals.html" }
     ],
     introLoader: {
       images: [
@@ -958,7 +963,7 @@ var SITE2 = {
         imageUrl: "images/glam-red-studio.png",
         imagePosition: "center 20%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 100%)",
-        link: "book.html",
+        link: "proposals.html",
         linkText: "Book Now"
       },
       {
@@ -1116,7 +1121,7 @@ var SITE2 = {
     },
     cta: {
       label: "Explore Partnerships",
-      href: "book.html"
+      href: "proposals.html"
     }
   },
   glamRoom: {
@@ -1441,12 +1446,14 @@ var SITE2 = {
   serviceNavLinks: [
     { label: "Home", href: "index.html" },
     { label: "All Services", href: "glam-room.html#services" },
-    { label: "Bookings & Proposals", href: "book.html" }
+    { label: "Book Appointment", href: "book.html" },
+    { label: "Partnerships", href: "proposals.html" }
   ],
   homeNavLinks: [
     { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
-    { label: "Bookings & Proposals", href: "book.html" }
+    { label: "Book Appointment", href: "book.html" },
+    { label: "Partnerships", href: "proposals.html" }
   ],
   aboutNavLinks: [
     { label: "Home", href: "index.html" },
@@ -1458,13 +1465,14 @@ var SITE2 = {
     { label: "Home", href: "index.html" },
     { label: "Services", href: "#services" },
     { label: "Gallery", href: "#gallery" },
-    { label: "Bookings & Proposals", href: "book.html" }
+    { label: "Book Appointment", href: "book.html" },
+    { label: "Partnerships", href: "proposals.html" }
   ],
   bookingNavLinks: [
     { label: "Home", href: "index.html" },
     { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
-    { label: "Bookings & Proposals", href: "book.html" }
+    { label: "Partnerships", href: "proposals.html" }
   ],
   footer: {
     copyright: `\xA9 ${(/* @__PURE__ */ new Date()).getFullYear()} Glam Room by Asantewaa. All rights reserved.`,

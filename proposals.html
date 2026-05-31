@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Partner with Asantewaa — submit your strategic briefing for brand collaborations and campaigns.">
+  <meta name="theme-color" content="#000000">
+  <title>Bookings & Proposals | Asantewaa</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css?v=20260540">
+  <link rel="stylesheet" href="home.css?v=20260540">
+  <link rel="stylesheet" href="proposals.css?v=20260540">
+  <link rel="stylesheet" href="mobile.css?v=20260540">
+</head>
+<body data-page="proposals" class="prop-page">
+
+  <header class="prop-topbar">
+    <a href="glam-room.html" class="prop-topbar-link" id="home-topbar-left">GLAM ROOM</a>
+    <span class="prop-topbar-sep" aria-hidden="true">*</span>
+    <button class="prop-topbar-menu" id="home-menu-open" aria-label="Open menu">MENU</button>
+  </header>
+
+  <div class="home-menu-overlay" id="home-menu-overlay"></div>
+  <nav class="home-menu-panel" id="home-menu-panel" aria-label="Site navigation">
+    <button class="home-menu-close" id="home-menu-close">Close</button>
+    <ul class="home-menu-links" id="home-menu-links"></ul>
+    <div class="home-menu-socials" id="home-menu-socials"></div>
+    <p class="home-menu-footer" id="home-menu-footer"></p>
+  </nav>
+
+  <main class="prop-main">
+    <header class="prop-hero">
+      <h1 class="prop-hero__title" id="prop-hero-title"></h1>
+      <p class="prop-hero__subline" id="prop-hero-subline"></p>
+    </header>
+
+    <form id="prop-form">
+      <div class="prop-field">
+        <label for="prop-name">Name / Company Name</label>
+        <input type="text" id="prop-name" name="name" required autocomplete="organization">
+      </div>
+      <div class="prop-field">
+        <label for="prop-email">Corporate Email Address</label>
+        <input type="email" id="prop-email" name="email" required autocomplete="email">
+      </div>
+      <div class="prop-field">
+        <label for="prop-pillar">Campaign Goals & Selected Collaboration Pillar</label>
+        <select id="prop-pillar" name="pillar" required></select>
+      </div>
+      <div class="prop-field">
+        <label for="prop-budget">Project Budget Allocation Tier</label>
+        <select id="prop-budget" name="budget" required></select>
+      </div>
+      <div class="prop-field">
+        <label for="prop-brief">Brief Details</label>
+        <textarea id="prop-brief" name="brief" rows="4" placeholder="Tell us about your campaign goals…"></textarea>
+      </div>
+      <button type="submit" class="prop-submit" id="prop-submit"></button>
+      <p class="prop-msg" id="prop-msg" hidden></p>
+    </form>
+
+    <section class="prop-compliance" id="prop-compliance" aria-label="Compliance framework"></section>
+    <section class="prop-contact" id="prop-contact" aria-label="Direct management contact"></section>
+    <p class="prop-footer" id="prop-footer"></p>
+  </main>
+
+  <script type="module" src="dist/app.bundle.js?v=6"></script>
+</body>
+</html>

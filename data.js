@@ -87,7 +87,7 @@ export const SITE = {
     { id: "02b", label: "The Enterprise — Campaign Pillars", href: "about.html#pillars" },
     { id: "03", label: "The Glam Room — Salon Flagship", href: "glam-room.html" },
     { id: "03b", label: "The Glam Room — Signature Services", href: "glam-room.html#services" },
-    { id: "04", label: "Bookings & Proposals — The Intake Engine", href: "book.html" },
+    { id: "04", label: "Bookings & Proposals — The Intake Engine", href: "proposals.html" },
   ],
 
   globalFooter: "© 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
@@ -139,7 +139,8 @@ export const SITE = {
       { label: "Home", href: "index.html" },
       { label: "The Enterprise", href: "about.html" },
       { label: "The Glam Room", href: "glam-room.html" },
-      { label: "Bookings & Proposals", href: "book.html" },
+      { label: "Book Appointment", href: "book.html" },
+      { label: "Partnerships", href: "proposals.html" },
     ],
     introLoader: {
       images: [
@@ -239,7 +240,7 @@ export const SITE = {
         imageUrl: "images/glam-red-studio.png",
         imagePosition: "center 20%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 100%)",
-        link: "book.html",
+        link: "proposals.html",
         linkText: "Book Now",
       },
       {
@@ -400,7 +401,7 @@ export const SITE = {
     },
     cta: {
       label: "Explore Partnerships",
-      href: "book.html",
+      href: "proposals.html",
     },
   },
 
@@ -749,13 +750,15 @@ export const SITE = {
   serviceNavLinks: [
     { label: "Home", href: "index.html" },
     { label: "All Services", href: "glam-room.html#services" },
-    { label: "Bookings & Proposals", href: "book.html" },
+    { label: "Book Appointment", href: "book.html" },
+    { label: "Partnerships", href: "proposals.html" },
   ],
 
   homeNavLinks: [
     { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
-    { label: "Bookings & Proposals", href: "book.html" },
+    { label: "Book Appointment", href: "book.html" },
+    { label: "Partnerships", href: "proposals.html" },
   ],
 
   aboutNavLinks: [
@@ -769,14 +772,15 @@ export const SITE = {
     { label: "Home", href: "index.html" },
     { label: "Services", href: "#services" },
     { label: "Gallery", href: "#gallery" },
-    { label: "Bookings & Proposals", href: "book.html" },
+    { label: "Book Appointment", href: "book.html" },
+    { label: "Partnerships", href: "proposals.html" },
   ],
 
   bookingNavLinks: [
     { label: "Home", href: "index.html" },
     { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
-    { label: "Bookings & Proposals", href: "book.html" },
+    { label: "Partnerships", href: "proposals.html" },
   ],
 
   footer: {

@@ -3870,6 +3870,25 @@ function getHeroIntroImageUrl() {
   if (introImages?.length) return introImages[introImages.length - 1];
   return SITE.home?.panels?.[0]?.imageUrl || SITE.hero?.photoUrl || "";
 }
+function getHeroTitleBottomPadding(hero) {
+  const content = hero?.querySelector(".home-panel-content");
+  if (!content) return 72;
+  const padding = parseFloat(getComputedStyle(content).paddingBottom);
+  return Number.isFinite(padding) ? padding : 72;
+}
+function setHeroTitleSlideDistance(hero, inner) {
+  const panelRect = hero.getBoundingClientRect();
+  const innerRect = inner.getBoundingClientRect();
+  const bottomPadding = getHeroTitleBottomPadding(hero);
+  const targetBottom = panelRect.bottom - bottomPadding;
+  const deltaY = targetBottom - innerRect.bottom;
+  inner.style.setProperty("--hero-title-shift", `${deltaY}px`);
+}
+function lockHeroTitleAtBase(hero, titleEl, inner) {
+  setHeroTitleSlideDistance(hero, inner);
+  titleEl.classList.add("is-settled");
+  hero.style.setProperty("--hero-title-block-height", `${inner.offsetHeight}px`);
+}
 function preloadImages(urls) {
   return Promise.all(
     urls.map(
@@ -3960,20 +3979,18 @@ async function initHeroTitleSequence() {
   await sleep(titleRevealMs + titleHoldMs);
   const inner = titleEl.querySelector(".home-hero-intro-title__inner");
   if (inner) {
-    const panelRect = hero.getBoundingClientRect();
-    const innerRect = inner.getBoundingClientRect();
-    const bottomPadding = Math.max(56, window.innerHeight * 0.1);
-    const targetCenterY = panelRect.height - bottomPadding - innerRect.height / 2;
-    const currentCenterY = innerRect.top + innerRect.height / 2 - panelRect.top;
-    const deltaY = targetCenterY - currentCenterY;
-    inner.style.setProperty("--hero-title-shift", `${deltaY}px`);
+    setHeroTitleSlideDistance(hero, inner);
   }
   titleEl.classList.add("is-sliding-down");
   await sleep(titleSlideMs);
+  if (inner) {
+    lockHeroTitleAtBase(hero, titleEl, inner);
+  } else {
+    titleEl.classList.add("is-settled");
+  }
   document.body.classList.remove("home-hero-title-active");
   document.body.classList.add("home-hero-title-done");
   hero.classList.add("home-hero-title-settled");
-  titleEl.classList.add("is-settled");
 }
 function isHomeHorizontalScroll() {
   return window.matchMedia("(min-width: 1024px)").matches;

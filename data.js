@@ -173,7 +173,7 @@ export const SITE = {
       },
       {
         id: "discover",
-        label: "Discover",
+        label: "",
         title: "The Queen Behind the Chair",
         subtitle: "4M+ Followers · Ghanaian Pride",
         imageUrl: "images/glam-red-studio.png",

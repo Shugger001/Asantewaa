@@ -131,7 +131,7 @@ var SITE = {
       },
       {
         id: "discover",
-        label: "Discover",
+        label: "",
         title: "The Queen Behind the Chair",
         subtitle: "4M+ Followers \xB7 Ghanaian Pride",
         imageUrl: "images/glam-red-studio.png",
@@ -923,7 +923,7 @@ var SITE2 = {
       },
       {
         id: "discover",
-        label: "Discover",
+        label: "",
         title: "The Queen Behind the Chair",
         subtitle: "4M+ Followers \xB7 Ghanaian Pride",
         imageUrl: "images/glam-red-studio.png",
@@ -2178,7 +2178,7 @@ var SITE3 = {
       },
       {
         id: "discover",
-        label: "Discover",
+        label: "",
         title: "The Queen Behind the Chair",
         subtitle: "4M+ Followers \xB7 Ghanaian Pride",
         imageUrl: "images/glam-red-studio.png",

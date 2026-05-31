@@ -1610,7 +1610,7 @@ async function handleDepositReturn(handlers = {}) {
   }
 }
 
-// booking.js?v=20260560
+// booking.js?v=20260561
 var slotBookingCounts = {};
 var datePicker = null;
 var capacityByDate = {};
@@ -1672,10 +1672,6 @@ function applyBookingLocationFromUrl() {
 }
 function populateBookingPage() {
   document.getElementById("booking-subhead").textContent = SITE.booking.subhead;
-  document.getElementById("booking-promise").innerHTML = `
-    <i class="fas fa-gem" style="color: var(--gold);"></i>
-    <strong>Mama Glam's Promise:</strong> ${SITE.booking.promise}
-  `;
   const locationsList = document.getElementById("booking-locations-list");
   if (locationsList) {
     locationsList.innerHTML = SITE.locations.map((loc) => {
@@ -1698,9 +1694,6 @@ function populateBookingPage() {
       return `<option value="${getLocationBookingValue(loc)}">${label}</option>`;
     }).join("");
   }
-  document.getElementById("booking-hours").textContent = SITE.booking.hours || SITE.business.hours;
-  document.getElementById("booking-tiktok").textContent = `Follow me: ${SITE.booking.tiktokHandle}`;
-  document.getElementById("booking-vibe").textContent = SITE.booking.vibeNote;
   populateServiceCategories();
   populateServiceStyles("");
   applyBookingServiceFromUrl();

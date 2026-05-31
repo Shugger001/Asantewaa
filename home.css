@@ -134,11 +134,10 @@ body.home-editorial .mobile-menu-overlay {
 }
 
 .site-topbar-logo {
-  width: 1.75rem;
-  height: 1.75rem;
-  border-radius: 0.35rem;
+  width: 2rem;
+  height: 2rem;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .home-menu-btn {

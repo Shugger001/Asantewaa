@@ -708,6 +708,7 @@ body.install-prompt-open {
 
   .ent-metric-value {
     font-size: clamp(1.5rem, 6.5vw, 2.5rem);
+    font-weight: 700;
     letter-spacing: 0.02em;
   }
 

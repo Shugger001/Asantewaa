@@ -115,7 +115,7 @@ var SITE = {
       titleHoldMs: 280,
       titleSlideMs: 950,
       title: "Asantewaa",
-      subtitle: "Glam Room",
+      subtitle: "",
       letterStaggerMs: 28
     },
     panels: [
@@ -925,7 +925,7 @@ var SITE2 = {
       titleHoldMs: 280,
       titleSlideMs: 950,
       title: "Asantewaa",
-      subtitle: "Glam Room",
+      subtitle: "",
       letterStaggerMs: 28
     },
     panels: [
@@ -2198,7 +2198,7 @@ var SITE3 = {
       titleHoldMs: 280,
       titleSlideMs: 950,
       title: "Asantewaa",
-      subtitle: "Glam Room",
+      subtitle: "",
       letterStaggerMs: 28
     },
     panels: [

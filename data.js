@@ -157,7 +157,7 @@ export const SITE = {
       titleHoldMs: 280,
       titleSlideMs: 950,
       title: "Asantewaa",
-      subtitle: "Glam Room",
+      subtitle: "",
       letterStaggerMs: 28,
     },
     panels: [

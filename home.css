@@ -1560,6 +1560,20 @@ body.editorial-theme .booking-container {
   padding-top: 5rem;
 }
 
+@media (max-width: 899px) {
+  body[data-page="booking"] .booking-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: 0.65rem;
+    align-items: start;
+  }
+
+  body[data-page="booking"] .personality-card,
+  body[data-page="booking"] .booking-form-card {
+    min-width: 0;
+  }
+}
+
 body.editorial-theme .booking-footer-note {
   color: var(--text-muted);
 }

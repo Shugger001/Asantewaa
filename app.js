@@ -1,12 +1,12 @@
 import { SITE, getLocationLabel, findServiceById, getServicePriceRange } from './data.js?v=20260536';
-import { initBookingForm } from './booking.js?v=20260541';
+import { initBookingForm } from './booking.js?v=20260560';
 import {
   bindSanctuaryBookingButtons,
   openBookingPage,
-} from './glam-booking.js?v=20260541';
+} from './glam-booking.js?v=20260548';
 import { initProposalsForm } from './proposals.js?v=20260536';
-import { initFindBooking } from './find-booking.js?v=20260536';
-import { initInstallPrompt } from './install-prompt.js?v=20260536';
+import { initFindBooking } from './find-booking.js?v=20260548';
+import { initInstallPrompt } from './install-prompt.js?v=20260548';
 
 /* ==========================================================================
    Glam Room by Asantewaa — Application Logic
@@ -82,11 +82,11 @@ function renderServiceDetail() {
     return;
   }
 
-  document.title = `${service.name} | Glam Room — Asantewaa`;
+  document.title = `${service.name} | Glam Room | Asantewaa`;
 
   const metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) {
-    metaDesc.content = `${service.name} at Glam Room — ${service.description}`;
+    metaDesc.content = `${service.name} at Glam Room. ${service.description}`;
   }
 
   const iconEl = document.getElementById('service-icon');
@@ -452,7 +452,7 @@ function renderProposals() {
   const budgetSelect = document.getElementById('prop-budget');
   if (budgetSelect && data.form?.budgetTiers) {
     budgetSelect.innerHTML =
-      '<option value="">— Select tier —</option>' +
+      '<option value="">Select tier</option>' +
       data.form.budgetTiers.map((t) => `<option value="${t}">${t}</option>`).join('');
   }
 
@@ -611,7 +611,7 @@ function populateStaticContent() {
     'glam-room': 'The Glam Room | Asantewaa',
     proposals: 'Partnerships | Asantewaa',
     about: `About ${SITE.owner} | Glam Room`,
-    business: `Glam Room | Hair Salon Accra — ${SITE.owner}`,
+    business: `Glam Room | Hair Salon Accra | ${SITE.owner}`,
     booking: `Book Your Glam | ${SITE.brand}`,
   };
   document.title = titles[page] || titles.home;

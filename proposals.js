@@ -16,7 +16,7 @@ export function initProposalsForm() {
     const contact = SITE.proposals?.contact || {};
 
     const body = encodeURIComponent(
-      `Strategic Briefing — Partner with Asantewaa\n\n` +
+      `Strategic Briefing: Partner with Asantewaa\n\n` +
         `Name / Company: ${name}\n` +
         `Email: ${email}\n` +
         `Collaboration Pillar: ${pillar}\n` +
@@ -24,7 +24,7 @@ export function initProposalsForm() {
         `Brief:\n${brief || '(none provided)'}`
     );
 
-    const mailto = `mailto:${contact.email || 'martinadwamena599@gmail.com'}?subject=${encodeURIComponent('Strategic Briefing — ' + name)}&body=${body}`;
+    const mailto = `mailto:${contact.email || 'martinadwamena599@gmail.com'}?subject=${encodeURIComponent('Strategic Briefing: ' + name)}&body=${body}`;
 
     msgEl.textContent = 'Opening your email client to submit the briefing…';
     msgEl.hidden = false;

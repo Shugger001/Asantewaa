@@ -7,7 +7,7 @@
 export function getLocationLabel(loc) {
   const address = loc.address?.trim();
   if (address) return address;
-  if (loc.area?.trim()) return `${loc.name?.trim() || "Glam Room"} — ${loc.area.trim()}`;
+  if (loc.area?.trim()) return `${loc.name?.trim() || "Glam Room"}, ${loc.area.trim()}`;
   return loc.name?.trim() || "Glam Room";
 }
 
@@ -58,14 +58,14 @@ export function getServicePriceRange(service) {
     return `GH₵ ${min}`;
   }
 
-  return `GH₵ ${min} – GH₵ ${max}`;
+  return `GH₵ ${min} to GH₵ ${max}`;
 }
 
 /** Flat list for booking dropdown — category + specific style */
 export function getBookingStyleOptions() {
   return SITE.services.flatMap((service) =>
     (service.styles || []).map((style) => ({
-      value: `${service.name} — ${style.name}`,
+      value: `${service.name}: ${style.name}`,
       label: style.name,
       category: service.name,
       price: style.price,
@@ -84,16 +84,16 @@ export const SITE = {
     /** Pages 6–7 use the black mark on light backgrounds */
     blackOnPages: ["booking", "admin"],
   },
-  tagline: "Accra's baddest hair destination — where your crown gets the main character energy it deserves.",
+  tagline: "Accra's baddest hair destination where your crown gets the main character energy it deserves.",
 
   /** Wireframe document — 6 pages (PDF pages 2–7) */
   wireframePages: [
-    { id: "01", label: "Home — Editorial Gateway", href: "index.html" },
-    { id: "02", label: "The Enterprise — Partnerships & Influence", href: "about.html" },
-    { id: "02b", label: "The Enterprise — Campaign Pillars", href: "about.html#pillars" },
-    { id: "03", label: "The Glam Room — Salon Flagship", href: "glam-room.html" },
-    { id: "03b", label: "The Glam Room — Signature Services", href: "glam-room.html#services" },
-    { id: "04", label: "Partnerships — Brand Intake", href: "proposals.html" },
+    { id: "01", label: "Home · Editorial Gateway", href: "index.html" },
+    { id: "02", label: "The Enterprise · Partnerships & Influence", href: "about.html" },
+    { id: "02b", label: "The Enterprise · Campaign Pillars", href: "about.html#pillars" },
+    { id: "03", label: "The Glam Room · Salon Flagship", href: "glam-room.html" },
+    { id: "03b", label: "The Glam Room · Signature Services", href: "glam-room.html#services" },
+    { id: "04", label: "Partnerships · Brand Intake", href: "proposals.html" },
   ],
 
   globalFooter: "© 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
@@ -112,7 +112,7 @@ export const SITE = {
       city: "Accra",
       country: "Ghana",
       mapUrl: "https://share.google/TN4FohAFQiJ6UgK4b",
-      hours: "Mon – Sat: 9am – 6pm · Sun: Closed",
+      hours: "Mon to Sat: 9am to 6pm · Sun: Closed",
       imageUrl: "images/glam-adenta-portrait.png",
       imagePosition: "center top",
       bookingValue: "glam-room-adenta",
@@ -125,7 +125,7 @@ export const SITE = {
       city: "Accra",
       country: "Ghana",
       mapUrl: "https://share.google/eNIyXIhSW1kZ6rzmF",
-      hours: "Mon – Sat: 9am – 6pm · Sun: Closed",
+      hours: "Mon to Sat: 9am to 6pm · Sun: Closed",
       imageUrl: "images/glam-braids-studio.png",
       imagePosition: "center top",
       bookingValue: "glam-room-sowutuom",
@@ -134,7 +134,7 @@ export const SITE = {
 
   hero: {
     photoUrl: "images/asantewaa-gown-smile.png",
-    photoAlt: "Asantewaa — Glam Room by Asantewaa",
+    photoAlt: "Asantewaa at Glam Room by Asantewaa",
     typewriterPhrases: ["Your Crown.", "Your Glow.", "Your Glam Room."],
   },
 
@@ -257,7 +257,7 @@ export const SITE = {
         type: "find-booking",
         label: "Track",
         title: "Find My Booking",
-        subtitle: "No account needed — phone & last 4 letters of your name",
+        subtitle: "No account needed. Phone and last 4 letters of your name",
         imageUrl: "images/glam-red-indoor.png",
         imagePosition: "center 30%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.88) 100%)",
@@ -278,15 +278,15 @@ export const SITE = {
   },
 
   quote: {
-    text: "I didn't come to play, I came to SLAY — and so did your hair when you walk out my door. Baby girl, treat yourself. You deserve to look expensive!",
-    attribution: "— Asantewaa",
+    text: "I didn't come to play, I came to SLAY, and so did your hair when you walk out my door. Baby girl, treat yourself. You deserve to look expensive!",
+    attribution: "Asantewaa",
   },
 
   about: {
     headline: "The Queen Behind the Chair",
     paragraphs: [
-      "Asantewaa is Ghana's favourite TikTok star — 4 million+ followers who know her for her energy, her humour, and her unapologetic Ghanaian pride. What started as viral content turned into a dream: a salon where every woman walks in feeling like herself and walks out feeling like THAT girl.",
-      "Glam Room is her love letter to Accra — warm vibes, expert hands, and zero tolerance for bad hair days. Whether you're coming for a silk press or a full transformation, you're family here.",
+      "Asantewaa is Ghana's favourite TikTok star with 4 million+ followers who know her for her energy, her humour, and her unapologetic Ghanaian pride. What started as viral content turned into a dream: a salon where every woman walks in feeling like herself and walks out feeling like THAT girl.",
+      "Glam Room is her love letter to Accra: warm vibes, expert hands, and zero tolerance for bad hair days. Whether you're coming for a silk press or a full transformation, you're family here.",
     ],
     stats: [
       { value: "4M+", label: "Followers" },
@@ -308,7 +308,7 @@ export const SITE = {
     ],
     statement: {
       imageUrl: "images/asantewaa-enterprise-statement.png",
-      imageAlt: "Asantewaa — editorial portrait",
+      imageAlt: "Asantewaa editorial portrait",
       imagePosition: "center 20%",
       displayLines: ["SHAPING", "CULTURE.", "DRIVING", "ENGAGEMENT."],
       statements: [
@@ -401,7 +401,7 @@ export const SITE = {
     },
     bookingOverlay: {
       title: "RESERVE YOUR CHAIR",
-      locationPrefix: "GLAM ROOM —",
+      locationPrefix: "GLAM ROOM ·",
       submitLabel: "CONFIRM YOUR RESERVATION",
       depositNote: "A commitment deposit confirms your reservation instantly.",
       exitLabel: "X EXIT",
@@ -453,13 +453,13 @@ export const SITE = {
       submitLabel: "SUBMIT STRATEGIC BRIEFING",
       budgetTiers: [
         "Under GH₵ 50,000",
-        "GH₵ 50,000 – GH₵ 150,000",
-        "GH₵ 150,000 – GH₵ 500,000",
+        "GH₵ 50,000 to GH₵ 150,000",
+        "GH₵ 150,000 to GH₵ 500,000",
         "GH₵ 500,000+",
       ],
       pillars: [
-        "01 — Demonstrative Campaigns",
-        "02 — Pro Location Campaigns",
+        "01 · Demonstrative Campaigns",
+        "02 · Pro Location Campaigns",
         "Open / Not yet selected",
       ],
     },
@@ -513,48 +513,48 @@ export const SITE = {
     {
       id: "hair-reset",
       name: "Hair Reset",
-      description: "Fresh start energy — wash, unwind, touch-ups, and quick styles to reset your crown.",
+      description: "Fresh start energy: wash, unwind, touch-ups, and quick styles to reset your crown.",
       price: "From GH₵ 35",
-      duration: "30 min – 2 hrs",
+      duration: "30 min to 2 hrs",
       icon: "fa-solid fa-arrows-rotate",
       badge: "Popular",
       styles: [
         { id: "hair-wash", name: "Hair Wash", description: "Cleanse and refresh your hair.", price: "GH₵ 35", duration: "30 min" },
-        { id: "hair-wash-cornrows", name: "Hair Wash + Cornrows", description: "Wash plus cornrow styling.", price: "GH₵ 55", duration: "1–1.5 hrs" },
-        { id: "unbraid-hair-wash", name: "Unbraiding & Hair Wash", description: "Take down braids and wash your hair.", price: "GH₵ 50", duration: "1–2 hrs" },
-        { id: "touch-up-salon-relaxer", name: "Touch Up with Salon’s Relaxer", description: "New growth touch-up using Glam Room relaxer.", price: "GH₵ 70", duration: "1–1.5 hrs" },
-        { id: "touch-up-client-relaxer", name: "Touch Up with Client’s Relaxer", description: "New growth touch-up using your own relaxer.", price: "GH₵ 50", duration: "1–1.5 hrs" },
-        { id: "normal-ponytail", name: "Normal Ponytail", description: "Sleek, styled ponytail finish.", price: "GH₵ 80", duration: "45 min – 1 hr" },
+        { id: "hair-wash-cornrows", name: "Hair Wash + Cornrows", description: "Wash plus cornrow styling.", price: "GH₵ 55", duration: "1 to 1.5 hrs" },
+        { id: "unbraid-hair-wash", name: "Unbraiding & Hair Wash", description: "Take down braids and wash your hair.", price: "GH₵ 50", duration: "1 to 2 hrs" },
+        { id: "touch-up-salon-relaxer", name: "Touch Up with Salon’s Relaxer", description: "New growth touch-up using Glam Room relaxer.", price: "GH₵ 70", duration: "1 to 1.5 hrs" },
+        { id: "touch-up-client-relaxer", name: "Touch Up with Client’s Relaxer", description: "New growth touch-up using your own relaxer.", price: "GH₵ 50", duration: "1 to 1.5 hrs" },
+        { id: "normal-ponytail", name: "Normal Ponytail", description: "Sleek, styled ponytail finish.", price: "GH₵ 80", duration: "45 min to 1 hr" },
       ],
     },
     {
       id: "hair-installation",
       name: "Hair Installation Services",
-      description: "Closure and frontal installs — secure, natural, and styled to slay.",
+      description: "Closure and frontal installs: secure, natural, and styled to slay.",
       price: "From GH₵ 50",
-      duration: "1–2 hrs",
+      duration: "1 to 2 hrs",
       icon: "fa-solid fa-hat-cowboy",
       badge: "Hot",
       styles: [
-        { id: "closure-install", name: "Closure Hair Install", description: "Closure unit installed and styled.", price: "GH₵ 50", duration: "1–1.5 hrs" },
-        { id: "frontal-install", name: "Frontal Hair Install", description: "Frontal unit installed with a natural hairline.", price: "GH₵ 100", duration: "1.5–2 hrs" },
-        { id: "frontal-ponytail", name: "Frontal Ponytail", description: "Frontal install finished in a sleek ponytail style.", price: "GH₵ 150", duration: "1.5–2 hrs" },
+        { id: "closure-install", name: "Closure Hair Install", description: "Closure unit installed and styled.", price: "GH₵ 50", duration: "1 to 1.5 hrs" },
+        { id: "frontal-install", name: "Frontal Hair Install", description: "Frontal unit installed with a natural hairline.", price: "GH₵ 100", duration: "1.5 to 2 hrs" },
+        { id: "frontal-ponytail", name: "Frontal Ponytail", description: "Frontal install finished in a sleek ponytail style.", price: "GH₵ 150", duration: "1.5 to 2 hrs" },
       ],
     },
     {
       id: "braiding-workmanship",
       name: "Braids (Workmanship Only)",
-      description: "Expert braiding by length — you bring the hair, we bring the hands. Workmanship only.",
+      description: "Expert braiding by length. You bring the hair, we bring the hands. Workmanship only.",
       price: "From GH₵ 150",
-      duration: "3–8 hrs",
+      duration: "3 to 8 hrs",
       icon: "fa-solid fa-grip-lines",
       badge: null,
       styles: [
-        { id: "shoulder-length", name: "Shoulder Length", description: "Braiding service to shoulder length. Hair not included.", price: "GH₵ 150", duration: "3–4 hrs", imageUrl: "images/glam-braids-studio.png" },
-        { id: "bra-length", name: "Bra Length", description: "Braiding service to bra strap length. Hair not included.", price: "GH₵ 200", duration: "4–5 hrs" },
-        { id: "hip-length", name: "Hip Length", description: "Braiding service to hip length. Hair not included.", price: "GH₵ 250", duration: "5–6 hrs" },
-        { id: "butt-length", name: "Butt Length", description: "Braiding service to butt length. Hair not included.", price: "GH₵ 300", duration: "6–7 hrs" },
-        { id: "under-butt", name: "Under Butt", description: "Braiding service past butt length. Hair not included.", price: "GH₵ 400", duration: "7–8 hrs", imageUrl: "images/glam-braids-portrait.png" },
+        { id: "shoulder-length", name: "Shoulder Length", description: "Braiding service to shoulder length. Hair not included.", price: "GH₵ 150", duration: "3 to 4 hrs", imageUrl: "images/glam-braids-studio.png" },
+        { id: "bra-length", name: "Bra Length", description: "Braiding service to bra strap length. Hair not included.", price: "GH₵ 200", duration: "4 to 5 hrs" },
+        { id: "hip-length", name: "Hip Length", description: "Braiding service to hip length. Hair not included.", price: "GH₵ 250", duration: "5 to 6 hrs" },
+        { id: "butt-length", name: "Butt Length", description: "Braiding service to butt length. Hair not included.", price: "GH₵ 300", duration: "6 to 7 hrs" },
+        { id: "under-butt", name: "Under Butt", description: "Braiding service past butt length. Hair not included.", price: "GH₵ 400", duration: "7 to 8 hrs", imageUrl: "images/glam-braids-portrait.png" },
       ],
     },
     {
@@ -562,29 +562,29 @@ export const SITE = {
       name: "Natural Hair Care",
       description: "Deep conditioning, trims, and treatments that love your natural texture back to life.",
       price: "From GH₵ 100",
-      duration: "1–2 hrs",
+      duration: "1 to 2 hrs",
       icon: "fa-solid fa-leaf",
       badge: null,
       styles: [
         { id: "deep-condition", name: "Deep Conditioning", description: "Intensive moisture treatment for dry, tired hair.", price: "GH₵ 100", duration: "1 hr" },
         { id: "trim-shape", name: "Trim & Shape", description: "Health trim to keep your ends fresh.", price: "GH₵ 80", duration: "45 min" },
-        { id: "steam-treatment", name: "Steam Treatment", description: "Steam-assisted hydration for max absorption.", price: "GH₵ 130", duration: "1–1.5 hrs" },
+        { id: "steam-treatment", name: "Steam Treatment", description: "Steam-assisted hydration for max absorption.", price: "GH₵ 130", duration: "1 to 1.5 hrs" },
         { id: "protein-treatment", name: "Protein Treatment", description: "Strengthen weak or over-processed strands.", price: "GH₵ 140", duration: "1.5 hrs" },
-        { id: "wash-go-style", name: "Wash & Go Style", description: "Define and set your natural curl pattern.", price: "GH₵ 120", duration: "1–2 hrs" },
+        { id: "wash-go-style", name: "Wash & Go Style", description: "Define and set your natural curl pattern.", price: "GH₵ 120", duration: "1 to 2 hrs" },
       ],
     },
     {
       id: "color-highlights",
       name: "Color & Highlights",
-      description: "Bold colour, subtle highlights, or a full transformation — let's make you unforgettable.",
+      description: "Bold colour, subtle highlights, or a full transformation. Let's make you unforgettable.",
       price: "From GH₵ 250",
-      duration: "3–4 hrs",
+      duration: "3 to 4 hrs",
       icon: "fa-solid fa-palette",
       badge: null,
       styles: [
-        { id: "full-color", name: "Full Color", description: "All-over colour transformation.", price: "From GH₵ 350", duration: "3–4 hrs", imageUrl: "images/glam-red-studio.png" },
+        { id: "full-color", name: "Full Color", description: "All-over colour transformation.", price: "From GH₵ 350", duration: "3 to 4 hrs", imageUrl: "images/glam-red-studio.png" },
         { id: "highlights", name: "Highlights", description: "Face-framing or full-head highlights.", price: "From GH₵ 280", duration: "3 hrs" },
-        { id: "ombre-balayage", name: "Ombré / Balayage", description: "Gradual colour melt — subtle or bold.", price: "From GH₵ 400", duration: "4–5 hrs" },
+        { id: "ombre-balayage", name: "Ombré / Balayage", description: "Gradual colour melt, subtle or bold.", price: "From GH₵ 400", duration: "4 to 5 hrs" },
         { id: "root-touchup", name: "Root Touch-up", description: "Refresh grown-out roots to match your colour.", price: "GH₵ 250", duration: "2 hrs" },
       ],
     },
@@ -597,18 +597,18 @@ export const SITE = {
       icon: "fa-solid fa-gem",
       badge: "Premium",
       styles: [
-        { id: "bridal-hair-makeup", name: "Bridal Hair & Makeup", description: "Full bridal glam — hair, makeup, and touch-ups.", price: "From GH₵ 800", duration: "Full day", imageUrl: "images/glam-red-indoor.png" },
-        { id: "bridal-hair-only", name: "Bridal Hair Only", description: "Wedding-day hairstyle with trial session.", price: "From GH₵ 500", duration: "4–6 hrs" },
-        { id: "bridesmaid-package", name: "Bridesmaid Package", description: "Coordinated looks for the bridal party.", price: "From GH₵ 350/person", duration: "2–3 hrs each" },
+        { id: "bridal-hair-makeup", name: "Bridal Hair & Makeup", description: "Full bridal glam: hair, makeup, and touch-ups.", price: "From GH₵ 800", duration: "Full day", imageUrl: "images/glam-red-indoor.png" },
+        { id: "bridal-hair-only", name: "Bridal Hair Only", description: "Wedding-day hairstyle with trial session.", price: "From GH₵ 500", duration: "4 to 6 hrs" },
+        { id: "bridesmaid-package", name: "Bridesmaid Package", description: "Coordinated looks for the bridal party.", price: "From GH₵ 350/person", duration: "2 to 3 hrs each" },
         { id: "engagement-look", name: "Engagement Look", description: "Camera-ready hair for your engagement shoot.", price: "From GH₵ 400", duration: "3 hrs", imageUrl: "images/glam-red-celebration.png" },
-        { id: "traditional-ceremony", name: "Traditional Ceremony Style", description: "Styled for kente, white, or traditional wedding events.", price: "From GH₵ 450", duration: "3–4 hrs" },
+        { id: "traditional-ceremony", name: "Traditional Ceremony Style", description: "Styled for kente, white, or traditional wedding events.", price: "From GH₵ 450", duration: "3 to 4 hrs" },
       ],
     },
   ],
 
   testimonials: [
     {
-      text: "Baby girl, when you leave my chair, Accra is NOT ready! Best silk press I've ever had — I felt like a whole new person.",
+      text: "Baby girl, when you leave my chair, Accra is NOT ready! Best silk press I've ever had. I felt like a whole new person.",
       author: "Ama K.",
       role: "Regular Client",
     },
@@ -618,7 +618,7 @@ export const SITE = {
       role: "First-Timer",
     },
     {
-      text: "I came in stressed, I left feeling like a celebrity. The vibes, the music, the hair — 10/10 would recommend to every sis.",
+      text: "I came in stressed, I left feeling like a celebrity. The vibes, the music, the hair. 10/10 would recommend to every sis.",
       author: "Akua T.",
       role: "Bridal Client",
     },
@@ -649,7 +649,7 @@ export const SITE = {
       "Glam Room is a destination for modern beauty. Designed for women who value excellence, every service is delivered with precision, care, and an uncompromising attention to detail.",
       "From everyday refinement to life's defining moments, our stylists create looks that feel effortless, elevated, and uniquely yours.",
     ],
-    hours: "Mon – Sat: 9am – 6pm · Sun: Closed",
+    hours: "Mon to Sat: 9am to 6pm · Sun: Closed",
   },
 
   booking: {
@@ -684,7 +684,7 @@ export const SITE = {
       pendingMessage:
         "Your slot is held. Complete the deposit payment to confirm your reservation.",
       confirmedMessage:
-        "You're confirmed! Your deposit secures your chair — see you at Glam Room.",
+        "You're confirmed! Your deposit secures your chair. See you at Glam Room.",
     },
 
     timeSlots: [
@@ -715,7 +715,7 @@ export const SITE = {
     submitLabel: "Check Status",
     loading: "Checking…",
     invalidPhone: "Enter a valid Ghana number (e.g. 024XXXXXXX).",
-    invalidName: "Enter exactly 4 letters — the last 4 letters of the name you booked with.",
+    invalidName: "Enter exactly 4 letters: the last 4 letters of the name you booked with.",
     notFound: "No booking found. Double-check your phone and the last 4 letters of the name you used when booking.",
     unavailable: "Booking lookup isn't connected yet. WhatsApp Glam Room to check your slot.",
     error: "Something went wrong. Please try again or WhatsApp Glam Room.",
@@ -723,7 +723,7 @@ export const SITE = {
 
   installPrompt: {
     title: "Add Glam Room to your home screen",
-    body: "Open like an app — one tap from your phone, no browser bar. Perfect for booking your next slay 👑",
+    body: "Open like an app: one tap from your phone, no browser bar. Perfect for booking your next slay 👑",
     installButton: "Add to Home Screen",
     iosButton: "Got it",
     laterButton: "Maybe later",

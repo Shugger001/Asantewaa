@@ -37,7 +37,7 @@ function populateServiceCategories() {
   if (!categorySelect) return;
 
   categorySelect.innerHTML =
-    '<option value="">— Select category —</option>' +
+    '<option value="">Select category</option>' +
     SITE.services
       .map((service) => `<option value="${service.id}">${service.name}</option>`)
       .join('');
@@ -51,7 +51,7 @@ function populateServiceStyles(serviceId, selectedStyleId = '') {
   const styles = service?.styles || [];
 
   if (!serviceId || !styles.length) {
-    styleSelect.innerHTML = '<option value="">— Select category first —</option>';
+    styleSelect.innerHTML = '<option value="">Select category first</option>';
     styleSelect.value = '';
     styleSelect.disabled = true;
     return;
@@ -59,9 +59,9 @@ function populateServiceStyles(serviceId, selectedStyleId = '') {
 
   styleSelect.disabled = false;
   styleSelect.innerHTML =
-    '<option value="">— Select service —</option>' +
+    '<option value="">Select service</option>' +
     styles
-      .map((style) => `<option value="${style.id}">${style.name} — ${style.price}</option>`)
+      .map((style) => `<option value="${style.id}">${style.name} (${style.price})</option>`)
       .join('');
 
   if (selectedStyleId && styles.some((style) => style.id === selectedStyleId)) {
@@ -77,7 +77,7 @@ function getSelectedBookingService() {
 
   if (!service || !style) return '';
 
-  return `${service.name} — ${style.name}`;
+  return `${service.name}: ${style.name}`;
 }
 
 function applyBookingServiceFromUrl() {
@@ -115,16 +115,10 @@ function applyBookingLocationFromUrl() {
 
 function populateBookingPage() {
   document.getElementById('booking-subhead').textContent = SITE.booking.subhead;
-  document.getElementById('booking-quote').innerHTML = `
-    <i class="fas fa-quote-left" style="color: var(--gold); margin-right: 0.4rem;"></i>
-    "${SITE.booking.bookingQuote}"
-    <div style="margin-top: 0.5rem; font-weight: 600; font-style: normal;">— ${SITE.owner} 🇬🇭</div>
-  `;
   document.getElementById('booking-promise').innerHTML = `
     <i class="fas fa-gem" style="color: var(--gold);"></i>
     <strong>Mama Glam's Promise:</strong> ${SITE.booking.promise}
   `;
-  document.getElementById('booking-tag').textContent = SITE.booking.tagline;
   const locationsList = document.getElementById('booking-locations-list');
   if (locationsList) {
     locationsList.innerHTML = SITE.locations
@@ -147,7 +141,7 @@ function populateBookingPage() {
   const locationSelect = document.getElementById('location');
   if (locationSelect) {
     locationSelect.innerHTML =
-      '<option value="">— Select location —</option>' +
+      '<option value="">Select location</option>' +
       SITE.locations
         .map((loc) => {
           const label = getLocationLabel(loc);
@@ -319,12 +313,12 @@ function formatTimeSlotLabel(label, timeValue) {
   const remaining = getSlotSpotsRemaining(timeValue, slotBookingCounts, max);
 
   if (remaining <= 0) {
-    return `${label} — Full`;
+    return `${label} (Full)`;
   }
 
   if (booked > 0) {
     const spotWord = remaining === 1 ? 'spot' : 'spots';
-    return `${label} — ${remaining} ${spotWord} left`;
+    return `${label} (${remaining} ${spotWord} left)`;
   }
 
   return label;
@@ -342,7 +336,7 @@ function updateTimeSlotAvailability() {
 
     if (isSlotFullyBooked(value, slotBookingCounts)) {
       option.disabled = true;
-      option.textContent = `${label} — Full`;
+      option.textContent = `${label} (Full)`;
     } else {
       option.disabled = false;
       option.textContent = formatTimeSlotLabel(label, value);

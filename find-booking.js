@@ -49,7 +49,7 @@ function renderResultMessage(booking) {
   const status = statusLabel(booking.status);
   const paymentPending = booking.payment_status === 'pending' && booking.status === 'pending';
   const paymentNote = paymentPending
-    ? ' Deposit not yet paid — your slot is not confirmed.'
+    ? ' Deposit not yet paid. Your slot is not confirmed.'
     : booking.payment_status === 'paid'
       ? ' Deposit received.'
       : '';
@@ -143,7 +143,7 @@ export function initFindBooking() {
     if (!/^[a-zA-Z]{4}$/.test(nameSuffix)) {
       showResult(
         resultEl,
-        copy.invalidName || 'Enter exactly 4 letters — the last 4 letters of the name you booked with.',
+        copy.invalidName || 'Enter exactly 4 letters: the last 4 letters of the name you booked with.',
         'error'
       );
       return;

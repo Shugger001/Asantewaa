@@ -72,7 +72,7 @@ function showPrompt(mode = 'android') {
     <button type="button" class="install-prompt-close" id="installPromptClose" aria-label="Close">×</button>
     <div class="install-prompt-icon" aria-hidden="true"><i class="fa-solid fa-mobile-screen-button"></i></div>
     <h2 id="installPromptTitle" class="install-prompt-title">${copy.title || 'Add Glam Room to your home screen'}</h2>
-    <p class="install-prompt-body">${copy.body || 'Open like an app — one tap from your phone, no browser bar.'}</p>
+    <p class="install-prompt-body">${copy.body || 'Open like an app: one tap from your phone, no browser bar.'}</p>
     ${
       isIosMode
         ? `<ol class="install-prompt-steps">

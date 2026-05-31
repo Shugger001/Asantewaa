@@ -27,7 +27,7 @@ function showAdmin() {
 }
 
 function formatTime(time) {
-  if (!time) return '—';
+  if (!time) return 'N/A';
   const [h, m] = time.split(':').map(Number);
   const period = h >= 12 ? 'PM' : 'AM';
   const hour12 = h % 12 || 12;
@@ -35,7 +35,7 @@ function formatTime(time) {
 }
 
 function formatDate(dateStr) {
-  if (!dateStr) return '—';
+  if (!dateStr) return 'N/A';
   return new Date(`${dateStr}T12:00:00`).toLocaleDateString('en-GH', {
     weekday: 'short',
     year: 'numeric',
@@ -81,7 +81,7 @@ function renderBookings(bookings) {
 
   bookingsBody.innerHTML = bookings
     .map((b) => {
-      const location = b.location || b.notes?.match(/\[Location: ([^\]]+)\]/)?.[1] || '—';
+      const location = b.location || b.notes?.match(/\[Location: ([^\]]+)\]/)?.[1] || 'N/A';
 
       return `
         <tr data-id="${b.id}">

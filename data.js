@@ -113,8 +113,8 @@ export const SITE = {
       country: "Ghana",
       mapUrl: "https://share.google/TN4FohAFQiJ6UgK4b",
       hours: "Mon – Sat: 9am – 6pm · Sun: Closed",
-      imageUrl: "images/glam-red-indoor.png",
-      imagePosition: "center center",
+      imageUrl: "images/glam-adenta-portrait.png",
+      imagePosition: "center top",
       bookingValue: "glam-room-adenta",
     },
     {

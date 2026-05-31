@@ -73,8 +73,8 @@ var SITE = {
       country: "Ghana",
       mapUrl: "https://share.google/TN4FohAFQiJ6UgK4b",
       hours: "Mon \u2013 Sat: 9am \u2013 6pm \xB7 Sun: Closed",
-      imageUrl: "images/glam-red-indoor.png",
-      imagePosition: "center center",
+      imageUrl: "images/glam-adenta-portrait.png",
+      imagePosition: "center top",
       bookingValue: "glam-room-adenta"
     },
     {
@@ -867,8 +867,8 @@ var SITE2 = {
       country: "Ghana",
       mapUrl: "https://share.google/TN4FohAFQiJ6UgK4b",
       hours: "Mon \u2013 Sat: 9am \u2013 6pm \xB7 Sun: Closed",
-      imageUrl: "images/glam-red-indoor.png",
-      imagePosition: "center center",
+      imageUrl: "images/glam-adenta-portrait.png",
+      imagePosition: "center top",
       bookingValue: "glam-room-adenta"
     },
     {
@@ -2124,8 +2124,8 @@ var SITE3 = {
       country: "Ghana",
       mapUrl: "https://share.google/TN4FohAFQiJ6UgK4b",
       hours: "Mon \u2013 Sat: 9am \u2013 6pm \xB7 Sun: Closed",
-      imageUrl: "images/glam-red-indoor.png",
-      imagePosition: "center center",
+      imageUrl: "images/glam-adenta-portrait.png",
+      imagePosition: "center top",
       bookingValue: "glam-room-adenta"
     },
     {

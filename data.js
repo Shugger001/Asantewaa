@@ -217,7 +217,7 @@ export const SITE = {
         id: "glam",
         label: "The Glam Room",
         title: "Your Crown. Your Glow.",
-        subtitle: "Accra's baddest hair destination",
+        subtitle: "Accra's Premier Hair Destination",
         imageUrl: "images/asantewaa-gown-mirror-color.png",
         imagePosition: "center 28%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.78) 100%)",

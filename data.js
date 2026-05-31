@@ -89,7 +89,7 @@ export const SITE = {
   /** Wireframe document — 6 pages (PDF pages 2–7) */
   wireframePages: [
     { id: "01", label: "Home — Editorial Gateway", href: "index.html" },
-    { id: "02", label: "The Enterprise — Cinematic Gateway & Portal", href: "about.html" },
+    { id: "02", label: "The Enterprise — Partnerships & Influence", href: "about.html" },
     { id: "02b", label: "The Enterprise — Campaign Pillars", href: "about.html#pillars" },
     { id: "03", label: "The Glam Room — Salon Flagship", href: "glam-room.html" },
     { id: "03b", label: "The Glam Room — Signature Services", href: "glam-room.html#services" },
@@ -216,7 +216,7 @@ export const SITE = {
         id: "glam",
         label: "The Glam Room",
         title: "Your Crown. Your Glow.",
-        subtitle: "Accra's baddest hair destination",
+        subtitle: "Accra's Premier Hair Destination",
         imageUrl: "images/asantewaa-gown-mirror-color.png",
         imagePosition: "center 28%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.78) 100%)",
@@ -244,8 +244,8 @@ export const SITE = {
       {
         id: "book",
         label: "Book Your Glam",
-        title: "Secure Your Slot",
-        subtitle: "Mama Glam Is Waiting",
+        title: "Reserve Your EXperience",
+        subtitle: "Experience The Artistry",
         imageUrl: "images/glam-red-celebration.png",
         imagePosition: "center 22%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 100%)",

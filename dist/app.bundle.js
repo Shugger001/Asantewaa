@@ -52,7 +52,7 @@ var SITE = {
   /** Wireframe document — 6 pages (PDF pages 2–7) */
   wireframePages: [
     { id: "01", label: "Home \u2014 Editorial Gateway", href: "index.html" },
-    { id: "02", label: "The Enterprise \u2014 Cinematic Gateway & Portal", href: "about.html" },
+    { id: "02", label: "The Enterprise \u2014 Partnerships & Influence", href: "about.html" },
     { id: "02b", label: "The Enterprise \u2014 Campaign Pillars", href: "about.html#pillars" },
     { id: "03", label: "The Glam Room \u2014 Salon Flagship", href: "glam-room.html" },
     { id: "03b", label: "The Glam Room \u2014 Signature Services", href: "glam-room.html#services" },
@@ -174,7 +174,7 @@ var SITE = {
         id: "glam",
         label: "The Glam Room",
         title: "Your Crown. Your Glow.",
-        subtitle: "Accra's baddest hair destination",
+        subtitle: "Accra's Premier Hair Destination",
         imageUrl: "images/asantewaa-gown-mirror-color.png",
         imagePosition: "center 28%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.78) 100%)",
@@ -202,8 +202,8 @@ var SITE = {
       {
         id: "book",
         label: "Book Your Glam",
-        title: "Secure Your Slot",
-        subtitle: "Mama Glam Is Waiting",
+        title: "Reserve Your EXperience",
+        subtitle: "Experience The Artistry",
         imageUrl: "images/glam-red-celebration.png",
         imagePosition: "center 22%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 100%)",
@@ -846,7 +846,7 @@ var SITE2 = {
   /** Wireframe document — 6 pages (PDF pages 2–7) */
   wireframePages: [
     { id: "01", label: "Home \u2014 Editorial Gateway", href: "index.html" },
-    { id: "02", label: "The Enterprise \u2014 Cinematic Gateway & Portal", href: "about.html" },
+    { id: "02", label: "The Enterprise \u2014 Partnerships & Influence", href: "about.html" },
     { id: "02b", label: "The Enterprise \u2014 Campaign Pillars", href: "about.html#pillars" },
     { id: "03", label: "The Glam Room \u2014 Salon Flagship", href: "glam-room.html" },
     { id: "03b", label: "The Glam Room \u2014 Signature Services", href: "glam-room.html#services" },
@@ -968,7 +968,7 @@ var SITE2 = {
         id: "glam",
         label: "The Glam Room",
         title: "Your Crown. Your Glow.",
-        subtitle: "Accra's baddest hair destination",
+        subtitle: "Accra's Premier Hair Destination",
         imageUrl: "images/asantewaa-gown-mirror-color.png",
         imagePosition: "center 28%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.78) 100%)",
@@ -996,8 +996,8 @@ var SITE2 = {
       {
         id: "book",
         label: "Book Your Glam",
-        title: "Secure Your Slot",
-        subtitle: "Mama Glam Is Waiting",
+        title: "Reserve Your EXperience",
+        subtitle: "Experience The Artistry",
         imageUrl: "images/glam-red-celebration.png",
         imagePosition: "center 22%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 100%)",
@@ -2103,7 +2103,7 @@ var SITE3 = {
   /** Wireframe document — 6 pages (PDF pages 2–7) */
   wireframePages: [
     { id: "01", label: "Home \u2014 Editorial Gateway", href: "index.html" },
-    { id: "02", label: "The Enterprise \u2014 Cinematic Gateway & Portal", href: "about.html" },
+    { id: "02", label: "The Enterprise \u2014 Partnerships & Influence", href: "about.html" },
     { id: "02b", label: "The Enterprise \u2014 Campaign Pillars", href: "about.html#pillars" },
     { id: "03", label: "The Glam Room \u2014 Salon Flagship", href: "glam-room.html" },
     { id: "03b", label: "The Glam Room \u2014 Signature Services", href: "glam-room.html#services" },
@@ -2225,7 +2225,7 @@ var SITE3 = {
         id: "glam",
         label: "The Glam Room",
         title: "Your Crown. Your Glow.",
-        subtitle: "Accra's baddest hair destination",
+        subtitle: "Accra's Premier Hair Destination",
         imageUrl: "images/asantewaa-gown-mirror-color.png",
         imagePosition: "center 28%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.78) 100%)",
@@ -2253,8 +2253,8 @@ var SITE3 = {
       {
         id: "book",
         label: "Book Your Glam",
-        title: "Secure Your Slot",
-        subtitle: "Mama Glam Is Waiting",
+        title: "Reserve Your EXperience",
+        subtitle: "Experience The Artistry",
         imageUrl: "images/glam-red-celebration.png",
         imagePosition: "center 22%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 100%)",
@@ -3255,31 +3255,6 @@ function renderEnterprise() {
   const data = SITE.enterprise;
   if (!data) return;
   document.title = "The Enterprise | Asantewaa";
-  const statement = data.statement;
-  const statementImage = document.getElementById("enterprise-statement-image");
-  if (statementImage && statement) {
-    statementImage.src = statement.imageUrl || SITE.hero?.photoUrl || "";
-    statementImage.alt = statement.imageAlt || "Asantewaa";
-    if (statement.imagePosition) {
-      statementImage.style.objectPosition = statement.imagePosition;
-    }
-  }
-  const headlinesEl = document.getElementById("enterprise-headlines");
-  if (headlinesEl && statement?.displayLines) {
-    headlinesEl.innerHTML = statement.displayLines.map((line) => `<span class="ent-display-line">${line}</span>`).join("");
-  }
-  const statementsEl = document.getElementById("enterprise-statements");
-  if (statementsEl && statement?.statements) {
-    statementsEl.innerHTML = statement.statements.map((line) => `<p class="ent-bold-line">${line}</p>`).join("");
-  }
-  const bodyEl = document.getElementById("enterprise-body");
-  if (bodyEl && statement?.body) {
-    bodyEl.innerHTML = statement.body.map((block, index) => {
-      const lines = block.map((line) => `<p class="ent-body-line">${line}</p>`).join("");
-      const gap = index < statement.body.length - 1 ? '<div class="ent-body-gap" aria-hidden="true"></div>' : "";
-      return lines + gap;
-    }).join("");
-  }
   const metricsEl = document.getElementById("enterprise-metrics");
   if (metricsEl && data.metrics) {
     const strips = data.metrics.filter((metric) => metric.variant === "strip");

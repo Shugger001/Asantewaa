@@ -3,22 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="The Glam Room by Asantewaa — Accra's premier salon. Adenta & Sowutuom locations.">
+  <meta name="description" content="Glam Room by Asantewaa — Accra's premier hair styling salon. Silk press, braids, wigs, and more.">
   <meta name="theme-color" content="#000000">
   <title>The Glam Room | Asantewaa</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-  <link rel="stylesheet" href="styles.css?v=20260534">
-  <link rel="stylesheet" href="home.css?v=20260534">
-  <link rel="stylesheet" href="glam-room.css?v=20260534">
-  <link rel="stylesheet" href="mobile.css?v=20260534">
+  <link rel="stylesheet" href="styles.css?v=20260539">
+  <link rel="stylesheet" href="home.css?v=20260539">
+  <link rel="stylesheet" href="services.css?v=20260539">
+  <link rel="stylesheet" href="glam-room.css?v=20260539">
+  <link rel="stylesheet" href="mobile.css?v=20260539">
 </head>
-<body data-page="glam-room" class="gr-page">
+<body data-page="glam-room" class="gr-page editorial-theme">
 
   <header class="gr-topbar">
     <a href="glam-room.html" class="gr-topbar-link" id="home-topbar-left">GLAM ROOM</a>
@@ -34,28 +36,128 @@
     <p class="home-menu-footer" id="home-menu-footer"></p>
   </nav>
 
-  <main class="gr-main">
-    <!-- PAGE 03 · SECTION 1 -->
-    <section class="gr-declaration" id="glam-room">
-      <h1 class="gr-declaration__title" id="gr-declaration-title"></h1>
-      <p class="gr-declaration__byline" id="gr-declaration-byline"></p>
-      <p class="gr-declaration__tagline" id="gr-declaration-tagline"></p>
+  <main class="gr-main editorial-main">
+    <section class="business-hero" id="hero">
+      <div class="hero-parallax kente-bg" id="hero-parallax"></div>
+      <div class="hero-gradient"></div>
+      <div class="business-hero-inner">
+        <div class="hero-badge hero-animate"><span class="flag">🇬🇭</span> 2 Locations · Accra</div>
+        <h1 class="business-hero-title hero-animate hero-animate-delay-1">Glam Room</h1>
+        <p class="business-hero-tagline hero-animate hero-animate-delay-2" id="business-tagline"></p>
+        <div class="hero-buttons hero-animate hero-animate-delay-3">
+          <button class="btn btn-secondary" id="btn-view-services" type="button">View Services <i class="fa-solid fa-arrow-down"></i></button>
+          <button class="btn btn-primary" id="btn-hero-book" type="button"><i class="fa-solid fa-calendar-check"></i> Book Now</button>
+        </div>
+      </div>
     </section>
 
-    <!-- PAGE 03 · SECTION 2 -->
-    <section class="gr-sanctuaries" id="gr-sanctuaries" aria-label="Salon locations"></section>
+    <div class="ghana-stripe"></div>
 
-    <p class="gr-footer" id="gr-footer-mid"></p>
+    <section class="section gr-locations-strip" id="locations" aria-label="Salon locations">
+      <div class="section-inner">
+        <header class="section-header">
+          <span class="section-label">Our Sanctuaries</span>
+          <h2 class="section-title">Two Spots. One Standard.</h2>
+        </header>
+        <div class="gr-sanctuaries" id="gr-sanctuaries"></div>
+      </div>
+    </section>
 
-    <!-- PAGE 03b · SECTION 4 -->
-    <section class="gr-services" id="services" aria-label="Signature services">
-      <div id="gr-services-list"></div>
+    <section class="section" id="about-business">
+      <div class="section-inner">
+        <header class="section-header">
+          <span class="section-label">The Salon</span>
+          <h2 class="section-title">Your Glow Up Starts Here</h2>
+        </header>
+        <div class="about-grid">
+          <div class="about-content" id="business-intro"></div>
+          <div class="glass-card quote-card">
+            <p class="quote-text" id="quote-text"></p>
+            <p class="quote-author" id="quote-author"></p>
+            <p class="business-hours" id="business-hours"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="section-inner">
+        <header class="section-header">
+          <span class="section-label">What We Do</span>
+          <h2 class="section-title">Services That Slay</h2>
+          <p class="section-desc">Pick your vibe and let us work our magic. Every service comes with main character energy included.</p>
+        </header>
+        <div class="services-grid" id="services-grid"></div>
+        <p class="services-extension-notice" role="note"></p>
+      </div>
+    </section>
+
+    <section class="section gr-signature-strip" id="signature-services" aria-label="Signature services">
+      <div class="section-inner">
+        <header class="section-header">
+          <span class="section-label">Signature Menu</span>
+          <h2 class="section-title">The Glam Room Edit</h2>
+        </header>
+        <div class="gr-services" id="gr-services-list"></div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="section-inner">
+        <header class="section-header">
+          <span class="section-label">Portfolio</span>
+          <h2 class="section-title">The Glam Gallery</h2>
+          <p class="section-desc">A peek at the slay. Real client photos coming soon — for now, imagine the glow.</p>
+        </header>
+        <div class="gallery-grid" id="gallery-grid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="testimonials">
+      <div class="section-inner">
+        <header class="section-header">
+          <span class="section-label">Love Notes</span>
+          <h2 class="section-title">What the Girls Are Saying</h2>
+          <p class="section-desc">Don't just take our word for it — hear from the queens who've sat in our chair.</p>
+        </header>
+        <div class="testimonials-wrapper">
+          <div class="testimonial-carousel">
+            <div class="testimonial-track" id="testimonial-track"></div>
+          </div>
+          <div class="carousel-controls">
+            <button class="carousel-btn" id="carousel-prev" aria-label="Previous" type="button"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="carousel-dots" id="carousel-dots"></div>
+            <button class="carousel-btn" id="carousel-next" aria-label="Next" type="button"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="section-inner">
+        <header class="section-header">
+          <span class="section-label">Get In Touch</span>
+          <h2 class="section-title">Come Through, Sis</h2>
+          <p class="section-desc">Two Glam Room spots in Accra — pick your location when you book.</p>
+        </header>
+        <div class="locations-grid" id="contact-locations"></div>
+        <div class="contact-grid" style="margin-top: 2.5rem;">
+          <div class="glass-card contact-card" style="max-width: 480px; margin: 0 auto;">
+            <h3><i class="fa-solid fa-share-nodes"></i> Follow Asantewaa</h3>
+            <p>Stay connected for daily slay inspiration and salon updates.</p>
+            <div class="social-links" id="contact-socials"></div>
+          </div>
+        </div>
+        <div class="contact-cta">
+          <button class="btn btn-primary" id="btn-contact-book" type="button"><i class="fa-solid fa-calendar-check"></i> Book Your Glow Up</button>
+          <button class="btn btn-whatsapp" id="btn-contact-whatsapp" type="button"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+        </div>
+      </div>
     </section>
 
     <p class="gr-footer" id="gr-footer-end"></p>
   </main>
 
-  <!-- PAGE 03 · SECTION 3 — Booking overlay -->
   <div class="gr-overlay" id="gr-booking-overlay" aria-hidden="true">
     <div class="gr-overlay__panel" role="dialog" aria-modal="true" aria-labelledby="gr-overlay-title">
       <button type="button" class="gr-overlay__exit" id="gr-overlay-exit"></button>
@@ -90,11 +192,12 @@
           <textarea id="gr-notes" name="notes" rows="2"></textarea>
         </div>
         <button type="submit" class="gr-overlay__submit" id="gr-overlay-submit"></button>
+        <p class="gr-overlay__deposit-note" id="gr-overlay-deposit-note" hidden></p>
         <p class="gr-overlay__msg" id="gr-overlay-msg" hidden></p>
       </form>
     </div>
   </div>
 
-  <script type="module" src="dist/app.bundle.js?v=1"></script>
+  <script type="module" src="dist/app.bundle.js?v=5"></script>
 </body>
 </html>

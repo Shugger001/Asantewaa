@@ -359,7 +359,8 @@
 .gr-field--services {
   border: 1px solid rgba(255, 255, 255, 0.35);
   padding: 1.15rem 1rem 1rem;
-  margin-bottom: 1.35rem;
+  margin: 0 0 1.35rem;
+  min-width: 0;
 }
 
 .gr-field--services legend {
@@ -451,6 +452,17 @@
   cursor: pointer;
 }
 
+.gr-overlay__deposit-note {
+  font-family: var(--gr-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+  margin: 0.85rem 0 0;
+  line-height: 1.45;
+}
+
 .gr-overlay__msg {
   font-size: 0.8125rem;
   text-align: center;
@@ -502,4 +514,25 @@
     text-align: left;
     max-width: none;
   }
+}
+
+/* Full salon page on gr-page */
+.gr-page.editorial-theme .gr-main {
+  background: var(--bg, #0a0a0a);
+}
+
+.gr-page.editorial-theme .business-hero {
+  min-height: min(88vh, 88dvh);
+}
+
+.gr-locations-strip .gr-sanctuaries {
+  border: 1px solid var(--gr-rule);
+}
+
+.gr-signature-strip .gr-services {
+  border-top: 1px solid var(--gr-rule);
+}
+
+.gr-page .gr-footer {
+  padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
 }

@@ -1410,3 +1410,22 @@ body.no-custom-cursor .cursor-ring {
     transform: none;
   }
 }
+
+.deposit-return-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  padding: 1rem 1.25rem;
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: #fff;
+  background: #1a6b3c;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.deposit-return-banner[data-type='pending'] {
+  background: #8a5a00;
+}

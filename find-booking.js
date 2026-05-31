@@ -47,7 +47,13 @@ function renderResultMessage(booking) {
   const date = formatBookingDate(booking.booking_date);
   const time = formatBookingTime(booking.booking_time);
   const status = statusLabel(booking.status);
-  return `Your booking on <strong>${date}</strong> at <strong>${time}</strong> is <strong>${status}</strong>`;
+  const paymentPending = booking.payment_status === 'pending' && booking.status === 'pending';
+  const paymentNote = paymentPending
+    ? ' Deposit not yet paid — your slot is not confirmed.'
+    : booking.payment_status === 'paid'
+      ? ' Deposit received.'
+      : '';
+  return `Your booking on <strong>${date}</strong> at <strong>${time}</strong> is <strong>${status}</strong>.${paymentNote}`;
 }
 
 async function lookupViaRpc(supabase, phone, nameSuffix) {
@@ -66,7 +72,7 @@ async function lookupViaTable(supabase, phone, nameSuffix) {
   for (const variant of phoneVariants(phone)) {
     const { data, error } = await supabase
       .from('bookings')
-      .select('booking_date, booking_time, status, service, location, full_name, phone')
+      .select('booking_date, booking_time, status, payment_status, service, location, full_name, phone')
       .eq('phone', variant);
 
     if (error) throw error;
@@ -80,6 +86,7 @@ async function lookupViaTable(supabase, phone, nameSuffix) {
         booking_date: row.booking_date,
         booking_time: row.booking_time,
         status: row.status,
+        payment_status: row.payment_status,
         service: row.service,
         location: row.location,
       });

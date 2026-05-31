@@ -6,6 +6,7 @@ returns table (
   booking_date date,
   booking_time text,
   status text,
+  payment_status text,
   service text,
   location text
 )
@@ -22,6 +23,7 @@ as $$
     b.booking_date,
     b.booking_time,
     b.status,
+    b.payment_status,
     b.service,
     coalesce(nullif(b.location, ''), 'Glam Room')
   from public.bookings b

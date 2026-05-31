@@ -75,7 +75,7 @@ function renderBookings(bookings) {
   emptyState.hidden = bookings.length > 0;
 
   if (!bookings.length) {
-    bookingsBody.innerHTML = '<tr><td colspan="8" class="table-empty">No bookings found</td></tr>';
+    bookingsBody.innerHTML = '<tr><td colspan="9" class="table-empty">No bookings found</td></tr>';
     return;
   }
 
@@ -92,6 +92,7 @@ function renderBookings(bookings) {
           <td>${escapeHtml(location)}</td>
           <td>${escapeHtml(b.service)}</td>
           <td>${statusBadge(b.status)}</td>
+          <td>${statusBadge(b.payment_status || 'pending')}</td>
           <td>
             <div class="row-actions">
               ${b.status === 'pending' ? `<button type="button" class="action-btn confirm" data-action="status" data-id="${b.id}" data-status="confirmed" title="Confirm">✅</button>` : ''}
@@ -125,7 +126,7 @@ async function loadBookings() {
     return;
   }
 
-  bookingsBody.innerHTML = '<tr><td colspan="8" class="table-loading">Loading bookings…</td></tr>';
+  bookingsBody.innerHTML = '<tr><td colspan="9" class="table-loading">Loading bookings…</td></tr>';
   emptyState.hidden = true;
 
   const { data, error } = await supabase
@@ -140,7 +141,7 @@ async function loadBookings() {
       await supabase.auth.signOut();
       return;
     }
-    bookingsBody.innerHTML = `<tr><td colspan="8" class="table-empty">Could not load bookings: ${escapeHtml(error.message)}</td></tr>`;
+    bookingsBody.innerHTML = `<tr><td colspan="9" class="table-empty">Could not load bookings: ${escapeHtml(error.message)}</td></tr>`;
     return;
   }
 

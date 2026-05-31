@@ -3,9 +3,10 @@ import { initBookingForm } from './booking.js?v=20260536';
 import {
   initGlamBookingOverlay,
   bindSanctuaryBookingButtons,
+  openBookingOverlay,
   populateOverlayServices,
   populateOverlayTimeSlots,
-} from './glam-booking.js?v=20260536';
+} from './glam-booking.js?v=20260539';
 import { initProposalsForm } from './proposals.js?v=20260536';
 import { initFindBooking } from './find-booking.js?v=20260536';
 import { initInstallPrompt } from './install-prompt.js?v=20260536';
@@ -511,6 +512,12 @@ function renderGlamRoom() {
   populateOverlayTimeSlots();
   initGlamBookingOverlay();
   bindSanctuaryBookingButtons();
+
+  renderBusiness();
+  renderServices();
+  renderGallery();
+  new TestimonialCarousel();
+  initReveal();
 }
 
 function renderProposals() {
@@ -1537,8 +1544,17 @@ function initButtons() {
     scrollToSection('#services');
   });
 
-  if (page === 'business') {
+  if (page === 'business' || page === 'glam-room') {
     document.getElementById('btn-contact-whatsapp')?.addEventListener('click', openWhatsApp);
+  }
+
+  if (page === 'glam-room') {
+    const openDefaultBooking = () => {
+      const loc = SITE.locations?.[0];
+      if (loc) openBookingOverlay(loc);
+    };
+    document.getElementById('btn-hero-book')?.addEventListener('click', openDefaultBooking);
+    document.getElementById('btn-contact-book')?.addEventListener('click', openDefaultBooking);
   }
 
   document.querySelectorAll('.btn').forEach((btn) => {
@@ -1604,6 +1620,7 @@ function bootApp() {
     renderEnterprise();
   } else if (page === 'glam-room') {
     renderGlamRoom();
+    initParallax();
   } else if (page === 'proposals') {
     renderProposals();
   } else if (page === 'about') {

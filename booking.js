@@ -16,6 +16,11 @@ import {
   getMaxReservationsPerDay,
   isDateFullyBooked,
 } from './booking-capacity.js?v=20260536';
+import {
+  handleDepositReturn,
+  isDepositPaymentEnabled,
+  startDepositPayment,
+} from './booking-payment.js?v=20260537';
 
 let bookedSlots = [];
 let datePicker = null;
@@ -245,11 +250,12 @@ async function fetchExistingBooking(supabase, date, time, locationId) {
 }
 
 async function insertBooking(supabase, booking) {
-  let result = await supabase.from('bookings').insert([toDbRow(booking, true)]);
+  let result = await supabase.from('bookings').insert([toDbRow(booking, true)]).select('id').single();
   if (isMissingColumnError(result.error)) {
-    result = await supabase.from('bookings').insert([toDbRow(booking, false)]);
+    result = await supabase.from('bookings').insert([toDbRow(booking, false)]).select('id').single();
   }
   if (result.error) throw result.error;
+  return result.data?.id;
 }
 
 async function fetchBookedSlots(date) {
@@ -458,7 +464,19 @@ async function handleSubmit(e) {
       return;
     }
 
-    await insertBooking(supabase, bookingData);
+    const bookingId = await insertBooking(supabase, bookingData);
+
+    if (isDepositPaymentEnabled() && bookingId) {
+      showSuccess('Redirecting to secure payment…');
+      await startDepositPayment({
+        bookingId,
+        email,
+        phone,
+        fullName,
+        returnPath: window.location.pathname,
+      });
+      return;
+    }
 
     showSuccess(
       `🔥 SUCCESS! ${fullName}, your booking at <strong>${location}</strong> for ${service} on ${date} at ${time} don land in our system! Asantewaa go confirm via WhatsApp soon. Come slay! 👑`
@@ -503,6 +521,10 @@ async function handleSubmit(e) {
 function initBookingForm() {
   populateBookingPage();
   initDatePicker();
+
+  handleDepositReturn({
+    onSuccess: (message) => showSuccess(message),
+  });
 
   document.getElementById('fullName')?.addEventListener('input', updateSummary);
   document.getElementById('location')?.addEventListener('change', async () => {

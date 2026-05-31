@@ -14,6 +14,13 @@ import {
   getMaxReservationsPerDay,
   isDateFullyBooked,
 } from './booking-capacity.js?v=20260536';
+import {
+  getDepositButtonLabel,
+  getDepositNote,
+  handleDepositReturn,
+  isDepositPaymentEnabled,
+  startDepositPayment,
+} from './booking-payment.js?v=20260537';
 
 let overlayDatePicker = null;
 let bookedSlots = [];
@@ -121,7 +128,7 @@ function initOverlayDatePicker() {
   });
 }
 
-function openBookingOverlay(location) {
+export function openBookingOverlay(location) {
   activeLocationId = getLocationBookingValue(location);
   const overlay = document.getElementById('gr-booking-overlay');
   const copy = SITE.glamRoom?.bookingOverlay || {};
@@ -130,7 +137,19 @@ function openBookingOverlay(location) {
   document.getElementById('gr-overlay-title').textContent = copy.title || 'RESERVE YOUR CHAIR';
   document.getElementById('gr-overlay-location').textContent = `${copy.locationPrefix || 'GLAM ROOM —'} ${location.area || getLocationLabelById(activeLocationId)}`;
   document.getElementById('gr-overlay-exit').textContent = copy.exitLabel || 'X EXIT';
-  document.getElementById('gr-overlay-submit').textContent = copy.submitLabel || 'CONFIRM YOUR RESERVATION';
+  document.getElementById('gr-overlay-submit').textContent = isDepositPaymentEnabled()
+    ? getDepositButtonLabel()
+    : copy.submitLabel || 'CONFIRM YOUR RESERVATION';
+
+  const depositNoteEl = document.getElementById('gr-overlay-deposit-note');
+  if (depositNoteEl) {
+    if (isDepositPaymentEnabled()) {
+      depositNoteEl.textContent = copy.depositNote || getDepositNote();
+      depositNoteEl.hidden = false;
+    } else {
+      depositNoteEl.hidden = true;
+    }
+  }
 
   document.getElementById('gr-booking-form').reset();
   document.getElementById('gr-overlay-msg').hidden = true;
@@ -216,7 +235,7 @@ async function handleOverlaySubmit(event) {
       notes: notes || null,
     };
 
-    let result = await supabase.from('bookings').insert([row]);
+    let result = await supabase.from('bookings').insert([row]).select('id').single();
     if (result.error?.code === '42703' || result.error?.code === 'PGRST204') {
       result = await supabase.from('bookings').insert([
         {
@@ -230,14 +249,30 @@ async function handleOverlaySubmit(event) {
           payment_status: 'pending',
           notes: [`[Location: ${location}]`, notes].filter(Boolean).join('\n') || null,
         },
-      ]);
+      ]).select('id').single();
     }
 
     if (result.error) throw result.error;
 
+    const bookingId = result.data?.id;
+    await refreshOverlayDateCapacity();
+
+    if (isDepositPaymentEnabled() && bookingId) {
+      msgEl.textContent = 'Redirecting to secure payment…';
+      msgEl.hidden = false;
+
+      await startDepositPayment({
+        bookingId,
+        email: '',
+        phone,
+        fullName,
+        returnPath: window.location.pathname,
+      });
+      return;
+    }
+
     msgEl.textContent = 'Reservation received. We will confirm through official channels.';
     msgEl.hidden = false;
-    await refreshOverlayDateCapacity();
     setTimeout(closeBookingOverlay, 2800);
   } catch (err) {
     const limitReached =
@@ -261,6 +296,20 @@ export function initGlamBookingOverlay() {
   if (!form) return;
 
   initOverlayDatePicker();
+
+  handleDepositReturn({
+    onSuccess: (message) => {
+      const overlay = document.getElementById('gr-booking-overlay');
+      const msgEl = document.getElementById('gr-overlay-msg');
+      if (overlay && msgEl) {
+        overlay.hidden = false;
+        overlay.setAttribute('aria-hidden', 'false');
+        msgEl.textContent = message;
+        msgEl.hidden = false;
+        setTimeout(closeBookingOverlay, 4000);
+      }
+    },
+  });
 
   document.getElementById('gr-overlay-exit')?.addEventListener('click', closeBookingOverlay);
   document.getElementById('gr-booking-overlay')?.addEventListener('click', (event) => {

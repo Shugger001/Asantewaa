@@ -44,3 +44,5 @@ create policy "Public can read bookings for availability"
   using (status in ('pending', 'confirmed'));
 
 -- 3) Optional: enforce max 6 reservations per shop per day — run supabase/max-daily-bookings.sql
+
+-- 4) Deposit auto-confirm (Moolre) — run supabase/setup-deposit.sql and deploy initiate-deposit + confirm-deposit

@@ -416,6 +416,7 @@ export const SITE = {
       title: "RESERVE YOUR CHAIR",
       locationPrefix: "GLAM ROOM —",
       submitLabel: "CONFIRM YOUR RESERVATION",
+      depositNote: "A commitment deposit confirms your reservation instantly.",
       exitLabel: "X EXIT",
     },
     signatureServices: [
@@ -680,6 +681,21 @@ export const SITE = {
     tiktokHandle: "@asantewaaa_official",
 
     maxReservationsPerDay: 6,
+
+    deposit: {
+      enabled: true,
+      configured: false,
+      provider: "moolre",
+      amountGhs: 50,
+      currency: "GHS",
+      label: "GH₵ 50 commitment deposit",
+      note: "Pay a commitment deposit via Mobile Money to instantly confirm your reservation.",
+      submitLabel: "PAY DEPOSIT & CONFIRM",
+      pendingMessage:
+        "Your slot is held. Complete the deposit payment to confirm your reservation.",
+      confirmedMessage:
+        "You're confirmed! Your deposit secures your chair — see you at Glam Room.",
+    },
 
     timeSlots: [
       { value: "09:00", label: "09:00 AM" },

@@ -131,8 +131,8 @@ var SITE = {
       },
       {
         id: "discover",
-        label: "",
-        title: "The Queen Behind the Chair",
+        label: "Dossier",
+        title: "The Era of Influence",
         subtitle: "4M+ Followers \xB7 Ghanaian Pride",
         imageUrl: "images/glam-red-studio.png",
         imagePosition: "center top",
@@ -923,8 +923,8 @@ var SITE2 = {
       },
       {
         id: "discover",
-        label: "",
-        title: "The Queen Behind the Chair",
+        label: "Dossier",
+        title: "The Era of Influence",
         subtitle: "4M+ Followers \xB7 Ghanaian Pride",
         imageUrl: "images/glam-red-studio.png",
         imagePosition: "center top",
@@ -2178,8 +2178,8 @@ var SITE3 = {
       },
       {
         id: "discover",
-        label: "",
-        title: "The Queen Behind the Chair",
+        label: "Dossier",
+        title: "The Era of Influence",
         subtitle: "4M+ Followers \xB7 Ghanaian Pride",
         imageUrl: "images/glam-red-studio.png",
         imagePosition: "center top",

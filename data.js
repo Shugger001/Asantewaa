@@ -173,8 +173,8 @@ export const SITE = {
       },
       {
         id: "discover",
-        label: "",
-        title: "The Queen Behind the Chair",
+        label: "Dossier",
+        title: "The Era of Influence",
         subtitle: "4M+ Followers · Ghanaian Pride",
         imageUrl: "images/glam-red-studio.png",
         imagePosition: "center top",

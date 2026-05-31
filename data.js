@@ -300,7 +300,7 @@ export const SITE = {
       { label: "Partnerships", href: "proposals.html" },
     ],
     statement: {
-      imageUrl: "images/glam-red-studio.png",
+      imageUrl: "images/asantewaa-enterprise-statement.png",
       imageAlt: "Asantewaa — editorial portrait",
       imagePosition: "center 20%",
       displayLines: ["SHAPING", "CULTURE.", "DRIVING", "ENGAGEMENT."],

@@ -236,6 +236,43 @@ function renderEnterprise() {
 
   document.title = 'The Enterprise | Asantewaa';
 
+  const statement = data.statement;
+  const statementImage = document.getElementById('enterprise-statement-image');
+  if (statementImage && statement) {
+    statementImage.src = statement.imageUrl || SITE.hero?.photoUrl || '';
+    statementImage.alt = statement.imageAlt || 'Asantewaa';
+    if (statement.imagePosition) {
+      statementImage.style.objectPosition = statement.imagePosition;
+    }
+  }
+
+  const headlinesEl = document.getElementById('enterprise-headlines');
+  if (headlinesEl && statement?.displayLines) {
+    headlinesEl.innerHTML = statement.displayLines
+      .map((line) => `<span class="ent-display-line">${line}</span>`)
+      .join('');
+  }
+
+  const statementsEl = document.getElementById('enterprise-statements');
+  if (statementsEl && statement?.statements) {
+    statementsEl.innerHTML = statement.statements
+      .map((line) => `<p class="ent-bold-line">${line}</p>`)
+      .join('');
+  }
+
+  const bodyEl = document.getElementById('enterprise-body');
+  if (bodyEl && statement?.body) {
+    bodyEl.innerHTML = statement.body
+      .map((block, index) => {
+        const lines = block
+          .map((line) => `<p class="ent-body-line">${line}</p>`)
+          .join('');
+        const gap = index < statement.body.length - 1 ? '<div class="ent-body-gap" aria-hidden="true"></div>' : '';
+        return lines + gap;
+      })
+      .join('');
+  }
+
   const metricsEl = document.getElementById('enterprise-metrics');
   if (metricsEl && data.metrics) {
     const strips = data.metrics.filter((metric) => metric.variant === 'strip');

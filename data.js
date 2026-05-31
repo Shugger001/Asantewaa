@@ -262,6 +262,18 @@ export const SITE = {
         imagePosition: "center 30%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.88) 100%)",
       },
+      {
+        id: "visual-8",
+        imageOnly: true,
+        imageUrl: "images/glam-red-outdoor.png",
+        imagePosition: "center 22%",
+      },
+      {
+        id: "visual-9",
+        imageOnly: true,
+        imageUrl: "images/glam-red-studio.png",
+        imagePosition: "center 18%",
+      },
     ],
   },
 

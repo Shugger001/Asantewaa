@@ -420,19 +420,19 @@ var SITE = {
     },
     compliance: [
       {
-        title: "image & asset rights",
+        title: "IMAGE & ASSET RIGHTS",
         body: "All creative assets licensed for 12 months from campaign launch. Organic digital distribution only."
       },
       {
-        title: "paid media amplification",
+        title: "PAID MEDIA AMPLIFICATION",
         body: "Boosting, dark-posting, or commercial promotion requires pre-approval plus a 30% base package premium."
       },
       {
-        title: "media restrictions",
+        title: "MEDIA RESTRICTIONS",
         body: "Assets prohibited on national TV, billboards, print, or any offline or out-of-home media channels."
       },
       {
-        title: "asset modification",
+        title: "ASSET MODIFICATION",
         body: "No re-editing, cropping, or remixing without written authorisation. Unapproved changes void usage rights."
       }
     ],
@@ -1214,19 +1214,19 @@ var SITE2 = {
     },
     compliance: [
       {
-        title: "image & asset rights",
+        title: "IMAGE & ASSET RIGHTS",
         body: "All creative assets licensed for 12 months from campaign launch. Organic digital distribution only."
       },
       {
-        title: "paid media amplification",
+        title: "PAID MEDIA AMPLIFICATION",
         body: "Boosting, dark-posting, or commercial promotion requires pre-approval plus a 30% base package premium."
       },
       {
-        title: "media restrictions",
+        title: "MEDIA RESTRICTIONS",
         body: "Assets prohibited on national TV, billboards, print, or any offline or out-of-home media channels."
       },
       {
-        title: "asset modification",
+        title: "ASSET MODIFICATION",
         body: "No re-editing, cropping, or remixing without written authorisation. Unapproved changes void usage rights."
       }
     ],
@@ -2471,19 +2471,19 @@ var SITE3 = {
     },
     compliance: [
       {
-        title: "image & asset rights",
+        title: "IMAGE & ASSET RIGHTS",
         body: "All creative assets licensed for 12 months from campaign launch. Organic digital distribution only."
       },
       {
-        title: "paid media amplification",
+        title: "PAID MEDIA AMPLIFICATION",
         body: "Boosting, dark-posting, or commercial promotion requires pre-approval plus a 30% base package premium."
       },
       {
-        title: "media restrictions",
+        title: "MEDIA RESTRICTIONS",
         body: "Assets prohibited on national TV, billboards, print, or any offline or out-of-home media channels."
       },
       {
-        title: "asset modification",
+        title: "ASSET MODIFICATION",
         body: "No re-editing, cropping, or remixing without written authorisation. Unapproved changes void usage rights."
       }
     ],

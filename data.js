@@ -78,6 +78,10 @@ export function getBookingStyleOptions() {
 export const SITE = {
   brand: "Glam Room by Asantewaa",
   owner: "Asantewaa",
+  logo: {
+    white: "icons/logo-white.png",
+    black: "icons/logo-black.png",
+  },
   tagline: "Accra's baddest hair destination — where your crown gets the main character energy it deserves.",
 
   /** Wireframe document — 6 pages (PDF pages 2–7) */

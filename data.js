@@ -407,6 +407,7 @@ export const SITE = {
     topbarLeftLink: "glam-room.html",
     menuLinks: [
       { label: "Home", href: "index.html" },
+      { label: "The Enterprise", href: "about.html" },
       { label: "The Glam Room", href: "glam-room.html" },
       { label: "Book Appointment", href: "book.html" },
     ],
@@ -754,6 +755,7 @@ export const SITE = {
 
   serviceNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
     { label: "All Services", href: "glam-room.html#services" },
     { label: "Book Appointment", href: "book.html" },
@@ -776,6 +778,7 @@ export const SITE = {
 
   businessNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
     { label: "Services", href: "#services" },
     { label: "Gallery", href: "#gallery" },
@@ -784,6 +787,7 @@ export const SITE = {
 
   bookingNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
     { label: "Book Appointment", href: "book.html" },
   ],

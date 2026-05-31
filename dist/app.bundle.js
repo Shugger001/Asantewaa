@@ -361,6 +361,7 @@ var SITE = {
     topbarLeftLink: "glam-room.html",
     menuLinks: [
       { label: "Home", href: "index.html" },
+      { label: "The Enterprise", href: "about.html" },
       { label: "The Glam Room", href: "glam-room.html" },
       { label: "Book Appointment", href: "book.html" }
     ],
@@ -685,6 +686,7 @@ var SITE = {
   },
   serviceNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
     { label: "All Services", href: "glam-room.html#services" },
     { label: "Book Appointment", href: "book.html" }
@@ -704,6 +706,7 @@ var SITE = {
   ],
   businessNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
     { label: "Services", href: "#services" },
     { label: "Gallery", href: "#gallery" },
@@ -711,6 +714,7 @@ var SITE = {
   ],
   bookingNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
     { label: "Book Appointment", href: "book.html" }
   ],
@@ -1136,6 +1140,7 @@ var SITE2 = {
     topbarLeftLink: "glam-room.html",
     menuLinks: [
       { label: "Home", href: "index.html" },
+      { label: "The Enterprise", href: "about.html" },
       { label: "The Glam Room", href: "glam-room.html" },
       { label: "Book Appointment", href: "book.html" }
     ],
@@ -1460,6 +1465,7 @@ var SITE2 = {
   },
   serviceNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
     { label: "All Services", href: "glam-room.html#services" },
     { label: "Book Appointment", href: "book.html" }
@@ -1479,6 +1485,7 @@ var SITE2 = {
   ],
   businessNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
     { label: "Services", href: "#services" },
     { label: "Gallery", href: "#gallery" },
@@ -1486,6 +1493,7 @@ var SITE2 = {
   ],
   bookingNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
     { label: "Book Appointment", href: "book.html" }
   ],
@@ -2391,6 +2399,7 @@ var SITE3 = {
     topbarLeftLink: "glam-room.html",
     menuLinks: [
       { label: "Home", href: "index.html" },
+      { label: "The Enterprise", href: "about.html" },
       { label: "The Glam Room", href: "glam-room.html" },
       { label: "Book Appointment", href: "book.html" }
     ],
@@ -2715,6 +2724,7 @@ var SITE3 = {
   },
   serviceNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
     { label: "All Services", href: "glam-room.html#services" },
     { label: "Book Appointment", href: "book.html" }
@@ -2734,6 +2744,7 @@ var SITE3 = {
   ],
   businessNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
     { label: "Services", href: "#services" },
     { label: "Gallery", href: "#gallery" },
@@ -2741,6 +2752,7 @@ var SITE3 = {
   ],
   bookingNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
     { label: "Book Appointment", href: "book.html" }
   ],

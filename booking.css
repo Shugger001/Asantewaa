@@ -432,20 +432,22 @@ html.dark .booking-alert.error {
 
 @media (max-width: 900px) {
   .booking-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-    gap: 0.65rem;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 0.5rem;
     align-items: start;
   }
 
   .personality-card {
     position: static;
-    padding: 0.85rem 0.65rem;
+    padding: 0.65rem 0.55rem;
     min-width: 0;
+    border-radius: 1rem;
   }
 
   .booking-form-card {
-    padding: 0.85rem 0.65rem;
+    padding: 0.75rem 0.55rem;
     min-width: 0;
+    border-radius: 1rem;
   }
 
   .form-row-2 {
@@ -500,14 +502,13 @@ html.dark .booking-alert.error {
     gap: 0.4rem;
   }
 
+  .booking-info-list li > span {
+    font-size: inherit;
+  }
+
   .booking-info-list i {
     width: 14px;
     font-size: 0.65rem;
-  }
-
-  .personality-card .booking-info-list + .booking-info-list,
-  .personality-card #booking-promise {
-    display: none;
   }
 
   .booking-form-title {

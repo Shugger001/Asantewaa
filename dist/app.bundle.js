@@ -607,7 +607,7 @@ var SITE = {
   ],
   business: {
     tagline: "Accra's baddest hair destination \u2014 where your crown gets the main character energy it deserves.",
-    extensionNotice: "Please note that all prices do not come with hair extensions. You can either come along with your own extensions or purchase from our salon.",
+    extensionNotice: "Please note that all Braids prices do not include hair extensions. You can either come along with your own extensions or purchase from our salon.",
     intro: [
       "Glam Room is Asantewaa's dream salon \u2014 with two locations across Accra, so your glow up is never far away. Warm vibes, expert stylists, and zero tolerance for bad hair days at every chair.",
       "From silk press to full bridal glam, every appointment comes with main character energy included. Walk in as you are, walk out ready for Accra to stare."
@@ -1415,7 +1415,7 @@ var SITE2 = {
   ],
   business: {
     tagline: "Accra's baddest hair destination \u2014 where your crown gets the main character energy it deserves.",
-    extensionNotice: "Please note that all prices do not come with hair extensions. You can either come along with your own extensions or purchase from our salon.",
+    extensionNotice: "Please note that all Braids prices do not include hair extensions. You can either come along with your own extensions or purchase from our salon.",
     intro: [
       "Glam Room is Asantewaa's dream salon \u2014 with two locations across Accra, so your glow up is never far away. Warm vibes, expert stylists, and zero tolerance for bad hair days at every chair.",
       "From silk press to full bridal glam, every appointment comes with main character energy included. Walk in as you are, walk out ready for Accra to stare."
@@ -2678,7 +2678,7 @@ var SITE3 = {
   ],
   business: {
     tagline: "Accra's baddest hair destination \u2014 where your crown gets the main character energy it deserves.",
-    extensionNotice: "Please note that all prices do not come with hair extensions. You can either come along with your own extensions or purchase from our salon.",
+    extensionNotice: "Please note that all Braids prices do not include hair extensions. You can either come along with your own extensions or purchase from our salon.",
     intro: [
       "Glam Room is Asantewaa's dream salon \u2014 with two locations across Accra, so your glow up is never far away. Warm vibes, expert stylists, and zero tolerance for bad hair days at every chair.",
       "From silk press to full bridal glam, every appointment comes with main character energy included. Walk in as you are, walk out ready for Accra to stare."

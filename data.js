@@ -245,7 +245,7 @@ export const SITE = {
       {
         id: "book",
         label: "Book Your Glam",
-        title: "Secure Your Slot",
+        title: "Reserve Your EXperience",
         subtitle: "Mama Glam Is Waiting",
         imageUrl: "images/glam-red-celebration.png",
         imagePosition: "center 22%",

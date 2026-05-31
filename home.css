@@ -1476,12 +1476,92 @@ body.editorial-theme .flatpickr-calendar {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
 }
 
+body.editorial-theme .flatpickr-months,
+body.editorial-theme .flatpickr-months .flatpickr-month {
+  background: #111;
+}
+
+body.editorial-theme .flatpickr-current-month,
+body.editorial-theme .flatpickr-current-month .flatpickr-monthDropdown-months,
+body.editorial-theme .flatpickr-current-month input.cur-year {
+  color: #fff;
+  font-weight: 500;
+}
+
+body.editorial-theme .flatpickr-current-month .flatpickr-monthDropdown-months {
+  background: #111;
+}
+
+body.editorial-theme .flatpickr-weekdays {
+  background: #111;
+}
+
+body.editorial-theme span.flatpickr-weekday {
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 500;
+}
+
+body.editorial-theme .flatpickr-months .flatpickr-prev-month,
+body.editorial-theme .flatpickr-months .flatpickr-next-month {
+  color: #fff;
+  fill: #fff;
+}
+
+body.editorial-theme .flatpickr-months .flatpickr-prev-month:hover,
+body.editorial-theme .flatpickr-months .flatpickr-next-month:hover {
+  color: var(--gold);
+  fill: var(--gold);
+}
+
 body.editorial-theme .flatpickr-day {
   color: #fff;
 }
 
-body.editorial-theme .flatpickr-day.selected {
+body.editorial-theme .flatpickr-day.today {
+  border-color: var(--gold);
+}
+
+body.editorial-theme .flatpickr-day.today:hover,
+body.editorial-theme .flatpickr-day.today:focus {
+  background: rgba(212, 168, 83, 0.2);
+  border-color: var(--gold);
+  color: #fff;
+}
+
+body.editorial-theme .flatpickr-day:hover,
+body.editorial-theme .flatpickr-day:focus {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+body.editorial-theme .flatpickr-day.selected,
+body.editorial-theme .flatpickr-day.selected:hover,
+body.editorial-theme .flatpickr-day.selected:focus {
   background: var(--gold);
   border-color: var(--gold);
   color: #000;
+}
+
+body.editorial-theme .flatpickr-day.flatpickr-disabled,
+body.editorial-theme .flatpickr-day.prevMonthDay,
+body.editorial-theme .flatpickr-day.nextMonthDay {
+  color: rgba(255, 255, 255, 0.28);
+}
+
+body.editorial-theme .flatpickr-day.flatpickr-disabled:hover {
+  color: rgba(255, 255, 255, 0.28);
+  background: transparent;
+}
+
+body.editorial-theme .numInputWrapper span.arrowUp:after {
+  border-bottom-color: #fff;
+}
+
+body.editorial-theme .numInputWrapper span.arrowDown:after {
+  border-top-color: #fff;
+}
+
+body.editorial-theme .form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
 }

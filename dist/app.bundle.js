@@ -252,6 +252,8 @@ var SITE = {
     menuLinks: [
       { label: "Home", href: "index.html" },
       { label: "The Enterprise", href: "about.html" },
+      { label: "The Glam Room", href: "glam-room.html" },
+      { label: "Book Appointment", href: "book.html" },
       { label: "Partnerships", href: "proposals.html" }
     ],
     statement: {
@@ -337,7 +339,8 @@ var SITE = {
       { label: "Home", href: "index.html" },
       { label: "The Enterprise", href: "about.html" },
       { label: "The Glam Room", href: "glam-room.html" },
-      { label: "Book Appointment", href: "book.html" }
+      { label: "Book Appointment", href: "book.html" },
+      { label: "Partnerships", href: "proposals.html" }
     ],
     declaration: {
       title: "THE GLAM ROOM",
@@ -691,6 +694,8 @@ var SITE = {
   proposalsNavLinks: [
     { label: "Home", href: "index.html" },
     { label: "The Enterprise", href: "about.html" },
+    { label: "The Glam Room", href: "glam-room.html" },
+    { label: "Book Appointment", href: "book.html" },
     { label: "Partnerships", href: "proposals.html" }
   ],
   footer: {
@@ -1035,6 +1040,8 @@ var SITE2 = {
     menuLinks: [
       { label: "Home", href: "index.html" },
       { label: "The Enterprise", href: "about.html" },
+      { label: "The Glam Room", href: "glam-room.html" },
+      { label: "Book Appointment", href: "book.html" },
       { label: "Partnerships", href: "proposals.html" }
     ],
     statement: {
@@ -1120,7 +1127,8 @@ var SITE2 = {
       { label: "Home", href: "index.html" },
       { label: "The Enterprise", href: "about.html" },
       { label: "The Glam Room", href: "glam-room.html" },
-      { label: "Book Appointment", href: "book.html" }
+      { label: "Book Appointment", href: "book.html" },
+      { label: "Partnerships", href: "proposals.html" }
     ],
     declaration: {
       title: "THE GLAM ROOM",
@@ -1474,6 +1482,8 @@ var SITE2 = {
   proposalsNavLinks: [
     { label: "Home", href: "index.html" },
     { label: "The Enterprise", href: "about.html" },
+    { label: "The Glam Room", href: "glam-room.html" },
+    { label: "Book Appointment", href: "book.html" },
     { label: "Partnerships", href: "proposals.html" }
   ],
   footer: {
@@ -2281,6 +2291,8 @@ var SITE3 = {
     menuLinks: [
       { label: "Home", href: "index.html" },
       { label: "The Enterprise", href: "about.html" },
+      { label: "The Glam Room", href: "glam-room.html" },
+      { label: "Book Appointment", href: "book.html" },
       { label: "Partnerships", href: "proposals.html" }
     ],
     statement: {
@@ -2366,7 +2378,8 @@ var SITE3 = {
       { label: "Home", href: "index.html" },
       { label: "The Enterprise", href: "about.html" },
       { label: "The Glam Room", href: "glam-room.html" },
-      { label: "Book Appointment", href: "book.html" }
+      { label: "Book Appointment", href: "book.html" },
+      { label: "Partnerships", href: "proposals.html" }
     ],
     declaration: {
       title: "THE GLAM ROOM",
@@ -2720,6 +2733,8 @@ var SITE3 = {
   proposalsNavLinks: [
     { label: "Home", href: "index.html" },
     { label: "The Enterprise", href: "about.html" },
+    { label: "The Glam Room", href: "glam-room.html" },
+    { label: "Book Appointment", href: "book.html" },
     { label: "Partnerships", href: "proposals.html" }
   ],
   footer: {

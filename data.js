@@ -297,6 +297,8 @@ export const SITE = {
     menuLinks: [
       { label: "Home", href: "index.html" },
       { label: "The Enterprise", href: "about.html" },
+      { label: "The Glam Room", href: "glam-room.html" },
+      { label: "Book Appointment", href: "book.html" },
       { label: "Partnerships", href: "proposals.html" },
     ],
     statement: {
@@ -384,6 +386,7 @@ export const SITE = {
       { label: "The Enterprise", href: "about.html" },
       { label: "The Glam Room", href: "glam-room.html" },
       { label: "Book Appointment", href: "book.html" },
+      { label: "Partnerships", href: "proposals.html" },
     ],
     declaration: {
       title: "THE GLAM ROOM",
@@ -765,6 +768,8 @@ export const SITE = {
   proposalsNavLinks: [
     { label: "Home", href: "index.html" },
     { label: "The Enterprise", href: "about.html" },
+    { label: "The Glam Room", href: "glam-room.html" },
+    { label: "Book Appointment", href: "book.html" },
     { label: "Partnerships", href: "proposals.html" },
   ],
 

@@ -89,6 +89,24 @@ function applyBookingServiceFromUrl() {
   }
 }
 
+function applyBookingLocationFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const locationValue = params.get('location');
+  if (!locationValue) return;
+
+  const locationSelect = document.getElementById('location');
+  if (!locationSelect) return;
+
+  const hasOption = Array.from(locationSelect.options).some(
+    (option) => option.value === locationValue
+  );
+  if (!hasOption) return;
+
+  locationSelect.value = locationValue;
+  locationSelect.dispatchEvent(new Event('change'));
+  updateSummary();
+}
+
 function populateBookingPage() {
   document.getElementById('booking-subhead').textContent = SITE.booking.subhead;
   document.getElementById('booking-quote').innerHTML = `
@@ -539,6 +557,8 @@ function initBookingForm() {
   document.getElementById('serviceStyle')?.addEventListener('change', updateSummary);
   document.getElementById('time')?.addEventListener('change', updateSummary);
   document.getElementById('bookingForm')?.addEventListener('submit', handleSubmit);
+
+  applyBookingLocationFromUrl();
 }
 
 export { initBookingForm };

@@ -11,10 +11,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-  <link rel="stylesheet" href="styles.css?v=20260539">
+  <link rel="stylesheet" href="styles.css?v=20260541">
   <link rel="stylesheet" href="home.css?v=20260539">
   <link rel="stylesheet" href="services.css?v=20260539">
   <link rel="stylesheet" href="glam-room.css?v=20260539">
@@ -158,46 +156,6 @@
     <p class="gr-footer" id="gr-footer-end"></p>
   </main>
 
-  <div class="gr-overlay" id="gr-booking-overlay" aria-hidden="true">
-    <div class="gr-overlay__panel" role="dialog" aria-modal="true" aria-labelledby="gr-overlay-title">
-      <button type="button" class="gr-overlay__exit" id="gr-overlay-exit"></button>
-      <h2 class="gr-overlay__title" id="gr-overlay-title"></h2>
-      <p class="gr-overlay__location" id="gr-overlay-location"></p>
-      <form id="gr-booking-form">
-        <input type="hidden" id="gr-location-id" name="locationId">
-        <div class="gr-field">
-          <label for="gr-full-name">Your Name</label>
-          <input type="text" id="gr-full-name" name="fullName" required autocomplete="name">
-        </div>
-        <div class="gr-field">
-          <label for="gr-phone">Phone / WhatsApp Number</label>
-          <input type="tel" id="gr-phone" name="phone" required autocomplete="tel">
-        </div>
-        <fieldset class="gr-field gr-field--services">
-          <legend>Select Your Service</legend>
-          <div class="gr-radio-group" id="gr-service-radios"></div>
-        </fieldset>
-        <div class="gr-field-row">
-          <div class="gr-field">
-            <label for="gr-date">Preferred Date</label>
-            <input type="text" id="gr-date" name="date" placeholder="Pick a date" required>
-          </div>
-          <div class="gr-field">
-            <label for="gr-time">Time</label>
-            <select id="gr-time" name="time" required></select>
-          </div>
-        </div>
-        <div class="gr-field">
-          <label for="gr-notes">Special Notes or Requests</label>
-          <textarea id="gr-notes" name="notes" rows="2"></textarea>
-        </div>
-        <button type="submit" class="gr-overlay__submit" id="gr-overlay-submit"></button>
-        <p class="gr-overlay__deposit-note" id="gr-overlay-deposit-note" hidden></p>
-        <p class="gr-overlay__msg" id="gr-overlay-msg" hidden></p>
-      </form>
-    </div>
-  </div>
-
-  <script type="module" src="dist/app.bundle.js?v=7"></script>
+  <script type="module" src="dist/app.bundle.js?v=8"></script>
 </body>
 </html>

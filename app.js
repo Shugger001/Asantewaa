@@ -1,12 +1,9 @@
 import { SITE, getLocationLabel, findServiceById, getServicePriceRange } from './data.js?v=20260536';
-import { initBookingForm } from './booking.js?v=20260536';
+import { initBookingForm } from './booking.js?v=20260541';
 import {
-  initGlamBookingOverlay,
   bindSanctuaryBookingButtons,
-  openBookingOverlay,
-  populateOverlayServices,
-  populateOverlayTimeSlots,
-} from './glam-booking.js?v=20260539';
+  openBookingPage,
+} from './glam-booking.js?v=20260541';
 import { initProposalsForm } from './proposals.js?v=20260536';
 import { initFindBooking } from './find-booking.js?v=20260536';
 import { initInstallPrompt } from './install-prompt.js?v=20260536';
@@ -508,9 +505,6 @@ function renderGlamRoom() {
   const footerEnd = document.getElementById('gr-footer-end');
   if (footerEnd) footerEnd.textContent = data.footer || SITE.globalFooter;
 
-  populateOverlayServices();
-  populateOverlayTimeSlots();
-  initGlamBookingOverlay();
   bindSanctuaryBookingButtons();
 
   renderBusiness();
@@ -755,11 +749,14 @@ function getPageChrome() {
     };
   }
 
-  if (page === 'glam-room' || page === 'booking' || page === 'business') {
+  if (page === 'glam-room' || page === 'booking' || page === 'business' || page === 'service') {
     return {
       topbarLeft: SITE.glamRoom?.topbarLeft || 'GLAM ROOM',
       topbarLeftLink: SITE.glamRoom?.topbarLeftLink || 'glam-room.html',
-      menuLinks: SITE.glamRoom?.menuLinks || SITE.bookingNavLinks,
+      menuLinks:
+        page === 'service'
+          ? SITE.serviceNavLinks
+          : SITE.glamRoom?.menuLinks || SITE.bookingNavLinks,
     };
   }
 
@@ -1586,8 +1583,7 @@ function initButtons() {
 
   if (page === 'glam-room') {
     const openDefaultBooking = () => {
-      const loc = SITE.locations?.[0];
-      if (loc) openBookingOverlay(loc);
+      openBookingPage();
     };
     document.getElementById('btn-hero-book')?.addEventListener('click', openDefaultBooking);
     document.getElementById('btn-contact-book')?.addEventListener('click', openDefaultBooking);

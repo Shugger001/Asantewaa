@@ -1462,19 +1462,24 @@ body.editorial-theme .business-hours {
 }
 
 body.editorial-theme .booking-page {
-  background: #000;
+  background: #0a0a0a;
 }
 
-body.editorial-theme .booking-pattern {
-  opacity: 0.15;
+body.editorial-theme .booking-bg__shade {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.78) 50%,
+    rgba(0, 0, 0, 0.92) 100%
+  );
 }
 
 body.editorial-theme .personality-card,
 body.editorial-theme .booking-form-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  background: rgba(10, 10, 10, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(16px);
-  box-shadow: none;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
 }
 
 body.editorial-theme .booking-title {

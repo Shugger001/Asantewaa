@@ -112,7 +112,6 @@ var SITE = {
         "images/asantewaa-glam-portrait-bw.png",
         "images/asantewaa-beaded-gown-bw.png",
         "images/asantewaa-kente-color.png",
-        "images/asantewaa-gown-smile.png",
         "images/asantewaa-gown-mirror-bw.png",
         "images/asantewaa-gown-full-bw.png",
         "images/asantewaa-gown-mirror-color.png",
@@ -120,7 +119,8 @@ var SITE = {
         "images/glam-red-celebration.png",
         "images/glam-red-studio.png",
         "images/glam-braids-portrait.png",
-        "images/glam-red-outdoor.png"
+        "images/glam-braids-studio.png",
+        "images/glam-red-indoor.png"
       ],
       slideMs: 90,
       starMs: 180,
@@ -929,7 +929,6 @@ var SITE2 = {
         "images/asantewaa-glam-portrait-bw.png",
         "images/asantewaa-beaded-gown-bw.png",
         "images/asantewaa-kente-color.png",
-        "images/asantewaa-gown-smile.png",
         "images/asantewaa-gown-mirror-bw.png",
         "images/asantewaa-gown-full-bw.png",
         "images/asantewaa-gown-mirror-color.png",
@@ -937,7 +936,8 @@ var SITE2 = {
         "images/glam-red-celebration.png",
         "images/glam-red-studio.png",
         "images/glam-braids-portrait.png",
-        "images/glam-red-outdoor.png"
+        "images/glam-braids-studio.png",
+        "images/glam-red-indoor.png"
       ],
       slideMs: 90,
       starMs: 180,
@@ -2209,7 +2209,6 @@ var SITE3 = {
         "images/asantewaa-glam-portrait-bw.png",
         "images/asantewaa-beaded-gown-bw.png",
         "images/asantewaa-kente-color.png",
-        "images/asantewaa-gown-smile.png",
         "images/asantewaa-gown-mirror-bw.png",
         "images/asantewaa-gown-full-bw.png",
         "images/asantewaa-gown-mirror-color.png",
@@ -2217,7 +2216,8 @@ var SITE3 = {
         "images/glam-red-celebration.png",
         "images/glam-red-studio.png",
         "images/glam-braids-portrait.png",
-        "images/glam-red-outdoor.png"
+        "images/glam-braids-studio.png",
+        "images/glam-red-indoor.png"
       ],
       slideMs: 90,
       starMs: 180,
@@ -3890,9 +3890,9 @@ function buildIntroTitleMarkup(config) {
   };
 }
 function getHeroIntroImageUrl() {
-  const introImages = SITE.home?.introLoader?.images?.filter(Boolean);
-  if (introImages?.length) return introImages[introImages.length - 1];
-  return SITE.home?.panels?.[0]?.imageUrl || SITE.hero?.photoUrl || "";
+  const heroPanel = SITE.home?.panels?.find((panel) => panel.id === "hero");
+  if (heroPanel?.imageUrl) return heroPanel.imageUrl;
+  return SITE.hero?.photoUrl || "";
 }
 function setBrandSlideDistance(hero, brand) {
   if (!hero || !brand) return;

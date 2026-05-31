@@ -1054,9 +1054,9 @@ function buildIntroTitleMarkup(config) {
 }
 
 function getHeroIntroImageUrl() {
-  const introImages = SITE.home?.introLoader?.images?.filter(Boolean);
-  if (introImages?.length) return introImages[introImages.length - 1];
-  return SITE.home?.panels?.[0]?.imageUrl || SITE.hero?.photoUrl || '';
+  const heroPanel = SITE.home?.panels?.find((panel) => panel.id === 'hero');
+  if (heroPanel?.imageUrl) return heroPanel.imageUrl;
+  return SITE.hero?.photoUrl || '';
 }
 
 function setBrandSlideDistance(hero, brand) {

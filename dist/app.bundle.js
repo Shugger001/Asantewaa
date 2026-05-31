@@ -153,10 +153,15 @@ var SITE = {
         linkText: "The Enterprise"
       },
       {
-        id: "visual-2",
-        imageOnly: true,
-        imageUrl: "images/asantewaa-kente-bw.png",
-        imagePosition: "center 15%"
+        id: "glam",
+        label: "The Glam Room",
+        title: "Your Crown. Your Glow.",
+        subtitle: "Accra's Premier Hair Destination",
+        imageUrl: "images/asantewaa-gown-mirror-color.png",
+        imagePosition: "center 28%",
+        gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.78) 100%)",
+        link: "glam-room.html",
+        linkText: "Enter Glam Room"
       },
       {
         id: "visual-3",
@@ -171,15 +176,10 @@ var SITE = {
         imagePosition: "center top"
       },
       {
-        id: "glam",
-        label: "The Glam Room",
-        title: "Your Crown. Your Glow.",
-        subtitle: "Accra's Premier Hair Destination",
-        imageUrl: "images/asantewaa-gown-mirror-color.png",
-        imagePosition: "center 28%",
-        gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.78) 100%)",
-        link: "glam-room.html",
-        linkText: "Enter Glam Room"
+        id: "visual-2",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-kente-bw.png",
+        imagePosition: "center 15%"
       },
       {
         id: "visual-5",
@@ -947,10 +947,15 @@ var SITE2 = {
         linkText: "The Enterprise"
       },
       {
-        id: "visual-2",
-        imageOnly: true,
-        imageUrl: "images/asantewaa-kente-bw.png",
-        imagePosition: "center 15%"
+        id: "glam",
+        label: "The Glam Room",
+        title: "Your Crown. Your Glow.",
+        subtitle: "Accra's Premier Hair Destination",
+        imageUrl: "images/asantewaa-gown-mirror-color.png",
+        imagePosition: "center 28%",
+        gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.78) 100%)",
+        link: "glam-room.html",
+        linkText: "Enter Glam Room"
       },
       {
         id: "visual-3",
@@ -965,15 +970,10 @@ var SITE2 = {
         imagePosition: "center top"
       },
       {
-        id: "glam",
-        label: "The Glam Room",
-        title: "Your Crown. Your Glow.",
-        subtitle: "Accra's Premier Hair Destination",
-        imageUrl: "images/asantewaa-gown-mirror-color.png",
-        imagePosition: "center 28%",
-        gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.78) 100%)",
-        link: "glam-room.html",
-        linkText: "Enter Glam Room"
+        id: "visual-2",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-kente-bw.png",
+        imagePosition: "center 15%"
       },
       {
         id: "visual-5",
@@ -2204,10 +2204,15 @@ var SITE3 = {
         linkText: "The Enterprise"
       },
       {
-        id: "visual-2",
-        imageOnly: true,
-        imageUrl: "images/asantewaa-kente-bw.png",
-        imagePosition: "center 15%"
+        id: "glam",
+        label: "The Glam Room",
+        title: "Your Crown. Your Glow.",
+        subtitle: "Accra's Premier Hair Destination",
+        imageUrl: "images/asantewaa-gown-mirror-color.png",
+        imagePosition: "center 28%",
+        gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.78) 100%)",
+        link: "glam-room.html",
+        linkText: "Enter Glam Room"
       },
       {
         id: "visual-3",
@@ -2222,15 +2227,10 @@ var SITE3 = {
         imagePosition: "center top"
       },
       {
-        id: "glam",
-        label: "The Glam Room",
-        title: "Your Crown. Your Glow.",
-        subtitle: "Accra's Premier Hair Destination",
-        imageUrl: "images/asantewaa-gown-mirror-color.png",
-        imagePosition: "center 28%",
-        gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.78) 100%)",
-        link: "glam-room.html",
-        linkText: "Enter Glam Room"
+        id: "visual-2",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-kente-bw.png",
+        imagePosition: "center 15%"
       },
       {
         id: "visual-5",

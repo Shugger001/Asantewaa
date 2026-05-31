@@ -1050,15 +1050,24 @@ function getHeroIntroImageUrl() {
   return SITE.home?.panels?.[0]?.imageUrl || SITE.hero?.photoUrl || '';
 }
 
-function getHeroTitleBottomPadding(hero) {
-  const content = hero?.querySelector('.home-panel-content');
-  if (!content) return 72;
-  const padding = parseFloat(getComputedStyle(content).paddingBottom);
-  return Number.isFinite(padding) ? padding : 72;
+function updateHeroTitlePosition(hero, inner) {
+  if (!hero || !inner) return;
+
+  const bottomRaw = getComputedStyle(hero).getPropertyValue('--hero-title-bottom').trim();
+  const bottom = parseFloat(bottomRaw) || 72;
+  const heroHeight = hero.offsetHeight;
+  const innerHeight = inner.offsetHeight;
+
+  if (!heroHeight || !innerHeight) return;
+
+  const translateY = heroHeight / 2 - bottom - innerHeight / 2;
+  inner.style.setProperty('--hero-title-translate-y', `${translateY}px`);
 }
 
 function lockHeroTitleAtBase(hero, titleEl, inner) {
+  updateHeroTitlePosition(hero, inner);
   titleEl.classList.add('is-settled');
+  titleEl.removeAttribute('aria-hidden');
   hero.style.setProperty('--hero-title-block-height', `${inner.offsetHeight}px`);
 }
 
@@ -1167,19 +1176,32 @@ async function initHeroTitleSequence() {
 
   await sleep(titleRevealMs + titleHoldMs);
 
+  const inner = titleEl.querySelector('.home-hero-intro-title__inner');
+  if (inner) {
+    inner.style.setProperty('--hero-title-translate-y', '0px');
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+    updateHeroTitlePosition(hero, inner);
+  }
+
   titleEl.classList.add('is-sliding-down');
   await sleep(titleSlideMs);
 
-  const inner = titleEl.querySelector('.home-hero-intro-title__inner');
   if (inner) {
     lockHeroTitleAtBase(hero, titleEl, inner);
   } else {
     titleEl.classList.add('is-settled');
+    titleEl.removeAttribute('aria-hidden');
   }
 
   document.body.classList.remove('home-hero-title-active');
   document.body.classList.add('home-hero-title-done');
   hero.classList.add('home-hero-title-settled');
+
+  if (inner) {
+    const recalc = () => updateHeroTitlePosition(hero, inner);
+    window.addEventListener('resize', recalc, { passive: true });
+    recalc();
+  }
 }
 
 function isHomeHorizontalScroll() {

@@ -765,9 +765,10 @@ body.home-intro-done .home-scroll-dots {
 .home-hero-intro-title {
   position: absolute;
   inset: 0;
-  z-index: 4;
+  z-index: 6;
   pointer-events: none;
   text-align: center;
+  overflow: visible;
 }
 
 .home-hero-intro-title__inner {
@@ -780,19 +781,21 @@ body.home-intro-done .home-scroll-dots {
   gap: 0.75rem;
   width: max-content;
   max-width: calc(100% - 4rem);
-  transform: translate(-50%, -50%);
-  transition:
-    top 0.95s cubic-bezier(0.22, 1, 0.36, 1),
-    bottom 0.95s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: top, bottom, transform;
+  --hero-title-translate-y: 0px;
+  transform: translate(-50%, calc(-50% + var(--hero-title-translate-y)));
+  transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
-.home-hero-intro-title.is-sliding-down .home-hero-intro-title__inner,
 .home-hero-intro-title.is-settled .home-hero-intro-title__inner {
-  top: auto;
-  bottom: var(--hero-title-bottom, 4.5rem);
-  transform: translateX(-50%);
+  transition: none;
+}
+
+.home-hero-intro-title.is-settled .home-intro-letter,
+.home-hero-intro-title.is-settled .home-intro-subtitle {
+  opacity: 1;
+  transform: none;
+  filter: none;
 }
 
 .home-hero-intro-title.is-settled::before {
@@ -804,7 +807,7 @@ body.home-intro-done .home-scroll-dots {
   content: '';
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.5) 100%);
   opacity: 0;
   animation: home-intro-veil 0.35s ease forwards;
@@ -946,13 +949,12 @@ body.home-intro-done .home-scroll-dots {
   }
 
   .home-hero-intro-title .home-intro-title-line {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
-    row-gap: 0.15rem;
   }
 
   .home-hero-intro-title .home-intro-letter {
-    font-size: clamp(2.75rem, 4.2vw, 5.25rem);
+    font-size: clamp(3rem, 5vw, 6rem);
   }
 
   .home-hero-intro-title .home-intro-subtitle {

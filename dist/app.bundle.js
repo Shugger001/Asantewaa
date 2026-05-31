@@ -3779,19 +3779,21 @@ function renderHomePanels() {
     const labelHtml = panel.label ? `<p class="home-panel-label">${panel.label}</p>` : "";
     const headingTag = i === 0 ? "h1" : "h2";
     const ctaHtml = panel.link ? `<a href="${panel.link}" class="home-panel-cta">${panel.linkText || "Explore"}</a>` : "";
-    const heroIntroTitleHtml = i === 0 && SITE.home?.introLoader ? (() => {
+    const heroBrandHtml = i === 0 && SITE.home?.introLoader ? (() => {
       const { html, letterStaggerMs } = buildIntroTitleMarkup(SITE.home.introLoader);
-      return `<div class="home-hero-intro-title" style="--letter-stagger:${letterStaggerMs}ms" aria-hidden="true">${html}</div>`;
+      return `<div id="home-hero-brand" class="home-hero-brand" style="--letter-stagger:${letterStaggerMs}ms" aria-hidden="true">${html}</div>`;
     })() : "";
+    const useHeroBrand = Boolean(heroBrandHtml);
+    const headingHtml = useHeroBrand ? "" : `<${headingTag} class="${titleClass}">${panel.title}</${headingTag}>`;
     return `
         <section class="${panelClass}" id="${panel.id}">
           <div class="home-panel-bg" style="${bgStyle}"></div>
           <div class="home-panel-overlay"></div>
           ${linkOverlay}
-          ${heroIntroTitleHtml}
-          <div class="home-panel-content">
+          <div class="home-panel-content${useHeroBrand ? " home-panel-content--hero" : ""}">
+            ${heroBrandHtml}
             ${labelHtml}
-            <${headingTag} class="${titleClass}">${panel.title}</${headingTag}>
+            ${headingHtml}
             ${panel.subtitle ? `<p class="home-panel-subtitle">${panel.subtitle}</p>` : ""}
             ${ctaHtml}
           </div>
@@ -3858,10 +3860,8 @@ function buildIntroTitleMarkup(config) {
     subtitle,
     letterStaggerMs,
     html: `
-      <div class="home-hero-intro-title__inner">
-        <div class="home-intro-title-line">${titleLetters}</div>
-        ${subtitle ? `<p class="home-intro-subtitle" style="--i:${title.length + 1}">${escapeHtml(subtitle)}</p>` : ""}
-      </div>
+      <div class="home-intro-title-line">${titleLetters}</div>
+      ${subtitle ? `<p class="home-intro-subtitle" style="--i:${title.length + 1}">${escapeHtml(subtitle)}</p>` : ""}
     `
   };
 }
@@ -3870,21 +3870,23 @@ function getHeroIntroImageUrl() {
   if (introImages?.length) return introImages[introImages.length - 1];
   return SITE.home?.panels?.[0]?.imageUrl || SITE.hero?.photoUrl || "";
 }
-function updateHeroTitlePosition(hero, inner) {
-  if (!hero || !inner) return;
-  const bottomRaw = getComputedStyle(hero).getPropertyValue("--hero-title-bottom").trim();
-  const bottom = parseFloat(bottomRaw) || 72;
-  const heroHeight = hero.offsetHeight;
-  const innerHeight = inner.offsetHeight;
-  if (!heroHeight || !innerHeight) return;
-  const translateY = heroHeight / 2 - bottom - innerHeight / 2;
-  inner.style.setProperty("--hero-title-translate-y", `${translateY}px`);
+function setBrandSlideDistance(hero, brand) {
+  if (!hero || !brand) return;
+  const content = hero.querySelector(".home-panel-content");
+  const bottomPadding = content ? parseFloat(getComputedStyle(content).paddingBottom) || 72 : 72;
+  const heroRect = hero.getBoundingClientRect();
+  const brandHeight = brand.offsetHeight || 100;
+  const settledCenterY = heroRect.bottom - bottomPadding - brandHeight / 2;
+  const viewportCenterY = window.innerHeight / 2;
+  const shift = settledCenterY - viewportCenterY;
+  brand.style.setProperty("--hero-brand-shift", `${shift}px`);
 }
-function lockHeroTitleAtBase(hero, titleEl, inner) {
-  updateHeroTitlePosition(hero, inner);
-  titleEl.classList.add("is-settled");
-  titleEl.removeAttribute("aria-hidden");
-  hero.style.setProperty("--hero-title-block-height", `${inner.offsetHeight}px`);
+function showHeroBrandImmediately(hero, brand) {
+  if (!brand) return;
+  brand.classList.add("show-title", "is-settled");
+  brand.removeAttribute("aria-hidden");
+  hero?.classList.add("home-hero-title-settled");
+  document.body.classList.add("home-intro-done", "home-hero-title-done");
 }
 function preloadImages(urls) {
   return Promise.all(
@@ -3903,9 +3905,10 @@ async function initHomeIntroLoader(onComplete) {
   const images = config?.images?.filter(Boolean);
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!images?.length || reducedMotion) {
-    document.body.classList.add("home-intro-done", "home-hero-title-done");
-    document.getElementById("hero")?.classList.add("home-hero-title-settled");
-    document.getElementById("hero")?.querySelector(".home-hero-intro-title")?.remove();
+    showHeroBrandImmediately(
+      document.getElementById("hero"),
+      document.getElementById("home-hero-brand")
+    );
     onComplete();
     return;
   }
@@ -3958,44 +3961,35 @@ async function initHomeIntroLoader(onComplete) {
 async function initHeroTitleSequence() {
   const config = SITE.home?.introLoader;
   const hero = document.getElementById("hero");
-  const titleEl = hero?.querySelector(".home-hero-intro-title");
+  const brand = document.getElementById("home-hero-brand");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (!titleEl || !config || reducedMotion) {
-    document.body.classList.remove("home-hero-title-active");
-    document.body.classList.add("home-hero-title-done");
-    hero?.classList.add("home-hero-title-settled");
+  if (!brand || !config || reducedMotion) {
+    showHeroBrandImmediately(hero, brand);
     return;
   }
+  brand.classList.add("is-revealing");
   await sleep(120);
-  titleEl.classList.add("show-title");
+  brand.classList.add("show-title");
   const { title } = buildIntroTitleMarkup(config);
   const letterStaggerMs = config.letterStaggerMs ?? 28;
   const titleHoldMs = config.titleHoldMs ?? 280;
   const titleSlideMs = config.titleSlideMs ?? 950;
   const titleRevealMs = title.length * letterStaggerMs + 220;
   await sleep(titleRevealMs + titleHoldMs);
-  const inner = titleEl.querySelector(".home-hero-intro-title__inner");
-  if (inner) {
-    inner.style.setProperty("--hero-title-translate-y", "0px");
-    await new Promise((resolve) => requestAnimationFrame(resolve));
-    updateHeroTitlePosition(hero, inner);
-  }
-  titleEl.classList.add("is-sliding-down");
+  brand.style.setProperty("--hero-brand-shift", "0px");
+  await new Promise((resolve) => requestAnimationFrame(resolve));
+  setBrandSlideDistance(hero, brand);
+  brand.classList.add("is-sliding");
+  await new Promise((resolve) => requestAnimationFrame(resolve));
   await sleep(titleSlideMs);
-  if (inner) {
-    lockHeroTitleAtBase(hero, titleEl, inner);
-  } else {
-    titleEl.classList.add("is-settled");
-    titleEl.removeAttribute("aria-hidden");
-  }
+  brand.classList.remove("is-revealing", "is-sliding");
+  brand.classList.add("is-settled");
+  brand.removeAttribute("aria-hidden");
   document.body.classList.remove("home-hero-title-active");
   document.body.classList.add("home-hero-title-done");
-  hero.classList.add("home-hero-title-settled");
-  if (inner) {
-    const recalc = () => updateHeroTitlePosition(hero, inner);
-    window.addEventListener("resize", recalc, { passive: true });
-    recalc();
-  }
+  hero?.classList.add("home-hero-title-settled");
+  const recalc = () => setBrandSlideDistance(hero, brand);
+  window.addEventListener("resize", recalc, { passive: true });
 }
 function isHomeHorizontalScroll() {
   return window.matchMedia("(min-width: 1024px)").matches;

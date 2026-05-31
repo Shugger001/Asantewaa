@@ -262,13 +262,6 @@ export const SITE = {
         imagePosition: "center 30%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.88) 100%)",
       },
-      {
-        id: "visual-8",
-        imageOnly: true,
-        imageUrl: "images/glam-braids-portrait.png",
-        imagePosition: "center top",
-        link: "glam-room.html",
-      },
     ],
   },
 

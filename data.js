@@ -175,7 +175,7 @@ export const SITE = {
         id: "discover",
         label: "Dossier",
         title: "The Era of Influence",
-        subtitle: "4M+ Followers · Ghanaian Pride",
+        subtitle: "Orchestrating Global Dominance",
         imageUrl: "images/glam-red-studio.png",
         imagePosition: "center top",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.75) 100%)",

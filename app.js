@@ -230,11 +230,131 @@ function initEnterpriseAccordion(container) {
   });
 }
 
+function initEnterprisePortalScroll(container) {
+  if (!container) return;
+
+  container.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (!target) return;
+      event.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+}
+
+function initEnterpriseGatewayScroll() {
+  const link = document.getElementById('enterprise-gateway-scroll');
+  if (!link) return;
+
+  link.addEventListener('click', (event) => {
+    const target = document.getElementById('enterprise-portal');
+    if (!target) return;
+    event.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
 function renderEnterprise() {
   const data = SITE.enterprise;
   if (!data) return;
 
   document.title = 'The Enterprise | Asantewaa';
+
+  const gateway = data.gateway;
+  if (gateway) {
+    const gatewayImage = document.getElementById('enterprise-gateway-image');
+    if (gatewayImage) {
+      gatewayImage.src = gateway.imageUrl || SITE.hero?.photoUrl || '';
+      gatewayImage.alt = gateway.imageAlt || 'Asantewaa';
+      if (gateway.imagePosition) {
+        gatewayImage.style.objectPosition = gateway.imagePosition;
+      }
+    }
+
+    const titleEl = document.getElementById('enterprise-gateway-title');
+    if (titleEl && gateway.title) titleEl.textContent = gateway.title;
+
+    const headlineEl = document.getElementById('enterprise-gateway-headline');
+    if (headlineEl && gateway.headline) {
+      headlineEl.innerHTML = `
+        <span class="ent-gateway__headline-rule" aria-hidden="true"></span>
+        <span class="ent-gateway__headline-text">${gateway.headline}</span>
+        <span class="ent-gateway__headline-rule" aria-hidden="true"></span>
+      `;
+    }
+
+    const metaEl = document.getElementById('enterprise-gateway-meta');
+    if (metaEl && gateway.meta) metaEl.textContent = gateway.meta;
+
+    const scrollText = document.getElementById('enterprise-gateway-scroll-text');
+    if (scrollText && gateway.scrollHint) scrollText.textContent = gateway.scrollHint;
+
+    initEnterpriseGatewayScroll();
+  }
+
+  const portalsEl = document.getElementById('enterprise-portals');
+  if (portalsEl && data.portals) {
+    portalsEl.innerHTML = data.portals
+      .map(
+        (panel) => `
+      <a href="${panel.href}" class="ent-portal__panel ent-portal__panel--${panel.theme || panel.id}">
+        <div class="ent-portal__media" aria-hidden="true">
+          <img src="${panel.imageUrl || ''}" alt="" loading="lazy" decoding="async"${panel.imagePosition ? ` style="object-position: ${panel.imagePosition}"` : ''}>
+        </div>
+        <div class="ent-portal__shade" aria-hidden="true"></div>
+        <div class="ent-portal__content">
+          <h2 class="ent-portal__title">${panel.title}</h2>
+          <p class="ent-portal__tagline">${panel.tagline}</p>
+          ${panel.subline ? `<p class="ent-portal__subline">${panel.subline}</p>` : '<p class="ent-portal__subline" aria-hidden="true">&nbsp;</p>'}
+          <span class="ent-portal__cta">${panel.cta}</span>
+        </div>
+      </a>
+    `
+      )
+      .join('');
+    initEnterprisePortalScroll(portalsEl);
+  }
+
+  const portalFooter = document.getElementById('enterprise-portal-footer');
+  if (portalFooter && data.footer) portalFooter.textContent = data.footer;
+
+  const statement = data.statement;
+  const statementImage = document.getElementById('enterprise-statement-image');
+  if (statementImage && statement) {
+    statementImage.src = statement.imageUrl || SITE.hero?.photoUrl || '';
+    statementImage.alt = statement.imageAlt || 'Asantewaa';
+    if (statement.imagePosition) {
+      statementImage.style.objectPosition = statement.imagePosition;
+    }
+  }
+
+  const headlinesEl = document.getElementById('enterprise-headlines');
+  if (headlinesEl && statement?.displayLines) {
+    headlinesEl.innerHTML = statement.displayLines
+      .map((line) => `<span class="ent-display-line">${line}</span>`)
+      .join('');
+  }
+
+  const statementsEl = document.getElementById('enterprise-statements');
+  if (statementsEl && statement?.statements) {
+    statementsEl.innerHTML = statement.statements
+      .map((line) => `<p class="ent-bold-line">${line}</p>`)
+      .join('');
+  }
+
+  const bodyEl = document.getElementById('enterprise-body');
+  if (bodyEl && statement?.body) {
+    bodyEl.innerHTML = statement.body
+      .map((block, index) => {
+        const lines = block
+          .map((line) => `<p class="ent-body-line">${line}</p>`)
+          .join('');
+        const gap = index < statement.body.length - 1 ? '<div class="ent-body-gap" aria-hidden="true"></div>' : '';
+        return lines + gap;
+      })
+      .join('');
+  }
 
   const metricsEl = document.getElementById('enterprise-metrics');
   if (metricsEl && data.metrics) {
@@ -934,9 +1054,9 @@ function buildIntroTitleMarkup(config) {
 }
 
 function getHeroIntroImageUrl() {
-  const heroPanel = SITE.home?.panels?.find((panel) => panel.id === 'hero');
-  if (heroPanel?.imageUrl) return heroPanel.imageUrl;
-  return SITE.hero?.photoUrl || '';
+  const introImages = SITE.home?.introLoader?.images?.filter(Boolean);
+  if (introImages?.length) return introImages[introImages.length - 1];
+  return SITE.home?.panels?.[0]?.imageUrl || SITE.hero?.photoUrl || '';
 }
 
 function setBrandSlideDistance(hero, brand) {

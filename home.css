@@ -108,14 +108,37 @@ body.home-editorial .mobile-menu-overlay {
 
 .home-topbar-center {
   justify-self: center;
-  color: rgba(255, 255, 255, 0.95);
-  font-size: 0.85rem;
-  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
   transition: transform 0.3s ease;
 }
 
 .home-topbar-center:hover {
   transform: scale(1.08);
+}
+
+.site-topbar-mark {
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  pointer-events: auto;
+  transition: transform 0.3s ease;
+}
+
+.site-topbar-mark:hover {
+  transform: scale(1.08);
+}
+
+.site-topbar-logo {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.35rem;
+  display: block;
+  object-fit: cover;
 }
 
 .home-menu-btn {

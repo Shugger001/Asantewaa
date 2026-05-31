@@ -1,5 +1,5 @@
 import { SITE, getLocationLabel, findServiceById, getServicePriceRange } from './data.js?v=20260536';
-import { initBookingForm } from './booking.js?v=20260561';
+import { initBookingForm } from './booking.js?v=20260562';
 import {
   bindSanctuaryBookingButtons,
   openBookingPage,

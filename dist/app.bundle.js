@@ -1610,7 +1610,7 @@ async function handleDepositReturn(handlers = {}) {
   }
 }
 
-// booking.js?v=20260561
+// booking.js?v=20260562
 var slotBookingCounts = {};
 var datePicker = null;
 var capacityByDate = {};
@@ -1674,6 +1674,7 @@ function populateBookingPage() {
   document.getElementById("booking-subhead").textContent = SITE.booking.subhead;
   const locationsList = document.getElementById("booking-locations-list");
   if (locationsList) {
+    const hours = SITE.business?.hours || "Mon to Sat: 9am to 6pm \xB7 Sun: Closed";
     locationsList.innerHTML = SITE.locations.map((loc) => {
       const label = getLocationLabel(loc);
       const brand = loc.name?.trim();
@@ -1681,11 +1682,15 @@ function populateBookingPage() {
       return `
       <li>
         <i class="fas fa-map-marker-alt"></i>
-        <strong>${label}</strong>
-        ${showBrand ? `<br><span style="opacity:0.85;font-size:0.88em">${brand}</span>` : ""}
+        <span><strong>${label}</strong>${showBrand ? `<br><span class="booking-info-sub">${brand}</span>` : ""}</span>
       </li>
     `;
-    }).join("");
+    }).join("") + `
+      <li class="booking-hours-row">
+        <i class="fas fa-clock"></i>
+        <span><strong>Opening hours</strong><br>${hours}</span>
+      </li>
+    `;
   }
   const locationSelect = document.getElementById("location");
   if (locationSelect) {

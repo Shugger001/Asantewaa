@@ -123,19 +123,11 @@ var SITE = {
         id: "hero",
         label: "",
         title: "Asantewaa",
-        subtitle: "\u{1F1EC}\u{1F1ED} Accra, Ghana",
+        subtitle: "",
         imageUrl: "images/glam-braids-studio.png",
         imagePosition: "center 15%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%)",
         link: null
-      },
-      {
-        id: "visual-1",
-        imageOnly: true,
-        labelLeft: "Braids",
-        labelRight: "Butterfly",
-        imageUrl: "images/glam-braids-portrait.png",
-        imagePosition: "center top"
       },
       {
         id: "discover",
@@ -151,16 +143,12 @@ var SITE = {
       {
         id: "visual-2",
         imageOnly: true,
-        labelLeft: "Bridal",
-        labelRight: "Glam",
         imageUrl: "images/glam-red-indoor.png",
         imagePosition: "center 20%"
       },
       {
         id: "visual-3",
         imageOnly: true,
-        labelLeft: "Red",
-        labelRight: "Carpet",
         imageUrl: "images/glam-red-outdoor.png",
         imagePosition: "center center"
       },
@@ -178,16 +166,12 @@ var SITE = {
       {
         id: "visual-4",
         imageOnly: true,
-        labelLeft: "Studio",
-        labelRight: "Slay",
         imageUrl: "images/glam-braids-studio.png",
         imagePosition: "center top"
       },
       {
         id: "visual-5",
         imageOnly: true,
-        labelLeft: "Full",
-        labelRight: "Glam",
         imageUrl: "images/glam-braids-portrait.png",
         imagePosition: "center center"
       },
@@ -215,8 +199,6 @@ var SITE = {
       {
         id: "visual-6",
         imageOnly: true,
-        labelLeft: "Ghana",
-        labelRight: "\u{1F1EC}\u{1F1ED}",
         imageUrl: "images/glam-red-celebration.png",
         imagePosition: "center center",
         link: "glam-room.html"
@@ -933,19 +915,11 @@ var SITE2 = {
         id: "hero",
         label: "",
         title: "Asantewaa",
-        subtitle: "\u{1F1EC}\u{1F1ED} Accra, Ghana",
+        subtitle: "",
         imageUrl: "images/glam-braids-studio.png",
         imagePosition: "center 15%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%)",
         link: null
-      },
-      {
-        id: "visual-1",
-        imageOnly: true,
-        labelLeft: "Braids",
-        labelRight: "Butterfly",
-        imageUrl: "images/glam-braids-portrait.png",
-        imagePosition: "center top"
       },
       {
         id: "discover",
@@ -961,16 +935,12 @@ var SITE2 = {
       {
         id: "visual-2",
         imageOnly: true,
-        labelLeft: "Bridal",
-        labelRight: "Glam",
         imageUrl: "images/glam-red-indoor.png",
         imagePosition: "center 20%"
       },
       {
         id: "visual-3",
         imageOnly: true,
-        labelLeft: "Red",
-        labelRight: "Carpet",
         imageUrl: "images/glam-red-outdoor.png",
         imagePosition: "center center"
       },
@@ -988,16 +958,12 @@ var SITE2 = {
       {
         id: "visual-4",
         imageOnly: true,
-        labelLeft: "Studio",
-        labelRight: "Slay",
         imageUrl: "images/glam-braids-studio.png",
         imagePosition: "center top"
       },
       {
         id: "visual-5",
         imageOnly: true,
-        labelLeft: "Full",
-        labelRight: "Glam",
         imageUrl: "images/glam-braids-portrait.png",
         imagePosition: "center center"
       },
@@ -1025,8 +991,6 @@ var SITE2 = {
       {
         id: "visual-6",
         imageOnly: true,
-        labelLeft: "Ghana",
-        labelRight: "\u{1F1EC}\u{1F1ED}",
         imageUrl: "images/glam-red-celebration.png",
         imagePosition: "center center",
         link: "glam-room.html"
@@ -2206,19 +2170,11 @@ var SITE3 = {
         id: "hero",
         label: "",
         title: "Asantewaa",
-        subtitle: "\u{1F1EC}\u{1F1ED} Accra, Ghana",
+        subtitle: "",
         imageUrl: "images/glam-braids-studio.png",
         imagePosition: "center 15%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%)",
         link: null
-      },
-      {
-        id: "visual-1",
-        imageOnly: true,
-        labelLeft: "Braids",
-        labelRight: "Butterfly",
-        imageUrl: "images/glam-braids-portrait.png",
-        imagePosition: "center top"
       },
       {
         id: "discover",
@@ -2234,16 +2190,12 @@ var SITE3 = {
       {
         id: "visual-2",
         imageOnly: true,
-        labelLeft: "Bridal",
-        labelRight: "Glam",
         imageUrl: "images/glam-red-indoor.png",
         imagePosition: "center 20%"
       },
       {
         id: "visual-3",
         imageOnly: true,
-        labelLeft: "Red",
-        labelRight: "Carpet",
         imageUrl: "images/glam-red-outdoor.png",
         imagePosition: "center center"
       },
@@ -2261,16 +2213,12 @@ var SITE3 = {
       {
         id: "visual-4",
         imageOnly: true,
-        labelLeft: "Studio",
-        labelRight: "Slay",
         imageUrl: "images/glam-braids-studio.png",
         imagePosition: "center top"
       },
       {
         id: "visual-5",
         imageOnly: true,
-        labelLeft: "Full",
-        labelRight: "Glam",
         imageUrl: "images/glam-braids-portrait.png",
         imagePosition: "center center"
       },
@@ -2298,8 +2246,6 @@ var SITE3 = {
       {
         id: "visual-6",
         imageOnly: true,
-        labelLeft: "Ghana",
-        labelRight: "\u{1F1EC}\u{1F1ED}",
         imageUrl: "images/glam-red-celebration.png",
         imagePosition: "center center",
         link: "glam-room.html"
@@ -3764,14 +3710,17 @@ function renderHomePanels() {
     }
     const linkOverlay = panel.link ? `<a href="${panel.link}" class="home-panel-link" aria-label="${panel.linkText || panel.labelLeft || panel.title || "View"}"></a>` : "";
     if (isVisual) {
-      return `
-        <section class="${panelClass}" id="${panel.id}">
-          <div class="home-panel-bg" style="${bgStyle}" role="img" aria-label="${panel.labelLeft || ""} ${panel.labelRight || ""}"></div>
-          ${linkOverlay}
-          <div class="home-panel-visual-labels">
+      const hasLabels = Boolean(panel.labelLeft || panel.labelRight);
+      const labelsHtml = hasLabels ? `<div class="home-panel-visual-labels">
             <span>${panel.labelLeft || ""}</span>
             <span>${panel.labelRight || ""}</span>
-          </div>
+          </div>` : "";
+      const ariaLabel = [panel.labelLeft, panel.labelRight].filter(Boolean).join(" ") || "Photo";
+      return `
+        <section class="${panelClass}" id="${panel.id}">
+          <div class="home-panel-bg" style="${bgStyle}" role="img" aria-label="${ariaLabel}"></div>
+          ${linkOverlay}
+          ${labelsHtml}
         </section>
       `;
     }
@@ -3794,7 +3743,7 @@ function renderHomePanels() {
             ${heroBrandHtml}
             ${labelHtml}
             ${headingHtml}
-            ${panel.subtitle ? `<p class="home-panel-subtitle">${panel.subtitle}</p>` : ""}
+            ${!useHeroBrand && panel.subtitle ? `<p class="home-panel-subtitle">${panel.subtitle}</p>` : ""}
             ${ctaHtml}
           </div>
         </section>

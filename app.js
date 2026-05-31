@@ -910,14 +910,20 @@ function renderHomePanels() {
         : '';
 
       if (isVisual) {
-        return `
-        <section class="${panelClass}" id="${panel.id}">
-          <div class="home-panel-bg" style="${bgStyle}" role="img" aria-label="${panel.labelLeft || ''} ${panel.labelRight || ''}"></div>
-          ${linkOverlay}
-          <div class="home-panel-visual-labels">
+        const hasLabels = Boolean(panel.labelLeft || panel.labelRight);
+        const labelsHtml = hasLabels
+          ? `<div class="home-panel-visual-labels">
             <span>${panel.labelLeft || ''}</span>
             <span>${panel.labelRight || ''}</span>
-          </div>
+          </div>`
+          : '';
+        const ariaLabel = [panel.labelLeft, panel.labelRight].filter(Boolean).join(' ') || 'Photo';
+
+        return `
+        <section class="${panelClass}" id="${panel.id}">
+          <div class="home-panel-bg" style="${bgStyle}" role="img" aria-label="${ariaLabel}"></div>
+          ${linkOverlay}
+          ${labelsHtml}
         </section>
       `;
       }
@@ -951,7 +957,7 @@ function renderHomePanels() {
             ${heroBrandHtml}
             ${labelHtml}
             ${headingHtml}
-            ${panel.subtitle ? `<p class="home-panel-subtitle">${panel.subtitle}</p>` : ''}
+            ${!useHeroBrand && panel.subtitle ? `<p class="home-panel-subtitle">${panel.subtitle}</p>` : ''}
             ${ctaHtml}
           </div>
         </section>

@@ -591,8 +591,8 @@ var SITE = {
     tagline: "Where beauty meets influence, and every detail is designed to make a statement.",
     extensionNotice: "Please note that all Braids prices do not include hair extensions. You can either come along with your own extensions or purchase from our salon.",
     intro: [
-      "Glam Room is Asantewaa's dream salon \u2014 with two locations across Accra, so your glow up is never far away. Warm vibes, expert stylists, and zero tolerance for bad hair days at every chair.",
-      "From silk press to full bridal glam, every appointment comes with main character energy included. Walk in as you are, walk out ready for Accra to stare."
+      "Glam Room is a destination for modern beauty. Designed for women who value excellence, every service is delivered with precision, care, and an uncompromising attention to detail.",
+      "From everyday refinement to life's defining moments, our stylists create looks that feel effortless, elevated, and uniquely yours."
     ],
     hours: "Mon \u2013 Sat: 9am \u2013 6pm \xB7 Sun: Closed"
   },
@@ -1384,8 +1384,8 @@ var SITE2 = {
     tagline: "Where beauty meets influence, and every detail is designed to make a statement.",
     extensionNotice: "Please note that all Braids prices do not include hair extensions. You can either come along with your own extensions or purchase from our salon.",
     intro: [
-      "Glam Room is Asantewaa's dream salon \u2014 with two locations across Accra, so your glow up is never far away. Warm vibes, expert stylists, and zero tolerance for bad hair days at every chair.",
-      "From silk press to full bridal glam, every appointment comes with main character energy included. Walk in as you are, walk out ready for Accra to stare."
+      "Glam Room is a destination for modern beauty. Designed for women who value excellence, every service is delivered with precision, care, and an uncompromising attention to detail.",
+      "From everyday refinement to life's defining moments, our stylists create looks that feel effortless, elevated, and uniquely yours."
     ],
     hours: "Mon \u2013 Sat: 9am \u2013 6pm \xB7 Sun: Closed"
   },
@@ -2640,8 +2640,8 @@ var SITE3 = {
     tagline: "Where beauty meets influence, and every detail is designed to make a statement.",
     extensionNotice: "Please note that all Braids prices do not include hair extensions. You can either come along with your own extensions or purchase from our salon.",
     intro: [
-      "Glam Room is Asantewaa's dream salon \u2014 with two locations across Accra, so your glow up is never far away. Warm vibes, expert stylists, and zero tolerance for bad hair days at every chair.",
-      "From silk press to full bridal glam, every appointment comes with main character energy included. Walk in as you are, walk out ready for Accra to stare."
+      "Glam Room is a destination for modern beauty. Designed for women who value excellence, every service is delivered with precision, care, and an uncompromising attention to detail.",
+      "From everyday refinement to life's defining moments, our stylists create looks that feel effortless, elevated, and uniquely yours."
     ],
     hours: "Mon \u2013 Sat: 9am \u2013 6pm \xB7 Sun: Closed"
   },

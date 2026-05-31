@@ -131,7 +131,7 @@ var SITE = {
       },
       {
         id: "discover",
-        label: "Dossier",
+        label: "",
         title: "The Era of Influence",
         subtitle: "Orchestrating Global Dominance",
         imageUrl: "images/glam-red-studio.png",
@@ -923,7 +923,7 @@ var SITE2 = {
       },
       {
         id: "discover",
-        label: "Dossier",
+        label: "",
         title: "The Era of Influence",
         subtitle: "Orchestrating Global Dominance",
         imageUrl: "images/glam-red-studio.png",
@@ -2178,7 +2178,7 @@ var SITE3 = {
       },
       {
         id: "discover",
-        label: "Dossier",
+        label: "",
         title: "The Era of Influence",
         subtitle: "Orchestrating Global Dominance",
         imageUrl: "images/glam-red-studio.png",

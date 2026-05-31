@@ -643,7 +643,7 @@ export const SITE = {
   ],
 
   business: {
-    tagline: "Accra's baddest hair destination — where your crown gets the main character energy it deserves.",
+    tagline: "Where beauty meets influence, and every detail is designed to make a statement.",
     extensionNotice:
       "Please note that all Braids prices do not include hair extensions. You can either come along with your own extensions or purchase from our salon.",
     intro: [

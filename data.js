@@ -87,7 +87,7 @@ export const SITE = {
     { id: "02b", label: "The Enterprise — Campaign Pillars", href: "about.html#pillars" },
     { id: "03", label: "The Glam Room — Salon Flagship", href: "glam-room.html" },
     { id: "03b", label: "The Glam Room — Signature Services", href: "glam-room.html#services" },
-    { id: "04", label: "Bookings & Proposals — The Intake Engine", href: "proposals.html" },
+    { id: "04", label: "Partnerships — Brand Intake", href: "proposals.html" },
   ],
 
   globalFooter: "© 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
@@ -234,7 +234,7 @@ export const SITE = {
       },
       {
         id: "book",
-        label: "Bookings & Proposals",
+        label: "Book Your Glam",
         title: "Secure Your Slot",
         subtitle: "Mama Glam Is Waiting",
         imageUrl: "images/glam-red-studio.png",
@@ -285,6 +285,13 @@ export const SITE = {
 
   enterprise: {
     footer: "© 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
+    topbarLeft: "THE ENTERPRISE",
+    topbarLeftLink: "about.html",
+    menuLinks: [
+      { label: "Home", href: "index.html" },
+      { label: "The Enterprise", href: "about.html" },
+      { label: "Partnerships", href: "proposals.html" },
+    ],
     gateway: {
       title: "ASANTEWAA",
       headline: "THE WORLD KNOWS HER NAME.",
@@ -305,17 +312,6 @@ export const SITE = {
         href: "#enterprise-statement",
         imageUrl: "images/glam-red-studio.png",
         imagePosition: "center 20%",
-      },
-      {
-        id: "glam-room",
-        theme: "glam",
-        title: "THE GLAM ROOM",
-        tagline: "She Defines Beauty.",
-        subline: "",
-        cta: "Book Your Experience",
-        href: "glam-room.html",
-        imageUrl: "images/glam-braids-studio.png",
-        imagePosition: "center top",
       },
     ],
     statement: {
@@ -407,6 +403,13 @@ export const SITE = {
 
   glamRoom: {
     footer: "© 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
+    topbarLeft: "GLAM ROOM",
+    topbarLeftLink: "glam-room.html",
+    menuLinks: [
+      { label: "Home", href: "index.html" },
+      { label: "The Glam Room", href: "glam-room.html" },
+      { label: "Book Appointment", href: "book.html" },
+    ],
     declaration: {
       title: "THE GLAM ROOM",
       byline: "BY ASANTEWAA",
@@ -456,6 +459,8 @@ export const SITE = {
 
   proposals: {
     footer: "© 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
+    topbarLeft: "PARTNERSHIPS",
+    topbarLeftLink: "proposals.html",
     hero: {
       title: "PARTNER WITH ASANTEWAA",
       subline:
@@ -749,9 +754,9 @@ export const SITE = {
 
   serviceNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Glam Room", href: "glam-room.html" },
     { label: "All Services", href: "glam-room.html#services" },
     { label: "Book Appointment", href: "book.html" },
-    { label: "Partnerships", href: "proposals.html" },
   ],
 
   homeNavLinks: [
@@ -763,23 +768,29 @@ export const SITE = {
 
   aboutNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "Analytics", href: "#analytics" },
-    { label: "Audience", href: "#audience" },
-    { label: "The Glam Room", href: "glam-room.html" },
+    { label: "Campaign Pillars", href: "#pillars" },
+    { label: "Partnerships", href: "proposals.html" },
   ],
 
   businessNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Glam Room", href: "glam-room.html" },
     { label: "Services", href: "#services" },
     { label: "Gallery", href: "#gallery" },
     { label: "Book Appointment", href: "book.html" },
-    { label: "Partnerships", href: "proposals.html" },
   ],
 
   bookingNavLinks: [
     { label: "Home", href: "index.html" },
-    { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
+    { label: "Book Appointment", href: "book.html" },
+  ],
+
+  proposalsNavLinks: [
+    { label: "Home", href: "index.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "Partnerships", href: "proposals.html" },
   ],
 

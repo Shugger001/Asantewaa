@@ -50,7 +50,7 @@ var SITE = {
     { id: "02b", label: "The Enterprise \u2014 Campaign Pillars", href: "about.html#pillars" },
     { id: "03", label: "The Glam Room \u2014 Salon Flagship", href: "glam-room.html" },
     { id: "03b", label: "The Glam Room \u2014 Signature Services", href: "glam-room.html#services" },
-    { id: "04", label: "Bookings & Proposals \u2014 The Intake Engine", href: "proposals.html" }
+    { id: "04", label: "Partnerships \u2014 Brand Intake", href: "proposals.html" }
   ],
   globalFooter: "\xA9 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
   // UPDATE THIS with your real WhatsApp number (include country code, e.g. +233XXXXXXXXX)
@@ -192,13 +192,13 @@ var SITE = {
       },
       {
         id: "book",
-        label: "Bookings & Proposals",
+        label: "Book Your Glam",
         title: "Secure Your Slot",
         subtitle: "Mama Glam Is Waiting",
         imageUrl: "images/glam-red-studio.png",
         imagePosition: "center 20%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 100%)",
-        link: "proposals.html",
+        link: "book.html",
         linkText: "Book Now"
       },
       {
@@ -240,6 +240,13 @@ var SITE = {
   },
   enterprise: {
     footer: "\xA9 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
+    topbarLeft: "THE ENTERPRISE",
+    topbarLeftLink: "about.html",
+    menuLinks: [
+      { label: "Home", href: "index.html" },
+      { label: "The Enterprise", href: "about.html" },
+      { label: "Partnerships", href: "proposals.html" }
+    ],
     gateway: {
       title: "ASANTEWAA",
       headline: "THE WORLD KNOWS HER NAME.",
@@ -260,17 +267,6 @@ var SITE = {
         href: "#enterprise-statement",
         imageUrl: "images/glam-red-studio.png",
         imagePosition: "center 20%"
-      },
-      {
-        id: "glam-room",
-        theme: "glam",
-        title: "THE GLAM ROOM",
-        tagline: "She Defines Beauty.",
-        subline: "",
-        cta: "Book Your Experience",
-        href: "glam-room.html",
-        imageUrl: "images/glam-braids-studio.png",
-        imagePosition: "center top"
       }
     ],
     statement: {
@@ -361,6 +357,13 @@ var SITE = {
   },
   glamRoom: {
     footer: "\xA9 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
+    topbarLeft: "GLAM ROOM",
+    topbarLeftLink: "glam-room.html",
+    menuLinks: [
+      { label: "Home", href: "index.html" },
+      { label: "The Glam Room", href: "glam-room.html" },
+      { label: "Book Appointment", href: "book.html" }
+    ],
     declaration: {
       title: "THE GLAM ROOM",
       byline: "BY ASANTEWAA",
@@ -408,6 +411,8 @@ var SITE = {
   },
   proposals: {
     footer: "\xA9 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
+    topbarLeft: "PARTNERSHIPS",
+    topbarLeftLink: "proposals.html",
     hero: {
       title: "PARTNER WITH ASANTEWAA",
       subline: "Submit your brief. We respond within 48 hours through official channels only."
@@ -680,9 +685,9 @@ var SITE = {
   },
   serviceNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Glam Room", href: "glam-room.html" },
     { label: "All Services", href: "glam-room.html#services" },
-    { label: "Book Appointment", href: "book.html" },
-    { label: "Partnerships", href: "proposals.html" }
+    { label: "Book Appointment", href: "book.html" }
   ],
   homeNavLinks: [
     { label: "The Enterprise", href: "about.html" },
@@ -692,21 +697,26 @@ var SITE = {
   ],
   aboutNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "Analytics", href: "#analytics" },
-    { label: "Audience", href: "#audience" },
-    { label: "The Glam Room", href: "glam-room.html" }
+    { label: "Campaign Pillars", href: "#pillars" },
+    { label: "Partnerships", href: "proposals.html" }
   ],
   businessNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Glam Room", href: "glam-room.html" },
     { label: "Services", href: "#services" },
     { label: "Gallery", href: "#gallery" },
-    { label: "Book Appointment", href: "book.html" },
-    { label: "Partnerships", href: "proposals.html" }
+    { label: "Book Appointment", href: "book.html" }
   ],
   bookingNavLinks: [
     { label: "Home", href: "index.html" },
-    { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
+    { label: "Book Appointment", href: "book.html" }
+  ],
+  proposalsNavLinks: [
+    { label: "Home", href: "index.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "Partnerships", href: "proposals.html" }
   ],
   footer: {
@@ -815,7 +825,7 @@ var SITE2 = {
     { id: "02b", label: "The Enterprise \u2014 Campaign Pillars", href: "about.html#pillars" },
     { id: "03", label: "The Glam Room \u2014 Salon Flagship", href: "glam-room.html" },
     { id: "03b", label: "The Glam Room \u2014 Signature Services", href: "glam-room.html#services" },
-    { id: "04", label: "Bookings & Proposals \u2014 The Intake Engine", href: "proposals.html" }
+    { id: "04", label: "Partnerships \u2014 Brand Intake", href: "proposals.html" }
   ],
   globalFooter: "\xA9 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
   // UPDATE THIS with your real WhatsApp number (include country code, e.g. +233XXXXXXXXX)
@@ -957,13 +967,13 @@ var SITE2 = {
       },
       {
         id: "book",
-        label: "Bookings & Proposals",
+        label: "Book Your Glam",
         title: "Secure Your Slot",
         subtitle: "Mama Glam Is Waiting",
         imageUrl: "images/glam-red-studio.png",
         imagePosition: "center 20%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 100%)",
-        link: "proposals.html",
+        link: "book.html",
         linkText: "Book Now"
       },
       {
@@ -1005,6 +1015,13 @@ var SITE2 = {
   },
   enterprise: {
     footer: "\xA9 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
+    topbarLeft: "THE ENTERPRISE",
+    topbarLeftLink: "about.html",
+    menuLinks: [
+      { label: "Home", href: "index.html" },
+      { label: "The Enterprise", href: "about.html" },
+      { label: "Partnerships", href: "proposals.html" }
+    ],
     gateway: {
       title: "ASANTEWAA",
       headline: "THE WORLD KNOWS HER NAME.",
@@ -1025,17 +1042,6 @@ var SITE2 = {
         href: "#enterprise-statement",
         imageUrl: "images/glam-red-studio.png",
         imagePosition: "center 20%"
-      },
-      {
-        id: "glam-room",
-        theme: "glam",
-        title: "THE GLAM ROOM",
-        tagline: "She Defines Beauty.",
-        subline: "",
-        cta: "Book Your Experience",
-        href: "glam-room.html",
-        imageUrl: "images/glam-braids-studio.png",
-        imagePosition: "center top"
       }
     ],
     statement: {
@@ -1126,6 +1132,13 @@ var SITE2 = {
   },
   glamRoom: {
     footer: "\xA9 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
+    topbarLeft: "GLAM ROOM",
+    topbarLeftLink: "glam-room.html",
+    menuLinks: [
+      { label: "Home", href: "index.html" },
+      { label: "The Glam Room", href: "glam-room.html" },
+      { label: "Book Appointment", href: "book.html" }
+    ],
     declaration: {
       title: "THE GLAM ROOM",
       byline: "BY ASANTEWAA",
@@ -1173,6 +1186,8 @@ var SITE2 = {
   },
   proposals: {
     footer: "\xA9 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
+    topbarLeft: "PARTNERSHIPS",
+    topbarLeftLink: "proposals.html",
     hero: {
       title: "PARTNER WITH ASANTEWAA",
       subline: "Submit your brief. We respond within 48 hours through official channels only."
@@ -1445,9 +1460,9 @@ var SITE2 = {
   },
   serviceNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Glam Room", href: "glam-room.html" },
     { label: "All Services", href: "glam-room.html#services" },
-    { label: "Book Appointment", href: "book.html" },
-    { label: "Partnerships", href: "proposals.html" }
+    { label: "Book Appointment", href: "book.html" }
   ],
   homeNavLinks: [
     { label: "The Enterprise", href: "about.html" },
@@ -1457,21 +1472,26 @@ var SITE2 = {
   ],
   aboutNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "Analytics", href: "#analytics" },
-    { label: "Audience", href: "#audience" },
-    { label: "The Glam Room", href: "glam-room.html" }
+    { label: "Campaign Pillars", href: "#pillars" },
+    { label: "Partnerships", href: "proposals.html" }
   ],
   businessNavLinks: [
     { label: "Home", href: "index.html" },
+    { label: "The Glam Room", href: "glam-room.html" },
     { label: "Services", href: "#services" },
     { label: "Gallery", href: "#gallery" },
-    { label: "Book Appointment", href: "book.html" },
-    { label: "Partnerships", href: "proposals.html" }
+    { label: "Book Appointment", href: "book.html" }
   ],
   bookingNavLinks: [
     { label: "Home", href: "index.html" },
-    { label: "The Enterprise", href: "about.html" },
     { label: "The Glam Room", href: "glam-room.html" },
+    { label: "Book Appointment", href: "book.html" }
+  ],
+  proposalsNavLinks: [
+    { label: "Home", href: "index.html" },
+    { label: "The Enterprise", href: "about.html" },
     { label: "Partnerships", href: "proposals.html" }
   ],
   footer: {
@@ -3016,7 +3036,7 @@ function renderGlamRoom() {
 function renderProposals() {
   const data = SITE.proposals;
   if (!data) return;
-  document.title = "Bookings & Proposals | Asantewaa";
+  document.title = "Partnerships | Asantewaa";
   const titleEl = document.getElementById("prop-hero-title");
   if (titleEl && data.hero?.title) titleEl.textContent = data.hero.title;
   const sublineEl = document.getElementById("prop-hero-subline");
@@ -3151,7 +3171,7 @@ function populateStaticContent() {
     home: SITE.owner,
     enterprise: "The Enterprise | Asantewaa",
     "glam-room": "The Glam Room | Asantewaa",
-    proposals: "Bookings & Proposals | Asantewaa",
+    proposals: "Partnerships | Asantewaa",
     about: `About ${SITE.owner} | Glam Room`,
     business: `Glam Room | Hair Salon Accra \u2014 ${SITE.owner}`,
     booking: `Book Your Glam | ${SITE.brand}`
@@ -3181,6 +3201,35 @@ function populateStaticContent() {
       el.innerHTML = `<i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>${extensionNotice}</span>`;
     });
   }
+}
+function getPageChrome() {
+  const page = document.body.dataset.page || "home";
+  if (page === "enterprise") {
+    return {
+      topbarLeft: SITE.enterprise?.topbarLeft || "THE ENTERPRISE",
+      topbarLeftLink: SITE.enterprise?.topbarLeftLink || "about.html",
+      menuLinks: SITE.enterprise?.menuLinks || SITE.aboutNavLinks
+    };
+  }
+  if (page === "proposals") {
+    return {
+      topbarLeft: SITE.proposals?.topbarLeft || "PARTNERSHIPS",
+      topbarLeftLink: SITE.proposals?.topbarLeftLink || "proposals.html",
+      menuLinks: SITE.proposalsNavLinks || SITE.enterprise?.menuLinks || []
+    };
+  }
+  if (page === "glam-room" || page === "booking" || page === "business") {
+    return {
+      topbarLeft: SITE.glamRoom?.topbarLeft || "GLAM ROOM",
+      topbarLeftLink: SITE.glamRoom?.topbarLeftLink || "glam-room.html",
+      menuLinks: SITE.glamRoom?.menuLinks || SITE.bookingNavLinks
+    };
+  }
+  return {
+    topbarLeft: SITE.home?.topbarLeft || "GLAM ROOM",
+    topbarLeftLink: SITE.home?.topbarLeftLink || "index.html",
+    menuLinks: SITE.home?.menuLinks || SITE.homeNavLinks
+  };
 }
 function renderFindBookingPanel(panel, i, bgStyle, panelClass) {
   const copy = SITE.findBooking || {};
@@ -3260,9 +3309,10 @@ function initEditorialMenu() {
   const closeBtn = document.getElementById("home-menu-close");
   const panel = document.getElementById("home-menu-panel");
   const overlay = document.getElementById("home-menu-overlay");
+  const chrome = getPageChrome();
   const menuLinks = document.getElementById("home-menu-links");
   if (menuLinks) {
-    menuLinks.innerHTML = SITE.home.menuLinks.map((link) => `<li><a href="${link.href}">${link.label}</a></li>`).join("");
+    menuLinks.innerHTML = chrome.menuLinks.map((link) => `<li><a href="${link.href}">${link.label}</a></li>`).join("");
   }
   const menuSocials = document.getElementById("home-menu-socials");
   if (menuSocials) {
@@ -3272,8 +3322,8 @@ function initEditorialMenu() {
   }
   const topbarLeft = document.getElementById("home-topbar-left");
   if (topbarLeft) {
-    topbarLeft.textContent = SITE.home.topbarLeft;
-    topbarLeft.href = SITE.home.topbarLeftLink;
+    topbarLeft.textContent = chrome.topbarLeft;
+    topbarLeft.href = chrome.topbarLeftLink;
   }
   const copyright = document.getElementById("home-copyright");
   if (copyright) copyright.textContent = `${SITE.owner} \xA9 ${(/* @__PURE__ */ new Date()).getFullYear()}`;

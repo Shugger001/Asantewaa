@@ -237,6 +237,10 @@
   min-height: inherit;
 }
 
+.ent-portal__grid:has(.ent-portal__panel:only-child) {
+  grid-template-columns: 1fr;
+}
+
 .ent-portal__panel {
   position: relative;
   display: flex;

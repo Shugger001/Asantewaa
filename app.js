@@ -524,7 +524,7 @@ function renderProposals() {
   const data = SITE.proposals;
   if (!data) return;
 
-  document.title = 'Bookings & Proposals | Asantewaa';
+  document.title = 'Partnerships | Asantewaa';
 
   const titleEl = document.getElementById('prop-hero-title');
   if (titleEl && data.hero?.title) titleEl.textContent = data.hero.title;
@@ -698,7 +698,7 @@ function populateStaticContent() {
     home: SITE.owner,
     enterprise: 'The Enterprise | Asantewaa',
     'glam-room': 'The Glam Room | Asantewaa',
-    proposals: 'Bookings & Proposals | Asantewaa',
+    proposals: 'Partnerships | Asantewaa',
     about: `About ${SITE.owner} | Glam Room`,
     business: `Glam Room | Hair Salon Accra — ${SITE.owner}`,
     booking: `Book Your Glam | ${SITE.brand}`,
@@ -736,13 +736,48 @@ function populateStaticContent() {
   }
 }
 
+function getPageChrome() {
+  const page = document.body.dataset.page || 'home';
+
+  if (page === 'enterprise') {
+    return {
+      topbarLeft: SITE.enterprise?.topbarLeft || 'THE ENTERPRISE',
+      topbarLeftLink: SITE.enterprise?.topbarLeftLink || 'about.html',
+      menuLinks: SITE.enterprise?.menuLinks || SITE.aboutNavLinks,
+    };
+  }
+
+  if (page === 'proposals') {
+    return {
+      topbarLeft: SITE.proposals?.topbarLeft || 'PARTNERSHIPS',
+      topbarLeftLink: SITE.proposals?.topbarLeftLink || 'proposals.html',
+      menuLinks: SITE.proposalsNavLinks || SITE.enterprise?.menuLinks || [],
+    };
+  }
+
+  if (page === 'glam-room' || page === 'booking' || page === 'business') {
+    return {
+      topbarLeft: SITE.glamRoom?.topbarLeft || 'GLAM ROOM',
+      topbarLeftLink: SITE.glamRoom?.topbarLeftLink || 'glam-room.html',
+      menuLinks: SITE.glamRoom?.menuLinks || SITE.bookingNavLinks,
+    };
+  }
+
+  return {
+    topbarLeft: SITE.home?.topbarLeft || 'GLAM ROOM',
+    topbarLeftLink: SITE.home?.topbarLeftLink || 'index.html',
+    menuLinks: SITE.home?.menuLinks || SITE.homeNavLinks,
+  };
+}
+
 function getNavLinks() {
   const page = document.body.dataset.page || 'home';
   if (page === 'business') return SITE.businessNavLinks;
   if (page === 'service') return SITE.serviceNavLinks;
   if (page === 'enterprise' || page === 'about') return SITE.aboutNavLinks;
-  if (page === 'proposals' || page === 'booking') return SITE.bookingNavLinks;
-  if (page === 'glam-room') return SITE.home.menuLinks;
+  if (page === 'proposals') return SITE.proposalsNavLinks;
+  if (page === 'booking') return SITE.bookingNavLinks;
+  if (page === 'glam-room') return SITE.glamRoom?.menuLinks || SITE.bookingNavLinks;
   return SITE.homeNavLinks;
 }
 
@@ -918,10 +953,11 @@ function initEditorialMenu() {
   const closeBtn = document.getElementById('home-menu-close');
   const panel = document.getElementById('home-menu-panel');
   const overlay = document.getElementById('home-menu-overlay');
+  const chrome = getPageChrome();
 
   const menuLinks = document.getElementById('home-menu-links');
   if (menuLinks) {
-    menuLinks.innerHTML = SITE.home.menuLinks
+    menuLinks.innerHTML = chrome.menuLinks
       .map((link) => `<li><a href="${link.href}">${link.label}</a></li>`)
       .join('');
   }
@@ -938,8 +974,8 @@ function initEditorialMenu() {
 
   const topbarLeft = document.getElementById('home-topbar-left');
   if (topbarLeft) {
-    topbarLeft.textContent = SITE.home.topbarLeft;
-    topbarLeft.href = SITE.home.topbarLeftLink;
+    topbarLeft.textContent = chrome.topbarLeft;
+    topbarLeft.href = chrome.topbarLeftLink;
   }
 
   const copyright = document.getElementById('home-copyright');

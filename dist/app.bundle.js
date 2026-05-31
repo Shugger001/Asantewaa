@@ -283,7 +283,7 @@ var SITE = {
       { value: "12,000,000+", label: "MONTHLY VIDEO VIEWS", sublabel: "Across All Platforms" },
       { value: "18 to 38", label: "CORE AUDIENCE AGE", sublabel: "72% of Total Reach" },
       { variant: "strip", text: "68% FEMALE / 32% MALE" },
-      { variant: "strip", text: "PRIMARY REACH: GHANA & WEST AFRICA" },
+      { variant: "strip", text: "PAN-AFRICAN INFLUENCE. GLOBAL REACH." },
       { variant: "strip", text: "89K+ SNAPCHAT SUBSCRIBERS" }
     ],
     brandPartners: {
@@ -1077,7 +1077,7 @@ var SITE2 = {
       { value: "12,000,000+", label: "MONTHLY VIDEO VIEWS", sublabel: "Across All Platforms" },
       { value: "18 to 38", label: "CORE AUDIENCE AGE", sublabel: "72% of Total Reach" },
       { variant: "strip", text: "68% FEMALE / 32% MALE" },
-      { variant: "strip", text: "PRIMARY REACH: GHANA & WEST AFRICA" },
+      { variant: "strip", text: "PAN-AFRICAN INFLUENCE. GLOBAL REACH." },
       { variant: "strip", text: "89K+ SNAPCHAT SUBSCRIBERS" }
     ],
     brandPartners: {
@@ -2334,7 +2334,7 @@ var SITE3 = {
       { value: "12,000,000+", label: "MONTHLY VIDEO VIEWS", sublabel: "Across All Platforms" },
       { value: "18 to 38", label: "CORE AUDIENCE AGE", sublabel: "72% of Total Reach" },
       { variant: "strip", text: "68% FEMALE / 32% MALE" },
-      { variant: "strip", text: "PRIMARY REACH: GHANA & WEST AFRICA" },
+      { variant: "strip", text: "PAN-AFRICAN INFLUENCE. GLOBAL REACH." },
       { variant: "strip", text: "89K+ SNAPCHAT SUBSCRIBERS" }
     ],
     brandPartners: {

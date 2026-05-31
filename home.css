@@ -1563,8 +1563,8 @@ body.editorial-theme .booking-container {
 @media (max-width: 899px) {
   body[data-page="booking"] .booking-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-    gap: 0.65rem;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 0.5rem;
     align-items: start;
   }
 

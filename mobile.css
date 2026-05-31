@@ -388,15 +388,25 @@ body.editorial-theme .booking-container {
 
   .booking-grid {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) !important;
-    gap: 0.65rem;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) !important;
+    gap: 0.5rem;
     align-items: start;
   }
 
   .personality-card,
   .booking-form-card {
-    padding: 0.85rem 0.65rem;
+    padding: 0.65rem 0.55rem;
     min-width: 0;
+    border-radius: 1rem;
+  }
+
+  .booking-form-card {
+    padding: 0.75rem 0.55rem;
+  }
+
+  .personality-card .booking-info-list li {
+    padding: 0.35rem 0;
+    font-size: 0.64rem;
   }
 
   .form-row-2 {

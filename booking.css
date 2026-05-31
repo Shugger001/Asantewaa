@@ -168,9 +168,8 @@ html.dark .booking-page {
   font-style: normal;
 }
 
-.booking-info-list {
-  list-style: none;
-  margin-top: 1.25rem;
+.personality-card .booking-info-list:first-child {
+  margin-top: 0;
 }
 
 .booking-info-list li {
@@ -493,13 +492,13 @@ html.dark .booking-alert.error {
   }
 
   .booking-info-list {
-    margin-top: 0.65rem;
+    margin-top: 0;
   }
 
   .booking-info-list li {
-    padding: 0.45rem 0;
-    font-size: 0.68rem;
-    gap: 0.4rem;
+    padding: 0.35rem 0;
+    font-size: 0.64rem;
+    gap: 0.35rem;
   }
 
   .booking-info-list li > span {

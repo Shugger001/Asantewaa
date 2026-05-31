@@ -380,7 +380,7 @@ body.editorial-theme .booking-container {
   min-height: 52px;
 }
 
-/* Booking page — stacked layout with comfortable spacing on mobile */
+/* Booking page — stacked layout on mobile: form first, locations below */
 @media (max-width: 899px) {
   .booking-container {
     max-width: 100%;
@@ -393,15 +393,18 @@ body.editorial-theme .booking-container {
     align-items: stretch;
   }
 
-  .personality-card,
   .booking-form-card {
-    padding: 1.25rem 1.1rem;
+    order: 1;
+    padding: 1.25rem 1rem;
     min-width: 0;
     border-radius: 1.25rem;
   }
 
-  .booking-form-card {
-    padding: 1.35rem 1.1rem;
+  .personality-card {
+    order: 2;
+    padding: 1.15rem 1rem;
+    min-width: 0;
+    border-radius: 1.25rem;
   }
 
   .personality-card .booking-info-list li {
@@ -412,32 +415,26 @@ body.editorial-theme .booking-container {
   .form-row-2 {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
-    gap: 0.85rem;
+    gap: 0.75rem;
     align-items: start;
   }
 
   .form-row-2 .form-group label {
-    font-size: 0.78rem;
-    line-height: 1.4;
+    font-size: clamp(0.72rem, 3vw, 0.8rem);
+    line-height: 1.35;
   }
 
   .form-row-2 .form-group label i {
     display: inline;
   }
 
-  .form-row-2 .form-hint {
-    font-size: 0.75rem;
-    line-height: 1.4;
-  }
-
   body.editorial-theme .form-row-2 .form-group label {
-    font-size: 0.72rem;
+    font-size: clamp(0.68rem, 2.8vw, 0.76rem);
     letter-spacing: 0.06em;
   }
 
   body.editorial-theme .booking-form-title {
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
+    font-size: clamp(0.72rem, 3vw, 0.85rem);
   }
 }
 

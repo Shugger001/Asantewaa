@@ -1568,9 +1568,9 @@ body.editorial-theme .booking-container {
 @media (max-width: 899px) {
   body[data-page="booking"] .booking-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    align-items: stretch;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 0.5rem;
+    align-items: start;
   }
 
   body[data-page="booking"] .personality-card,

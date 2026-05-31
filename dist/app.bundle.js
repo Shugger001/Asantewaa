@@ -411,7 +411,6 @@ var SITE = {
       pillars: [
         "01 \u2014 Demonstrative Campaigns",
         "02 \u2014 Pro Location Campaigns",
-        "03 \u2014 Snapchat Ecosystem Amplification",
         "Open / Not yet selected"
       ]
     },
@@ -1205,7 +1204,6 @@ var SITE2 = {
       pillars: [
         "01 \u2014 Demonstrative Campaigns",
         "02 \u2014 Pro Location Campaigns",
-        "03 \u2014 Snapchat Ecosystem Amplification",
         "Open / Not yet selected"
       ]
     },
@@ -2462,7 +2460,6 @@ var SITE3 = {
       pillars: [
         "01 \u2014 Demonstrative Campaigns",
         "02 \u2014 Pro Location Campaigns",
-        "03 \u2014 Snapchat Ecosystem Amplification",
         "Open / Not yet selected"
       ]
     },

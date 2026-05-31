@@ -460,7 +460,6 @@ export const SITE = {
       pillars: [
         "01 — Demonstrative Campaigns",
         "02 — Pro Location Campaigns",
-        "03 — Snapchat Ecosystem Amplification",
         "Open / Not yet selected",
       ],
     },

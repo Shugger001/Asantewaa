@@ -584,8 +584,9 @@ var SITE = {
     { id: 4, label: "Bridal Glow", imageUrl: "images/glam-red-indoor.png", gradient: "linear-gradient(135deg, #D4A853 0%, #C75B39 100%)" },
     { id: 5, label: "Studio Slay", imageUrl: "images/glam-red-studio.png", gradient: "linear-gradient(135deg, #2C1810 0%, #006B3F 100%)" },
     { id: 6, label: "Celebration Glam", imageUrl: "images/glam-red-celebration.png", gradient: "linear-gradient(135deg, #CE1126 0%, #FCD116 100%)" },
-    { id: 7, label: "Twist Out", gradient: "linear-gradient(135deg, #C75B39 0%, #006B3F 100%)" },
-    { id: 8, label: "Glam Room Vibes", gradient: "linear-gradient(135deg, #D4A853 0%, #CE1126 100%)" }
+    { id: 7, label: "Silk Waves Profile", imageUrl: "images/glam-gallery-waves-profile.png", gradient: "linear-gradient(135deg, #C75B39 0%, #006B3F 100%)" },
+    { id: 8, label: "Butterfly Braids B&W", imageUrl: "images/glam-gallery-braids-bw.png", gradient: "linear-gradient(135deg, #2C1810 0%, #666 100%)" },
+    { id: 9, label: "Hollywood Waves", imageUrl: "images/glam-gallery-waves-front.png", gradient: "linear-gradient(135deg, #D4A853 0%, #CE1126 100%)" }
   ],
   business: {
     tagline: "Accra's baddest hair destination \u2014 where your crown gets the main character energy it deserves.",
@@ -1377,8 +1378,9 @@ var SITE2 = {
     { id: 4, label: "Bridal Glow", imageUrl: "images/glam-red-indoor.png", gradient: "linear-gradient(135deg, #D4A853 0%, #C75B39 100%)" },
     { id: 5, label: "Studio Slay", imageUrl: "images/glam-red-studio.png", gradient: "linear-gradient(135deg, #2C1810 0%, #006B3F 100%)" },
     { id: 6, label: "Celebration Glam", imageUrl: "images/glam-red-celebration.png", gradient: "linear-gradient(135deg, #CE1126 0%, #FCD116 100%)" },
-    { id: 7, label: "Twist Out", gradient: "linear-gradient(135deg, #C75B39 0%, #006B3F 100%)" },
-    { id: 8, label: "Glam Room Vibes", gradient: "linear-gradient(135deg, #D4A853 0%, #CE1126 100%)" }
+    { id: 7, label: "Silk Waves Profile", imageUrl: "images/glam-gallery-waves-profile.png", gradient: "linear-gradient(135deg, #C75B39 0%, #006B3F 100%)" },
+    { id: 8, label: "Butterfly Braids B&W", imageUrl: "images/glam-gallery-braids-bw.png", gradient: "linear-gradient(135deg, #2C1810 0%, #666 100%)" },
+    { id: 9, label: "Hollywood Waves", imageUrl: "images/glam-gallery-waves-front.png", gradient: "linear-gradient(135deg, #D4A853 0%, #CE1126 100%)" }
   ],
   business: {
     tagline: "Accra's baddest hair destination \u2014 where your crown gets the main character energy it deserves.",
@@ -2633,8 +2635,9 @@ var SITE3 = {
     { id: 4, label: "Bridal Glow", imageUrl: "images/glam-red-indoor.png", gradient: "linear-gradient(135deg, #D4A853 0%, #C75B39 100%)" },
     { id: 5, label: "Studio Slay", imageUrl: "images/glam-red-studio.png", gradient: "linear-gradient(135deg, #2C1810 0%, #006B3F 100%)" },
     { id: 6, label: "Celebration Glam", imageUrl: "images/glam-red-celebration.png", gradient: "linear-gradient(135deg, #CE1126 0%, #FCD116 100%)" },
-    { id: 7, label: "Twist Out", gradient: "linear-gradient(135deg, #C75B39 0%, #006B3F 100%)" },
-    { id: 8, label: "Glam Room Vibes", gradient: "linear-gradient(135deg, #D4A853 0%, #CE1126 100%)" }
+    { id: 7, label: "Silk Waves Profile", imageUrl: "images/glam-gallery-waves-profile.png", gradient: "linear-gradient(135deg, #C75B39 0%, #006B3F 100%)" },
+    { id: 8, label: "Butterfly Braids B&W", imageUrl: "images/glam-gallery-braids-bw.png", gradient: "linear-gradient(135deg, #2C1810 0%, #666 100%)" },
+    { id: 9, label: "Hollywood Waves", imageUrl: "images/glam-gallery-waves-front.png", gradient: "linear-gradient(135deg, #D4A853 0%, #CE1126 100%)" }
   ],
   business: {
     tagline: "Accra's baddest hair destination \u2014 where your crown gets the main character energy it deserves.",

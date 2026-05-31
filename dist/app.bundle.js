@@ -92,7 +92,7 @@ var SITE = {
     }
   ],
   hero: {
-    photoUrl: "images/glam-braids-studio.png",
+    photoUrl: "images/asantewaa-gown-smile.png",
     photoAlt: "Asantewaa \u2014 Glam Room by Asantewaa",
     typewriterPhrases: ["Your Crown.", "Your Glow.", "Your Glam Room."]
   },
@@ -108,16 +108,23 @@ var SITE = {
     ],
     introLoader: {
       images: [
-        "images/glam-braids-studio.png",
-        "images/glam-braids-portrait.png",
+        "images/asantewaa-kente-bw.png",
+        "images/asantewaa-glam-portrait-bw.png",
+        "images/asantewaa-beaded-gown-bw.png",
+        "images/asantewaa-kente-color.png",
+        "images/asantewaa-gown-smile.png",
+        "images/asantewaa-gown-mirror-bw.png",
+        "images/asantewaa-gown-full-bw.png",
+        "images/asantewaa-gown-mirror-color.png",
+        "images/asantewaa-gown-joy.png",
+        "images/glam-red-celebration.png",
         "images/glam-red-studio.png",
-        "images/glam-red-indoor.png",
-        "images/glam-red-outdoor.png",
-        "images/glam-red-celebration.png"
+        "images/glam-braids-portrait.png",
+        "images/glam-red-outdoor.png"
       ],
-      slideMs: 160,
-      starMs: 320,
-      exitMs: 320,
+      slideMs: 90,
+      starMs: 180,
+      exitMs: 200,
       titleHoldMs: 280,
       titleSlideMs: 950,
       title: "Asantewaa",
@@ -130,9 +137,9 @@ var SITE = {
         label: "",
         title: "Asantewaa",
         subtitle: "",
-        imageUrl: "images/glam-braids-studio.png",
-        imagePosition: "center 15%",
-        gradient: "linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%)",
+        imageUrl: "images/asantewaa-gown-smile.png",
+        imagePosition: "center 12%",
+        gradient: "linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%)",
         link: null
       },
       {
@@ -140,54 +147,66 @@ var SITE = {
         label: "",
         title: "The Era of Influence",
         subtitle: "Orchestrating Global Dominance",
-        imageUrl: "images/glam-red-studio.png",
-        imagePosition: "center top",
-        gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.75) 100%)",
+        imageUrl: "images/asantewaa-kente-color.png",
+        imagePosition: "center 18%",
+        gradient: "linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.72) 100%)",
         link: "about.html",
         linkText: "The Enterprise"
       },
       {
         id: "visual-2",
         imageOnly: true,
-        imageUrl: "images/glam-red-indoor.png",
-        imagePosition: "center 20%"
+        imageUrl: "images/asantewaa-kente-bw.png",
+        imagePosition: "center 15%"
       },
       {
         id: "visual-3",
         imageOnly: true,
-        imageUrl: "images/glam-red-outdoor.png",
-        imagePosition: "center center"
+        imageUrl: "images/asantewaa-glam-portrait-bw.png",
+        imagePosition: "center 22%"
+      },
+      {
+        id: "visual-4",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-beaded-gown-bw.png",
+        imagePosition: "center top"
       },
       {
         id: "glam",
         label: "The Glam Room",
         title: "Your Crown. Your Glow.",
         subtitle: "Accra's baddest hair destination",
-        imageUrl: "images/glam-red-celebration.png",
-        imagePosition: "center 25%",
-        gradient: "linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%)",
+        imageUrl: "images/asantewaa-gown-mirror-color.png",
+        imagePosition: "center 28%",
+        gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.78) 100%)",
         link: "glam-room.html",
         linkText: "Enter Glam Room"
       },
       {
-        id: "visual-4",
-        imageOnly: true,
-        imageUrl: "images/glam-braids-studio.png",
-        imagePosition: "center top"
-      },
-      {
         id: "visual-5",
         imageOnly: true,
-        imageUrl: "images/glam-braids-portrait.png",
+        imageUrl: "images/asantewaa-gown-joy.png",
+        imagePosition: "center 20%"
+      },
+      {
+        id: "visual-6",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-gown-full-bw.png",
         imagePosition: "center center"
+      },
+      {
+        id: "visual-7",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-gown-mirror-bw.png",
+        imagePosition: "center 25%"
       },
       {
         id: "book",
         label: "Book Your Glam",
         title: "Secure Your Slot",
         subtitle: "Mama Glam Is Waiting",
-        imageUrl: "images/glam-red-studio.png",
-        imagePosition: "center 20%",
+        imageUrl: "images/glam-red-celebration.png",
+        imagePosition: "center 22%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 100%)",
         link: "book.html",
         linkText: "Book Now"
@@ -203,10 +222,10 @@ var SITE = {
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.88) 100%)"
       },
       {
-        id: "visual-6",
+        id: "visual-8",
         imageOnly: true,
-        imageUrl: "images/glam-red-celebration.png",
-        imagePosition: "center center",
+        imageUrl: "images/glam-braids-portrait.png",
+        imagePosition: "center top",
         link: "glam-room.html"
       }
     ]
@@ -890,7 +909,7 @@ var SITE2 = {
     }
   ],
   hero: {
-    photoUrl: "images/glam-braids-studio.png",
+    photoUrl: "images/asantewaa-gown-smile.png",
     photoAlt: "Asantewaa \u2014 Glam Room by Asantewaa",
     typewriterPhrases: ["Your Crown.", "Your Glow.", "Your Glam Room."]
   },
@@ -906,16 +925,23 @@ var SITE2 = {
     ],
     introLoader: {
       images: [
-        "images/glam-braids-studio.png",
-        "images/glam-braids-portrait.png",
+        "images/asantewaa-kente-bw.png",
+        "images/asantewaa-glam-portrait-bw.png",
+        "images/asantewaa-beaded-gown-bw.png",
+        "images/asantewaa-kente-color.png",
+        "images/asantewaa-gown-smile.png",
+        "images/asantewaa-gown-mirror-bw.png",
+        "images/asantewaa-gown-full-bw.png",
+        "images/asantewaa-gown-mirror-color.png",
+        "images/asantewaa-gown-joy.png",
+        "images/glam-red-celebration.png",
         "images/glam-red-studio.png",
-        "images/glam-red-indoor.png",
-        "images/glam-red-outdoor.png",
-        "images/glam-red-celebration.png"
+        "images/glam-braids-portrait.png",
+        "images/glam-red-outdoor.png"
       ],
-      slideMs: 160,
-      starMs: 320,
-      exitMs: 320,
+      slideMs: 90,
+      starMs: 180,
+      exitMs: 200,
       titleHoldMs: 280,
       titleSlideMs: 950,
       title: "Asantewaa",
@@ -928,9 +954,9 @@ var SITE2 = {
         label: "",
         title: "Asantewaa",
         subtitle: "",
-        imageUrl: "images/glam-braids-studio.png",
-        imagePosition: "center 15%",
-        gradient: "linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%)",
+        imageUrl: "images/asantewaa-gown-smile.png",
+        imagePosition: "center 12%",
+        gradient: "linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%)",
         link: null
       },
       {
@@ -938,54 +964,66 @@ var SITE2 = {
         label: "",
         title: "The Era of Influence",
         subtitle: "Orchestrating Global Dominance",
-        imageUrl: "images/glam-red-studio.png",
-        imagePosition: "center top",
-        gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.75) 100%)",
+        imageUrl: "images/asantewaa-kente-color.png",
+        imagePosition: "center 18%",
+        gradient: "linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.72) 100%)",
         link: "about.html",
         linkText: "The Enterprise"
       },
       {
         id: "visual-2",
         imageOnly: true,
-        imageUrl: "images/glam-red-indoor.png",
-        imagePosition: "center 20%"
+        imageUrl: "images/asantewaa-kente-bw.png",
+        imagePosition: "center 15%"
       },
       {
         id: "visual-3",
         imageOnly: true,
-        imageUrl: "images/glam-red-outdoor.png",
-        imagePosition: "center center"
+        imageUrl: "images/asantewaa-glam-portrait-bw.png",
+        imagePosition: "center 22%"
+      },
+      {
+        id: "visual-4",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-beaded-gown-bw.png",
+        imagePosition: "center top"
       },
       {
         id: "glam",
         label: "The Glam Room",
         title: "Your Crown. Your Glow.",
         subtitle: "Accra's baddest hair destination",
-        imageUrl: "images/glam-red-celebration.png",
-        imagePosition: "center 25%",
-        gradient: "linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%)",
+        imageUrl: "images/asantewaa-gown-mirror-color.png",
+        imagePosition: "center 28%",
+        gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.78) 100%)",
         link: "glam-room.html",
         linkText: "Enter Glam Room"
       },
       {
-        id: "visual-4",
-        imageOnly: true,
-        imageUrl: "images/glam-braids-studio.png",
-        imagePosition: "center top"
-      },
-      {
         id: "visual-5",
         imageOnly: true,
-        imageUrl: "images/glam-braids-portrait.png",
+        imageUrl: "images/asantewaa-gown-joy.png",
+        imagePosition: "center 20%"
+      },
+      {
+        id: "visual-6",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-gown-full-bw.png",
         imagePosition: "center center"
+      },
+      {
+        id: "visual-7",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-gown-mirror-bw.png",
+        imagePosition: "center 25%"
       },
       {
         id: "book",
         label: "Book Your Glam",
         title: "Secure Your Slot",
         subtitle: "Mama Glam Is Waiting",
-        imageUrl: "images/glam-red-studio.png",
-        imagePosition: "center 20%",
+        imageUrl: "images/glam-red-celebration.png",
+        imagePosition: "center 22%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 100%)",
         link: "book.html",
         linkText: "Book Now"
@@ -1001,10 +1039,10 @@ var SITE2 = {
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.88) 100%)"
       },
       {
-        id: "visual-6",
+        id: "visual-8",
         imageOnly: true,
-        imageUrl: "images/glam-red-celebration.png",
-        imagePosition: "center center",
+        imageUrl: "images/glam-braids-portrait.png",
+        imagePosition: "center top",
         link: "glam-room.html"
       }
     ]
@@ -2151,7 +2189,7 @@ var SITE3 = {
     }
   ],
   hero: {
-    photoUrl: "images/glam-braids-studio.png",
+    photoUrl: "images/asantewaa-gown-smile.png",
     photoAlt: "Asantewaa \u2014 Glam Room by Asantewaa",
     typewriterPhrases: ["Your Crown.", "Your Glow.", "Your Glam Room."]
   },
@@ -2167,16 +2205,23 @@ var SITE3 = {
     ],
     introLoader: {
       images: [
-        "images/glam-braids-studio.png",
-        "images/glam-braids-portrait.png",
+        "images/asantewaa-kente-bw.png",
+        "images/asantewaa-glam-portrait-bw.png",
+        "images/asantewaa-beaded-gown-bw.png",
+        "images/asantewaa-kente-color.png",
+        "images/asantewaa-gown-smile.png",
+        "images/asantewaa-gown-mirror-bw.png",
+        "images/asantewaa-gown-full-bw.png",
+        "images/asantewaa-gown-mirror-color.png",
+        "images/asantewaa-gown-joy.png",
+        "images/glam-red-celebration.png",
         "images/glam-red-studio.png",
-        "images/glam-red-indoor.png",
-        "images/glam-red-outdoor.png",
-        "images/glam-red-celebration.png"
+        "images/glam-braids-portrait.png",
+        "images/glam-red-outdoor.png"
       ],
-      slideMs: 160,
-      starMs: 320,
-      exitMs: 320,
+      slideMs: 90,
+      starMs: 180,
+      exitMs: 200,
       titleHoldMs: 280,
       titleSlideMs: 950,
       title: "Asantewaa",
@@ -2189,9 +2234,9 @@ var SITE3 = {
         label: "",
         title: "Asantewaa",
         subtitle: "",
-        imageUrl: "images/glam-braids-studio.png",
-        imagePosition: "center 15%",
-        gradient: "linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%)",
+        imageUrl: "images/asantewaa-gown-smile.png",
+        imagePosition: "center 12%",
+        gradient: "linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%)",
         link: null
       },
       {
@@ -2199,54 +2244,66 @@ var SITE3 = {
         label: "",
         title: "The Era of Influence",
         subtitle: "Orchestrating Global Dominance",
-        imageUrl: "images/glam-red-studio.png",
-        imagePosition: "center top",
-        gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.75) 100%)",
+        imageUrl: "images/asantewaa-kente-color.png",
+        imagePosition: "center 18%",
+        gradient: "linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.72) 100%)",
         link: "about.html",
         linkText: "The Enterprise"
       },
       {
         id: "visual-2",
         imageOnly: true,
-        imageUrl: "images/glam-red-indoor.png",
-        imagePosition: "center 20%"
+        imageUrl: "images/asantewaa-kente-bw.png",
+        imagePosition: "center 15%"
       },
       {
         id: "visual-3",
         imageOnly: true,
-        imageUrl: "images/glam-red-outdoor.png",
-        imagePosition: "center center"
+        imageUrl: "images/asantewaa-glam-portrait-bw.png",
+        imagePosition: "center 22%"
+      },
+      {
+        id: "visual-4",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-beaded-gown-bw.png",
+        imagePosition: "center top"
       },
       {
         id: "glam",
         label: "The Glam Room",
         title: "Your Crown. Your Glow.",
         subtitle: "Accra's baddest hair destination",
-        imageUrl: "images/glam-red-celebration.png",
-        imagePosition: "center 25%",
-        gradient: "linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%)",
+        imageUrl: "images/asantewaa-gown-mirror-color.png",
+        imagePosition: "center 28%",
+        gradient: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.78) 100%)",
         link: "glam-room.html",
         linkText: "Enter Glam Room"
       },
       {
-        id: "visual-4",
-        imageOnly: true,
-        imageUrl: "images/glam-braids-studio.png",
-        imagePosition: "center top"
-      },
-      {
         id: "visual-5",
         imageOnly: true,
-        imageUrl: "images/glam-braids-portrait.png",
+        imageUrl: "images/asantewaa-gown-joy.png",
+        imagePosition: "center 20%"
+      },
+      {
+        id: "visual-6",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-gown-full-bw.png",
         imagePosition: "center center"
+      },
+      {
+        id: "visual-7",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-gown-mirror-bw.png",
+        imagePosition: "center 25%"
       },
       {
         id: "book",
         label: "Book Your Glam",
         title: "Secure Your Slot",
         subtitle: "Mama Glam Is Waiting",
-        imageUrl: "images/glam-red-studio.png",
-        imagePosition: "center 20%",
+        imageUrl: "images/glam-red-celebration.png",
+        imagePosition: "center 22%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 100%)",
         link: "book.html",
         linkText: "Book Now"
@@ -2262,10 +2319,10 @@ var SITE3 = {
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.88) 100%)"
       },
       {
-        id: "visual-6",
+        id: "visual-8",
         imageOnly: true,
-        imageUrl: "images/glam-red-celebration.png",
-        imagePosition: "center center",
+        imageUrl: "images/glam-braids-portrait.png",
+        imagePosition: "center top",
         link: "glam-room.html"
       }
     ]

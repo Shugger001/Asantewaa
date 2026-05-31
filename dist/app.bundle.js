@@ -52,7 +52,7 @@ var SITE = {
   /** Wireframe document — 6 pages (PDF pages 2–7) */
   wireframePages: [
     { id: "01", label: "Home \u2014 Editorial Gateway", href: "index.html" },
-    { id: "02", label: "The Enterprise \u2014 Cinematic Gateway & Portal", href: "about.html" },
+    { id: "02", label: "The Enterprise \u2014 Partnerships & Influence", href: "about.html" },
     { id: "02b", label: "The Enterprise \u2014 Campaign Pillars", href: "about.html#pillars" },
     { id: "03", label: "The Glam Room \u2014 Salon Flagship", href: "glam-room.html" },
     { id: "03b", label: "The Glam Room \u2014 Signature Services", href: "glam-room.html#services" },
@@ -118,9 +118,9 @@ var SITE = {
         "images/asantewaa-gown-joy.png",
         "images/glam-red-celebration.png",
         "images/glam-red-studio.png",
-        "images/glam-braids-portrait.png",
         "images/glam-braids-studio.png",
-        "images/glam-red-indoor.png"
+        "images/glam-red-indoor.png",
+        "images/glam-red-outdoor.png"
       ],
       slideMs: 90,
       starMs: 180,
@@ -220,13 +220,6 @@ var SITE = {
         imageUrl: "images/glam-red-indoor.png",
         imagePosition: "center 30%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.88) 100%)"
-      },
-      {
-        id: "visual-8",
-        imageOnly: true,
-        imageUrl: "images/glam-braids-portrait.png",
-        imagePosition: "center top",
-        link: "glam-room.html"
       }
     ]
   },
@@ -254,28 +247,6 @@ var SITE = {
       { label: "Home", href: "index.html" },
       { label: "The Enterprise", href: "about.html" },
       { label: "Partnerships", href: "proposals.html" }
-    ],
-    gateway: {
-      title: "ASANTEWAA",
-      headline: "THE WORLD KNOWS HER NAME.",
-      meta: "ACCRA, GHANA * ASANTEWAA \xA9 2026",
-      scrollHint: "SCROLL TO ENTER",
-      imageUrl: "images/glam-braids-portrait.png",
-      imageAlt: "Asantewaa \u2014 cinematic portrait",
-      imagePosition: "center 15%"
-    },
-    portals: [
-      {
-        id: "enterprise",
-        theme: "enterprise",
-        title: "THE ENTERPRISE",
-        tagline: "She Builds Empires.",
-        subline: "",
-        cta: "Explore Partnerships",
-        href: "#enterprise-statement",
-        imageUrl: "images/glam-red-studio.png",
-        imagePosition: "center 20%"
-      }
     ],
     statement: {
       imageUrl: "images/glam-red-studio.png",
@@ -869,7 +840,7 @@ var SITE2 = {
   /** Wireframe document — 6 pages (PDF pages 2–7) */
   wireframePages: [
     { id: "01", label: "Home \u2014 Editorial Gateway", href: "index.html" },
-    { id: "02", label: "The Enterprise \u2014 Cinematic Gateway & Portal", href: "about.html" },
+    { id: "02", label: "The Enterprise \u2014 Partnerships & Influence", href: "about.html" },
     { id: "02b", label: "The Enterprise \u2014 Campaign Pillars", href: "about.html#pillars" },
     { id: "03", label: "The Glam Room \u2014 Salon Flagship", href: "glam-room.html" },
     { id: "03b", label: "The Glam Room \u2014 Signature Services", href: "glam-room.html#services" },
@@ -935,9 +906,9 @@ var SITE2 = {
         "images/asantewaa-gown-joy.png",
         "images/glam-red-celebration.png",
         "images/glam-red-studio.png",
-        "images/glam-braids-portrait.png",
         "images/glam-braids-studio.png",
-        "images/glam-red-indoor.png"
+        "images/glam-red-indoor.png",
+        "images/glam-red-outdoor.png"
       ],
       slideMs: 90,
       starMs: 180,
@@ -1037,13 +1008,6 @@ var SITE2 = {
         imageUrl: "images/glam-red-indoor.png",
         imagePosition: "center 30%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.88) 100%)"
-      },
-      {
-        id: "visual-8",
-        imageOnly: true,
-        imageUrl: "images/glam-braids-portrait.png",
-        imagePosition: "center top",
-        link: "glam-room.html"
       }
     ]
   },
@@ -1071,28 +1035,6 @@ var SITE2 = {
       { label: "Home", href: "index.html" },
       { label: "The Enterprise", href: "about.html" },
       { label: "Partnerships", href: "proposals.html" }
-    ],
-    gateway: {
-      title: "ASANTEWAA",
-      headline: "THE WORLD KNOWS HER NAME.",
-      meta: "ACCRA, GHANA * ASANTEWAA \xA9 2026",
-      scrollHint: "SCROLL TO ENTER",
-      imageUrl: "images/glam-braids-portrait.png",
-      imageAlt: "Asantewaa \u2014 cinematic portrait",
-      imagePosition: "center 15%"
-    },
-    portals: [
-      {
-        id: "enterprise",
-        theme: "enterprise",
-        title: "THE ENTERPRISE",
-        tagline: "She Builds Empires.",
-        subline: "",
-        cta: "Explore Partnerships",
-        href: "#enterprise-statement",
-        imageUrl: "images/glam-red-studio.png",
-        imagePosition: "center 20%"
-      }
     ],
     statement: {
       imageUrl: "images/glam-red-studio.png",
@@ -2149,7 +2091,7 @@ var SITE3 = {
   /** Wireframe document — 6 pages (PDF pages 2–7) */
   wireframePages: [
     { id: "01", label: "Home \u2014 Editorial Gateway", href: "index.html" },
-    { id: "02", label: "The Enterprise \u2014 Cinematic Gateway & Portal", href: "about.html" },
+    { id: "02", label: "The Enterprise \u2014 Partnerships & Influence", href: "about.html" },
     { id: "02b", label: "The Enterprise \u2014 Campaign Pillars", href: "about.html#pillars" },
     { id: "03", label: "The Glam Room \u2014 Salon Flagship", href: "glam-room.html" },
     { id: "03b", label: "The Glam Room \u2014 Signature Services", href: "glam-room.html#services" },
@@ -2215,9 +2157,9 @@ var SITE3 = {
         "images/asantewaa-gown-joy.png",
         "images/glam-red-celebration.png",
         "images/glam-red-studio.png",
-        "images/glam-braids-portrait.png",
         "images/glam-braids-studio.png",
-        "images/glam-red-indoor.png"
+        "images/glam-red-indoor.png",
+        "images/glam-red-outdoor.png"
       ],
       slideMs: 90,
       starMs: 180,
@@ -2317,13 +2259,6 @@ var SITE3 = {
         imageUrl: "images/glam-red-indoor.png",
         imagePosition: "center 30%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.88) 100%)"
-      },
-      {
-        id: "visual-8",
-        imageOnly: true,
-        imageUrl: "images/glam-braids-portrait.png",
-        imagePosition: "center top",
-        link: "glam-room.html"
       }
     ]
   },
@@ -2351,28 +2286,6 @@ var SITE3 = {
       { label: "Home", href: "index.html" },
       { label: "The Enterprise", href: "about.html" },
       { label: "Partnerships", href: "proposals.html" }
-    ],
-    gateway: {
-      title: "ASANTEWAA",
-      headline: "THE WORLD KNOWS HER NAME.",
-      meta: "ACCRA, GHANA * ASANTEWAA \xA9 2026",
-      scrollHint: "SCROLL TO ENTER",
-      imageUrl: "images/glam-braids-portrait.png",
-      imageAlt: "Asantewaa \u2014 cinematic portrait",
-      imagePosition: "center 15%"
-    },
-    portals: [
-      {
-        id: "enterprise",
-        theme: "enterprise",
-        title: "THE ENTERPRISE",
-        tagline: "She Builds Empires.",
-        subline: "",
-        cta: "Explore Partnerships",
-        href: "#enterprise-statement",
-        imageUrl: "images/glam-red-studio.png",
-        imagePosition: "center 20%"
-      }
     ],
     statement: {
       imageUrl: "images/glam-red-studio.png",
@@ -3320,79 +3233,10 @@ function initEnterpriseAccordion(container) {
     });
   });
 }
-function initEnterprisePortalScroll(container) {
-  if (!container) return;
-  container.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener("click", (event) => {
-      const target = document.querySelector(link.getAttribute("href"));
-      if (!target) return;
-      event.preventDefault();
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  });
-}
-function initEnterpriseGatewayScroll() {
-  const link = document.getElementById("enterprise-gateway-scroll");
-  if (!link) return;
-  link.addEventListener("click", (event) => {
-    const target = document.getElementById("enterprise-portal");
-    if (!target) return;
-    event.preventDefault();
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
-}
 function renderEnterprise() {
   const data = SITE.enterprise;
   if (!data) return;
   document.title = "The Enterprise | Asantewaa";
-  const gateway = data.gateway;
-  if (gateway) {
-    const gatewayImage = document.getElementById("enterprise-gateway-image");
-    if (gatewayImage) {
-      gatewayImage.src = gateway.imageUrl || SITE.hero?.photoUrl || "";
-      gatewayImage.alt = gateway.imageAlt || "Asantewaa";
-      if (gateway.imagePosition) {
-        gatewayImage.style.objectPosition = gateway.imagePosition;
-      }
-    }
-    const titleEl = document.getElementById("enterprise-gateway-title");
-    if (titleEl && gateway.title) titleEl.textContent = gateway.title;
-    const headlineEl = document.getElementById("enterprise-gateway-headline");
-    if (headlineEl && gateway.headline) {
-      headlineEl.innerHTML = `
-        <span class="ent-gateway__headline-rule" aria-hidden="true"></span>
-        <span class="ent-gateway__headline-text">${gateway.headline}</span>
-        <span class="ent-gateway__headline-rule" aria-hidden="true"></span>
-      `;
-    }
-    const metaEl = document.getElementById("enterprise-gateway-meta");
-    if (metaEl && gateway.meta) metaEl.textContent = gateway.meta;
-    const scrollText = document.getElementById("enterprise-gateway-scroll-text");
-    if (scrollText && gateway.scrollHint) scrollText.textContent = gateway.scrollHint;
-    initEnterpriseGatewayScroll();
-  }
-  const portalsEl = document.getElementById("enterprise-portals");
-  if (portalsEl && data.portals) {
-    portalsEl.innerHTML = data.portals.map(
-      (panel) => `
-      <a href="${panel.href}" class="ent-portal__panel ent-portal__panel--${panel.theme || panel.id}">
-        <div class="ent-portal__media" aria-hidden="true">
-          <img src="${panel.imageUrl || ""}" alt="" loading="lazy" decoding="async"${panel.imagePosition ? ` style="object-position: ${panel.imagePosition}"` : ""}>
-        </div>
-        <div class="ent-portal__shade" aria-hidden="true"></div>
-        <div class="ent-portal__content">
-          <h2 class="ent-portal__title">${panel.title}</h2>
-          <p class="ent-portal__tagline">${panel.tagline}</p>
-          ${panel.subline ? `<p class="ent-portal__subline">${panel.subline}</p>` : '<p class="ent-portal__subline" aria-hidden="true">&nbsp;</p>'}
-          <span class="ent-portal__cta">${panel.cta}</span>
-        </div>
-      </a>
-    `
-    ).join("");
-    initEnterprisePortalScroll(portalsEl);
-  }
-  const portalFooter = document.getElementById("enterprise-portal-footer");
-  if (portalFooter && data.footer) portalFooter.textContent = data.footer;
   const statement = data.statement;
   const statementImage = document.getElementById("enterprise-statement-image");
   if (statementImage && statement) {

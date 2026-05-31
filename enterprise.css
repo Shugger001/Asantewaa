@@ -395,6 +395,13 @@
   border-top: 1px solid var(--ent-rule);
 }
 
+.ent-statement--lead {
+  border-top: none;
+  padding-top: calc(4.5rem + env(safe-area-inset-top, 0px));
+  min-height: calc(100vh - 4.5rem);
+  min-height: calc(100dvh - 4.5rem);
+}
+
 .ent-statement__portrait {
   position: relative;
   background: var(--ent-black);

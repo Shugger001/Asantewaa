@@ -89,7 +89,7 @@ export const SITE = {
   /** Wireframe document — 6 pages (PDF pages 2–7) */
   wireframePages: [
     { id: "01", label: "Home — Editorial Gateway", href: "index.html" },
-    { id: "02", label: "The Enterprise — Cinematic Gateway & Portal", href: "about.html" },
+    { id: "02", label: "The Enterprise — Partnerships & Influence", href: "about.html" },
     { id: "02b", label: "The Enterprise — Campaign Pillars", href: "about.html#pillars" },
     { id: "03", label: "The Glam Room — Salon Flagship", href: "glam-room.html" },
     { id: "03b", label: "The Glam Room — Signature Services", href: "glam-room.html#services" },
@@ -160,9 +160,9 @@ export const SITE = {
         "images/asantewaa-gown-joy.png",
         "images/glam-red-celebration.png",
         "images/glam-red-studio.png",
-        "images/glam-braids-portrait.png",
         "images/glam-braids-studio.png",
         "images/glam-red-indoor.png",
+        "images/glam-red-outdoor.png",
       ],
       slideMs: 90,
       starMs: 180,
@@ -263,13 +263,6 @@ export const SITE = {
         imagePosition: "center 30%",
         gradient: "linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.88) 100%)",
       },
-      {
-        id: "visual-8",
-        imageOnly: true,
-        imageUrl: "images/glam-braids-portrait.png",
-        imagePosition: "center top",
-        link: "glam-room.html",
-      },
     ],
   },
 
@@ -299,28 +292,6 @@ export const SITE = {
       { label: "Home", href: "index.html" },
       { label: "The Enterprise", href: "about.html" },
       { label: "Partnerships", href: "proposals.html" },
-    ],
-    gateway: {
-      title: "ASANTEWAA",
-      headline: "THE WORLD KNOWS HER NAME.",
-      meta: "ACCRA, GHANA * ASANTEWAA © 2026",
-      scrollHint: "SCROLL TO ENTER",
-      imageUrl: "images/glam-braids-portrait.png",
-      imageAlt: "Asantewaa — cinematic portrait",
-      imagePosition: "center 15%",
-    },
-    portals: [
-      {
-        id: "enterprise",
-        theme: "enterprise",
-        title: "THE ENTERPRISE",
-        tagline: "She Builds Empires.",
-        subline: "",
-        cta: "Explore Partnerships",
-        href: "#enterprise-statement",
-        imageUrl: "images/glam-red-studio.png",
-        imagePosition: "center 20%",
-      },
     ],
     statement: {
       imageUrl: "images/glam-red-studio.png",

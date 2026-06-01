@@ -67,8 +67,14 @@ function showLogin(message = '') {
   adminContent.hidden = true;
   loginContainer.hidden = false;
   loginError.textContent = message;
-  loginError.classList.toggle('is-visible', Boolean(message));
-  loginError.hidden = !message;
+  if (message) {
+    loginError.classList.add('is-visible');
+    loginError.hidden = false;
+    loginError.style.removeProperty('display');
+  } else {
+    loginError.classList.remove('is-visible');
+    loginError.hidden = true;
+  }
 }
 
 function showAdmin() {
@@ -713,9 +719,12 @@ async function init() {
     const passwordInput = document.getElementById('adminPassword');
     btn.disabled = true;
     btn.textContent = 'Signing in…';
-    loginError.style.display = 'none';
+    showLogin('');
 
-    await login(emailInput?.value || '', passwordInput?.value || '');
+    const ok = await login(emailInput?.value || '', passwordInput?.value || '');
+    if (!ok) {
+      passwordInput?.focus();
+    }
 
     btn.disabled = false;
     btn.textContent = 'Sign in';
@@ -780,4 +789,12 @@ async function init() {
   }
 }
 
-init();
+if (!loginForm || !loginError || !adminContent || !loginContainer) {
+  document.body.innerHTML =
+    '<p style="color:#fff;padding:2rem;font-family:sans-serif">Admin page failed to load. Refresh or try another browser.</p>';
+} else {
+  init().catch((err) => {
+    console.error(err);
+    showLogin(err?.message || 'Admin failed to start. Refresh the page.');
+  });
+}

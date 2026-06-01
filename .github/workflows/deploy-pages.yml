@@ -30,7 +30,9 @@ jobs:
           node-version: "20"
 
       - name: Build app bundle
-        run: npx --yes esbuild app.js --bundle --format=esm --outfile=dist/app.bundle.js --target=es2020
+        run: |
+          npx --yes esbuild app.js --bundle --format=esm --outfile=dist/app.bundle.js --target=es2020
+          npx --yes esbuild admin.js --bundle --format=esm --outfile=admin.bundle.js --target=es2020
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

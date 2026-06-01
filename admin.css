@@ -912,12 +912,13 @@ td strong {
   padding: 0.75rem 0.85rem;
   border-radius: 10px;
   font-size: 0.8125rem;
+  line-height: 1.45;
   margin-bottom: 1rem;
   text-align: center;
   display: none;
 }
 
-.admin-login .login-error:not(:empty) {
+.admin-login .login-error.is-visible {
   display: block;
 }
 

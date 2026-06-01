@@ -13,10 +13,19 @@ export function isSupabaseConfigured() {
   );
 }
 
-export function getSupabase() {
+export function getSupabase(options = {}) {
   if (!isSupabaseConfigured()) return null;
   if (!client) {
-    client = createClient(SITE.booking.supabase.url, SITE.booking.supabase.anonKey);
+    const { url, anonKey } = SITE.booking.supabase;
+    client = createClient(url, anonKey, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true,
+        storage: typeof window !== 'undefined' ? window.localStorage : undefined,
+        ...options.auth,
+      },
+    });
   }
   return client;
 }

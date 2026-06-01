@@ -1,6 +1,24 @@
 import { SITE } from './data.js';
-import { getSupabase } from './supabase-client.js';
+import { isSupabaseConfigured } from './supabase-client.js';
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+let adminSupabase = null;
+
+function getAdminSupabase() {
+  if (!isSupabaseConfigured()) return null;
+  if (!adminSupabase) {
+    const { url, anonKey } = SITE.booking.supabase;
+    adminSupabase = createClient(url, anonKey, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true,
+        storageKey: 'glam-admin-auth',
+      },
+    });
+  }
+  return adminSupabase;
+}
 
 const adminContent = document.getElementById('adminContent');
 const loginContainer = document.getElementById('loginContainer');
@@ -48,8 +66,9 @@ function needsStatusConfirm(fromStatus, toStatus) {
 function showLogin(message = '') {
   adminContent.hidden = true;
   loginContainer.hidden = false;
-  loginError.style.display = message ? 'block' : 'none';
   loginError.textContent = message;
+  loginError.classList.toggle('is-visible', Boolean(message));
+  loginError.hidden = !message;
 }
 
 function showAdmin() {
@@ -313,7 +332,7 @@ function applyFilters() {
 }
 
 async function loadBookings() {
-  const supabase = getSupabase();
+  const supabase = getAdminSupabase();
   if (!supabase) {
     showLogin('Supabase is not configured in data.js.');
     return;
@@ -438,22 +457,61 @@ function exportToCSV() {
   showToast(`Exported ${rows.length} booking${rows.length === 1 ? '' : 's'}.`);
 }
 
+function formatAuthError(error) {
+  const msg = error?.message || 'Sign-in failed.';
+  if (/invalid login credentials/i.test(msg)) {
+    return 'Incorrect staff login or password. Type your Supabase staff login manually — saved browser autofill often uses the wrong account.';
+  }
+  if (/email not confirmed/i.test(msg)) {
+    return 'Staff account is not confirmed. In Supabase, run supabase/create-admin-lesley.sql again.';
+  }
+  if (/network|fetch/i.test(msg)) {
+    return 'Network error. Check your connection and try again.';
+  }
+  return msg;
+}
+
+function isValidStaffLogin(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
 async function login(email, password) {
-  const supabase = getSupabase();
+  const supabase = getSupabase({ auth: { storageKey: 'glam-admin-auth' } });
   if (!supabase) {
     showLogin('Supabase is not configured in data.js.');
-    return;
+    return false;
   }
 
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  const normalizedEmail = email.trim().toLowerCase();
+  if (!isValidStaffLogin(normalizedEmail)) {
+    showLogin('Enter a valid staff login (must be an email address).');
+    return false;
+  }
+
+  if (!password) {
+    showLogin('Enter your password.');
+    return false;
+  }
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: normalizedEmail,
+    password,
+  });
+
   if (error) {
-    showLogin(error.message);
-    return;
+    showLogin(formatAuthError(error));
+    return false;
+  }
+
+  if (!data?.session) {
+    showLogin('Sign-in did not create a session. Try again or use a private browser window.');
+    return false;
   }
 
   cachedLoginPassword = password;
   showAdmin();
   await loadBookings();
+  return true;
 }
 
 function resetFilters() {
@@ -628,16 +686,21 @@ async function logout() {
 }
 
 async function init() {
-  const supabase = getSupabase();
+  const supabase = getSupabase({ auth: { storageKey: 'glam-admin-auth' } });
+
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('loginBtn');
+    const emailInput = document.getElementById('adminEmail');
+    const passwordInput = document.getElementById('adminPassword');
     btn.disabled = true;
-    await login(
-      document.getElementById('adminEmail').value.trim(),
-      document.getElementById('adminPassword').value
-    );
+    btn.textContent = 'Signing in…';
+    loginError.style.display = 'none';
+
+    await login(emailInput?.value || '', passwordInput?.value || '');
+
     btn.disabled = false;
+    btn.textContent = 'Sign in';
   });
 
   document.getElementById('applyFilterBtn').addEventListener('click', () => {
@@ -686,7 +749,11 @@ async function init() {
     return;
   }
 
-  const { data: { session } } = await supabase.auth.getSession();
+  const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+  if (sessionError) {
+    showLogin(formatAuthError(sessionError));
+    return;
+  }
   if (session) {
     showAdmin();
     await loadBookings();

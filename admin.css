@@ -780,13 +780,30 @@ td strong {
 
 /* — Login — */
 .admin-login {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
   min-height: 100vh;
   min-height: 100dvh;
-  display: flex;
   align-items: center;
   justify-content: center;
   padding: max(1.25rem, env(safe-area-inset-top)) max(1.25rem, env(safe-area-inset-right))
     max(1.25rem, env(safe-area-inset-bottom)) max(1.25rem, env(safe-area-inset-left));
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.admin-login[hidden] {
+  display: none !important;
+}
+
+.admin-login:not([hidden]) {
+  display: flex;
+}
+
+.admin-shell[hidden] {
+  display: none !important;
 }
 
 .admin-login__card {

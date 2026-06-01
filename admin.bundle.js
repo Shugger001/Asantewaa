@@ -1259,15 +1259,30 @@ function needsStatusConfirm(fromStatus, toStatus) {
 }
 function showLogin(message = "") {
   adminContent.hidden = true;
+  adminContent.setAttribute("aria-hidden", "true");
   loginContainer.hidden = false;
+  loginContainer.removeAttribute("aria-hidden");
+  document.body.classList.remove("admin-is-signed-in");
   loginError.textContent = message;
-  loginError.classList.toggle("is-visible", Boolean(message));
-  loginError.hidden = !message;
+  if (message) {
+    loginError.classList.add("is-visible");
+    loginError.hidden = false;
+    loginError.style.removeProperty("display");
+  } else {
+    loginError.classList.remove("is-visible");
+    loginError.hidden = true;
+    loginError.style.removeProperty("display");
+  }
 }
 function showAdmin() {
   loginContainer.hidden = true;
+  loginContainer.setAttribute("aria-hidden", "true");
   adminContent.hidden = false;
-  loginError.style.display = "none";
+  adminContent.removeAttribute("aria-hidden");
+  document.body.classList.add("admin-is-signed-in");
+  loginError.classList.remove("is-visible");
+  loginError.hidden = true;
+  loginError.textContent = "";
 }
 function formatTime(time) {
   if (!time) return "N/A";
@@ -1792,8 +1807,11 @@ async function init() {
     const passwordInput = document.getElementById("adminPassword");
     btn.disabled = true;
     btn.textContent = "Signing in\u2026";
-    loginError.style.display = "none";
-    await login(emailInput?.value || "", passwordInput?.value || "");
+    showLogin("");
+    const ok = await login(emailInput?.value || "", passwordInput?.value || "");
+    if (!ok) {
+      passwordInput?.focus();
+    }
     btn.disabled = false;
     btn.textContent = "Sign in";
   });
@@ -1850,4 +1868,11 @@ async function init() {
     showLogin();
   }
 }
-init();
+if (!loginForm || !loginError || !adminContent || !loginContainer) {
+  document.body.innerHTML = '<p style="color:#fff;padding:2rem;font-family:sans-serif">Admin page failed to load. Refresh or try another browser.</p>';
+} else {
+  init().catch((err) => {
+    console.error(err);
+    showLogin(err?.message || "Admin failed to start. Refresh the page.");
+  });
+}

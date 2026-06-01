@@ -65,7 +65,10 @@ function needsStatusConfirm(fromStatus, toStatus) {
 
 function showLogin(message = '') {
   adminContent.hidden = true;
+  adminContent.setAttribute('aria-hidden', 'true');
   loginContainer.hidden = false;
+  loginContainer.removeAttribute('aria-hidden');
+  document.body.classList.remove('admin-is-signed-in');
   loginError.textContent = message;
   if (message) {
     loginError.classList.add('is-visible');
@@ -74,13 +77,19 @@ function showLogin(message = '') {
   } else {
     loginError.classList.remove('is-visible');
     loginError.hidden = true;
+    loginError.style.removeProperty('display');
   }
 }
 
 function showAdmin() {
   loginContainer.hidden = true;
+  loginContainer.setAttribute('aria-hidden', 'true');
   adminContent.hidden = false;
-  loginError.style.display = 'none';
+  adminContent.removeAttribute('aria-hidden');
+  document.body.classList.add('admin-is-signed-in');
+  loginError.classList.remove('is-visible');
+  loginError.hidden = true;
+  loginError.textContent = '';
 }
 
 function formatTime(time) {

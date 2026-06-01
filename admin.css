@@ -898,6 +898,46 @@ td strong {
   transition: background-color 99999s ease-out 0s;
 }
 
+.admin-password-wrap {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+
+.admin-password-wrap input {
+  flex: 1;
+  padding-right: 2.75rem;
+}
+
+.admin-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0.35rem;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--admin-muted);
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.admin-password-toggle:hover {
+  color: var(--admin-gold);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.admin-password-toggle:focus-visible {
+  outline: 2px solid var(--admin-gold);
+  outline-offset: 2px;
+}
+
 .admin-login__form .admin-btn--full {
   margin-top: 0.35rem;
   padding: 0.9rem 1rem;

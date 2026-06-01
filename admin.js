@@ -367,7 +367,7 @@ async function loadBookings() {
 }
 
 async function updateStatus(id, status) {
-  const supabase = getSupabase();
+  const supabase = getAdminSupabase();
   const { error } = await supabase.from('bookings').update({ status }).eq('id', id);
   if (error) {
     showToast(`Update failed: ${error.message}`, true);
@@ -476,7 +476,7 @@ function isValidStaffLogin(value) {
 }
 
 async function login(email, password) {
-  const supabase = getSupabase({ auth: { storageKey: 'glam-admin-auth' } });
+  const supabase = getAdminSupabase();
   if (!supabase) {
     showLogin('Supabase is not configured in data.js.');
     return false;
@@ -538,7 +538,7 @@ function resetFilters() {
 }
 
 async function deleteAllBookings() {
-  const supabase = getSupabase();
+  const supabase = getAdminSupabase();
   if (!supabase) throw new Error('Supabase is not configured.');
 
   const { data: rows, error: readError } = await supabase.from('bookings').select('id');
@@ -585,7 +585,7 @@ async function verifyClearPassword(password) {
 
   if (cachedLoginPassword && trimmed === cachedLoginPassword) return true;
 
-  const supabase = getSupabase();
+  const supabase = getAdminSupabase();
   if (!supabase) return false;
 
   const { data: { session } } = await supabase.auth.getSession();
@@ -679,14 +679,32 @@ async function handleClearWithPassword() {
 }
 
 async function logout() {
-  const supabase = getSupabase();
+  const supabase = getAdminSupabase();
   if (supabase) await supabase.auth.signOut();
   cachedLoginPassword = null;
   showLogin();
 }
 
+function bindPasswordToggle() {
+  const input = document.getElementById('adminPassword');
+  const toggle = document.getElementById('toggleAdminPassword');
+  if (!input || !toggle) return;
+
+  toggle.addEventListener('click', () => {
+    const show = input.type === 'password';
+    input.type = show ? 'text' : 'password';
+    toggle.setAttribute('aria-pressed', show ? 'true' : 'false');
+    toggle.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+    const icon = toggle.querySelector('i');
+    if (icon) {
+      icon.className = show ? 'fa-solid fa-eye-slash' : 'fa-regular fa-eye';
+    }
+  });
+}
+
 async function init() {
-  const supabase = getSupabase({ auth: { storageKey: 'glam-admin-auth' } });
+  const supabase = getAdminSupabase();
+  bindPasswordToggle();
 
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();

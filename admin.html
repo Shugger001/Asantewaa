@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="preload" href="images/admin-bg-enterprise.png?v=2" as="image">
-  <link rel="stylesheet" href="admin.css?v=7">
+  <link rel="stylesheet" href="admin.css?v=9">
 </head>
 <body class="admin-page">
 
@@ -157,13 +157,18 @@
         </div>
         <div class="admin-field">
           <label for="adminPassword">Password</label>
-          <input type="password" id="adminPassword" name="staff_password" required autocomplete="off" placeholder="Enter password">
+          <div class="admin-password-wrap">
+            <input type="password" id="adminPassword" name="staff_password" required autocomplete="off" placeholder="Enter password">
+            <button type="button" class="admin-password-toggle" id="toggleAdminPassword" aria-label="Show password" aria-pressed="false">
+              <i class="fa-regular fa-eye" aria-hidden="true"></i>
+            </button>
+          </div>
         </div>
         <button type="submit" class="admin-btn admin-btn--primary admin-btn--full" id="loginBtn">Sign in</button>
       </form>
     </div>
   </div>
 
-  <script type="module" src="admin.js?v=9"></script>
+  <script type="module" src="admin.js?v=10"></script>
 </body>
 </html>

@@ -164,12 +164,40 @@ var SITE = {
         linkText: "Enter Glam Room"
       },
       {
-        id: "visual-editorial",
+        id: "visual-3",
         imageOnly: true,
-        labelLeft: "Editorial",
-        labelRight: "Glam Room",
-        imageUrl: "images/asantewaa-gown-full-bw.png",
+        imageUrl: "images/asantewaa-glam-portrait-bw.png",
+        imagePosition: "center 22%"
+      },
+      {
+        id: "visual-4",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-beaded-gown-bw.png",
+        imagePosition: "center top"
+      },
+      {
+        id: "visual-2",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-kente-bw.png",
+        imagePosition: "center 15%"
+      },
+      {
+        id: "visual-5",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-gown-joy.png",
         imagePosition: "center 20%"
+      },
+      {
+        id: "visual-6",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-gown-full-bw.png",
+        imagePosition: "center center"
+      },
+      {
+        id: "visual-7",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-gown-mirror-bw.png",
+        imagePosition: "center 25%"
       },
       {
         id: "book",
@@ -917,12 +945,40 @@ var SITE2 = {
         linkText: "Enter Glam Room"
       },
       {
-        id: "visual-editorial",
+        id: "visual-3",
         imageOnly: true,
-        labelLeft: "Editorial",
-        labelRight: "Glam Room",
-        imageUrl: "images/asantewaa-gown-full-bw.png",
+        imageUrl: "images/asantewaa-glam-portrait-bw.png",
+        imagePosition: "center 22%"
+      },
+      {
+        id: "visual-4",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-beaded-gown-bw.png",
+        imagePosition: "center top"
+      },
+      {
+        id: "visual-2",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-kente-bw.png",
+        imagePosition: "center 15%"
+      },
+      {
+        id: "visual-5",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-gown-joy.png",
         imagePosition: "center 20%"
+      },
+      {
+        id: "visual-6",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-gown-full-bw.png",
+        imagePosition: "center center"
+      },
+      {
+        id: "visual-7",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-gown-mirror-bw.png",
+        imagePosition: "center 25%"
       },
       {
         id: "book",
@@ -2120,12 +2176,40 @@ var SITE3 = {
         linkText: "Enter Glam Room"
       },
       {
-        id: "visual-editorial",
+        id: "visual-3",
         imageOnly: true,
-        labelLeft: "Editorial",
-        labelRight: "Glam Room",
-        imageUrl: "images/asantewaa-gown-full-bw.png",
+        imageUrl: "images/asantewaa-glam-portrait-bw.png",
+        imagePosition: "center 22%"
+      },
+      {
+        id: "visual-4",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-beaded-gown-bw.png",
+        imagePosition: "center top"
+      },
+      {
+        id: "visual-2",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-kente-bw.png",
+        imagePosition: "center 15%"
+      },
+      {
+        id: "visual-5",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-gown-joy.png",
         imagePosition: "center 20%"
+      },
+      {
+        id: "visual-6",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-gown-full-bw.png",
+        imagePosition: "center center"
+      },
+      {
+        id: "visual-7",
+        imageOnly: true,
+        imageUrl: "images/asantewaa-gown-mirror-bw.png",
+        imagePosition: "center 25%"
       },
       {
         id: "book",

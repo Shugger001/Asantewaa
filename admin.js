@@ -349,7 +349,7 @@ function updateStats(bookings) {
 
 function sortBookings(bookings) {
   const key = document.getElementById('sortBy')?.value || 'date';
-  const dir = document.getElementById('sortDir')?.value || 'desc';
+  const dir = document.getElementById('sortDir')?.value || 'asc';
   const mult = dir === 'asc' ? 1 : -1;
 
   return [...bookings].sort((a, b) => {
@@ -453,8 +453,8 @@ async function loadBookings() {
   const { data, error } = await supabase
     .from('bookings')
     .select('*')
-    .order('booking_date', { ascending: false })
-    .order('booking_time', { ascending: false });
+    .order('booking_date', { ascending: true })
+    .order('booking_time', { ascending: true });
 
   if (error) {
     if (error.message?.includes('JWT') || error.code === 'PGRST301') {
@@ -647,7 +647,7 @@ function resetFilters() {
   const sortBy = document.getElementById('sortBy');
   const sortDir = document.getElementById('sortDir');
   if (sortBy) sortBy.value = 'date';
-  if (sortDir) sortDir.value = 'desc';
+  if (sortDir) sortDir.value = 'asc';
 
   applyQuickFilter('all');
 }

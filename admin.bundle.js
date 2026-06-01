@@ -1584,7 +1584,7 @@ async function loadBookings() {
     showLogin("Supabase is not configured in data.js.");
     return;
   }
-  bookingsBody.innerHTML = '<tr><td colspan="9" class="table-loading">Loading bookings\u2026</td></tr>';
+  bookingsBody.innerHTML = '<tr class="table-loading"><td colspan="9">Loading bookings\u2026</td></tr>';
   emptyState.hidden = true;
   const { data, error } = await supabase.from("bookings").select("*").order("booking_date", { ascending: false }).order("booking_time", { ascending: false });
   if (error) {
@@ -1593,7 +1593,7 @@ async function loadBookings() {
       await supabase.auth.signOut();
       return;
     }
-    bookingsBody.innerHTML = `<tr><td colspan="9" class="table-empty">Could not load bookings: ${escapeHtml(error.message)}</td></tr>`;
+    bookingsBody.innerHTML = `<tr class="table-empty"><td colspan="9">Could not load bookings: ${escapeHtml(error.message)}</td></tr>`;
     return;
   }
   allBookings = data || [];

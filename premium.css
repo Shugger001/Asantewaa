@@ -155,6 +155,10 @@ body.gr-page {
   letter-spacing: 0.24em;
 }
 
+.home-editorial .home-scroll-hint::after {
+  content: none;
+}
+
 @keyframes homeScrollLine {
   0%, 100% { opacity: 0.35; transform: scaleY(0.85); }
   50% { opacity: 0.9; transform: scaleY(1); }

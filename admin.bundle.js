@@ -1448,14 +1448,50 @@ function updateStats(bookings) {
   document.getElementById("confirmedBookings").textContent = bookings.filter((b) => b.status === "confirmed").length;
   document.getElementById("todayBookings").textContent = bookings.filter((b) => b.booking_date === today).length;
 }
+function sortBookings(bookings) {
+  const key = document.getElementById("sortBy")?.value || "date";
+  const dir = document.getElementById("sortDir")?.value || "desc";
+  const mult = dir === "asc" ? 1 : -1;
+  return [...bookings].sort((a, b) => {
+    let cmp = 0;
+    switch (key) {
+      case "time":
+        cmp = (a.booking_time || "").localeCompare(b.booking_time || "");
+        if (cmp === 0) cmp = (a.booking_date || "").localeCompare(b.booking_date || "");
+        break;
+      case "name":
+        cmp = (a.full_name || "").localeCompare(b.full_name || "", void 0, { sensitivity: "base" });
+        break;
+      case "status":
+        cmp = (a.status || "").localeCompare(b.status || "");
+        break;
+      case "service":
+        cmp = (a.service || "").localeCompare(b.service || "", void 0, { sensitivity: "base" });
+        break;
+      case "deposit":
+        cmp = (a.payment_status || "").localeCompare(b.payment_status || "");
+        break;
+      case "created":
+        cmp = (a.created_at || "").localeCompare(b.created_at || "");
+        break;
+      case "date":
+      default:
+        cmp = (a.booking_date || "").localeCompare(b.booking_date || "");
+        if (cmp === 0) cmp = (a.booking_time || "").localeCompare(b.booking_time || "");
+        break;
+    }
+    return cmp * mult;
+  });
+}
 function renderBookings(bookings) {
-  filteredBookings = bookings;
-  emptyState.hidden = bookings.length > 0;
-  if (!bookings.length) {
+  const sorted = sortBookings(bookings);
+  filteredBookings = sorted;
+  emptyState.hidden = sorted.length > 0;
+  if (!sorted.length) {
     bookingsBody.innerHTML = '<tr><td colspan="9" class="table-empty">No bookings found</td></tr>';
     return;
   }
-  bookingsBody.innerHTML = bookings.map((b) => {
+  bookingsBody.innerHTML = sorted.map((b) => {
     const location = b.location || b.notes?.match(/\[Location: ([^\]]+)\]/)?.[1] || "N/A";
     return `
         <tr data-id="${b.id}">
@@ -1658,6 +1694,10 @@ function resetFilters() {
   if (phoneFilter) {
     phoneFilter.value = "";
   }
+  const sortBy = document.getElementById("sortBy");
+  const sortDir = document.getElementById("sortDir");
+  if (sortBy) sortBy.value = "date";
+  if (sortDir) sortDir.value = "desc";
   applyQuickFilter("all");
 }
 async function deleteAllBookings() {

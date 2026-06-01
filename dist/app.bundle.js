@@ -371,24 +371,6 @@ var SITE = {
         title: "CUSTOM WIG STYLING & MAINTENANCE",
         descriptor: "Bespoke shaping and care. Built for your identity.",
         serviceId: "hair-reset"
-      },
-      {
-        number: "03",
-        title: "PRECISION HAIR COLORING & BLENDING",
-        descriptor: "Color that looks like it was born that way.",
-        serviceId: "color-highlights"
-      },
-      {
-        number: "04",
-        title: "DEEP TREATMENTS & HAIR RESTORATION",
-        descriptor: "Repair. Restore. Revive. Results that speak.",
-        serviceId: "natural-care"
-      },
-      {
-        number: "05",
-        title: "EDITORIAL & BRIDAL GLAM",
-        descriptor: "For the moments that define you. No second takes.",
-        serviceId: "bridal-glam"
       }
     ]
   },
@@ -504,53 +486,6 @@ var SITE = {
         { id: "hip-length", name: "Hip Length", description: "Braiding service to hip length. Hair not included.", price: "GH\u20B5 250", duration: "5 to 6 hrs" },
         { id: "butt-length", name: "Butt Length", description: "Braiding service to butt length. Hair not included.", price: "GH\u20B5 300", duration: "6 to 7 hrs" },
         { id: "under-butt", name: "Under Butt", description: "Braiding service past butt length. Hair not included.", price: "GH\u20B5 400", duration: "7 to 8 hrs", imageUrl: "images/glam-braids-portrait.png" }
-      ]
-    },
-    {
-      id: "natural-care",
-      name: "Natural Hair Care",
-      description: "Deep conditioning, trims, and treatments that love your natural texture back to life.",
-      price: "From GH\u20B5 100",
-      duration: "1 to 2 hrs",
-      icon: "fa-solid fa-leaf",
-      badge: null,
-      styles: [
-        { id: "deep-condition", name: "Deep Conditioning", description: "Intensive moisture treatment for dry, tired hair.", price: "GH\u20B5 100", duration: "1 hr" },
-        { id: "trim-shape", name: "Trim & Shape", description: "Health trim to keep your ends fresh.", price: "GH\u20B5 80", duration: "45 min" },
-        { id: "steam-treatment", name: "Steam Treatment", description: "Steam-assisted hydration for max absorption.", price: "GH\u20B5 130", duration: "1 to 1.5 hrs" },
-        { id: "protein-treatment", name: "Protein Treatment", description: "Strengthen weak or over-processed strands.", price: "GH\u20B5 140", duration: "1.5 hrs" },
-        { id: "wash-go-style", name: "Wash & Go Style", description: "Define and set your natural curl pattern.", price: "GH\u20B5 120", duration: "1 to 2 hrs" }
-      ]
-    },
-    {
-      id: "color-highlights",
-      name: "Color & Highlights",
-      description: "Bold colour, subtle highlights, or a full transformation. Let's make you unforgettable.",
-      price: "From GH\u20B5 250",
-      duration: "3 to 4 hrs",
-      icon: "fa-solid fa-palette",
-      badge: null,
-      styles: [
-        { id: "full-color", name: "Full Color", description: "All-over colour transformation.", price: "From GH\u20B5 350", duration: "3 to 4 hrs", imageUrl: "images/glam-red-studio.png" },
-        { id: "highlights", name: "Highlights", description: "Face-framing or full-head highlights.", price: "From GH\u20B5 280", duration: "3 hrs" },
-        { id: "ombre-balayage", name: "Ombr\xE9 / Balayage", description: "Gradual colour melt, subtle or bold.", price: "From GH\u20B5 400", duration: "4 to 5 hrs" },
-        { id: "root-touchup", name: "Root Touch-up", description: "Refresh grown-out roots to match your colour.", price: "GH\u20B5 250", duration: "2 hrs" }
-      ]
-    },
-    {
-      id: "bridal-glam",
-      name: "Bridal Glam",
-      description: "Your big day deserves a crown that stops the room. Bridal packages with all the extras.",
-      price: "From GH\u20B5 500",
-      duration: "Full day",
-      icon: "fa-solid fa-gem",
-      badge: "Premium",
-      styles: [
-        { id: "bridal-hair-makeup", name: "Bridal Hair & Makeup", description: "Full bridal glam: hair, makeup, and touch-ups.", price: "From GH\u20B5 800", duration: "Full day", imageUrl: "images/glam-red-indoor.png" },
-        { id: "bridal-hair-only", name: "Bridal Hair Only", description: "Wedding-day hairstyle with trial session.", price: "From GH\u20B5 500", duration: "4 to 6 hrs" },
-        { id: "bridesmaid-package", name: "Bridesmaid Package", description: "Coordinated looks for the bridal party.", price: "From GH\u20B5 350/person", duration: "2 to 3 hrs each" },
-        { id: "engagement-look", name: "Engagement Look", description: "Camera-ready hair for your engagement shoot.", price: "From GH\u20B5 400", duration: "3 hrs", imageUrl: "images/glam-red-celebration.png" },
-        { id: "traditional-ceremony", name: "Traditional Ceremony Style", description: "Styled for kente, white, or traditional wedding events.", price: "From GH\u20B5 450", duration: "3 to 4 hrs" }
       ]
     }
   ],
@@ -1164,24 +1099,6 @@ var SITE2 = {
         title: "CUSTOM WIG STYLING & MAINTENANCE",
         descriptor: "Bespoke shaping and care. Built for your identity.",
         serviceId: "hair-reset"
-      },
-      {
-        number: "03",
-        title: "PRECISION HAIR COLORING & BLENDING",
-        descriptor: "Color that looks like it was born that way.",
-        serviceId: "color-highlights"
-      },
-      {
-        number: "04",
-        title: "DEEP TREATMENTS & HAIR RESTORATION",
-        descriptor: "Repair. Restore. Revive. Results that speak.",
-        serviceId: "natural-care"
-      },
-      {
-        number: "05",
-        title: "EDITORIAL & BRIDAL GLAM",
-        descriptor: "For the moments that define you. No second takes.",
-        serviceId: "bridal-glam"
       }
     ]
   },
@@ -1297,53 +1214,6 @@ var SITE2 = {
         { id: "hip-length", name: "Hip Length", description: "Braiding service to hip length. Hair not included.", price: "GH\u20B5 250", duration: "5 to 6 hrs" },
         { id: "butt-length", name: "Butt Length", description: "Braiding service to butt length. Hair not included.", price: "GH\u20B5 300", duration: "6 to 7 hrs" },
         { id: "under-butt", name: "Under Butt", description: "Braiding service past butt length. Hair not included.", price: "GH\u20B5 400", duration: "7 to 8 hrs", imageUrl: "images/glam-braids-portrait.png" }
-      ]
-    },
-    {
-      id: "natural-care",
-      name: "Natural Hair Care",
-      description: "Deep conditioning, trims, and treatments that love your natural texture back to life.",
-      price: "From GH\u20B5 100",
-      duration: "1 to 2 hrs",
-      icon: "fa-solid fa-leaf",
-      badge: null,
-      styles: [
-        { id: "deep-condition", name: "Deep Conditioning", description: "Intensive moisture treatment for dry, tired hair.", price: "GH\u20B5 100", duration: "1 hr" },
-        { id: "trim-shape", name: "Trim & Shape", description: "Health trim to keep your ends fresh.", price: "GH\u20B5 80", duration: "45 min" },
-        { id: "steam-treatment", name: "Steam Treatment", description: "Steam-assisted hydration for max absorption.", price: "GH\u20B5 130", duration: "1 to 1.5 hrs" },
-        { id: "protein-treatment", name: "Protein Treatment", description: "Strengthen weak or over-processed strands.", price: "GH\u20B5 140", duration: "1.5 hrs" },
-        { id: "wash-go-style", name: "Wash & Go Style", description: "Define and set your natural curl pattern.", price: "GH\u20B5 120", duration: "1 to 2 hrs" }
-      ]
-    },
-    {
-      id: "color-highlights",
-      name: "Color & Highlights",
-      description: "Bold colour, subtle highlights, or a full transformation. Let's make you unforgettable.",
-      price: "From GH\u20B5 250",
-      duration: "3 to 4 hrs",
-      icon: "fa-solid fa-palette",
-      badge: null,
-      styles: [
-        { id: "full-color", name: "Full Color", description: "All-over colour transformation.", price: "From GH\u20B5 350", duration: "3 to 4 hrs", imageUrl: "images/glam-red-studio.png" },
-        { id: "highlights", name: "Highlights", description: "Face-framing or full-head highlights.", price: "From GH\u20B5 280", duration: "3 hrs" },
-        { id: "ombre-balayage", name: "Ombr\xE9 / Balayage", description: "Gradual colour melt, subtle or bold.", price: "From GH\u20B5 400", duration: "4 to 5 hrs" },
-        { id: "root-touchup", name: "Root Touch-up", description: "Refresh grown-out roots to match your colour.", price: "GH\u20B5 250", duration: "2 hrs" }
-      ]
-    },
-    {
-      id: "bridal-glam",
-      name: "Bridal Glam",
-      description: "Your big day deserves a crown that stops the room. Bridal packages with all the extras.",
-      price: "From GH\u20B5 500",
-      duration: "Full day",
-      icon: "fa-solid fa-gem",
-      badge: "Premium",
-      styles: [
-        { id: "bridal-hair-makeup", name: "Bridal Hair & Makeup", description: "Full bridal glam: hair, makeup, and touch-ups.", price: "From GH\u20B5 800", duration: "Full day", imageUrl: "images/glam-red-indoor.png" },
-        { id: "bridal-hair-only", name: "Bridal Hair Only", description: "Wedding-day hairstyle with trial session.", price: "From GH\u20B5 500", duration: "4 to 6 hrs" },
-        { id: "bridesmaid-package", name: "Bridesmaid Package", description: "Coordinated looks for the bridal party.", price: "From GH\u20B5 350/person", duration: "2 to 3 hrs each" },
-        { id: "engagement-look", name: "Engagement Look", description: "Camera-ready hair for your engagement shoot.", price: "From GH\u20B5 400", duration: "3 hrs", imageUrl: "images/glam-red-celebration.png" },
-        { id: "traditional-ceremony", name: "Traditional Ceremony Style", description: "Styled for kente, white, or traditional wedding events.", price: "From GH\u20B5 450", duration: "3 to 4 hrs" }
       ]
     }
   ],
@@ -2407,24 +2277,6 @@ var SITE3 = {
         title: "CUSTOM WIG STYLING & MAINTENANCE",
         descriptor: "Bespoke shaping and care. Built for your identity.",
         serviceId: "hair-reset"
-      },
-      {
-        number: "03",
-        title: "PRECISION HAIR COLORING & BLENDING",
-        descriptor: "Color that looks like it was born that way.",
-        serviceId: "color-highlights"
-      },
-      {
-        number: "04",
-        title: "DEEP TREATMENTS & HAIR RESTORATION",
-        descriptor: "Repair. Restore. Revive. Results that speak.",
-        serviceId: "natural-care"
-      },
-      {
-        number: "05",
-        title: "EDITORIAL & BRIDAL GLAM",
-        descriptor: "For the moments that define you. No second takes.",
-        serviceId: "bridal-glam"
       }
     ]
   },
@@ -2540,53 +2392,6 @@ var SITE3 = {
         { id: "hip-length", name: "Hip Length", description: "Braiding service to hip length. Hair not included.", price: "GH\u20B5 250", duration: "5 to 6 hrs" },
         { id: "butt-length", name: "Butt Length", description: "Braiding service to butt length. Hair not included.", price: "GH\u20B5 300", duration: "6 to 7 hrs" },
         { id: "under-butt", name: "Under Butt", description: "Braiding service past butt length. Hair not included.", price: "GH\u20B5 400", duration: "7 to 8 hrs", imageUrl: "images/glam-braids-portrait.png" }
-      ]
-    },
-    {
-      id: "natural-care",
-      name: "Natural Hair Care",
-      description: "Deep conditioning, trims, and treatments that love your natural texture back to life.",
-      price: "From GH\u20B5 100",
-      duration: "1 to 2 hrs",
-      icon: "fa-solid fa-leaf",
-      badge: null,
-      styles: [
-        { id: "deep-condition", name: "Deep Conditioning", description: "Intensive moisture treatment for dry, tired hair.", price: "GH\u20B5 100", duration: "1 hr" },
-        { id: "trim-shape", name: "Trim & Shape", description: "Health trim to keep your ends fresh.", price: "GH\u20B5 80", duration: "45 min" },
-        { id: "steam-treatment", name: "Steam Treatment", description: "Steam-assisted hydration for max absorption.", price: "GH\u20B5 130", duration: "1 to 1.5 hrs" },
-        { id: "protein-treatment", name: "Protein Treatment", description: "Strengthen weak or over-processed strands.", price: "GH\u20B5 140", duration: "1.5 hrs" },
-        { id: "wash-go-style", name: "Wash & Go Style", description: "Define and set your natural curl pattern.", price: "GH\u20B5 120", duration: "1 to 2 hrs" }
-      ]
-    },
-    {
-      id: "color-highlights",
-      name: "Color & Highlights",
-      description: "Bold colour, subtle highlights, or a full transformation. Let's make you unforgettable.",
-      price: "From GH\u20B5 250",
-      duration: "3 to 4 hrs",
-      icon: "fa-solid fa-palette",
-      badge: null,
-      styles: [
-        { id: "full-color", name: "Full Color", description: "All-over colour transformation.", price: "From GH\u20B5 350", duration: "3 to 4 hrs", imageUrl: "images/glam-red-studio.png" },
-        { id: "highlights", name: "Highlights", description: "Face-framing or full-head highlights.", price: "From GH\u20B5 280", duration: "3 hrs" },
-        { id: "ombre-balayage", name: "Ombr\xE9 / Balayage", description: "Gradual colour melt, subtle or bold.", price: "From GH\u20B5 400", duration: "4 to 5 hrs" },
-        { id: "root-touchup", name: "Root Touch-up", description: "Refresh grown-out roots to match your colour.", price: "GH\u20B5 250", duration: "2 hrs" }
-      ]
-    },
-    {
-      id: "bridal-glam",
-      name: "Bridal Glam",
-      description: "Your big day deserves a crown that stops the room. Bridal packages with all the extras.",
-      price: "From GH\u20B5 500",
-      duration: "Full day",
-      icon: "fa-solid fa-gem",
-      badge: "Premium",
-      styles: [
-        { id: "bridal-hair-makeup", name: "Bridal Hair & Makeup", description: "Full bridal glam: hair, makeup, and touch-ups.", price: "From GH\u20B5 800", duration: "Full day", imageUrl: "images/glam-red-indoor.png" },
-        { id: "bridal-hair-only", name: "Bridal Hair Only", description: "Wedding-day hairstyle with trial session.", price: "From GH\u20B5 500", duration: "4 to 6 hrs" },
-        { id: "bridesmaid-package", name: "Bridesmaid Package", description: "Coordinated looks for the bridal party.", price: "From GH\u20B5 350/person", duration: "2 to 3 hrs each" },
-        { id: "engagement-look", name: "Engagement Look", description: "Camera-ready hair for your engagement shoot.", price: "From GH\u20B5 400", duration: "3 hrs", imageUrl: "images/glam-red-celebration.png" },
-        { id: "traditional-ceremony", name: "Traditional Ceremony Style", description: "Styled for kente, white, or traditional wedding events.", price: "From GH\u20B5 450", duration: "3 to 4 hrs" }
       ]
     }
   ],

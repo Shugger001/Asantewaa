@@ -60,7 +60,17 @@ body.gr-page {
 }
 
 .home-panel.in-view .home-panel-bg {
-  --panel-scale: 1.04;
+  --panel-scale: 1.03;
+}
+
+.home-editorial .home-scroll {
+  scroll-snap-type: y proximity;
+}
+
+@media (min-width: 1024px) {
+  .home-editorial .home-scroll {
+    scroll-snap-type: x proximity;
+  }
 }
 
 .home-panel-label {

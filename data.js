@@ -590,6 +590,9 @@ export const SITE = {
       "From everyday refinement to life's defining moments, our stylists create looks that feel effortless, elevated, and uniquely yours.",
     ],
     hours: "Mon to Sat: 9am to 6pm · Sun: Closed",
+    /** Official Glam Room WhatsApp — staff must use this line/phone when messaging clients from admin */
+    shopWhatsApp: "+233247743593",
+    shopName: "Glam Room by Asantewaaa",
   },
 
   booking: {
@@ -636,12 +639,7 @@ export const SITE = {
   },
 
   // Admin dashboard — admin.html (create user via supabase/create-admin-lesley.sql)
-  admin: {
-    /** Official Glam Room line — staff phone must be logged into this WhatsApp to send client texts */
-    shopWhatsapp: "+233247743593",
-    shopWhatsappLabel: "Glam Room WhatsApp",
-    clientMessagePrefix: "Glam Room by Asantewaa",
-  },
+  admin: {},
 
   findBooking: {
     phonePlaceholder: "024 XXX XXXX or +233 XX XXX XXXX",

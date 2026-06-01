@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="preload" href="images/admin-bg-enterprise.png?v=2" as="image">
-  <link rel="stylesheet" href="admin.css?v=11">
+  <link rel="stylesheet" href="admin.css?v=12">
 </head>
 <body class="admin-page">
 
@@ -23,10 +23,12 @@
           <p class="admin-eyebrow">Glam Room · Internal</p>
           <h1>Bookings</h1>
           <p class="admin-header__sub">Manage reservations, deposits, and chair schedule.</p>
-          <p class="admin-shop-wa" id="adminShopWaLine" hidden></p>
         </div>
       </div>
       <div class="admin-header__actions">
+        <a href="#" class="admin-btn admin-btn--outline" id="shopWhatsAppLink" target="_blank" rel="noopener noreferrer" title="Open official Glam Room WhatsApp">
+          <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Shop line
+        </a>
         <button type="button" class="admin-btn admin-btn--ghost" id="refreshBtn">
           <i class="fa-solid fa-rotate" aria-hidden="true"></i> Refresh
         </button>
@@ -118,6 +120,7 @@
           <button type="button" class="admin-btn admin-btn--ghost" id="resetFilterBtn">Reset</button>
         </div>
       </div>
+      <p class="admin-wa-hint" id="adminWaHint"></p>
       <div class="admin-filters__toolbar">
         <button type="button" class="admin-btn admin-btn--outline" id="exportBtn">
           <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i> Export CSV
@@ -189,6 +192,6 @@
     </div>
   </div>
 
-  <script type="module" src="admin.bundle.js?v=3"></script>
+  <script type="module" src="admin.bundle.js?v=4"></script>
 </body>
 </html>

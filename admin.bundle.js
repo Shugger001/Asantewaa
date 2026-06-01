@@ -489,7 +489,10 @@ var SITE = {
       "Glam Room is a destination for modern beauty. Designed for women who value excellence, every service is delivered with precision, care, and an uncompromising attention to detail.",
       "From everyday refinement to life's defining moments, our stylists create looks that feel effortless, elevated, and uniquely yours."
     ],
-    hours: "Mon to Sat: 9am to 6pm \xB7 Sun: Closed"
+    hours: "Mon to Sat: 9am to 6pm \xB7 Sun: Closed",
+    /** Official Glam Room WhatsApp — staff must use this line/phone when messaging clients from admin */
+    shopWhatsApp: "+233247743593",
+    shopName: "Glam Room by Asantewaaa"
   },
   booking: {
     // Supabase — paste credentials from Project Settings → API
@@ -526,12 +529,7 @@ var SITE = {
     ]
   },
   // Admin dashboard — admin.html (create user via supabase/create-admin-lesley.sql)
-  admin: {
-    /** Official Glam Room line — staff phone must be logged into this WhatsApp to send client texts */
-    shopWhatsapp: "+233247743593",
-    shopWhatsappLabel: "Glam Room WhatsApp",
-    clientMessagePrefix: "Glam Room by Asantewaa"
-  },
+  admin: {},
   findBooking: {
     phonePlaceholder: "024 XXX XXXX or +233 XX XXX XXXX",
     namePlaceholder: "Last 4 letters of your name",
@@ -1093,7 +1091,10 @@ var SITE2 = {
       "Glam Room is a destination for modern beauty. Designed for women who value excellence, every service is delivered with precision, care, and an uncompromising attention to detail.",
       "From everyday refinement to life's defining moments, our stylists create looks that feel effortless, elevated, and uniquely yours."
     ],
-    hours: "Mon to Sat: 9am to 6pm \xB7 Sun: Closed"
+    hours: "Mon to Sat: 9am to 6pm \xB7 Sun: Closed",
+    /** Official Glam Room WhatsApp — staff must use this line/phone when messaging clients from admin */
+    shopWhatsApp: "+233247743593",
+    shopName: "Glam Room by Asantewaaa"
   },
   booking: {
     // Supabase — paste credentials from Project Settings → API
@@ -1130,12 +1131,7 @@ var SITE2 = {
     ]
   },
   // Admin dashboard — admin.html (create user via supabase/create-admin-lesley.sql)
-  admin: {
-    /** Official Glam Room line — staff phone must be logged into this WhatsApp to send client texts */
-    shopWhatsapp: "+233247743593",
-    shopWhatsappLabel: "Glam Room WhatsApp",
-    clientMessagePrefix: "Glam Room by Asantewaa"
-  },
+  admin: {},
   findBooking: {
     phonePlaceholder: "024 XXX XXXX or +233 XX XXX XXXX",
     namePlaceholder: "Last 4 letters of your name",
@@ -1309,6 +1305,55 @@ function formatDate(dateStr) {
     month: "short",
     day: "numeric"
   });
+}
+function getShopWhatsAppNumber() {
+  return SITE.business?.shopWhatsApp || SITE.whatsapp || "";
+}
+function normalizeWaDigits(phone) {
+  let digits = String(phone || "").replace(/\D/g, "");
+  if (digits.startsWith("0")) digits = `233${digits.slice(1)}`;
+  else if (!digits.startsWith("233") && digits.length === 9) digits = `233${digits}`;
+  return digits;
+}
+function buildClientWhatsAppMessage(booking) {
+  const shopName = SITE.business?.shopName || SITE.brand || "Glam Room by Asantewaa";
+  const firstName = (booking.full_name || "").trim().split(/\s+/)[0] || "there";
+  const location = booking.location || booking.notes?.match(/\[Location: ([^\]]+)\]/)?.[1] || "Glam Room";
+  const date = formatDate(booking.booking_date);
+  const time = formatTime(booking.booking_time);
+  const service = booking.service || "your appointment";
+  return `Hi ${firstName}! \u{1F451}
+
+This is *${shopName}* (${location}).
+
+Your booking:
+\u{1F4C5} ${date} at ${time}
+\u{1F487} ${service}
+
+Please reply on our official Glam Room WhatsApp if you have any questions. See you soon!`;
+}
+function whatsAppClientHref(booking) {
+  const digits = normalizeWaDigits(booking.phone);
+  const text = encodeURIComponent(buildClientWhatsAppMessage(booking));
+  return `https://wa.me/${digits}?text=${text}`;
+}
+function getShopWhatsAppHref() {
+  const digits = normalizeWaDigits(getShopWhatsAppNumber());
+  const text = encodeURIComponent(
+    SITE.whatsappMessage || "Hi Glam Room! I need help with a booking."
+  );
+  return `https://wa.me/${digits}?text=${text}`;
+}
+function setupShopWhatsAppUi() {
+  const shopLink = document.getElementById("shopWhatsAppLink");
+  const hint = document.getElementById("adminWaHint");
+  const shopDisplay = getShopWhatsAppNumber();
+  if (shopLink) {
+    shopLink.href = getShopWhatsAppHref();
+  }
+  if (hint && shopDisplay) {
+    hint.innerHTML = `<i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Client messages must be sent from the <strong>official Glam Room line</strong> (${escapeHtml(shopDisplay)}). Use the green button per row \u2014 open WhatsApp on the shop phone.`;
+  }
 }
 function statusBadge(status, type = "status") {
   const safe = (status || "pending").toLowerCase().replace(/\s+/g, "-");
@@ -1504,14 +1549,14 @@ function renderBookings(bookings) {
           <td>${formatDate(b.booking_date)}</td>
           <td>${formatTime(b.booking_time)}</td>
           <td><strong>${escapeHtml(b.full_name)}</strong></td>
-          <td><a class="phone-link" href="${whatsAppHref(b.phone)}" target="_blank" rel="noopener noreferrer">${escapeHtml(b.phone)}</a></td>
+          <td><a class="phone-link" href="${whatsAppClientHref(b)}" target="_blank" rel="noopener noreferrer">${escapeHtml(b.phone)}</a></td>
           <td>${escapeHtml(location)}</td>
           <td class="service-cell">${escapeHtml(b.service)}</td>
           <td>${statusSelectHtml(b)}</td>
           <td>${statusBadge(b.payment_status || "pending", "payment")}</td>
           <td>
             <div class="row-actions">
-              <a class="action-pill action-pill--wa" href="${whatsAppHref(b.phone)}" target="_blank" rel="noopener noreferrer" title="WhatsApp client" aria-label="WhatsApp ${escapeHtml(b.full_name)}"><i class="fa-brands fa-whatsapp"></i></a>
+              <a class="action-pill action-pill--wa" href="${whatsAppClientHref(b)}" target="_blank" rel="noopener noreferrer" title="Message client from Glam Room WhatsApp (use shop phone)" aria-label="WhatsApp ${escapeHtml(b.full_name)} from Glam Room"><i class="fa-brands fa-whatsapp"></i></a>
             </div>
           </td>
         </tr>
@@ -1681,6 +1726,7 @@ async function login(email, password) {
   }
   cachedLoginPassword = password;
   showAdmin();
+  setupShopWhatsAppUi();
   await loadBookings();
   return true;
 }
@@ -1911,6 +1957,7 @@ async function init() {
   }
   if (session) {
     showAdmin();
+    setupShopWhatsAppUi();
     await loadBookings();
   } else {
     showLogin();

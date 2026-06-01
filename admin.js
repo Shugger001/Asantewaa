@@ -110,49 +110,63 @@ function formatDate(dateStr) {
   });
 }
 
-function normalizeGhanaWhatsAppDigits(phone) {
+function getShopWhatsAppNumber() {
+  return SITE.business?.shopWhatsApp || SITE.whatsapp || '';
+}
+
+function normalizeWaDigits(phone) {
   let digits = String(phone || '').replace(/\D/g, '');
-  if (!digits) return '';
   if (digits.startsWith('0')) digits = `233${digits.slice(1)}`;
-  if (!digits.startsWith('233')) digits = `233${digits}`;
+  else if (!digits.startsWith('233') && digits.length === 9) digits = `233${digits}`;
   return digits;
 }
 
-function getShopWhatsAppConfig() {
-  const admin = SITE.admin || {};
-  const number = admin.shopWhatsapp || SITE.whatsapp || '';
-  const digits = normalizeGhanaWhatsAppDigits(number);
-  return {
-    digits,
-    display: admin.shopWhatsapp || SITE.whatsapp || '',
-    label: admin.shopWhatsappLabel || 'Glam Room WhatsApp',
-    prefix: admin.clientMessagePrefix || 'Glam Room by Asantewaa',
-  };
+function buildClientWhatsAppMessage(booking) {
+  const shopName = SITE.business?.shopName || SITE.brand || 'Glam Room by Asantewaa';
+  const firstName = (booking.full_name || '').trim().split(/\s+/)[0] || 'there';
+  const location =
+    booking.location || booking.notes?.match(/\[Location: ([^\]]+)\]/)?.[1] || 'Glam Room';
+  const date = formatDate(booking.booking_date);
+  const time = formatTime(booking.booking_time);
+  const service = booking.service || 'your appointment';
+
+  return (
+    `Hi ${firstName}! 👑\n\n` +
+    `This is *${shopName}* (${location}).\n\n` +
+    `Your booking:\n` +
+    `📅 ${date} at ${time}\n` +
+    `💇 ${service}\n\n` +
+    `Please reply on our official Glam Room WhatsApp if you have any questions. See you soon!`
+  );
 }
 
 function whatsAppClientHref(booking) {
-  const clientDigits = normalizeGhanaWhatsAppDigits(booking.phone);
-  if (!clientDigits) return '#';
+  const digits = normalizeWaDigits(booking.phone);
+  const text = encodeURIComponent(buildClientWhatsAppMessage(booking));
+  return `https://wa.me/${digits}?text=${text}`;
+}
 
-  const shop = getShopWhatsAppConfig();
-  const name = booking.full_name || 'there';
-  const date = booking.booking_date ? formatDate(booking.booking_date) : 'TBC';
-  const time = booking.booking_time ? formatTime(booking.booking_time) : 'TBC';
-  const service = booking.service || 'your appointment';
-  const location =
-    booking.location || booking.notes?.match(/\[Location: ([^\]]+)\]/)?.[1] || 'Glam Room';
-  const status = (booking.status || 'pending').replace(/^\w/, (c) => c.toUpperCase());
+function getShopWhatsAppHref() {
+  const digits = normalizeWaDigits(getShopWhatsAppNumber());
+  const text = encodeURIComponent(
+    SITE.whatsappMessage || 'Hi Glam Room! I need help with a booking.'
+  );
+  return `https://wa.me/${digits}?text=${text}`;
+}
 
-  const message =
-    `Hi ${name}, ${shop.prefix} here! 👑\n\n` +
-    `Regarding your booking:\n` +
-    `• Service: ${service}\n` +
-    `• When: ${date} at ${time}\n` +
-    `• Where: ${location}\n` +
-    `• Status: ${status}\n\n` +
-    `This message is from our salon line (${shop.display}). Reply here with any questions — see you soon!`;
+function setupShopWhatsAppUi() {
+  const shopLink = document.getElementById('shopWhatsAppLink');
+  const hint = document.getElementById('adminWaHint');
+  const shopDisplay = getShopWhatsAppNumber();
 
-  return `https://wa.me/${clientDigits}?text=${encodeURIComponent(message)}`;
+  if (shopLink) {
+    shopLink.href = getShopWhatsAppHref();
+  }
+
+  if (hint && shopDisplay) {
+    hint.innerHTML =
+      `<i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Client messages must be sent from the <strong>official Glam Room line</strong> (${escapeHtml(shopDisplay)}). Use the green button per row — open WhatsApp on the shop phone.`;
+  }
 }
 
 function statusBadge(status, type = 'status') {
@@ -391,14 +405,14 @@ function renderBookings(bookings) {
           <td>${formatDate(b.booking_date)}</td>
           <td>${formatTime(b.booking_time)}</td>
           <td><strong>${escapeHtml(b.full_name)}</strong></td>
-          <td><a class="phone-link" href="${whatsAppHref(b.phone)}" target="_blank" rel="noopener noreferrer">${escapeHtml(b.phone)}</a></td>
+          <td><a class="phone-link" href="${whatsAppClientHref(b)}" target="_blank" rel="noopener noreferrer">${escapeHtml(b.phone)}</a></td>
           <td>${escapeHtml(location)}</td>
           <td class="service-cell">${escapeHtml(b.service)}</td>
           <td>${statusSelectHtml(b)}</td>
           <td>${statusBadge(b.payment_status || 'pending', 'payment')}</td>
           <td>
             <div class="row-actions">
-              <a class="action-pill action-pill--wa" href="${whatsAppHref(b.phone)}" target="_blank" rel="noopener noreferrer" title="WhatsApp client" aria-label="WhatsApp ${escapeHtml(b.full_name)}"><i class="fa-brands fa-whatsapp"></i></a>
+              <a class="action-pill action-pill--wa" href="${whatsAppClientHref(b)}" target="_blank" rel="noopener noreferrer" title="Message client from Glam Room WhatsApp (use shop phone)" aria-label="WhatsApp ${escapeHtml(b.full_name)} from Glam Room"><i class="fa-brands fa-whatsapp"></i></a>
             </div>
           </td>
         </tr>
@@ -605,6 +619,7 @@ async function login(email, password) {
 
   cachedLoginPassword = password;
   showAdmin();
+  setupShopWhatsAppUi();
   await loadBookings();
   return true;
 }
@@ -879,6 +894,7 @@ async function init() {
   }
   if (session) {
     showAdmin();
+    setupShopWhatsAppUi();
     await loadBookings();
   } else {
     showLogin();

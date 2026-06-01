@@ -1199,6 +1199,13 @@ function initHomeScrollEffects() {
     });
 
     dots?.forEach((dot, i) => dot.classList.toggle('active', i === activeIndex));
+
+    const hintText = hint?.querySelector('.home-scroll-hint__text');
+    if (hintText && panels.length) {
+      const current = String(activeIndex + 1).padStart(2, '0');
+      const total = String(panels.length).padStart(2, '0');
+      hintText.textContent = `${current} / ${total}`;
+    }
   }
 
   if (!scrollEl) return;

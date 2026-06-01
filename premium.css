@@ -93,9 +93,119 @@ body.gr-page {
   border-bottom-color: var(--premium-gold);
 }
 
-.home-scroll-hint {
-  letter-spacing: 0.22em;
-  color: rgba(255, 255, 255, 0.5);
+/* — Homepage scroll chrome — */
+.home-editorial .home-panel-label::before,
+.home-editorial .home-panel-label::after {
+  content: '';
+  width: clamp(1.5rem, 5vw, 2.75rem);
+  height: 1px;
+  background: var(--premium-gold-soft);
+  font-size: 0;
+  opacity: 1;
+}
+
+.home-editorial .home-panel-label:empty {
+  display: none;
+}
+
+.home-editorial .home-panel-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.62);
+  margin-top: 1rem;
+}
+
+.home-editorial .home-panel-overlay {
+  background:
+    radial-gradient(ellipse 130% 90% at 50% 100%, rgba(0, 0, 0, 0.78) 0%, transparent 58%),
+    radial-gradient(ellipse 85% 70% at 50% 50%, transparent 35%, rgba(0, 0, 0, 0.32) 100%);
+}
+
+.home-editorial .home-panel--visual .home-panel-overlay {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, transparent 35%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.55) 0%, transparent 45%),
+    radial-gradient(ellipse 90% 80% at 50% 50%, transparent 30%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+.home-editorial .home-scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.55);
+  animation: none;
+}
+
+.home-editorial .home-scroll-hint__line {
+  display: block;
+  width: 1px;
+  height: 2.25rem;
+  background: linear-gradient(180deg, transparent, var(--premium-gold-soft));
+  animation: homeScrollLine 2.8s ease-in-out infinite;
+}
+
+.home-editorial .home-scroll-hint__text {
+  font-size: 0.52rem;
+  letter-spacing: 0.24em;
+}
+
+@keyframes homeScrollLine {
+  0%, 100% { opacity: 0.35; transform: scaleY(0.85); }
+  50% { opacity: 0.9; transform: scaleY(1); }
+}
+
+.home-editorial .home-bottombar {
+  mix-blend-mode: normal;
+  justify-content: center;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.72) 100%);
+  padding-top: 2.5rem;
+}
+
+.home-editorial .home-bottombar span,
+.home-editorial .home-bottombar a {
+  opacity: 0.45;
+}
+
+body.home-editorial.home-horizontal::before,
+body.home-editorial.home-horizontal::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: min(8vw, 5rem);
+  z-index: 120;
+  pointer-events: none;
+}
+
+body.home-editorial.home-horizontal::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
+}
+
+body.home-editorial.home-horizontal::after {
+  right: 0;
+  background: linear-gradient(270deg, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
+}
+
+.home-editorial .home-scroll::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.home-menu-links a:hover {
+  padding-left: 0;
+  opacity: 0.5;
 }
 
 .home-scroll-dot {
@@ -370,8 +480,13 @@ body.editorial-theme .service-price {
 }
 
 .home-hero-brand .home-intro-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(0.85rem, 2vw, 1.05rem);
   color: var(--premium-gold-soft);
-  letter-spacing: 0.28em;
+  letter-spacing: 0.2em;
+  text-transform: none;
 }
 
 /* — Enterprise & Partnerships — */
@@ -387,9 +502,12 @@ body.editorial-theme .service-price {
   -webkit-backdrop-filter: blur(14px);
 }
 
-.enterprise-page .ent-metric-value,
-.prop-page .prop-submit {
-  color: var(--premium-gold);
+.enterprise-page .ent-metric-value {
+  color: var(--premium-ivory);
+}
+
+.enterprise-page .ent-metric-label {
+  color: var(--premium-gold-soft);
 }
 
 .prop-page .prop-field input,

@@ -14,13 +14,14 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="preload" href="images/glam-red-celebration.png" as="image">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 
-  <link rel="stylesheet" href="styles.css?v=20260571">
-  <link rel="stylesheet" href="home.css?v=20260571">
-  <link rel="stylesheet" href="premium.css?v=20260571">
-  <link rel="stylesheet" href="mobile.css?v=20260571">
+  <link rel="stylesheet" href="styles.css?v=20260572">
+  <link rel="stylesheet" href="home.css?v=20260572">
+  <link rel="stylesheet" href="premium.css?v=20260572">
+  <link rel="stylesheet" href="mobile.css?v=20260572">
 </head>
 <body data-page="home" class="editorial-theme home-editorial">
 
@@ -40,7 +41,10 @@
     <p class="home-menu-footer" id="home-menu-footer"></p>
   </nav>
 
-  <p class="home-scroll-hint" id="home-scroll-hint">Scroll</p>
+  <p class="home-scroll-hint" id="home-scroll-hint" aria-live="polite">
+    <span class="home-scroll-hint__line" aria-hidden="true"></span>
+    <span class="home-scroll-hint__text">01 / 06</span>
+  </p>
 
   <div class="home-scroll-dots" id="home-scroll-dots" aria-hidden="true"></div>
   <div class="home-scroll" id="home-scroll">
@@ -63,6 +67,6 @@
     </div>
   </footer>
 
-  <script type="module" src="dist/app.bundle.js?v=53"></script>
+  <script type="module" src="dist/app.bundle.js?v=55"></script>
 </body>
 </html>

@@ -280,8 +280,9 @@ body.site-light-topbar .home-topbar {
   height: 100vh;
   height: 100dvh;
   overflow-y: scroll;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
   scroll-behavior: smooth;
+  overscroll-behavior-y: contain;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -297,7 +298,7 @@ body.site-light-topbar .home-topbar {
   height: 100dvh;
   min-height: 560px;
   scroll-snap-align: start;
-  scroll-snap-stop: always;
+  scroll-snap-stop: normal;
   overflow: hidden;
   display: flex;
   align-items: flex-end;
@@ -333,8 +334,8 @@ body.site-light-topbar .home-topbar {
   padding: 0 2rem 4.5rem;
   text-align: center;
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.85s ease 0.1s, transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+  transform: translateY(18px);
+  transition: opacity 0.65s ease 0.05s, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.05s;
 }
 
 .home-panel.in-view .home-panel-content {
@@ -960,7 +961,8 @@ body.home-intro-done .home-scroll-dots {
   .home-scroll {
     overflow-x: auto;
     overflow-y: hidden;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
+    overscroll-behavior-x: contain;
   }
 
   #home-panels {

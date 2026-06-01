@@ -3936,18 +3936,41 @@ function initHomeScrollEffects() {
     if (scrolled > 80) hint?.classList.add("hidden");
     updateActivePanel();
   }, { passive: true });
+  let wheelSnapLock = false;
+  let wheelSnapTimer = null;
+  function getActivePanelIndex() {
+    const horizontal = isHomeHorizontalScroll();
+    let activeIndex = 0;
+    panels.forEach((panel, i) => {
+      const rect = panel.getBoundingClientRect();
+      const inView = horizontal ? rect.left < window.innerWidth * 0.55 && rect.right > window.innerWidth * 0.45 : rect.top < window.innerHeight * 0.55 && rect.bottom > window.innerHeight * 0.45;
+      if (inView) activeIndex = i;
+    });
+    return activeIndex;
+  }
+  function snapToPanelIndex(index) {
+    const panel = panels[index];
+    if (!panel) return;
+    wheelSnapLock = true;
+    scrollHomeToPanel(scrollEl, panel, reducedMotion);
+  }
   function handleHorizontalWheel(e) {
-    if (!isHomeHorizontalScroll() || e.ctrlKey) return;
+    if (!isHomeHorizontalScroll() || e.ctrlKey || wheelSnapLock) return;
     const delta = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
-    if (!delta) return;
-    const maxScroll = scrollEl.scrollWidth - scrollEl.clientWidth;
-    const nextScroll = scrollEl.scrollLeft + delta;
-    const canScrollLeft = nextScroll > 0;
-    const canScrollRight = nextScroll < maxScroll;
-    if (delta > 0 && canScrollRight || delta < 0 && canScrollLeft) {
-      e.preventDefault();
-      scrollEl.scrollBy({ left: delta, behavior: "auto" });
-    }
+    if (Math.abs(delta) < 12) return;
+    e.preventDefault();
+    clearTimeout(wheelSnapTimer);
+    wheelSnapTimer = setTimeout(() => {
+      const activeIndex = getActivePanelIndex();
+      const direction = delta > 0 ? 1 : -1;
+      const nextIndex = Math.max(0, Math.min(panels.length - 1, activeIndex + direction));
+      if (nextIndex !== activeIndex) {
+        snapToPanelIndex(nextIndex);
+        setTimeout(() => {
+          wheelSnapLock = false;
+        }, reducedMotion.matches ? 0 : 720);
+      }
+    }, 48);
   }
   window.addEventListener("wheel", handleHorizontalWheel, { passive: false, capture: true });
   dots?.forEach((dot) => {

@@ -98,8 +98,8 @@ export const SITE = {
 
   globalFooter: "© 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
 
-  // UPDATE THIS with your real WhatsApp number (include country code, e.g. +233XXXXXXXXX)
-  whatsapp: "+233XXXXXXXXX",
+  url: "https://shugger001.github.io/Asantewaaa",
+  whatsapp: "+233247743593",
   whatsappMessage: "Hi Glam Room! I'd like to book an appointment 💅",
 
   // Two Glam Room shops — names/addresses match Google Maps pins (not area labels)
@@ -506,12 +506,12 @@ export const SITE = {
       icon: "fa-solid fa-arrows-rotate",
       badge: "Popular",
       styles: [
-        { id: "hair-wash", name: "Hair Wash", description: "Cleanse and refresh your hair.", price: "GH₵ 35", duration: "30 min" },
-        { id: "hair-wash-cornrows", name: "Hair Wash + Cornrows", description: "Wash plus cornrow styling.", price: "GH₵ 55", duration: "1 to 1.5 hrs" },
-        { id: "unbraid-hair-wash", name: "Unbraiding & Hair Wash", description: "Take down braids and wash your hair.", price: "GH₵ 50", duration: "1 to 2 hrs" },
-        { id: "touch-up-salon-relaxer", name: "Touch Up with Salon’s Relaxer", description: "New growth touch-up using Glam Room relaxer.", price: "GH₵ 70", duration: "1 to 1.5 hrs" },
-        { id: "touch-up-client-relaxer", name: "Touch Up with Client’s Relaxer", description: "New growth touch-up using your own relaxer.", price: "GH₵ 50", duration: "1 to 1.5 hrs" },
-        { id: "normal-ponytail", name: "Normal Ponytail", description: "Sleek, styled ponytail finish.", price: "GH₵ 80", duration: "45 min to 1 hr" },
+        { id: "hair-wash", name: "Hair Wash", description: "Cleanse and refresh your hair.", price: "GH₵ 35", duration: "30 min", imageUrl: "images/glam-adenta-portrait.png" },
+        { id: "hair-wash-cornrows", name: "Hair Wash + Cornrows", description: "Wash plus cornrow styling.", price: "GH₵ 55", duration: "1 to 1.5 hrs", imageUrl: "images/glam-braids-studio.png" },
+        { id: "unbraid-hair-wash", name: "Unbraiding & Hair Wash", description: "Take down braids and wash your hair.", price: "GH₵ 50", duration: "1 to 2 hrs", imageUrl: "images/glam-braids-portrait.png" },
+        { id: "touch-up-salon-relaxer", name: "Touch Up with Salon’s Relaxer", description: "New growth touch-up using Glam Room relaxer.", price: "GH₵ 70", duration: "1 to 1.5 hrs", imageUrl: "images/glam-gallery-waves-front.png" },
+        { id: "touch-up-client-relaxer", name: "Touch Up with Client’s Relaxer", description: "New growth touch-up using your own relaxer.", price: "GH₵ 50", duration: "1 to 1.5 hrs", imageUrl: "images/glam-gallery-waves-profile.png" },
+        { id: "normal-ponytail", name: "Normal Ponytail", description: "Sleek, styled ponytail finish.", price: "GH₵ 80", duration: "45 min to 1 hr", imageUrl: "images/glam-red-outdoor.png" },
       ],
     },
     {
@@ -523,9 +523,9 @@ export const SITE = {
       icon: "fa-solid fa-hat-cowboy",
       badge: "Hot",
       styles: [
-        { id: "closure-install", name: "Closure Hair Install", description: "Closure unit installed and styled.", price: "GH₵ 50", duration: "1 to 1.5 hrs" },
-        { id: "frontal-install", name: "Frontal Hair Install", description: "Frontal unit installed with a natural hairline.", price: "GH₵ 100", duration: "1.5 to 2 hrs" },
-        { id: "frontal-ponytail", name: "Frontal Ponytail", description: "Frontal install finished in a sleek ponytail style.", price: "GH₵ 150", duration: "1.5 to 2 hrs" },
+        { id: "closure-install", name: "Closure Hair Install", description: "Closure unit installed and styled.", price: "GH₵ 50", duration: "1 to 1.5 hrs", imageUrl: "images/glam-red-studio.png" },
+        { id: "frontal-install", name: "Frontal Hair Install", description: "Frontal unit installed with a natural hairline.", price: "GH₵ 100", duration: "1.5 to 2 hrs", imageUrl: "images/glam-red-indoor.png" },
+        { id: "frontal-ponytail", name: "Frontal Ponytail", description: "Frontal install finished in a sleek ponytail style.", price: "GH₵ 150", duration: "1.5 to 2 hrs", imageUrl: "images/glam-red-celebration.png" },
       ],
     },
     {
@@ -538,9 +538,9 @@ export const SITE = {
       badge: null,
       styles: [
         { id: "shoulder-length", name: "Shoulder Length", description: "Braiding service to shoulder length. Hair not included.", price: "GH₵ 150", duration: "3 to 4 hrs", imageUrl: "images/glam-braids-studio.png" },
-        { id: "bra-length", name: "Bra Length", description: "Braiding service to bra strap length. Hair not included.", price: "GH₵ 200", duration: "4 to 5 hrs" },
-        { id: "hip-length", name: "Hip Length", description: "Braiding service to hip length. Hair not included.", price: "GH₵ 250", duration: "5 to 6 hrs" },
-        { id: "butt-length", name: "Butt Length", description: "Braiding service to butt length. Hair not included.", price: "GH₵ 300", duration: "6 to 7 hrs" },
+        { id: "bra-length", name: "Bra Length", description: "Braiding service to bra strap length. Hair not included.", price: "GH₵ 200", duration: "4 to 5 hrs", imageUrl: "images/glam-gallery-braids-bw.png" },
+        { id: "hip-length", name: "Hip Length", description: "Braiding service to hip length. Hair not included.", price: "GH₵ 250", duration: "5 to 6 hrs", imageUrl: "images/glam-braids-studio.png" },
+        { id: "butt-length", name: "Butt Length", description: "Braiding service to butt length. Hair not included.", price: "GH₵ 300", duration: "6 to 7 hrs", imageUrl: "images/glam-braids-portrait.png" },
         { id: "under-butt", name: "Under Butt", description: "Braiding service past butt length. Hair not included.", price: "GH₵ 400", duration: "7 to 8 hrs", imageUrl: "images/glam-braids-portrait.png" },
       ],
     },
@@ -560,7 +560,7 @@ export const SITE = {
     {
       text: "I came in stressed, I left feeling like a celebrity. The vibes, the music, the hair. 10/10 would recommend to every sis.",
       author: "Akua T.",
-      role: "Bridal Client",
+      role: "Glam Room Client",
     },
     {
       text: "My wig install was so seamless my own mother thought it was my hair. Glam Room is THE spot in Accra, period.",
@@ -573,7 +573,7 @@ export const SITE = {
     { id: 1, label: "Butterfly Braids", imageUrl: "images/glam-braids-studio.png", gradient: "linear-gradient(135deg, #C75B39 0%, #D4A853 100%)" },
     { id: 2, label: "Full Glam Portrait", imageUrl: "images/glam-braids-portrait.png", gradient: "linear-gradient(135deg, #006B3F 0%, #D4A853 100%)" },
     { id: 3, label: "Red Carpet Outdoor", imageUrl: "images/glam-red-outdoor.png", gradient: "linear-gradient(135deg, #CE1126 0%, #2C1810 100%)" },
-    { id: 4, label: "Bridal Glow", imageUrl: "images/glam-red-indoor.png", gradient: "linear-gradient(135deg, #D4A853 0%, #C75B39 100%)" },
+    { id: 4, label: "Signature Glam", imageUrl: "images/glam-red-indoor.png", gradient: "linear-gradient(135deg, #D4A853 0%, #C75B39 100%)" },
     { id: 5, label: "Studio Slay", imageUrl: "images/glam-red-studio.png", gradient: "linear-gradient(135deg, #2C1810 0%, #006B3F 100%)" },
     { id: 6, label: "Celebration Glam", imageUrl: "images/glam-red-celebration.png", gradient: "linear-gradient(135deg, #CE1126 0%, #FCD116 100%)" },
     { id: 7, label: "Silk Waves Profile", imageUrl: "images/glam-gallery-waves-profile.png", gradient: "linear-gradient(135deg, #C75B39 0%, #006B3F 100%)" },
@@ -633,20 +633,11 @@ export const SITE = {
       { value: "14:00", label: "02:00 PM" },
       { value: "17:00", label: "05:00 PM" },
     ],
-
-    services: [
-      { value: "Braid Bomb", label: "💥 Braid Bomb", price: "250 GHS" },
-      { value: "Mama Glam Special", label: "👩🏾‍🦱 Mama Glam Special", price: "450 GHS" },
-      { value: "Glow Up Express", label: "✨ Glow Up Express", price: "150 GHS" },
-      { value: "Celebrity Wig Fix", label: "💇🏾‍♀️ Celebrity Wig Fix", price: "300 GHS" },
-      { value: "Custom Style", label: "👑 Custom Style", price: "Price on chat" },
-    ],
   },
 
-  // Admin dashboard — admin.html (create user in Supabase → Authentication)
+  // Admin dashboard — admin.html (create user via supabase/create-admin-lesley.sql)
   admin: {
     loginEmail: "lesleyyskills@gmail.com",
-    clearPassword: "GlamLesley2026!",
   },
 
   findBooking: {
@@ -657,7 +648,7 @@ export const SITE = {
     invalidPhone: "Enter a valid Ghana number (e.g. 024XXXXXXX).",
     invalidName: "Enter exactly 4 letters: the last 4 letters of the name you booked with.",
     notFound: "No booking found. Double-check your phone and the last 4 letters of the name you used when booking.",
-    unavailable: "Booking lookup isn't connected yet. WhatsApp Glam Room to check your slot.",
+    unavailable: "Booking lookup is not available yet. WhatsApp Glam Room to check your slot.",
     error: "Something went wrong. Please try again or WhatsApp Glam Room.",
   },
 

@@ -282,8 +282,6 @@ async function verifyClearPassword(password) {
   const trimmed = password.trim();
   if (!trimmed) return false;
 
-  const configured = SITE.admin?.clearPassword?.trim();
-  if (configured && trimmed === configured) return true;
   if (cachedLoginPassword && trimmed === cachedLoginPassword) return true;
 
   const supabase = getSupabase();

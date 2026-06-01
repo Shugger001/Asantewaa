@@ -392,6 +392,8 @@ function renderGlamRoom() {
         <div class="gr-sanctuary__content">
           <p class="gr-sanctuary__brand">${loc.name?.toUpperCase() || 'GLAM ROOM'}</p>
           <p class="gr-sanctuary__area">${loc.area || loc.city || 'ACCRA'}</p>
+          ${loc.address ? `<p class="gr-sanctuary__address">${loc.address}</p>` : ''}
+          ${loc.mapUrl ? `<a href="${loc.mapUrl}" class="gr-sanctuary__map" target="_blank" rel="noopener noreferrer">Get directions</a>` : ''}
           <span class="gr-sanctuary__cta">RESERVE YOUR CHAIR</span>
         </div>
       </button>

@@ -10,7 +10,8 @@ export function openBookingPage(location) {
 
 export function bindSanctuaryBookingButtons() {
   document.querySelectorAll('[data-location-id]').forEach((button) => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', (event) => {
+      if (event.target.closest('.gr-sanctuary__map')) return;
       const loc = findLocationById(button.dataset.locationId);
       if (loc) openBookingPage(loc);
     });

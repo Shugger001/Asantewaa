@@ -182,7 +182,29 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.55);
-  margin: 0 0 1.35rem;
+  margin: 0 0 0.35rem;
+}
+
+.gr-sanctuary__address {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0 0 0.5rem;
+}
+
+.gr-sanctuary__map {
+  display: inline-block;
+  font-family: var(--gr-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gr-gold, #d4a853);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  margin: 0 0 1rem;
+}
+
+.gr-sanctuary__map:hover {
+  color: #fff;
 }
 
 .gr-sanctuary__cta {

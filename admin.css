@@ -1086,54 +1086,317 @@ body.admin-modal-open {
   margin-top: 0.25rem;
 }
 
-/* — Responsive — */
-@media (max-width: 900px) {
-  .admin-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* — Table hint (mobile) — */
+.admin-table-hint {
+  display: none;
 }
 
-@media (max-width: 560px) {
-  .admin-stats {
-    grid-template-columns: 1fr;
+/* — Responsive — */
+@media (max-width: 900px) {
+  .admin-shell {
+    padding: 0.85rem;
+    padding-top: max(0.85rem, env(safe-area-inset-top));
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
   }
 
-  .admin-header__brand {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  .admin-header {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    margin: -0.85rem -0.85rem 1rem;
+    padding: 0.85rem;
+    padding-top: max(0.85rem, env(safe-area-inset-top));
+    background: rgba(8, 8, 8, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--admin-border);
+  }
+
+  .admin-header__sub {
+    display: none;
+  }
+
+  .admin-header h1 {
+    font-size: 1.65rem;
   }
 
   .admin-header__actions {
-    width: 100%;
-    justify-content: center;
+    gap: 0.35rem;
   }
 
-  .admin-filters__row {
-    flex-direction: column;
-    align-items: stretch;
+  .admin-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+  }
+
+  .stat-card {
+    padding: 0.85rem;
+  }
+
+  .stat-card__number {
+    font-size: 1.55rem;
+  }
+
+  .admin-filters {
+    padding: 1rem;
+  }
+
+  .admin-field--grow {
+    flex: 1 1 100%;
   }
 
   .admin-field select,
-  .admin-field input[type="date"] {
+  .admin-field input {
     width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-quick-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0 -0.25rem;
+    padding-bottom: 0.35rem;
+  }
+
+  .admin-quick-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .admin-chip {
+    flex-shrink: 0;
+  }
+
+  .admin-filters__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+    align-items: end;
+  }
+
+  .admin-field--grow,
+  .admin-filters__actions,
+  .admin-wa-hint {
+    grid-column: 1 / -1;
   }
 
   .admin-filters__actions {
-    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
   }
 
   .admin-filters__actions .admin-btn {
-    flex: 1;
+    width: 100%;
+    min-height: 2.75rem;
+  }
+
+  .admin-filters__toolbar {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
   }
 
   .admin-filters__toolbar .admin-btn {
-    flex: 1 1 auto;
+    width: 100%;
+    min-height: 2.75rem;
     justify-content: center;
+  }
+
+  .admin-table-hint {
+    display: block;
+    margin: 0;
+    padding: 0.65rem 1rem 0;
+    font-family: var(--admin-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--admin-muted);
+  }
+
+  .table-wrap {
+    overflow: visible;
+    padding: 0 0.75rem 0.75rem;
+  }
+
+  #bookingsTable {
+    min-width: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  #bookingsTable thead {
+    display: none;
+  }
+
+  #bookingsTable tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  #bookingsTable tbody tr.booking-row {
+    display: block;
+    background: rgba(14, 14, 14, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    padding: 0.25rem 0.85rem 0.5rem;
+  }
+
+  #bookingsTable tbody tr.table-empty,
+  #bookingsTable tbody tr.table-loading {
+    display: block;
+    padding: 2rem 1rem;
+    text-align: center;
+    background: transparent;
+    border: none;
+  }
+
+  #bookingsTable tbody tr.table-empty td,
+  #bookingsTable tbody tr.table-loading td {
+    display: block;
+    padding: 0;
+    border: none;
+  }
+
+  #bookingsTable tbody tr.table-empty td::before,
+  #bookingsTable tbody tr.table-loading td::before {
+    display: none;
+  }
+
+  #bookingsTable td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.55rem 0;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 0.8125rem;
+    text-align: right;
+  }
+
+  #bookingsTable td::before {
+    content: attr(data-label);
+    font-family: var(--admin-mono);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--admin-muted);
+    text-align: left;
+    flex-shrink: 0;
+  }
+
+  #bookingsTable td[data-label='Client'] {
+    padding-top: 0.75rem;
+    font-size: 0.9375rem;
+  }
+
+  #bookingsTable td[data-label='Client'] strong {
+    font-size: 1rem;
+  }
+
+  #bookingsTable td[data-label='Service'] {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  #bookingsTable td[data-label='Service']::before {
+    margin-bottom: 0.15rem;
+  }
+
+  #bookingsTable td.service-cell {
+    max-width: none;
+    text-align: left;
+  }
+
+  #bookingsTable td[data-label='Status'] .status-select {
+    min-width: 0;
+    width: 100%;
+    max-width: 11rem;
+  }
+
+  #bookingsTable td[data-label='Actions'] {
+    border-bottom: none;
+    padding-top: 0.65rem;
+    justify-content: flex-end;
+  }
+
+  #bookingsTable td[data-label='Actions']::before {
+    align-self: center;
+  }
+
+  .row-actions {
+    justify-content: flex-end;
+  }
+
+  .action-pill {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .empty-state {
+    padding: 2rem 1rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-header__brand {
+    gap: 0.65rem;
+  }
+
+  .admin-header__logo {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .admin-eyebrow {
+    font-size: 0.5625rem;
+  }
+
+  .admin-btn__text {
+    display: none;
+  }
+
+  .admin-header__actions .admin-btn {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0 0.65rem;
+  }
+
+  .admin-header__actions .admin-btn--outline {
+    padding: 0 0.75rem;
+  }
+
+  .admin-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stat-card__icon {
+    width: 2.15rem;
+    height: 2.15rem;
+    font-size: 0.9rem;
+  }
+
+  .stat-card__label {
+    font-size: 0.5625rem;
+  }
+
+  .admin-filters__row {
+    grid-template-columns: 1fr;
   }
 
   .admin-footer {
     flex-direction: column;
     text-align: center;
+    gap: 0.5rem;
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }

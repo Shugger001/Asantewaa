@@ -1,20 +1,27 @@
-# Supabase setup (run once in SQL Editor)
+# Supabase setup checklist
 
-Run these scripts **in order** on project `pksfslkwmlrlttoojluk`:
+> **Do not run this file in the SQL Editor.**  
+> Supabase only runs `.sql` files. Markdown lines starting with `#` cause a syntax error.  
+> In the repo, open each file below, copy its full contents, paste into **SQL Editor → New query**, then click **Run**.
 
-1. `setup.sql` — bookings table and RLS
-2. `max-daily-bookings.sql` — daily cap (12) and per-slot cap (3)
-3. `migrations/004_slot_capacity.sql` — if not already applied by step 2
-4. `setup-find-booking.sql` — homepage “Find my booking” lookup
-5. `setup-admin.sql` — admin policies
-6. `create-admin-lesley.sql` — Lesley admin user (Authentication)
-7. `setup-deposit.sql` — deposit columns and payment status
+Project: `pksfslkwmlrlttoojluk`
 
-Then deploy edge functions:
+## Run these `.sql` files in order
 
-- `supabase/functions/initiate-deposit`
-- `supabase/functions/confirm-deposit`
+| Step | File to open and run |
+|------|----------------------|
+| 1 | `supabase/setup.sql` |
+| 2 | `supabase/max-daily-bookings.sql` |
+| 3 | `supabase/setup-find-booking.sql` |
+| 4 | `supabase/setup-admin.sql` |
+| 5 | `supabase/create-admin-lesley.sql` |
+| 6 | `supabase/setup-deposit.sql` |
 
-Set secrets: `MOOLRE_*` (or your provider keys). In `data.js`, set `booking.deposit.configured` to `true` when live.
+Skip `migrations/004_slot_capacity.sql` if step 2 already succeeded (it overlaps with max-daily-bookings).
 
-**Rotate** the Lesley password in Supabase Auth after first login (it is no longer stored in the site code).
+## After SQL
+
+1. Deploy edge functions: `initiate-deposit`, `confirm-deposit` (see `supabase/functions/`).
+2. Add Moolre secrets in Supabase → Project Settings → Edge Functions.
+3. In `data.js`, set `booking.deposit.configured` to `true` when payments are live.
+4. Rotate Lesley’s password in **Authentication → Users** after first login.

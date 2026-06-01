@@ -470,8 +470,8 @@ export const SITE = {
     ],
     contact: {
       intro: "FOR IMMEDIATE ASSISTANCE OR OFFICIAL DOCUMENTATION APPROVALS",
-      whatsappLabel: "WhatsApp Management",
-      whatsapp: "+233 (0) 247 743 593",
+      whatsappLabel: "Glam Room WhatsApp",
+      whatsapp: "+233247743593",
       emailLabel: "Corporate Inbox",
       email: "martinadwamena599@gmail.com",
       locations: "ACCRA, GHANA * NEW JERSEY, USA",

@@ -392,7 +392,7 @@ function renderBookings(bookings) {
   emptyState.hidden = sorted.length > 0;
 
   if (!sorted.length) {
-    bookingsBody.innerHTML = '<tr><td colspan="9" class="table-empty">No bookings found</td></tr>';
+    bookingsBody.innerHTML = '<tr class="table-empty"><td colspan="9">No bookings found</td></tr>';
     return;
   }
 
@@ -401,16 +401,16 @@ function renderBookings(bookings) {
       const location = b.location || b.notes?.match(/\[Location: ([^\]]+)\]/)?.[1] || 'N/A';
 
       return `
-        <tr data-id="${b.id}">
-          <td>${formatDate(b.booking_date)}</td>
-          <td>${formatTime(b.booking_time)}</td>
-          <td><strong>${escapeHtml(b.full_name)}</strong></td>
-          <td><a class="phone-link" href="${whatsAppClientHref(b)}" target="_blank" rel="noopener noreferrer">${escapeHtml(b.phone)}</a></td>
-          <td>${escapeHtml(location)}</td>
-          <td class="service-cell">${escapeHtml(b.service)}</td>
-          <td>${statusSelectHtml(b)}</td>
-          <td>${statusBadge(b.payment_status || 'pending', 'payment')}</td>
-          <td>
+        <tr class="booking-row" data-id="${b.id}">
+          <td data-label="Date">${formatDate(b.booking_date)}</td>
+          <td data-label="Time">${formatTime(b.booking_time)}</td>
+          <td data-label="Client"><strong>${escapeHtml(b.full_name)}</strong></td>
+          <td data-label="Phone"><a class="phone-link" href="${whatsAppClientHref(b)}" target="_blank" rel="noopener noreferrer">${escapeHtml(b.phone)}</a></td>
+          <td data-label="Location">${escapeHtml(location)}</td>
+          <td class="service-cell" data-label="Service">${escapeHtml(b.service)}</td>
+          <td data-label="Status">${statusSelectHtml(b)}</td>
+          <td data-label="Deposit">${statusBadge(b.payment_status || 'pending', 'payment')}</td>
+          <td data-label="Actions">
             <div class="row-actions">
               <a class="action-pill action-pill--wa" href="${whatsAppClientHref(b)}" target="_blank" rel="noopener noreferrer" title="Message client from Glam Room WhatsApp (use shop phone)" aria-label="WhatsApp ${escapeHtml(b.full_name)} from Glam Room"><i class="fa-brands fa-whatsapp"></i></a>
             </div>
@@ -447,7 +447,7 @@ async function loadBookings() {
     return;
   }
 
-  bookingsBody.innerHTML = '<tr><td colspan="9" class="table-loading">Loading bookings…</td></tr>';
+  bookingsBody.innerHTML = '<tr class="table-loading"><td colspan="9">Loading bookings…</td></tr>';
   emptyState.hidden = true;
 
   const { data, error } = await supabase
@@ -462,7 +462,7 @@ async function loadBookings() {
       await supabase.auth.signOut();
       return;
     }
-    bookingsBody.innerHTML = `<tr><td colspan="9" class="table-empty">Could not load bookings: ${escapeHtml(error.message)}</td></tr>`;
+    bookingsBody.innerHTML = `<tr class="table-empty"><td colspan="9">Could not load bookings: ${escapeHtml(error.message)}</td></tr>`;
     return;
   }
 

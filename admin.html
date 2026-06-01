@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="preload" href="images/admin-bg-enterprise.png?v=2" as="image">
-  <link rel="stylesheet" href="admin.css?v=12">
+  <link rel="stylesheet" href="admin.css?v=13">
 </head>
 <body class="admin-page">
 
@@ -27,13 +27,13 @@
       </div>
       <div class="admin-header__actions">
         <a href="#" class="admin-btn admin-btn--outline" id="shopWhatsAppLink" target="_blank" rel="noopener noreferrer" title="Open official Glam Room WhatsApp">
-          <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Shop line
+          <i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span class="admin-btn__text">Shop</span>
         </a>
-        <button type="button" class="admin-btn admin-btn--ghost" id="refreshBtn">
-          <i class="fa-solid fa-rotate" aria-hidden="true"></i> Refresh
+        <button type="button" class="admin-btn admin-btn--ghost" id="refreshBtn" title="Refresh bookings">
+          <i class="fa-solid fa-rotate" aria-hidden="true"></i><span class="admin-btn__text">Refresh</span>
         </button>
-        <button type="button" class="admin-btn admin-btn--ghost" id="logoutBtn">
-          <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Logout
+        <button type="button" class="admin-btn admin-btn--ghost" id="logoutBtn" title="Log out">
+          <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i><span class="admin-btn__text">Logout</span>
         </button>
       </div>
     </header>
@@ -132,6 +132,7 @@
     </section>
 
     <section class="admin-panel admin-table-panel">
+      <p class="admin-table-hint" aria-hidden="true">Booking cards — scroll below</p>
       <div class="table-wrap">
         <table id="bookingsTable">
           <thead>
@@ -192,6 +193,6 @@
     </div>
   </div>
 
-  <script type="module" src="admin.bundle.js?v=4"></script>
+  <script type="module" src="admin.bundle.js?v=5"></script>
 </body>
 </html>

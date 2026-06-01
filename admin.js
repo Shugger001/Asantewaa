@@ -49,9 +49,16 @@ function whatsAppHref(phone) {
   return `https://wa.me/${digits}`;
 }
 
-function statusBadge(status) {
-  const safe = (status || 'pending').toLowerCase();
-  return `<span class="status-badge status-${safe}">${safe}</span>`;
+function statusBadge(status, type = 'status') {
+  const safe = (status || 'pending').toLowerCase().replace(/\s+/g, '-');
+  const paymentClass =
+    type === 'payment' && !['paid', 'pending', 'failed', 'unpaid', 'cancelled'].includes(safe)
+      ? 'payment-pending'
+      : type === 'payment'
+        ? `payment-${safe}`
+        : '';
+  const className = paymentClass || `status-${safe}`;
+  return `<span class="status-badge ${className}">${escapeHtml(safe.replace(/-/g, ' '))}</span>`;
 }
 
 function escapeHtml(str) {
@@ -92,12 +99,12 @@ function renderBookings(bookings) {
           <td>${escapeHtml(location)}</td>
           <td>${escapeHtml(b.service)}</td>
           <td>${statusBadge(b.status)}</td>
-          <td>${statusBadge(b.payment_status || 'pending')}</td>
+          <td>${statusBadge(b.payment_status || 'pending', 'payment')}</td>
           <td>
             <div class="row-actions">
-              ${b.status === 'pending' ? `<button type="button" class="action-btn confirm" data-action="status" data-id="${b.id}" data-status="confirmed" title="Confirm">✅</button>` : ''}
-              ${b.status === 'confirmed' ? `<button type="button" class="action-btn complete" data-action="status" data-id="${b.id}" data-status="completed" title="Complete">✨</button>` : ''}
-              ${b.status !== 'cancelled' ? `<button type="button" class="action-btn cancel" data-action="status" data-id="${b.id}" data-status="cancelled" title="Cancel">❌</button>` : ''}
+              ${b.status === 'pending' ? `<button type="button" class="action-pill action-pill--confirm" data-action="status" data-id="${b.id}" data-status="confirmed" title="Confirm booking" aria-label="Confirm"><i class="fa-solid fa-check"></i></button>` : ''}
+              ${b.status === 'confirmed' ? `<button type="button" class="action-pill action-pill--complete" data-action="status" data-id="${b.id}" data-status="completed" title="Mark complete" aria-label="Complete"><i class="fa-solid fa-star"></i></button>` : ''}
+              ${b.status !== 'cancelled' ? `<button type="button" class="action-pill action-pill--cancel" data-action="status" data-id="${b.id}" data-status="cancelled" title="Cancel booking" aria-label="Cancel"><i class="fa-solid fa-xmark"></i></button>` : ''}
             </div>
           </td>
         </tr>
@@ -268,7 +275,7 @@ function showClearSuccess(message = 'All bookings cleared from the site.') {
     toast.id = 'clearFiltersToast';
     toast.className = 'clear-filters-toast';
     toast.setAttribute('role', 'status');
-    document.querySelector('.filter-bar')?.appendChild(toast);
+    document.querySelector('.admin-filters')?.appendChild(toast);
   }
   toast.textContent = message;
   toast.hidden = false;

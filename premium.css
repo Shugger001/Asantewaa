@@ -1,0 +1,421 @@
+/* ==========================================================================
+   Glam Room — Premium editorial refinements
+   Load after home.css / page CSS, before mobile.css
+   ========================================================================== */
+
+body.editorial-theme,
+body.home-editorial,
+body.gr-page {
+  --premium-gold: #c9a962;
+  --premium-gold-soft: rgba(201, 169, 98, 0.45);
+  --premium-ivory: #f0ebe3;
+  --premium-border: rgba(255, 255, 255, 0.11);
+  --premium-surface: rgba(8, 8, 8, 0.78);
+  --premium-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --accent: var(--premium-gold);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* — Top bar — */
+.home-topbar,
+.gr-topbar {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.62) 0%,
+    rgba(0, 0, 0, 0.15) 70%,
+    transparent 100%
+  ) !important;
+}
+
+.home-topbar-link,
+.home-menu-btn,
+.gr-topbar-link,
+.gr-topbar-menu {
+  letter-spacing: 0.2em;
+  font-weight: 500;
+}
+
+/* — Menu — */
+.home-menu-panel {
+  background: #050505;
+  border-left-color: var(--premium-border);
+}
+
+.home-menu-links a {
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.home-menu-socials a:hover {
+  color: var(--premium-gold);
+}
+
+/* — Homepage panels — */
+.home-panel-bg {
+  transition: transform 10s var(--premium-ease);
+}
+
+.home-panel.in-view .home-panel-bg {
+  --panel-scale: 1.04;
+}
+
+.home-panel-label {
+  letter-spacing: 0.28em;
+  color: var(--premium-gold-soft);
+}
+
+.home-panel-title,
+.home-panel-title.hero-name {
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  text-shadow: 0 4px 48px rgba(0, 0, 0, 0.55);
+}
+
+.home-panel-subtitle {
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.home-panel-cta {
+  letter-spacing: 0.24em;
+  border-bottom-width: 1px;
+  border-bottom-color: var(--premium-gold-soft);
+  padding-bottom: 0.35rem;
+  transition: opacity 0.35s var(--premium-ease), border-color 0.35s var(--premium-ease);
+}
+
+.home-panel-cta:hover {
+  opacity: 1;
+  border-bottom-color: var(--premium-gold);
+}
+
+.home-scroll-hint {
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.home-scroll-dot {
+  background: rgba(255, 255, 255, 0.2);
+  transition: background 0.4s var(--premium-ease), width 0.4s var(--premium-ease);
+}
+
+.home-scroll-dot.active {
+  background: var(--premium-gold);
+}
+
+.home-bottombar span,
+.home-bottombar a {
+  letter-spacing: 0.18em;
+  opacity: 0.55;
+}
+
+/* — Find booking panel — */
+.find-booking-field span {
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.find-booking-field input {
+  border-radius: 0;
+  border: 1px solid var(--premium-border);
+  background: rgba(255, 255, 255, 0.04);
+  transition: border-color 0.35s var(--premium-ease);
+}
+
+.find-booking-field input:focus {
+  border-color: var(--premium-gold);
+  box-shadow: none;
+}
+
+.find-booking-submit {
+  border-radius: 0;
+  letter-spacing: 0.18em;
+  border: 1px solid var(--premium-gold);
+  background: transparent;
+  color: var(--premium-gold);
+  transition: background 0.4s var(--premium-ease), color 0.4s var(--premium-ease);
+}
+
+.find-booking-submit:hover {
+  background: var(--premium-gold);
+  color: #000;
+}
+
+/* — Booking page — */
+body.booking-page .booking-bg img {
+  filter: grayscale(100%) contrast(1.06) brightness(0.82);
+}
+
+body.booking-page .booking-bg__shade {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.82) 55%,
+    rgba(0, 0, 0, 0.94) 100%
+  );
+}
+
+body.booking-page .booking-form-card,
+body.booking-page .personality-card {
+  background: var(--premium-surface);
+  border: 1px solid var(--premium-border);
+  border-radius: 0;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.5);
+}
+
+body.booking-page .booking-form-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.85rem, 5vw, 2.35rem);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  text-transform: none;
+  color: var(--premium-ivory);
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.15rem;
+  border-bottom: 1px solid var(--premium-border);
+}
+
+body.booking-page .form-group label {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 500;
+}
+
+body.booking-page .form-group input,
+body.booking-page .form-group select,
+body.booking-page .form-group textarea {
+  border-radius: 0;
+  border-width: 1px;
+  border-color: var(--premium-border);
+  background: rgba(255, 255, 255, 0.035);
+  padding: 0.95rem 1.05rem;
+  transition:
+    border-color 0.35s var(--premium-ease),
+    background 0.35s var(--premium-ease);
+}
+
+body.booking-page .form-group input:focus,
+body.booking-page .form-group select:focus,
+body.booking-page .form-group textarea:focus {
+  border-color: var(--premium-gold);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: none;
+}
+
+body.booking-page .btn-book-submit {
+  margin-top: 1.25rem;
+  background: transparent;
+  border: 1px solid var(--premium-gold);
+  color: var(--premium-gold);
+  border-radius: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  box-shadow: none;
+  transition: background 0.45s var(--premium-ease), color 0.45s var(--premium-ease);
+}
+
+body.booking-page .btn-book-submit:hover:not(:disabled) {
+  background: var(--premium-gold);
+  color: #0a0a0a;
+  transform: none;
+  box-shadow: none;
+}
+
+body.booking-page .booking-summary {
+  border-radius: 0;
+  border-color: var(--premium-border);
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 0.86rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+body.booking-page .booking-info-list li {
+  border-color: var(--premium-border);
+}
+
+body.booking-page .booking-hours-row strong {
+  color: var(--premium-gold);
+  font-weight: 500;
+}
+
+body.booking-page .booking-whatsapp-alt a {
+  color: var(--premium-gold-soft);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s var(--premium-ease), color 0.3s var(--premium-ease);
+}
+
+body.booking-page .booking-whatsapp-alt a:hover {
+  color: var(--premium-gold);
+  border-bottom-color: var(--premium-gold);
+}
+
+body.booking-page .services-extension-notice {
+  border-color: rgba(201, 169, 98, 0.25);
+  background: rgba(201, 169, 98, 0.06);
+  border-radius: 0;
+}
+
+/* — Inner editorial pages — */
+body.editorial-theme .section-label {
+  color: var(--premium-gold-soft);
+  letter-spacing: 0.24em;
+}
+
+body.editorial-theme .section-title {
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+body.editorial-theme .glass-card {
+  border-radius: 0;
+  border-color: var(--premium-border);
+  background: var(--premium-surface);
+  backdrop-filter: blur(16px);
+  transition: border-color 0.4s var(--premium-ease);
+}
+
+body.editorial-theme .glass-card:hover {
+  border-color: rgba(201, 169, 98, 0.28);
+}
+
+body.editorial-theme .btn-primary {
+  border-color: var(--premium-gold);
+  color: var(--premium-gold);
+  letter-spacing: 0.18em;
+  transition: background 0.4s var(--premium-ease), color 0.4s var(--premium-ease), border-color 0.4s var(--premium-ease);
+}
+
+body.editorial-theme .btn-primary:hover {
+  background: var(--premium-gold);
+  color: #0a0a0a;
+  border-color: var(--premium-gold);
+}
+
+body.editorial-theme .btn-secondary {
+  letter-spacing: 0.14em;
+  transition: opacity 0.35s var(--premium-ease), border-color 0.35s var(--premium-ease);
+}
+
+body.editorial-theme .quote-text {
+  font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+  line-height: 1.65;
+}
+
+body.editorial-theme .quote-author {
+  color: var(--premium-gold);
+  letter-spacing: 0.12em;
+}
+
+body.editorial-theme .ghana-stripe {
+  height: 1px;
+  opacity: 0.35;
+}
+
+body.editorial-theme .carousel-dot.active {
+  background: var(--premium-gold);
+}
+
+body.editorial-theme .service-price {
+  color: var(--premium-gold);
+}
+
+/* — Glam Room — */
+.gr-page .gr-declaration__title,
+.gr-page .section-title {
+  font-weight: 400;
+}
+
+.gr-page .gr-sanctuary-card {
+  border-color: var(--premium-border);
+  transition: border-color 0.4s var(--premium-ease), transform 0.5s var(--premium-ease);
+}
+
+.gr-page .gr-sanctuary-card:hover {
+  border-color: rgba(201, 169, 98, 0.35);
+}
+
+.gr-page .gr-service-row {
+  border-color: var(--premium-border);
+  transition: background 0.35s var(--premium-ease);
+}
+
+.gr-page .gr-service-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.gr-topbar {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* — Hero intro typography — */
+.home-hero-brand .home-intro-letter {
+  font-weight: 400;
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.45);
+}
+
+.home-hero-brand .home-intro-subtitle {
+  color: var(--premium-gold-soft);
+  letter-spacing: 0.28em;
+}
+
+/* — Enterprise & Partnerships — */
+.enterprise-page,
+.prop-page {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ent-topbar,
+.prop-topbar {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.enterprise-page .ent-metric-value,
+.prop-page .prop-submit {
+  color: var(--premium-gold);
+}
+
+.prop-page .prop-field input,
+.prop-page .prop-field select,
+.prop-page .prop-field textarea {
+  border-radius: 0;
+  border-color: var(--premium-border);
+  background: rgba(255, 255, 255, 0.04);
+  transition: border-color 0.35s var(--premium-ease);
+}
+
+.prop-page .prop-field input:focus,
+.prop-page .prop-field select:focus,
+.prop-page .prop-field textarea:focus {
+  border-color: var(--premium-gold);
+  box-shadow: none;
+}
+
+.prop-page .prop-submit {
+  border: 1px solid var(--premium-gold);
+  background: transparent;
+  letter-spacing: 0.18em;
+  transition: background 0.4s var(--premium-ease), color 0.4s var(--premium-ease);
+}
+
+.prop-page .prop-submit:hover {
+  background: var(--premium-gold);
+  color: #0a0a0a;
+}

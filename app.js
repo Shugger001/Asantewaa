@@ -487,7 +487,7 @@ function renderProposals() {
       </div>
       <div class="prop-contact__row">
         <span class="prop-contact__label">${contact.emailLabel || 'Corporate Inbox'}</span>
-        <a class="prop-contact__value" href="mailto:${contact.email || ''}">${contact.email || ''}</a>
+        <a class="prop-contact__value" href="mailto:${contact.email || ''}">Send briefing by email</a>
       </div>
       <p class="prop-contact__locations">${contact.locations || ''}</p>
     `;

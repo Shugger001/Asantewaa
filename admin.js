@@ -33,7 +33,17 @@ const STATUS_CONFIRM = {
     confirmLabel: 'Cancel booking',
     danger: true,
   },
+  pending: {
+    title: 'Revert to pending?',
+    text: (name) => `Set ${name}'s booking back to pending. Use this if you need to reopen the slot.`,
+    confirmLabel: 'Revert to pending',
+  },
 };
+
+function needsStatusConfirm(fromStatus, toStatus) {
+  if (fromStatus === toStatus) return false;
+  return Boolean(STATUS_CONFIRM[toStatus]) || (toStatus === 'pending' && fromStatus !== 'pending');
+}
 
 function showLogin(message = '') {
   adminContent.hidden = true;
@@ -330,7 +340,11 @@ async function loadBookings() {
 
   allBookings = data || [];
   updateStats(allBookings);
-  applyFilters();
+  if (activeQuickFilter) {
+    applyQuickFilter(activeQuickFilter);
+  } else {
+    applyFilters();
+  }
 }
 
 async function updateStatus(id, status) {
@@ -369,7 +383,7 @@ function handleStatusSelectChange(select) {
     else select.dataset.prev = toStatus;
   };
 
-  if (STATUS_CONFIRM[toStatus]) {
+  if (needsStatusConfirm(fromStatus, toStatus)) {
     openStatusConfirmModal({ name, fromStatus, toStatus, onConfirm: runUpdate });
     return;
   }
@@ -388,7 +402,6 @@ function exportToCSV() {
   const headers = [
     'Full Name',
     'Phone',
-    'Email',
     'Location',
     'Service',
     'Date',
@@ -401,7 +414,6 @@ function exportToCSV() {
   const csvRows = rows.map((b) => [
     b.full_name,
     b.phone,
-    b.email || '',
     b.location || '',
     b.service,
     b.booking_date,
@@ -423,6 +435,7 @@ function exportToCSV() {
   a.download = `glam-room-bookings-${new Date().toISOString().split('T')[0]}.csv`;
   a.click();
   URL.revokeObjectURL(url);
+  showToast(`Exported ${rows.length} booking${rows.length === 1 ? '' : 's'}.`);
 }
 
 async function login(email, password) {
@@ -616,11 +629,6 @@ async function logout() {
 
 async function init() {
   const supabase = getSupabase();
-  const emailInput = document.getElementById('adminEmail');
-  if (SITE.admin?.loginEmail && emailInput) {
-    emailInput.value = SITE.admin.loginEmail;
-  }
-
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('loginBtn');
@@ -633,14 +641,22 @@ async function init() {
   });
 
   document.getElementById('applyFilterBtn').addEventListener('click', () => {
-    activeQuickFilter = '';
-    document.querySelectorAll('.admin-chip').forEach((c) => c.classList.remove('is-active'));
+    clearQuickFilterUi();
     applyFilters();
   });
   document.getElementById('resetFilterBtn').addEventListener('click', resetFilters);
-  document.getElementById('statusFilter').addEventListener('change', applyFilters);
-  document.getElementById('dateFilter').addEventListener('change', applyFilters);
-  document.getElementById('phoneFilter').addEventListener('input', applyFilters);
+  document.getElementById('statusFilter').addEventListener('change', () => {
+    clearQuickFilterUi();
+    applyFilters();
+  });
+  document.getElementById('dateFilter').addEventListener('change', () => {
+    clearQuickFilterUi();
+    applyFilters();
+  });
+  document.getElementById('phoneFilter').addEventListener('input', () => {
+    clearQuickFilterUi();
+    applyFilters();
+  });
   document.getElementById('exportBtn').addEventListener('click', exportToCSV);
   document.getElementById('clearAllBtn').addEventListener('click', openClearConfirmModal);
   document.getElementById('refreshBtn').addEventListener('click', loadBookings);

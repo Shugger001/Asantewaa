@@ -636,9 +636,7 @@ export const SITE = {
   },
 
   // Admin dashboard — admin.html (create user via supabase/create-admin-lesley.sql)
-  admin: {
-    loginEmail: "lesleyyskills@gmail.com",
-  },
+  admin: {},
 
   findBooking: {
     phonePlaceholder: "024 XXX XXXX or +233 XX XXX XXXX",

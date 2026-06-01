@@ -566,9 +566,7 @@ var SITE = {
     ]
   },
   // Admin dashboard — admin.html (create user via supabase/create-admin-lesley.sql)
-  admin: {
-    loginEmail: "lesleyyskills@gmail.com"
-  },
+  admin: {},
   findBooking: {
     phonePlaceholder: "024 XXX XXXX or +233 XX XXX XXXX",
     namePlaceholder: "Last 4 letters of your name",
@@ -1286,9 +1284,7 @@ var SITE2 = {
     ]
   },
   // Admin dashboard — admin.html (create user via supabase/create-admin-lesley.sql)
-  admin: {
-    loginEmail: "lesleyyskills@gmail.com"
-  },
+  admin: {},
   findBooking: {
     phonePlaceholder: "024 XXX XXXX or +233 XX XXX XXXX",
     namePlaceholder: "Last 4 letters of your name",
@@ -2456,9 +2452,7 @@ var SITE3 = {
     ]
   },
   // Admin dashboard — admin.html (create user via supabase/create-admin-lesley.sql)
-  admin: {
-    loginEmail: "lesleyyskills@gmail.com"
-  },
+  admin: {},
   findBooking: {
     phonePlaceholder: "024 XXX XXXX or +233 XX XXX XXXX",
     namePlaceholder: "Last 4 letters of your name",
@@ -3214,7 +3208,7 @@ function renderProposals() {
       </div>
       <div class="prop-contact__row">
         <span class="prop-contact__label">${contact.emailLabel || "Corporate Inbox"}</span>
-        <a class="prop-contact__value" href="mailto:${contact.email || ""}">${contact.email || ""}</a>
+        <a class="prop-contact__value" href="mailto:${contact.email || ""}">Send briefing by email</a>
       </div>
       <p class="prop-contact__locations">${contact.locations || ""}</p>
     `;

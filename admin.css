@@ -51,9 +51,9 @@ body.admin-page::before {
   z-index: 0;
   pointer-events: none;
   background-color: #050505;
-  background-image: url('images/admin-bg-enterprise.png');
+  background-image: url('images/admin-bg-enterprise.png?v=2');
   background-size: cover;
-  background-position: center 22%;
+  background-position: center 35%;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }

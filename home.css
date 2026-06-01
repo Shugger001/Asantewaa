@@ -34,6 +34,10 @@ body.home-editorial {
   --cursor-color: #fff;
 }
 
+body.home-editorial.home-horizontal {
+  overflow: hidden;
+}
+
 body.editorial-theme .cursor-dot,
 body.editorial-theme .cursor-ring,
 body.home-editorial .cursor-dot,
@@ -1520,6 +1524,14 @@ body.editorial-theme .form-group label {
   color: rgba(255, 255, 255, 0.8);
 }
 
+body.editorial-theme.booking-page .form-group label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  white-space: normal;
+}
+
 body.editorial-theme .form-group input,
 body.editorial-theme .form-group select,
 body.editorial-theme .form-group textarea {
@@ -1568,9 +1580,17 @@ body.editorial-theme .booking-container {
 @media (max-width: 899px) {
   body[data-page="booking"] .booking-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-    gap: 0.5rem;
-    align-items: start;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    align-items: stretch;
+  }
+
+  body[data-page="booking"] .booking-form-card {
+    order: 1;
+  }
+
+  body[data-page="booking"] .personality-card {
+    order: 2;
   }
 
   body[data-page="booking"] .personality-card,
@@ -1730,6 +1750,8 @@ body.editorial-theme .numInputWrapper span.arrowDown:after {
   border-top-color: #fff;
 }
 
-body.editorial-theme .form-group input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+body.editorial-theme .form-group input::placeholder,
+body.editorial-theme .form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.62);
+  opacity: 1;
 }

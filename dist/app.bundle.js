@@ -639,8 +639,8 @@ var SITE = {
   },
   // Admin dashboard — admin.html (create user in Supabase → Authentication)
   admin: {
-    loginEmail: "asantewaa@glamroom.com",
-    clearPassword: "glamroom2024"
+    loginEmail: "lesleyyskills@gmail.com",
+    clearPassword: "GlamLesley2026!"
   },
   findBooking: {
     phonePlaceholder: "024 XXX XXXX or +233 XX XXX XXXX",
@@ -1432,8 +1432,8 @@ var SITE2 = {
   },
   // Admin dashboard — admin.html (create user in Supabase → Authentication)
   admin: {
-    loginEmail: "asantewaa@glamroom.com",
-    clearPassword: "glamroom2024"
+    loginEmail: "lesleyyskills@gmail.com",
+    clearPassword: "GlamLesley2026!"
   },
   findBooking: {
     phonePlaceholder: "024 XXX XXXX or +233 XX XXX XXXX",
@@ -1671,7 +1671,6 @@ function applyBookingLocationFromUrl() {
   updateSummary();
 }
 function populateBookingPage() {
-  document.getElementById("booking-subhead").textContent = SITE.booking.subhead;
   const locationsList = document.getElementById("booking-locations-list");
   if (locationsList) {
     const hours = SITE.business?.hours || "Mon to Sat: 9am to 6pm \xB7 Sun: Closed";
@@ -1681,13 +1680,11 @@ function populateBookingPage() {
       const showBrand = brand && label !== brand;
       return `
       <li>
-        <i class="fas fa-map-marker-alt"></i>
         <span><strong>${label}</strong>${showBrand ? `<br><span class="booking-info-sub">${brand}</span>` : ""}</span>
       </li>
     `;
     }).join("") + `
       <li class="booking-hours-row">
-        <i class="fas fa-clock"></i>
         <span><strong>Opening hours</strong><br>${hours}</span>
       </li>
     `;
@@ -1858,19 +1855,17 @@ function updateSummary() {
   const summaryDiv = document.getElementById("liveSummary");
   if (service && locationId && date && time) {
     summaryDiv.innerHTML = `
-      <i class="fas fa-check-circle" style="color: var(--terracotta);"></i>
-      <strong>Booking summary:</strong><br>
-      \u{1F451} ${name} \xB7 ${service}<br>
-      \u{1F4CD} ${location}<br>
-      \u{1F4C5} ${date} at ${time}<br>
-      <span style="font-size: 0.82rem;">\u{1F4B0} Pay at salon. Mama Glam dey wait you!</span>
+      <strong>Summary</strong><br>
+      ${name} \xB7 ${service}<br>
+      ${location}<br>
+      ${date} at ${time}
     `;
   } else if (service && locationId) {
-    summaryDiv.innerHTML = `<i class="fas fa-info-circle"></i> Pick date and time to complete your booking.`;
+    summaryDiv.textContent = "Pick a date and time to finish.";
   } else if (service) {
-    summaryDiv.innerHTML = `<i class="fas fa-info-circle"></i> Pick date and time to complete your booking.`;
+    summaryDiv.textContent = "Pick a date and time to finish.";
   } else {
-    summaryDiv.innerHTML = `<i class="fas fa-info-circle"></i> Select a general service and specific style to see your summary.`;
+    summaryDiv.textContent = "Choose category and style to see your summary.";
   }
 }
 function validatePhone(phone) {
@@ -1900,7 +1895,7 @@ function showError(message, { html = false } = {}) {
   }, 6e3);
 }
 function resetButton(btn) {
-  btn.innerHTML = '<i class="fas fa-calendar-plus"></i> Book My Glam Session';
+  btn.textContent = "Book appointment";
   btn.disabled = false;
 }
 function getWhatsAppFallbackUrl(bookingData) {
@@ -2680,8 +2675,8 @@ var SITE3 = {
   },
   // Admin dashboard — admin.html (create user in Supabase → Authentication)
   admin: {
-    loginEmail: "asantewaa@glamroom.com",
-    clearPassword: "glamroom2024"
+    loginEmail: "lesleyyskills@gmail.com",
+    clearPassword: "GlamLesley2026!"
   },
   findBooking: {
     phonePlaceholder: "024 XXX XXXX or +233 XX XXX XXXX",
@@ -3871,6 +3866,23 @@ async function initHeroTitleSequence() {
 function isHomeHorizontalScroll() {
   return window.matchMedia("(min-width: 1024px)").matches;
 }
+function scrollHomeToPanel(scrollEl, panel, reducedMotion) {
+  if (!scrollEl || !panel) return;
+  if (isHomeHorizontalScroll()) {
+    scrollEl.scrollTo({
+      left: panel.offsetLeft,
+      behavior: reducedMotion.matches ? "auto" : "smooth"
+    });
+    return;
+  }
+  panel.scrollIntoView({
+    behavior: reducedMotion.matches ? "auto" : "smooth",
+    block: "start"
+  });
+}
+function syncHomeHorizontalMode() {
+  document.body.classList.toggle("home-horizontal", isHomeHorizontalScroll());
+}
 function initHomeScrollEffects() {
   const scrollEl = document.getElementById("home-scroll");
   const hint = document.getElementById("home-scroll-hint");
@@ -3918,25 +3930,31 @@ function initHomeScrollEffects() {
     if (scrolled > 80) hint?.classList.add("hidden");
     updateActivePanel();
   }, { passive: true });
-  scrollEl.addEventListener("wheel", (e) => {
+  function handleHorizontalWheel(e) {
     if (!isHomeHorizontalScroll() || e.ctrlKey) return;
-    if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
-    e.preventDefault();
-    scrollEl.scrollLeft += e.deltaY;
-  }, { passive: false });
+    const delta = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+    if (!delta) return;
+    const maxScroll = scrollEl.scrollWidth - scrollEl.clientWidth;
+    const nextScroll = scrollEl.scrollLeft + delta;
+    const canScrollLeft = nextScroll > 0;
+    const canScrollRight = nextScroll < maxScroll;
+    if (delta > 0 && canScrollRight || delta < 0 && canScrollLeft) {
+      e.preventDefault();
+      scrollEl.scrollBy({ left: delta, behavior: "auto" });
+    }
+  }
+  window.addEventListener("wheel", handleHorizontalWheel, { passive: false, capture: true });
   dots?.forEach((dot) => {
     dot.addEventListener("click", () => {
       const index = Number(dot.dataset.index);
-      const panel = panels[index];
-      if (!panel) return;
-      panel.scrollIntoView({
-        behavior: reducedMotion.matches ? "auto" : "smooth",
-        block: "nearest",
-        inline: isHomeHorizontalScroll() ? "start" : "nearest"
-      });
+      scrollHomeToPanel(scrollEl, panels[index], reducedMotion);
     });
   });
-  window.addEventListener("resize", updateActivePanel, { passive: true });
+  window.addEventListener("resize", () => {
+    syncHomeHorizontalMode();
+    updateActivePanel();
+  }, { passive: true });
+  syncHomeHorizontalMode();
   updateActivePanel();
 }
 var TestimonialCarousel = class {

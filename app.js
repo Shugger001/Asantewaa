@@ -1131,6 +1131,27 @@ function isHomeHorizontalScroll() {
   return window.matchMedia('(min-width: 1024px)').matches;
 }
 
+function scrollHomeToPanel(scrollEl, panel, reducedMotion) {
+  if (!scrollEl || !panel) return;
+
+  if (isHomeHorizontalScroll()) {
+    scrollEl.scrollTo({
+      left: panel.offsetLeft,
+      behavior: reducedMotion.matches ? 'auto' : 'smooth',
+    });
+    return;
+  }
+
+  panel.scrollIntoView({
+    behavior: reducedMotion.matches ? 'auto' : 'smooth',
+    block: 'start',
+  });
+}
+
+function syncHomeHorizontalMode() {
+  document.body.classList.toggle('home-horizontal', isHomeHorizontalScroll());
+}
+
 function initHomeScrollEffects() {
   const scrollEl = document.getElementById('home-scroll');
   const hint = document.getElementById('home-scroll-hint');
@@ -1189,27 +1210,39 @@ function initHomeScrollEffects() {
     updateActivePanel();
   }, { passive: true });
 
-  scrollEl.addEventListener('wheel', (e) => {
+  function handleHorizontalWheel(e) {
     if (!isHomeHorizontalScroll() || e.ctrlKey) return;
-    if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
-    e.preventDefault();
-    scrollEl.scrollLeft += e.deltaY;
-  }, { passive: false });
+
+    const delta =
+      Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+    if (!delta) return;
+
+    const maxScroll = scrollEl.scrollWidth - scrollEl.clientWidth;
+    const nextScroll = scrollEl.scrollLeft + delta;
+    const canScrollLeft = nextScroll > 0;
+    const canScrollRight = nextScroll < maxScroll;
+
+    if ((delta > 0 && canScrollRight) || (delta < 0 && canScrollLeft)) {
+      e.preventDefault();
+      scrollEl.scrollBy({ left: delta, behavior: 'auto' });
+    }
+  }
+
+  window.addEventListener('wheel', handleHorizontalWheel, { passive: false, capture: true });
 
   dots?.forEach((dot) => {
     dot.addEventListener('click', () => {
       const index = Number(dot.dataset.index);
-      const panel = panels[index];
-      if (!panel) return;
-      panel.scrollIntoView({
-        behavior: reducedMotion.matches ? 'auto' : 'smooth',
-        block: 'nearest',
-        inline: isHomeHorizontalScroll() ? 'start' : 'nearest',
-      });
+      scrollHomeToPanel(scrollEl, panels[index], reducedMotion);
     });
   });
 
-  window.addEventListener('resize', updateActivePanel, { passive: true });
+  window.addEventListener('resize', () => {
+    syncHomeHorizontalMode();
+    updateActivePanel();
+  }, { passive: true });
+
+  syncHomeHorizontalMode();
   updateActivePanel();
 }
 

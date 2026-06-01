@@ -114,7 +114,6 @@ function applyBookingLocationFromUrl() {
 }
 
 function populateBookingPage() {
-  document.getElementById('booking-subhead').textContent = SITE.booking.subhead;
   const locationsList = document.getElementById('booking-locations-list');
   if (locationsList) {
     const hours = SITE.business?.hours || 'Mon to Sat: 9am to 6pm · Sun: Closed';
@@ -127,7 +126,6 @@ function populateBookingPage() {
 
           return `
       <li>
-        <i class="fas fa-map-marker-alt"></i>
         <span><strong>${label}</strong>${showBrand ? `<br><span class="booking-info-sub">${brand}</span>` : ''}</span>
       </li>
     `;
@@ -135,7 +133,6 @@ function populateBookingPage() {
         .join('') +
       `
       <li class="booking-hours-row">
-        <i class="fas fa-clock"></i>
         <span><strong>Opening hours</strong><br>${hours}</span>
       </li>
     `;
@@ -358,19 +355,17 @@ function updateSummary() {
 
   if (service && locationId && date && time) {
     summaryDiv.innerHTML = `
-      <i class="fas fa-check-circle" style="color: var(--terracotta);"></i>
-      <strong>Booking summary:</strong><br>
-      👑 ${name} · ${service}<br>
-      📍 ${location}<br>
-      📅 ${date} at ${time}<br>
-      <span style="font-size: 0.82rem;">💰 Pay at salon. Mama Glam dey wait you!</span>
+      <strong>Summary</strong><br>
+      ${name} · ${service}<br>
+      ${location}<br>
+      ${date} at ${time}
     `;
   } else if (service && locationId) {
-    summaryDiv.innerHTML = `<i class="fas fa-info-circle"></i> Pick date and time to complete your booking.`;
+    summaryDiv.textContent = 'Pick a date and time to finish.';
   } else if (service) {
-    summaryDiv.innerHTML = `<i class="fas fa-info-circle"></i> Pick date and time to complete your booking.`;
+    summaryDiv.textContent = 'Pick a date and time to finish.';
   } else {
-    summaryDiv.innerHTML = `<i class="fas fa-info-circle"></i> Select a general service and specific style to see your summary.`;
+    summaryDiv.textContent = 'Choose category and style to see your summary.';
   }
 }
 
@@ -400,7 +395,7 @@ function showError(message, { html = false } = {}) {
 }
 
 function resetButton(btn) {
-  btn.innerHTML = '<i class="fas fa-calendar-plus"></i> Book My Glam Session';
+  btn.textContent = 'Book appointment';
   btn.disabled = false;
 }
 

@@ -47,7 +47,7 @@ html.dark .booking-page {
 .booking-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 6rem 1.5rem 3rem;
+  padding: 5rem 1.5rem 2.5rem;
   position: relative;
   z-index: 1;
 }
@@ -194,9 +194,6 @@ html.dark .booking-page {
 .booking-info-list li {
   padding: 0.7rem 0;
   border-bottom: 1px solid var(--glass-border);
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
   font-size: 0.9rem;
   color: var(--text-secondary);
   min-width: 0;
@@ -334,6 +331,13 @@ body:not(.editorial-theme) .services-extension-notice {
   margin-top: 0.35rem;
 }
 
+.label-optional {
+  font-weight: 400;
+  opacity: 0.55;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
 html.dark .form-hint {
   color: var(--gold);
 }
@@ -448,6 +452,82 @@ html.dark .booking-alert.error {
   text-decoration: underline;
 }
 
+/* Booking form — full-width fields, no clipped labels or select text */
+body.booking-page .booking-form-card {
+  overflow: visible;
+}
+
+body.booking-page .form-group {
+  width: 100%;
+  min-width: 0;
+}
+
+body.booking-page .form-group label {
+  display: block;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  line-height: 1.45;
+  word-break: break-word;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+}
+
+body.booking-page .form-group input,
+body.booking-page .form-group select,
+body.booking-page .form-group textarea {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+body.booking-page select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 2.75rem;
+  color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23ffffff' fill-opacity='0.65' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px 8px;
+}
+
+body.booking-page .form-group input::placeholder,
+body.booking-page .form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.68);
+  opacity: 1;
+}
+
+body.booking-page .form-group select:invalid {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+body.booking-page .form-group select option {
+  color: #fff;
+  background: #1a1a1a;
+}
+
+body.booking-page .form-group select option[value=""] {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+body.booking-page .form-row-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+@media (min-width: 960px) {
+  body.booking-page .form-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+
 @media (max-width: 900px) {
   .booking-grid {
     grid-template-columns: 1fr;
@@ -471,8 +551,12 @@ html.dark .booking-alert.error {
   }
 
   .form-row-2 {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 0.75rem;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .form-row-2 .form-group {
+    margin-bottom: 1.15rem;
   }
 
   .booking-container {

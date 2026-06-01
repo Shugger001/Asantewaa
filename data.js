@@ -636,7 +636,12 @@ export const SITE = {
   },
 
   // Admin dashboard — admin.html (create user via supabase/create-admin-lesley.sql)
-  admin: {},
+  admin: {
+    /** Official Glam Room line — staff phone must be logged into this WhatsApp to send client texts */
+    shopWhatsapp: "+233247743593",
+    shopWhatsappLabel: "Glam Room WhatsApp",
+    clientMessagePrefix: "Glam Room by Asantewaa",
+  },
 
   findBooking: {
     phonePlaceholder: "024 XXX XXXX or +233 XX XXX XXXX",

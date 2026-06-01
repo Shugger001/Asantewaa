@@ -110,9 +110,49 @@ function formatDate(dateStr) {
   });
 }
 
-function whatsAppHref(phone) {
-  const digits = phone.replace(/\D/g, '').replace(/^0/, '233');
-  return `https://wa.me/${digits}`;
+function normalizeGhanaWhatsAppDigits(phone) {
+  let digits = String(phone || '').replace(/\D/g, '');
+  if (!digits) return '';
+  if (digits.startsWith('0')) digits = `233${digits.slice(1)}`;
+  if (!digits.startsWith('233')) digits = `233${digits}`;
+  return digits;
+}
+
+function getShopWhatsAppConfig() {
+  const admin = SITE.admin || {};
+  const number = admin.shopWhatsapp || SITE.whatsapp || '';
+  const digits = normalizeGhanaWhatsAppDigits(number);
+  return {
+    digits,
+    display: admin.shopWhatsapp || SITE.whatsapp || '',
+    label: admin.shopWhatsappLabel || 'Glam Room WhatsApp',
+    prefix: admin.clientMessagePrefix || 'Glam Room by Asantewaa',
+  };
+}
+
+function whatsAppClientHref(booking) {
+  const clientDigits = normalizeGhanaWhatsAppDigits(booking.phone);
+  if (!clientDigits) return '#';
+
+  const shop = getShopWhatsAppConfig();
+  const name = booking.full_name || 'there';
+  const date = booking.booking_date ? formatDate(booking.booking_date) : 'TBC';
+  const time = booking.booking_time ? formatTime(booking.booking_time) : 'TBC';
+  const service = booking.service || 'your appointment';
+  const location =
+    booking.location || booking.notes?.match(/\[Location: ([^\]]+)\]/)?.[1] || 'Glam Room';
+  const status = (booking.status || 'pending').replace(/^\w/, (c) => c.toUpperCase());
+
+  const message =
+    `Hi ${name}, ${shop.prefix} here! 👑\n\n` +
+    `Regarding your booking:\n` +
+    `• Service: ${service}\n` +
+    `• When: ${date} at ${time}\n` +
+    `• Where: ${location}\n` +
+    `• Status: ${status}\n\n` +
+    `This message is from our salon line (${shop.display}). Reply here with any questions — see you soon!`;
+
+  return `https://wa.me/${clientDigits}?text=${encodeURIComponent(message)}`;
 }
 
 function statusBadge(status, type = 'status') {
@@ -801,6 +841,8 @@ async function init() {
     clearQuickFilterUi();
     applyFilters();
   });
+  document.getElementById('sortBy')?.addEventListener('change', applyFilters);
+  document.getElementById('sortDir')?.addEventListener('change', applyFilters);
   document.getElementById('exportBtn').addEventListener('click', exportToCSV);
   document.getElementById('clearAllBtn').addEventListener('click', openClearConfirmModal);
   document.getElementById('refreshBtn').addEventListener('click', loadBookings);

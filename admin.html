@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
-  <link rel="stylesheet" href="admin.css?v=2">
+  <link rel="stylesheet" href="admin.css?v=3">
 </head>
 <body class="admin-page">
 
@@ -35,28 +35,28 @@
     </header>
 
     <section class="admin-stats" aria-label="Booking summary">
-      <article class="stat-card stat-card--total">
+      <article class="stat-card stat-card--total" data-quick-filter="all" tabindex="0" role="button" aria-label="Show all bookings">
         <span class="stat-card__icon" aria-hidden="true"><i class="fa-solid fa-calendar-days"></i></span>
         <div class="stat-card__body">
           <p class="stat-card__number" id="totalBookings">0</p>
           <p class="stat-card__label">Total bookings</p>
         </div>
       </article>
-      <article class="stat-card stat-card--pending">
+      <article class="stat-card stat-card--pending" data-quick-filter="pending" tabindex="0" role="button" aria-label="Show pending bookings">
         <span class="stat-card__icon" aria-hidden="true"><i class="fa-solid fa-hourglass-half"></i></span>
         <div class="stat-card__body">
           <p class="stat-card__number" id="pendingBookings">0</p>
           <p class="stat-card__label">Pending</p>
         </div>
       </article>
-      <article class="stat-card stat-card--today">
+      <article class="stat-card stat-card--today" data-quick-filter="today" tabindex="0" role="button" aria-label="Show today's bookings">
         <span class="stat-card__icon" aria-hidden="true"><i class="fa-solid fa-sun"></i></span>
         <div class="stat-card__body">
           <p class="stat-card__number" id="todayBookings">0</p>
           <p class="stat-card__label">Today</p>
         </div>
       </article>
-      <article class="stat-card stat-card--confirmed">
+      <article class="stat-card stat-card--confirmed" data-quick-filter="confirmed" tabindex="0" role="button" aria-label="Show confirmed bookings">
         <span class="stat-card__icon" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
         <div class="stat-card__body">
           <p class="stat-card__number" id="confirmedBookings">0</p>
@@ -66,6 +66,13 @@
     </section>
 
     <section class="admin-panel admin-filters" aria-label="Filters and actions">
+      <div class="admin-quick-filters" role="group" aria-label="Quick filters">
+        <span class="admin-quick-filters__label">Quick</span>
+        <button type="button" class="admin-chip is-active" data-quick="all">All</button>
+        <button type="button" class="admin-chip" data-quick="today">Today</button>
+        <button type="button" class="admin-chip" data-quick="pending">Pending</button>
+        <button type="button" class="admin-chip" data-quick="upcoming">Upcoming</button>
+      </div>
       <div class="admin-filters__row">
         <div class="admin-field">
           <label for="statusFilter">Status</label>
@@ -154,6 +161,6 @@
     </div>
   </div>
 
-  <script type="module" src="admin.js?v=6"></script>
+  <script type="module" src="admin.js?v=7"></script>
 </body>
 </html>

@@ -3,7 +3,8 @@
 :root {
   --admin-bg: #050505;
   --admin-bg-elevated: #0f0f0f;
-  --admin-surface: #141414;
+  --admin-surface: rgba(14, 14, 14, 0.82);
+  --admin-surface-solid: #141414;
   --admin-border: rgba(255, 255, 255, 0.1);
   --admin-border-strong: rgba(255, 255, 255, 0.16);
   --admin-text: #f0ebe3;
@@ -47,11 +48,32 @@ body.admin-page::before {
   content: '';
   position: fixed;
   inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: #050505;
+  background-image: url('images/admin-bg-enterprise.png');
+  background-size: cover;
+  background-position: center 22%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+body.admin-page::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(201, 169, 98, 0.08), transparent 55%),
-    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(206, 17, 38, 0.04), transparent 50%);
-  z-index: 0;
+    linear-gradient(180deg, rgba(5, 5, 5, 0.55) 0%, rgba(5, 5, 5, 0.82) 42%, rgba(5, 5, 5, 0.94) 100%),
+    radial-gradient(ellipse 90% 60% at 50% 0%, rgba(201, 169, 98, 0.06), transparent 55%);
+}
+
+@media (max-width: 768px) {
+  body.admin-page::before {
+    background-attachment: scroll;
+    background-position: center 18%;
+  }
 }
 
 .admin-shell,
@@ -276,6 +298,8 @@ body.admin-page::before {
   gap: 0.85rem;
   padding: 1.1rem 1.15rem;
   background: var(--admin-surface);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--admin-border);
   border-radius: var(--admin-radius);
   transition: border-color 0.2s, transform 0.2s var(--admin-ease);
@@ -351,6 +375,8 @@ body.admin-page::before {
 /* — Panels — */
 .admin-panel {
   background: var(--admin-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--admin-border);
   border-radius: var(--admin-radius-lg);
   margin-bottom: 1.25rem;
@@ -525,7 +551,9 @@ th {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--admin-muted);
-  background: #111;
+  background: rgba(8, 8, 8, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   white-space: nowrap;
 }
 
@@ -762,10 +790,12 @@ td strong {
 .admin-login__card {
   width: min(100%, 400px);
   padding: 2rem 1.75rem;
-  background: var(--admin-surface);
-  border: 1px solid var(--admin-border);
+  background: rgba(10, 10, 10, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--admin-border-strong);
   border-radius: var(--admin-radius-lg);
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
 }
 
 .admin-login__logo {
@@ -849,11 +879,13 @@ body.admin-modal-open {
 
 .admin-modal {
   width: min(100%, 400px);
-  background: var(--admin-surface);
-  border: 1px solid var(--admin-border);
+  background: rgba(12, 12, 12, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--admin-border-strong);
   border-radius: var(--admin-radius-lg);
   padding: 1.5rem;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
 }
 
 .admin-modal h3 {

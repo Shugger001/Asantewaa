@@ -99,7 +99,7 @@ export const SITE = {
   globalFooter: "© 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
 
   url: "https://shugger001.github.io/Asantewaaa",
-  whatsapp: "+233247743593",
+  whatsapp: "+233243646400",
   whatsappMessage: "Hi Glam Room! I'd like to book an appointment 💅",
 
   // Two Glam Room shops — names/addresses match Google Maps pins (not area labels)
@@ -112,7 +112,7 @@ export const SITE = {
       city: "Accra",
       country: "Ghana",
       mapUrl: "https://share.google/TN4FohAFQiJ6UgK4b",
-      hours: "Mon to Sat: 9am to 6pm · Sun: Closed",
+      hours: "Mon to Sun: 8am to 8pm",
       imageUrl: "images/glam-adenta-portrait.png",
       imagePosition: "center top",
       bookingValue: "glam-room-adenta",
@@ -125,7 +125,7 @@ export const SITE = {
       city: "Accra",
       country: "Ghana",
       mapUrl: "https://share.google/eNIyXIhSW1kZ6rzmF",
-      hours: "Mon to Sat: 9am to 6pm · Sun: Closed",
+      hours: "Mon to Sun: 8am to 8pm",
       imageUrl: "images/glam-braids-studio.png",
       imagePosition: "center top",
       bookingValue: "glam-room-sowutuom",
@@ -471,7 +471,7 @@ export const SITE = {
     contact: {
       intro: "FOR IMMEDIATE ASSISTANCE OR OFFICIAL DOCUMENTATION APPROVALS",
       whatsappLabel: "Glam Room WhatsApp",
-      whatsapp: "+233247743593",
+      whatsapp: "+233243646400",
       emailLabel: "Corporate Inbox",
       email: "martinadwamena599@gmail.com",
       locations: "ACCRA, GHANA * NEW JERSEY, USA",
@@ -589,9 +589,9 @@ export const SITE = {
       "Glam Room is a destination for modern beauty. Designed for women who value excellence, every service is delivered with precision, care, and an uncompromising attention to detail.",
       "From everyday refinement to life's defining moments, our stylists create looks that feel effortless, elevated, and uniquely yours.",
     ],
-    hours: "Mon to Sat: 9am to 6pm · Sun: Closed",
+    hours: "Mon to Sun: 8am to 8pm",
     /** Official Glam Room WhatsApp — staff must use this line/phone when messaging clients from admin */
-    shopWhatsApp: "+233247743593",
+    shopWhatsApp: "+233243646400",
     shopName: "Glam Room by Asantewaaa",
   },
 

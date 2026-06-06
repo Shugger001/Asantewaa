@@ -116,7 +116,7 @@ function applyBookingLocationFromUrl() {
 function populateBookingPage() {
   const locationsList = document.getElementById('booking-locations-list');
   if (locationsList) {
-    const hours = SITE.business?.hours || 'Mon to Sat: 9am to 6pm · Sun: Closed';
+    const hours = SITE.business?.hours || 'Mon to Sun: 8am to 8pm';
     locationsList.innerHTML =
       SITE.locations
         .map((loc) => {

@@ -60,7 +60,7 @@ var SITE = {
   ],
   globalFooter: "\xA9 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
   url: "https://shugger001.github.io/Asantewaaa",
-  whatsapp: "+233247743593",
+  whatsapp: "+233243646400",
   whatsappMessage: "Hi Glam Room! I'd like to book an appointment \u{1F485}",
   // Two Glam Room shops — names/addresses match Google Maps pins (not area labels)
   locations: [
@@ -72,7 +72,7 @@ var SITE = {
       city: "Accra",
       country: "Ghana",
       mapUrl: "https://share.google/TN4FohAFQiJ6UgK4b",
-      hours: "Mon to Sat: 9am to 6pm \xB7 Sun: Closed",
+      hours: "Mon to Sun: 8am to 8pm",
       imageUrl: "images/glam-adenta-portrait.png",
       imagePosition: "center top",
       bookingValue: "glam-room-adenta"
@@ -85,7 +85,7 @@ var SITE = {
       city: "Accra",
       country: "Ghana",
       mapUrl: "https://share.google/eNIyXIhSW1kZ6rzmF",
-      hours: "Mon to Sat: 9am to 6pm \xB7 Sun: Closed",
+      hours: "Mon to Sun: 8am to 8pm",
       imageUrl: "images/glam-braids-studio.png",
       imagePosition: "center top",
       bookingValue: "glam-room-sowutuom"
@@ -417,7 +417,7 @@ var SITE = {
     contact: {
       intro: "FOR IMMEDIATE ASSISTANCE OR OFFICIAL DOCUMENTATION APPROVALS",
       whatsappLabel: "WhatsApp Management",
-      whatsapp: "+233 (0) 247 743 593",
+      whatsapp: "+233243646400",
       emailLabel: "Corporate Inbox",
       email: "martinadwamena599@gmail.com",
       locations: "ACCRA, GHANA * NEW JERSEY, USA"
@@ -529,7 +529,7 @@ var SITE = {
       "Glam Room is a destination for modern beauty. Designed for women who value excellence, every service is delivered with precision, care, and an uncompromising attention to detail.",
       "From everyday refinement to life's defining moments, our stylists create looks that feel effortless, elevated, and uniquely yours."
     ],
-    hours: "Mon to Sat: 9am to 6pm \xB7 Sun: Closed"
+    hours: "Mon to Sun: 8am to 8pm"
   },
   booking: {
     // Supabase — paste credentials from Project Settings → API
@@ -778,7 +778,7 @@ var SITE2 = {
   ],
   globalFooter: "\xA9 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
   url: "https://shugger001.github.io/Asantewaaa",
-  whatsapp: "+233247743593",
+  whatsapp: "+233243646400",
   whatsappMessage: "Hi Glam Room! I'd like to book an appointment \u{1F485}",
   // Two Glam Room shops — names/addresses match Google Maps pins (not area labels)
   locations: [
@@ -790,7 +790,7 @@ var SITE2 = {
       city: "Accra",
       country: "Ghana",
       mapUrl: "https://share.google/TN4FohAFQiJ6UgK4b",
-      hours: "Mon to Sat: 9am to 6pm \xB7 Sun: Closed",
+      hours: "Mon to Sun: 8am to 8pm",
       imageUrl: "images/glam-adenta-portrait.png",
       imagePosition: "center top",
       bookingValue: "glam-room-adenta"
@@ -803,7 +803,7 @@ var SITE2 = {
       city: "Accra",
       country: "Ghana",
       mapUrl: "https://share.google/eNIyXIhSW1kZ6rzmF",
-      hours: "Mon to Sat: 9am to 6pm \xB7 Sun: Closed",
+      hours: "Mon to Sun: 8am to 8pm",
       imageUrl: "images/glam-braids-studio.png",
       imagePosition: "center top",
       bookingValue: "glam-room-sowutuom"
@@ -1135,7 +1135,7 @@ var SITE2 = {
     contact: {
       intro: "FOR IMMEDIATE ASSISTANCE OR OFFICIAL DOCUMENTATION APPROVALS",
       whatsappLabel: "WhatsApp Management",
-      whatsapp: "+233 (0) 247 743 593",
+      whatsapp: "+233243646400",
       emailLabel: "Corporate Inbox",
       email: "martinadwamena599@gmail.com",
       locations: "ACCRA, GHANA * NEW JERSEY, USA"
@@ -1247,7 +1247,7 @@ var SITE2 = {
       "Glam Room is a destination for modern beauty. Designed for women who value excellence, every service is delivered with precision, care, and an uncompromising attention to detail.",
       "From everyday refinement to life's defining moments, our stylists create looks that feel effortless, elevated, and uniquely yours."
     ],
-    hours: "Mon to Sat: 9am to 6pm \xB7 Sun: Closed"
+    hours: "Mon to Sun: 8am to 8pm"
   },
   booking: {
     // Supabase — paste credentials from Project Settings → API
@@ -1523,7 +1523,7 @@ function applyBookingLocationFromUrl() {
 function populateBookingPage() {
   const locationsList = document.getElementById("booking-locations-list");
   if (locationsList) {
-    const hours = SITE.business?.hours || "Mon to Sat: 9am to 6pm \xB7 Sun: Closed";
+    const hours = SITE.business?.hours || "Mon to Sun: 8am to 8pm";
     locationsList.innerHTML = SITE.locations.map((loc) => {
       const label = getLocationLabel(loc);
       const brand = loc.name?.trim();
@@ -1946,7 +1946,7 @@ var SITE3 = {
   ],
   globalFooter: "\xA9 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
   url: "https://shugger001.github.io/Asantewaaa",
-  whatsapp: "+233247743593",
+  whatsapp: "+233243646400",
   whatsappMessage: "Hi Glam Room! I'd like to book an appointment \u{1F485}",
   // Two Glam Room shops — names/addresses match Google Maps pins (not area labels)
   locations: [
@@ -1958,7 +1958,7 @@ var SITE3 = {
       city: "Accra",
       country: "Ghana",
       mapUrl: "https://share.google/TN4FohAFQiJ6UgK4b",
-      hours: "Mon to Sat: 9am to 6pm \xB7 Sun: Closed",
+      hours: "Mon to Sun: 8am to 8pm",
       imageUrl: "images/glam-adenta-portrait.png",
       imagePosition: "center top",
       bookingValue: "glam-room-adenta"
@@ -1971,7 +1971,7 @@ var SITE3 = {
       city: "Accra",
       country: "Ghana",
       mapUrl: "https://share.google/eNIyXIhSW1kZ6rzmF",
-      hours: "Mon to Sat: 9am to 6pm \xB7 Sun: Closed",
+      hours: "Mon to Sun: 8am to 8pm",
       imageUrl: "images/glam-braids-studio.png",
       imagePosition: "center top",
       bookingValue: "glam-room-sowutuom"
@@ -2303,7 +2303,7 @@ var SITE3 = {
     contact: {
       intro: "FOR IMMEDIATE ASSISTANCE OR OFFICIAL DOCUMENTATION APPROVALS",
       whatsappLabel: "WhatsApp Management",
-      whatsapp: "+233 (0) 247 743 593",
+      whatsapp: "+233243646400",
       emailLabel: "Corporate Inbox",
       email: "martinadwamena599@gmail.com",
       locations: "ACCRA, GHANA * NEW JERSEY, USA"
@@ -2415,7 +2415,7 @@ var SITE3 = {
       "Glam Room is a destination for modern beauty. Designed for women who value excellence, every service is delivered with precision, care, and an uncompromising attention to detail.",
       "From everyday refinement to life's defining moments, our stylists create looks that feel effortless, elevated, and uniquely yours."
     ],
-    hours: "Mon to Sat: 9am to 6pm \xB7 Sun: Closed"
+    hours: "Mon to Sun: 8am to 8pm"
   },
   booking: {
     // Supabase — paste credentials from Project Settings → API

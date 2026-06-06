@@ -52,7 +52,6 @@ export function getSlotSpotsRemaining(time, countsBySlot, max = getMaxReservatio
 
 export function buildDateDisableFunctions(countsByDate, maxPerDay = getMaxReservationsPerDay()) {
   return [
-    (date) => date.getDay() === 0,
     (date) => isDateFullyBooked(formatDateYmd(date), countsByDate, maxPerDay),
   ];
 }

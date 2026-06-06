@@ -63,11 +63,19 @@ function needsStatusConfirm(fromStatus, toStatus) {
   return Boolean(STATUS_CONFIRM[toStatus]) || (toStatus === 'pending' && fromStatus !== 'pending');
 }
 
+function clearLoginError() {
+  loginError.textContent = '';
+  loginError.classList.remove('is-visible');
+  loginError.hidden = true;
+  loginError.style.removeProperty('display');
+}
+
 function showLogin(message = '') {
   adminContent.hidden = true;
   adminContent.setAttribute('aria-hidden', 'true');
   loginContainer.hidden = false;
   loginContainer.removeAttribute('aria-hidden');
+  loginContainer.removeAttribute('inert');
   document.body.classList.remove('admin-is-signed-in');
   loginError.textContent = message;
   if (message) {
@@ -75,21 +83,20 @@ function showLogin(message = '') {
     loginError.hidden = false;
     loginError.style.removeProperty('display');
   } else {
-    loginError.classList.remove('is-visible');
-    loginError.hidden = true;
-    loginError.style.removeProperty('display');
+    clearLoginError();
   }
 }
 
 function showAdmin() {
   loginContainer.hidden = true;
   loginContainer.setAttribute('aria-hidden', 'true');
+  loginContainer.setAttribute('inert', '');
   adminContent.hidden = false;
   adminContent.removeAttribute('aria-hidden');
+  adminContent.removeAttribute('inert');
   document.body.classList.add('admin-is-signed-in');
-  loginError.classList.remove('is-visible');
-  loginError.hidden = true;
-  loginError.textContent = '';
+  document.body.classList.remove('admin-modal-open');
+  clearLoginError();
 }
 
 function formatTime(time) {
@@ -819,6 +826,9 @@ function bindPasswordToggle() {
 
 async function init() {
   const supabase = getAdminSupabase();
+  document.body.classList.remove('admin-modal-open');
+  document.getElementById('adminActionModal')?.remove();
+  document.getElementById('clearConfirmModal')?.remove();
   bindPasswordToggle();
 
   loginForm.addEventListener('submit', async (e) => {
@@ -828,7 +838,7 @@ async function init() {
     const passwordInput = document.getElementById('adminPassword');
     btn.disabled = true;
     btn.textContent = 'Signing in…';
-    showLogin('');
+    clearLoginError();
 
     const ok = await login(emailInput?.value || '', passwordInput?.value || '');
     if (!ok) {
@@ -839,29 +849,34 @@ async function init() {
     btn.textContent = 'Sign in';
   });
 
-  document.getElementById('applyFilterBtn').addEventListener('click', () => {
+  document.getElementById('applyFilterBtn')?.addEventListener('click', () => {
     clearQuickFilterUi();
     applyFilters();
   });
-  document.getElementById('resetFilterBtn').addEventListener('click', resetFilters);
-  document.getElementById('statusFilter').addEventListener('change', () => {
+  document.getElementById('resetFilterBtn')?.addEventListener('click', resetFilters);
+  document.getElementById('statusFilter')?.addEventListener('change', () => {
     clearQuickFilterUi();
     applyFilters();
   });
-  document.getElementById('dateFilter').addEventListener('change', () => {
+  document.getElementById('dateFilter')?.addEventListener('change', () => {
     clearQuickFilterUi();
     applyFilters();
   });
-  document.getElementById('phoneFilter').addEventListener('input', () => {
+  document.getElementById('phoneFilter')?.addEventListener('input', () => {
     clearQuickFilterUi();
     applyFilters();
   });
   document.getElementById('sortBy')?.addEventListener('change', applyFilters);
   document.getElementById('sortDir')?.addEventListener('change', applyFilters);
-  document.getElementById('exportBtn').addEventListener('click', exportToCSV);
-  document.getElementById('clearAllBtn').addEventListener('click', openClearConfirmModal);
-  document.getElementById('refreshBtn').addEventListener('click', loadBookings);
-  document.getElementById('logoutBtn').addEventListener('click', logout);
+  document.getElementById('exportBtn')?.addEventListener('click', exportToCSV);
+  document.getElementById('clearAllBtn')?.addEventListener('click', openClearConfirmModal);
+  document.getElementById('refreshBtn')?.addEventListener('click', loadBookings);
+  document.getElementById('logoutBtn')?.addEventListener('click', logout);
+  document.getElementById('shopWhatsAppLink')?.addEventListener('click', (e) => {
+    if (!e.currentTarget.href || e.currentTarget.getAttribute('href') === '#') {
+      e.preventDefault();
+    }
+  });
 
   document.querySelectorAll('.admin-chip[data-quick]').forEach((chip) => {
     chip.addEventListener('click', () => applyQuickFilter(chip.dataset.quick));

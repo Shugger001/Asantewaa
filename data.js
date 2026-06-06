@@ -98,7 +98,7 @@ export const SITE = {
 
   globalFooter: "© 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
 
-  url: "https://shugger001.github.io/Asantewaaa",
+  url: "https://shugger001.github.io/Asantewaa",
   whatsapp: "+233243646400",
   whatsappMessage: "Hi Glam Room! I'd like to book an appointment 💅",
 
@@ -592,7 +592,7 @@ export const SITE = {
     hours: "Mon to Sun: 8am to 8pm",
     /** Official Glam Room WhatsApp — staff must use this line/phone when messaging clients from admin */
     shopWhatsApp: "+233243646400",
-    shopName: "Glam Room by Asantewaaa",
+    shopName: "Glam Room by Asantewaa",
   },
 
   booking: {
@@ -616,7 +616,7 @@ export const SITE = {
     maxReservationsPerSlot: 3,
 
     deposit: {
-      enabled: true,
+      enabled: false,
       configured: false,
       provider: "moolre",
       amountGhs: 50,
@@ -632,9 +632,18 @@ export const SITE = {
 
     timeSlots: [
       { value: "08:00", label: "08:00 AM" },
+      { value: "09:00", label: "09:00 AM" },
+      { value: "10:00", label: "10:00 AM" },
       { value: "11:00", label: "11:00 AM" },
+      { value: "12:00", label: "12:00 PM" },
+      { value: "13:00", label: "01:00 PM" },
       { value: "14:00", label: "02:00 PM" },
+      { value: "15:00", label: "03:00 PM" },
+      { value: "16:00", label: "04:00 PM" },
       { value: "17:00", label: "05:00 PM" },
+      { value: "18:00", label: "06:00 PM" },
+      { value: "19:00", label: "07:00 PM" },
+      { value: "20:00", label: "08:00 PM" },
     ],
   },
 

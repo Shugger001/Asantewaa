@@ -19,7 +19,7 @@ var SITE = {
     { id: "04", label: "Partnerships \xB7 Brand Intake", href: "proposals.html" }
   ],
   globalFooter: "\xA9 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
-  url: "https://shugger001.github.io/Asantewaaa",
+  url: "https://shugger001.github.io/Asantewaa",
   whatsapp: "+233243646400",
   whatsappMessage: "Hi Glam Room! I'd like to book an appointment \u{1F485}",
   // Two Glam Room shops — names/addresses match Google Maps pins (not area labels)
@@ -492,7 +492,7 @@ var SITE = {
     hours: "Mon to Sun: 8am to 8pm",
     /** Official Glam Room WhatsApp — staff must use this line/phone when messaging clients from admin */
     shopWhatsApp: "+233243646400",
-    shopName: "Glam Room by Asantewaaa"
+    shopName: "Glam Room by Asantewaa"
   },
   booking: {
     // Supabase — paste credentials from Project Settings → API
@@ -510,7 +510,7 @@ var SITE = {
     maxReservationsPerDay: 12,
     maxReservationsPerSlot: 3,
     deposit: {
-      enabled: true,
+      enabled: false,
       configured: false,
       provider: "moolre",
       amountGhs: 50,
@@ -523,9 +523,18 @@ var SITE = {
     },
     timeSlots: [
       { value: "08:00", label: "08:00 AM" },
+      { value: "09:00", label: "09:00 AM" },
+      { value: "10:00", label: "10:00 AM" },
       { value: "11:00", label: "11:00 AM" },
+      { value: "12:00", label: "12:00 PM" },
+      { value: "13:00", label: "01:00 PM" },
       { value: "14:00", label: "02:00 PM" },
-      { value: "17:00", label: "05:00 PM" }
+      { value: "15:00", label: "03:00 PM" },
+      { value: "16:00", label: "04:00 PM" },
+      { value: "17:00", label: "05:00 PM" },
+      { value: "18:00", label: "06:00 PM" },
+      { value: "19:00", label: "07:00 PM" },
+      { value: "20:00", label: "08:00 PM" }
     ]
   },
   // Admin dashboard — admin.html (create user via supabase/create-admin-lesley.sql)
@@ -621,7 +630,7 @@ var SITE2 = {
     { id: "04", label: "Partnerships \xB7 Brand Intake", href: "proposals.html" }
   ],
   globalFooter: "\xA9 2026 THE HOUSE OF ASANTEWAA. ALL RIGHTS RESERVED.",
-  url: "https://shugger001.github.io/Asantewaaa",
+  url: "https://shugger001.github.io/Asantewaa",
   whatsapp: "+233243646400",
   whatsappMessage: "Hi Glam Room! I'd like to book an appointment \u{1F485}",
   // Two Glam Room shops — names/addresses match Google Maps pins (not area labels)
@@ -1094,7 +1103,7 @@ var SITE2 = {
     hours: "Mon to Sun: 8am to 8pm",
     /** Official Glam Room WhatsApp — staff must use this line/phone when messaging clients from admin */
     shopWhatsApp: "+233243646400",
-    shopName: "Glam Room by Asantewaaa"
+    shopName: "Glam Room by Asantewaa"
   },
   booking: {
     // Supabase — paste credentials from Project Settings → API
@@ -1112,7 +1121,7 @@ var SITE2 = {
     maxReservationsPerDay: 12,
     maxReservationsPerSlot: 3,
     deposit: {
-      enabled: true,
+      enabled: false,
       configured: false,
       provider: "moolre",
       amountGhs: 50,
@@ -1125,9 +1134,18 @@ var SITE2 = {
     },
     timeSlots: [
       { value: "08:00", label: "08:00 AM" },
+      { value: "09:00", label: "09:00 AM" },
+      { value: "10:00", label: "10:00 AM" },
       { value: "11:00", label: "11:00 AM" },
+      { value: "12:00", label: "12:00 PM" },
+      { value: "13:00", label: "01:00 PM" },
       { value: "14:00", label: "02:00 PM" },
-      { value: "17:00", label: "05:00 PM" }
+      { value: "15:00", label: "03:00 PM" },
+      { value: "16:00", label: "04:00 PM" },
+      { value: "17:00", label: "05:00 PM" },
+      { value: "18:00", label: "06:00 PM" },
+      { value: "19:00", label: "07:00 PM" },
+      { value: "20:00", label: "08:00 PM" }
     ]
   },
   // Admin dashboard — admin.html (create user via supabase/create-admin-lesley.sql)

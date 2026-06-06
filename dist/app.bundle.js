@@ -563,10 +563,10 @@ var SITE = {
       confirmedMessage: "You're confirmed! Your deposit secures your chair. See you at Glam Room."
     },
     timeSlots: [
-      { value: "08:00", label: "08:00 AM" },
-      { value: "11:00", label: "11:00 AM" },
-      { value: "14:00", label: "02:00 PM" },
-      { value: "17:00", label: "05:00 PM" }
+      { value: "09:00", label: "09:00 AM" },
+      { value: "12:00", label: "12:00 PM" },
+      { value: "15:00", label: "03:00 PM" },
+      { value: "18:00", label: "06:00 PM" }
     ]
   },
   // Admin dashboard — admin.html (create user via supabase/create-admin-lesley.sql)
@@ -1294,10 +1294,10 @@ var SITE2 = {
       confirmedMessage: "You're confirmed! Your deposit secures your chair. See you at Glam Room."
     },
     timeSlots: [
-      { value: "08:00", label: "08:00 AM" },
-      { value: "11:00", label: "11:00 AM" },
-      { value: "14:00", label: "02:00 PM" },
-      { value: "17:00", label: "05:00 PM" }
+      { value: "09:00", label: "09:00 AM" },
+      { value: "12:00", label: "12:00 PM" },
+      { value: "15:00", label: "03:00 PM" },
+      { value: "18:00", label: "06:00 PM" }
     ]
   },
   // Admin dashboard — admin.html (create user via supabase/create-admin-lesley.sql)
@@ -2475,10 +2475,10 @@ var SITE3 = {
       confirmedMessage: "You're confirmed! Your deposit secures your chair. See you at Glam Room."
     },
     timeSlots: [
-      { value: "08:00", label: "08:00 AM" },
-      { value: "11:00", label: "11:00 AM" },
-      { value: "14:00", label: "02:00 PM" },
-      { value: "17:00", label: "05:00 PM" }
+      { value: "09:00", label: "09:00 AM" },
+      { value: "12:00", label: "12:00 PM" },
+      { value: "15:00", label: "03:00 PM" },
+      { value: "18:00", label: "06:00 PM" }
     ]
   },
   // Admin dashboard — admin.html (create user via supabase/create-admin-lesley.sql)

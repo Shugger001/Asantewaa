@@ -525,7 +525,7 @@ export const SITE = {
       styles: [
         { id: "closure-install", name: "Closure Hair Install", description: "Closure unit installed and styled.", price: "GH₵ 50", duration: "1 to 1.5 hrs", imageUrl: "images/glam-red-studio.png" },
         { id: "frontal-install", name: "Frontal Hair Install", description: "Frontal unit installed with a natural hairline.", price: "GH₵ 100", duration: "1.5 to 2 hrs", imageUrl: "images/glam-red-indoor.png" },
-        { id: "frontal-ponytail", name: "Frontal Ponytail", description: "Frontal install finished in a sleek ponytail style.", price: "GH₵ 150", duration: "1.5 to 2 hrs", imageUrl: "images/glam-red-celebration.png" },
+        { id: "frontal-ponytail", name: "Frontal Ponytail", description: "Frontal install finished in a sleek ponytail style.", price: "GH₵ 150", duration: "1.5 to 2 hrs", imageUrl: "images/glam-frontal-ponytail.png" },
       ],
     },
     {

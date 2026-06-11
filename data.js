@@ -538,7 +538,7 @@ export const SITE = {
       badge: null,
       styles: [
         { id: "shoulder-length", name: "Shoulder Length", description: "Braiding service to shoulder length. Hair not included.", price: "GH₵ 150", duration: "3 to 4 hrs", imageUrl: "images/glam-braids-studio.png" },
-        { id: "bra-length", name: "Bra Length", description: "Braiding service to bra strap length. Hair not included.", price: "GH₵ 200", duration: "4 to 5 hrs", imageUrl: "images/glam-gallery-braids-bw.png" },
+        { id: "bra-length", name: "Bra Length", description: "Braiding service to bra strap length. Hair not included.", price: "GH₵ 200", duration: "4 to 5 hrs", imageUrl: "images/glam-bra-length.png" },
         { id: "waist-length", name: "Waist Length", description: "Braiding service to waist length. Hair not included.", price: "GH₵ 220", duration: "4 to 5 hrs", imageUrl: "images/glam-braids-studio.png" },
         { id: "hip-length", name: "Hip Length", description: "Braiding service to hip length. Hair not included.", price: "GH₵ 250", duration: "5 to 6 hrs", imageUrl: "images/glam-braids-studio.png" },
         { id: "butt-length", name: "Butt Length", description: "Braiding service to butt length. Hair not included.", price: "GH₵ 300", duration: "6 to 7 hrs", imageUrl: "images/glam-braids-portrait.png" },

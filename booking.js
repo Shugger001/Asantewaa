@@ -19,6 +19,7 @@ import {
   getMaxReservationsPerSlot,
   getSlotBookingCount,
   getSlotSpotsRemaining,
+  hasExistingCustomerBookingOnDate,
   isDateFullyBooked,
   isSlotFullyBooked,
 } from './booking-capacity.js?v=20260536';
@@ -399,6 +400,18 @@ function resetButton(btn) {
   btn.disabled = false;
 }
 
+function isDuplicateCustomerBookingError(error) {
+  const message = error?.message || '';
+  return error?.code === 'P0001' && message.includes('already have a booking');
+}
+
+function getDuplicateBookingMessage() {
+  return (
+    'You already have a booking on this date with this phone number. ' +
+    'Use <a href="index.html#find-booking">Find my booking</a> to check it, or pick another day.'
+  );
+}
+
 function getWhatsAppFallbackUrl(bookingData) {
   const num = SITE.whatsapp.replace(/[^0-9+]/g, '').replace('+', '');
   const msg = encodeURIComponent(
@@ -484,6 +497,12 @@ async function handleSubmit(e) {
       return;
     }
 
+    if (await hasExistingCustomerBookingOnDate(supabase, phone, date)) {
+      showError(getDuplicateBookingMessage(), { html: true });
+      resetButton(submitBtn);
+      return;
+    }
+
     const bookingId = await insertBooking(supabase, bookingData);
 
     if (isDepositPaymentEnabled() && bookingId) {
@@ -516,6 +535,13 @@ async function handleSubmit(e) {
     await fetchBookedSlots(date);
   } catch (err) {
     console.error('Booking error:', err);
+
+    if (isDuplicateCustomerBookingError(err)) {
+      showError(getDuplicateBookingMessage(), { html: true });
+      resetButton(submitBtn);
+      return;
+    }
+
     const limitReached =
       err?.message?.includes('Daily booking limit') ||
       err?.details?.includes('Daily booking limit') ||

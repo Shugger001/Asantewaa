@@ -1,11 +1,11 @@
 import { SITE, getLocationLabel, findServiceById, getServicePriceRange } from './data.js?v=20260536';
-import { initBookingForm } from './booking.js?v=20260562';
+import { initBookingForm } from './booking.js?v=20260563';
 import {
   bindSanctuaryBookingButtons,
   openBookingPage,
 } from './glam-booking.js?v=20260548';
 import { initProposalsForm } from './proposals.js?v=20260536';
-import { initFindBooking } from './find-booking.js?v=20260548';
+import { initFindBooking } from './find-booking.js?v=20260563';
 import { initInstallPrompt } from './install-prompt.js?v=20260548';
 
 /* ==========================================================================

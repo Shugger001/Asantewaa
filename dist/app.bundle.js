@@ -664,6 +664,22 @@ function getSupabase(options = {}) {
   return client;
 }
 
+// booking-phone.js?v=20260536
+function normalizePhoneDigits(phone) {
+  return (phone || "").replace(/\D/g, "");
+}
+function phoneVariants(phone) {
+  const digits = normalizePhoneDigits(phone);
+  const variants = /* @__PURE__ */ new Set([digits]);
+  if (digits.startsWith("233") && digits.length >= 12) {
+    variants.add(`0${digits.slice(3)}`);
+  }
+  if (digits.startsWith("0") && digits.length >= 10) {
+    variants.add(`233${digits.slice(1)}`);
+  }
+  return [...variants];
+}
+
 // booking-capacity.js?v=20260536
 function getMaxReservationsPerDay() {
   return SITE.booking?.maxReservationsPerDay ?? 12;
@@ -755,6 +771,24 @@ async function getSlotBookingCount(supabase, date, time, locationId) {
   } catch {
     return 0;
   }
+}
+async function hasExistingCustomerBookingOnDate(supabase, phone, date) {
+  if (!supabase || !phone || !date) return false;
+  try {
+    const { data, error } = await supabase.rpc("customer_has_active_booking_on_date", {
+      p_phone: phone,
+      p_date: date
+    });
+    if (!error) return Boolean(data);
+    if (!error.message?.includes("customer_has_active_booking_on_date")) throw error;
+  } catch {
+  }
+  for (const variant of phoneVariants(phone)) {
+    const { count, error } = await supabase.from("bookings").select("id", { count: "exact", head: true }).eq("booking_date", date).eq("phone", variant).in("status", ["pending", "confirmed"]);
+    if (error) throw error;
+    if (count > 0) return true;
+  }
+  return false;
 }
 function getBookingWindowDates(daysAhead = 60) {
   const minDate = /* @__PURE__ */ new Date();
@@ -1485,7 +1519,7 @@ async function handleDepositReturn(handlers = {}) {
   }
 }
 
-// booking.js?v=20260562
+// booking.js?v=20260563
 var slotBookingCounts = {};
 var datePicker = null;
 var capacityByDate = {};
@@ -1773,6 +1807,13 @@ function resetButton(btn) {
   btn.textContent = "Book appointment";
   btn.disabled = false;
 }
+function isDuplicateCustomerBookingError(error) {
+  const message = error?.message || "";
+  return error?.code === "P0001" && message.includes("already have a booking");
+}
+function getDuplicateBookingMessage() {
+  return 'You already have a booking on this date with this phone number. Use <a href="index.html#find-booking">Find my booking</a> to check it, or pick another day.';
+}
 function getWhatsAppFallbackUrl(bookingData) {
   const num = SITE.whatsapp.replace(/[^0-9+]/g, "").replace("+", "");
   const msg = encodeURIComponent(
@@ -1872,6 +1913,11 @@ async function handleSubmit(e) {
       await fetchBookedSlots(date);
       return;
     }
+    if (await hasExistingCustomerBookingOnDate(supabase, phone, date)) {
+      showError(getDuplicateBookingMessage(), { html: true });
+      resetButton(submitBtn);
+      return;
+    }
     const bookingId = await insertBooking(supabase, bookingData);
     if (isDepositPaymentEnabled() && bookingId) {
       showSuccess("Redirecting to secure payment\u2026");
@@ -1901,6 +1947,11 @@ async function handleSubmit(e) {
     await fetchBookedSlots(date);
   } catch (err) {
     console.error("Booking error:", err);
+    if (isDuplicateCustomerBookingError(err)) {
+      showError(getDuplicateBookingMessage(), { html: true });
+      resetButton(submitBtn);
+      return;
+    }
     const limitReached = err?.message?.includes("Daily booking limit") || err?.details?.includes("Daily booking limit") || err?.message?.includes("Time slot fully booked") || err?.details?.includes("Time slot fully booked");
     if (limitReached) {
       const slotFull = err?.message?.includes("Time slot fully booked") || err?.details?.includes("Time slot fully booked");
@@ -2596,21 +2647,7 @@ ${brief || "(none provided)"}`
   });
 }
 
-// find-booking.js?v=20260548
-function normalizePhoneDigits(phone) {
-  return phone.replace(/\D/g, "");
-}
-function phoneVariants(phone) {
-  const digits = normalizePhoneDigits(phone);
-  const variants = /* @__PURE__ */ new Set([digits]);
-  if (digits.startsWith("233") && digits.length >= 12) {
-    variants.add(`0${digits.slice(3)}`);
-  }
-  if (digits.startsWith("0") && digits.length >= 10) {
-    variants.add(`233${digits.slice(1)}`);
-  }
-  return [...variants];
-}
+// find-booking.js?v=20260563
 function nameSuffixMatches(fullName, suffix) {
   const letters = (fullName || "").replace(/[^a-zA-Z]/g, "");
   const expected = suffix.replace(/[^a-zA-Z]/g, "").toLowerCase();

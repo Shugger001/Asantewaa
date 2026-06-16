@@ -12,10 +12,11 @@ Project: `pksfslkwmlrlttoojluk`
 |------|----------------------|
 | 1 | `supabase/setup.sql` |
 | 2 | `supabase/max-daily-bookings.sql` |
-| 3 | `supabase/setup-find-booking.sql` |
-| 4 | `supabase/setup-admin.sql` |
-| 5 | `supabase/create-admin-lesley.sql` |
-| 6 | `supabase/setup-deposit.sql` |
+| 3 | `supabase/prevent-duplicate-bookings.sql` |
+| 4 | `supabase/setup-find-booking.sql` |
+| 5 | `supabase/setup-admin.sql` |
+| 6 | `supabase/create-admin-lesley.sql` |
+| 7 | `supabase/setup-deposit.sql` |
 
 Skip `migrations/004_slot_capacity.sql` if step 2 already succeeded (it overlaps with max-daily-bookings).
 

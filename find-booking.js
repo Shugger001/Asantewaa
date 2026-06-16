@@ -1,21 +1,6 @@
 import { SITE } from './data.js?v=20260536';
 import { getSupabase, isSupabaseConfigured } from './supabase-client.js?v=20260536';
-
-function normalizePhoneDigits(phone) {
-  return phone.replace(/\D/g, '');
-}
-
-function phoneVariants(phone) {
-  const digits = normalizePhoneDigits(phone);
-  const variants = new Set([digits]);
-  if (digits.startsWith('233') && digits.length >= 12) {
-    variants.add(`0${digits.slice(3)}`);
-  }
-  if (digits.startsWith('0') && digits.length >= 10) {
-    variants.add(`233${digits.slice(1)}`);
-  }
-  return [...variants];
-}
+import { phoneVariants } from './booking-phone.js?v=20260536';
 
 function nameSuffixMatches(fullName, suffix) {
   const letters = (fullName || '').replace(/[^a-zA-Z]/g, '');

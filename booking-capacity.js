@@ -1,4 +1,5 @@
 import { SITE } from './data.js?v=20260536';
+import { phoneVariants } from './booking-phone.js?v=20260536';
 
 export function getMaxReservationsPerDay() {
   return SITE.booking?.maxReservationsPerDay ?? 12;
@@ -143,6 +144,35 @@ export async function getSlotBookingCount(supabase, date, time, locationId) {
   } catch {
     return 0;
   }
+}
+
+export async function hasExistingCustomerBookingOnDate(supabase, phone, date) {
+  if (!supabase || !phone || !date) return false;
+
+  try {
+    const { data, error } = await supabase.rpc('customer_has_active_booking_on_date', {
+      p_phone: phone,
+      p_date: date,
+    });
+    if (!error) return Boolean(data);
+    if (!error.message?.includes('customer_has_active_booking_on_date')) throw error;
+  } catch {
+    // Fall back to direct lookup if RPC is not deployed yet.
+  }
+
+  for (const variant of phoneVariants(phone)) {
+    const { count, error } = await supabase
+      .from('bookings')
+      .select('id', { count: 'exact', head: true })
+      .eq('booking_date', date)
+      .eq('phone', variant)
+      .in('status', ['pending', 'confirmed']);
+
+    if (error) throw error;
+    if (count > 0) return true;
+  }
+
+  return false;
 }
 
 export function getBookingWindowDates(daysAhead = 60) {

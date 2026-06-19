@@ -1,0 +1,51 @@
+name: Daily site health scan
+
+on:
+  schedule:
+    # 05:00 UTC = 05:00 GMT
+    - cron: "0 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scan-and-email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run site health check
+        id: health
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          node scripts/site-health-check.mjs | tee scan-report.txt
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Send email report
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: >-
+            ${{ steps.health.outputs.exit_code == '0' && '✅' || '⚠️' }}
+            Glam Room site scan —
+            ${{ steps.health.outputs.exit_code == '0' && 'All clear' || 'Issues found' }}
+            (${{ github.run_number }})
+          to: stewardmoore22@gmail.com
+          from: Glam Room Health Check <${{ secrets.SMTP_USERNAME }}>
+          body: file://scan-report.txt
+
+      - name: Fail if health check failed
+        if: steps.health.outputs.exit_code != '0'
+        run: exit 1
